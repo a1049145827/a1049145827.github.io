@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="xcode 正则," />
 
 
 
@@ -95,13 +95,14 @@
 
 
 <meta name="description" content="有这样的需求：类似于 GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;); 这样的代码，需要批量修改为： GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;, nil); 这里使用普通的查找替换不能够达到目的，需要用到正则表达式： GLOBAL_STR(.*); 替换文本的正则： GLOBAL_STR(.$1,nil); xcode的查找替换选项里面选择regular expre">
+<meta name="keywords" content="xcode 正则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xcode中使用正则表达式来搜索替换代码">
 <meta property="og:url" content="http://yoursite.com/2017/08/15/xcode/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
 <meta property="og:description" content="有这样的需求：类似于 GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;); 这样的代码，需要批量修改为： GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;, nil); 这里使用普通的查找替换不能够达到目的，需要用到正则表达式： GLOBAL_STR(.*); 替换文本的正则： GLOBAL_STR(.$1,nil); xcode的查找替换选项里面选择regular expre">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-15T05:00:55.000Z">
+<meta property="og:updated_time" content="2017-12-21T04:59:20.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xcode中使用正则表达式来搜索替换代码">
 <meta name="twitter:description" content="有这样的需求：类似于 GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;); 这样的代码，需要批量修改为： GLOBAL_STR(@&amp;quot;请继续添加&amp;quot;, nil); 这里使用普通的查找替换不能够达到目的，需要用到正则表达式： GLOBAL_STR(.*); 替换文本的正则： GLOBAL_STR(.$1,nil); xcode的查找替换选项里面选择regular expre">
@@ -351,14 +352,31 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
     
     
     
+    <div>
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
 
     
 
     
 
     
-
+    
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xcode-正则/" rel="tag"><i class="fa fa-tag"></i> xcode 正则</a>
+          
+        </div>
       
 
       
@@ -449,7 +467,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -457,6 +475,15 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
@@ -492,7 +519,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2017</span>
@@ -502,6 +531,13 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   <span class="author" itemprop="copyrightHolder">Coder bruce</span>
 </div>
 
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
 
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
@@ -514,7 +550,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   </a>
 </div>
 
-
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共8.3k字</span>
+</div>
         
 
         
