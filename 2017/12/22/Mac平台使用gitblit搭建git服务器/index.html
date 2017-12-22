@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Backend Perfect Swift," />
+  <meta name="keywords" content="git服务," />
 
 
 
@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。 以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令1.build/debug/PerfectTemplate 即可开启服务。 当我们">
-<meta name="keywords" content="Backend Perfect Swift">
+<meta name="description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
+<meta name="keywords" content="git服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Create A Backend Use Perfect Power By Swift">
-<meta property="og:url" content="http://yoursite.com/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/index.html">
+<meta property="og:title" content="Mac平台使用gitblit搭建git服务器">
+<meta property="og:url" content="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。 以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令1.build/debug/PerfectTemplate 即可开启服务。 当我们">
+<meta property="og:description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-21T04:59:18.869Z">
+<meta property="og:updated_time" content="2017-12-22T06:42:12.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Create A Backend Use Perfect Power By Swift">
-<meta name="twitter:description" content="现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。 以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令1.build/debug/PerfectTemplate 即可开启服务。 当我们">
+<meta name="twitter:title" content="Mac平台使用gitblit搭建git服务器">
+<meta name="twitter:description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/"/>
 
 
 
 
 
-  <title>Create A Backend Use Perfect Power By Swift | Bruce's Blog</title>
+  <title>Mac平台使用gitblit搭建git服务器 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">Create A Backend Use Perfect Power By Swift</h1>
+          <h1 class="post-title" itemprop="name headline">Mac平台使用gitblit搭建git服务器</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T12:31:58+08:00">
-                2017-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-22T11:14:49+08:00">
+                2017-12-22
               </time>
             
 
@@ -316,6 +316,28 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -344,21 +366,24 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。</p>
-<p>以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate</div></pre></td></tr></table></figure></p>
-<p>即可开启服务。</p>
-<p>当我们需要服务在后台执行的时候可以在命令后加上&amp;<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate &amp;</div></pre></td></tr></table></figure></p>
-<p>执行后控制台会有类似于下面的日志👇<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1] 94640</div></pre></td></tr></table></figure></p>
-<p>这个表示当前服务运行的进程id。</p>
-<p>当我们修改完项目需要重新运行的时候，后天服务会占用端口导致新服务无法正常启动，这时我们就要杀掉旧服务的进程。之前控制台打印出来的id号去终止进程，命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo kill -9 94640</div></pre></td></tr></table></figure></p>
-<p>不过有时候我们会关闭掉命令行窗口，并没有记录进程id，那么就需要手动去查找进程id，这里有两种方案：</p>
+        <p>最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。</p>
+<p>诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。</p>
+<p>需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。</p>
+<p>如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。<br><a href="https://about.gitlab.com/installation/" target="_blank" rel="external">使用gitlab搭建git服务</a></p>
+<p>其实Mac下也可以使用docker安装gitlab，只不过懒得折腾，能用就行。<br><a href="http://blog.csdn.net/u011904605/article/details/54664835" target="_blank" rel="external">使用docker安装gitlab搭建git服务</a></p>
+<p>还是说说我们在Mac下用gitblit搭建git服务</p>
 <ol>
-<li>使用top命令查找</li>
-<li>通过端口号查找</li>
+<li>首先安装运行环境: <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">jdk8</a></li>
+<li>然后下载 <a href="http://gitblit.com/" target="_blank" rel="external">gitblit</a></li>
+<li>配置gitblit</li>
 </ol>
-<p>第一种方法是通过top命令查看服务名对应的pid即可</p>
-<p>第二种通过命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp:8181</div></pre></td></tr></table></figure></p>
-<p>即可查找到占用8181端口的服务。</p>
+<p>其实最主要的步骤还是第三步</p>
+<p>把gitblit上下载的文件解压，然后进入data子目录，找到defaults.properties打开。这里的很多配置项都可以使用缺省，不过如果想要修改文件存放的路径，可以把git.repositoriesFolder配置下，路径可以自己指定（但要有写权限）。</p>
+<p>然后找到server.httpPort，设定http协议的端口号，这个端口号理论上来说可以随便指定（保证和其他应用不冲突就行），这里我设置成1234。保存，关闭。</p>
+<p>配置完成后启动gitblit服务，安装包里做好了可执行的脚本，我们只要在终端运行就可以了。</p>
+<p>打开浏览器，输入localhost:1234(localhost也可以换成你本机的ip地址)，进入gitblit web管理页面。选择右上角登录。</p>
+<p>默认的用户名和密码是admin，强烈建议登录后修改密码。登录后最好再创建一个用户，然后在该用户下创建项目目录。</p>
+<p>创建完成后就会自动跳转到项目页面，然后我们就可以拿到git链接，接下来就可以愉快的使用git啦。(～￣▽￣)～</p>
 
       
     </div>
@@ -380,6 +405,35 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2017/12/22/Mac平台使用gitblit搭建git服务器/">Mac平台使用gitblit搭建git服务器</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Coder bruce 的个人博客">Coder bruce</a></p>
+  <p><span>发布时间:</span>2017年12月22日 - 11:12</p>
+  <p><span>最后更新:</span>2017年12月22日 - 14:12</p>
+  <p><span>原始链接:</span><a href="/2017/12/22/Mac平台使用gitblit搭建git服务器/" title="Mac平台使用gitblit搭建git服务器">http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
       
     </div>
     
@@ -393,7 +447,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <div class="post-tags">
           
-            <a href="/tags/Backend-Perfect-Swift/" rel="tag"><i class="fa fa-tag"></i> Backend Perfect Swift</a>
+            <a href="/tags/git服务/" rel="tag"><i class="fa fa-tag"></i> git服务</a>
           
         </div>
       
@@ -406,8 +460,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/15/ios/" rel="next" title="iOS消除警告">
-                <i class="fa fa-chevron-left"></i> iOS消除警告
+              <a href="/2017/12/21/hexo使用小记/" rel="next" title="hexo使用小记">
+                <i class="fa fa-chevron-left"></i> hexo使用小记
               </a>
             
           </div>
@@ -415,10 +469,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/21/hexo使用小记/" rel="prev" title="hexo使用小记">
-                hexo使用小记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
