@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Bruce&#39;s Blog">
 <meta property="og:description" content="现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。 以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令1.build/debug/PerfectTemplate 即可开启服务。 当我们">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-21T04:59:18.869Z">
+<meta property="og:updated_time" content="2017-12-25T05:04:22.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Create A Backend Use Perfect Power By Swift">
 <meta name="twitter:description" content="现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。 以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令1.build/debug/PerfectTemplate 即可开启服务。 当我们">
@@ -345,19 +345,19 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。</p>
-<p>以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate</div></pre></td></tr></table></figure></p>
+<p>以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate</div></pre></td></tr></table></figure></p>
 <p>即可开启服务。</p>
-<p>当我们需要服务在后台执行的时候可以在命令后加上&amp;<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate &amp;</div></pre></td></tr></table></figure></p>
-<p>执行后控制台会有类似于下面的日志👇<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1] 94640</div></pre></td></tr></table></figure></p>
+<p>当我们需要服务在后台执行的时候可以在命令后加上&amp;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate &amp;</div></pre></td></tr></table></figure></p>
+<p>执行后控制台会有类似于下面的日志👇<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1] 94640</div></pre></td></tr></table></figure></p>
 <p>这个表示当前服务运行的进程id。</p>
-<p>当我们修改完项目需要重新运行的时候，后天服务会占用端口导致新服务无法正常启动，这时我们就要杀掉旧服务的进程。之前控制台打印出来的id号去终止进程，命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo kill -9 94640</div></pre></td></tr></table></figure></p>
+<p>当我们修改完项目需要重新运行的时候，后天服务会占用端口导致新服务无法正常启动，这时我们就要杀掉旧服务的进程。之前控制台打印出来的id号去终止进程，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo <span class="built_in">kill</span> -9 94640</div></pre></td></tr></table></figure></p>
 <p>不过有时候我们会关闭掉命令行窗口，并没有记录进程id，那么就需要手动去查找进程id，这里有两种方案：</p>
 <ol>
 <li>使用top命令查找</li>
 <li>通过端口号查找</li>
 </ol>
 <p>第一种方法是通过top命令查看服务名对应的pid即可</p>
-<p>第二种通过命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp:8181</div></pre></td></tr></table></figure></p>
+<p>第二种通过命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp:8181</div></pre></td></tr></table></figure></p>
 <p>即可查找到占用8181端口的服务。</p>
 
       
@@ -488,7 +488,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -601,7 +601,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共9.2k字</span>
+  <span class="post-count">博客全站共9.6k字</span>
 </div>
 
 
