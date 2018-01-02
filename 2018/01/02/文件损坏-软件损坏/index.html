@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="git服务," />
+  <meta name="keywords" content="Mac," />
 
 
 
@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
-<meta name="keywords" content="git服务">
+<meta name="description" content="macOS High Sierra 10.13 文件损坏  软件损坏日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了： 需要在终端输入：1sudo spctl --master-disable">
+<meta name="keywords" content="Mac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac平台使用gitblit搭建git服务器">
-<meta property="og:url" content="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/index.html">
+<meta property="og:title" content="文件损坏 软件损坏">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/文件损坏-软件损坏/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
+<meta property="og:description" content="macOS High Sierra 10.13 文件损坏  软件损坏日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了： 需要在终端输入：1sudo spctl --master-disable">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-22T06:48:05.015Z">
+<meta property="og:updated_time" content="2018-01-02T12:42:37.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac平台使用gitblit搭建git服务器">
-<meta name="twitter:description" content="最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。 诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。 需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。 如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。使用gitlab搭建git服">
+<meta name="twitter:title" content="文件损坏 软件损坏">
+<meta name="twitter:description" content="macOS High Sierra 10.13 文件损坏  软件损坏日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了： 需要在终端输入：1sudo spctl --master-disable">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/文件损坏-软件损坏/"/>
 
 
 
 
 
-  <title>Mac平台使用gitblit搭建git服务器 | Bruce's Blog</title>
+  <title>文件损坏 软件损坏 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/22/Mac平台使用gitblit搭建git服务器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/文件损坏-软件损坏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mac平台使用gitblit搭建git服务器</h1>
+          <h1 class="post-title" itemprop="name headline">文件损坏 软件损坏</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-22T11:14:49+08:00">
-                2017-12-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T20:33:12+08:00">
+                2018-01-02
               </time>
             
 
@@ -329,8 +329,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/categories/macOS/" itemprop="url" rel="index">
+                    <span itemprop="name">macOS</span>
                   </a>
                 </span>
 
@@ -366,24 +366,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。</p>
-<p>诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。</p>
-<p>需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。</p>
-<p>如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。<br><a href="https://about.gitlab.com/installation/" target="_blank" rel="external">使用gitlab搭建git服务</a></p>
-<p>其实Mac下也可以使用docker安装gitlab，只不过懒得折腾，能用就行。<br><a href="http://blog.csdn.net/u011904605/article/details/54664835" target="_blank" rel="external">使用docker安装gitlab搭建git服务</a></p>
-<p>还是说说我们在Mac下用gitblit搭建git服务</p>
-<ol>
-<li>首先安装运行环境: <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">jdk8</a></li>
-<li>然后下载 <a href="http://gitblit.com/" target="_blank" rel="external">gitblit</a></li>
-<li>配置gitblit</li>
-</ol>
-<p>其实最主要的步骤还是第三步</p>
-<p>把gitblit上下载的文件解压，然后进入data子目录，找到defaults.properties打开。这里的很多配置项都可以使用缺省，不过如果想要修改文件存放的路径，可以把git.repositoriesFolder配置下，路径可以自己指定（但要有写权限）。</p>
-<p>然后找到server.httpPort，设定http协议的端口号，这个端口号理论上来说可以随便指定（保证和其他应用不冲突就行），这里我设置成1234。保存，关闭。</p>
-<p>配置完成后启动gitblit服务，安装包里做好了可执行的脚本，我们只要在终端运行就可以了。</p>
-<p>打开浏览器，输入localhost:1234(localhost也可以换成你本机的ip地址)，进入gitblit web管理页面。选择右上角登录。</p>
-<p>默认的用户名和密码是admin，强烈建议登录后修改密码。登录后最好再创建一个用户，然后在该用户下创建项目目录。</p>
-<p>创建完成后就会自动跳转到项目页面，然后我们就可以拿到git链接，接下来就可以愉快的使用git啦。(～￣▽￣)～</p>
+        <h4 id="macOS-High-Sierra-10-13-文件损坏-软件损坏"><a href="#macOS-High-Sierra-10-13-文件损坏-软件损坏" class="headerlink" title="macOS High Sierra 10.13 文件损坏  软件损坏"></a>macOS High Sierra 10.13 文件损坏  软件损坏</h4><p>日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，<br>不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了：</p>
+<p>需要在终端输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo spctl --master-disable</div></pre></td></tr></table></figure></p>
+<p>就可以打开这些软件了。</p>
 
       
     </div>
@@ -418,7 +403,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <div class="post-tags">
           
-            <a href="/tags/git服务/" rel="tag"><i class="fa fa-tag"></i> git服务</a>
+            <a href="/tags/Mac/" rel="tag"><i class="fa fa-tag"></i> Mac</a>
           
         </div>
       
@@ -431,8 +416,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/21/hexo使用小记/" rel="next" title="hexo使用小记">
-                <i class="fa fa-chevron-left"></i> hexo使用小记
+              <a href="/2017/12/29/UISlider-使用采坑记/" rel="next" title="UISlider 使用采坑记">
+                <i class="fa fa-chevron-left"></i> UISlider 使用采坑记
               </a>
             
           </div>
@@ -440,10 +425,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/25/Adobe-After-Effects名为Checkbox的种类effect没有属性或方法/" rel="prev" title="Adobe After Effects名为Checkbox的种类effect没有属性或方法">
-                Adobe After Effects名为Checkbox的种类effect没有属性或方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,8 +478,17 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -584,6 +574,22 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#macOS-High-Sierra-10-13-文件损坏-软件损坏"><span class="nav-number">1.</span> <span class="nav-text">macOS High Sierra 10.13 文件损坏  软件损坏</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
