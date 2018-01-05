@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS, Swift, 后端," />
 
 
 
@@ -101,16 +101,18 @@
 
 
 
-<meta name="description" content="hello world">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bruce&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/iOS/index.html">
+<meta name="description" content="最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放">
+<meta name="keywords" content="iOS, Swift, 后端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Swift后端框架Perfect做一个文件上传服务器">
+<meta property="og:url" content="http://yoursite.com/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="hello world">
+<meta property="og:description" content="最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-04T14:12:16.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bruce&#39;s Blog">
-<meta name="twitter:description" content="hello world">
+<meta name="twitter:title" content="使用Swift后端框架Perfect做一个文件上传服务器">
+<meta name="twitter:description" content="最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放">
 
 
 
@@ -139,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/iOS/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/"/>
 
 
 
 
 
-  <title>标签: iOS | Bruce's Blog</title>
+  <title>使用Swift后端框架Perfect做一个文件上传服务器 | Bruce's Blog</title>
   
 
 
@@ -175,7 +177,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
@@ -261,194 +263,196 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>iOS<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/01/05/Xcode运行程序时左侧memory不显示内存/" itemprop="url">
-              
-                <span itemprop="name">Xcode运行程序时左侧memory不显示内存</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">使用Swift后端框架Perfect做一个文件上传服务器</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-05T14:47:51+08:00"
-              content="2018-01-05" >
-          01-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T21:55:51+08:00">
+                2018-01-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift后端k开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift后端k开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/05/iOS设备型号-2018最新统计/" itemprop="url">
-              
-                <span itemprop="name">iOS设备型号 2018最新统计</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-05T11:00:09+08:00"
-              content="2018-01-05" >
-          01-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/29/UISlider-使用采坑记/" itemprop="url">
-              
-                <span itemprop="name">UISlider 使用采坑记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-29T14:35:13+08:00"
-              content="2017-12-29" >
-          12-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/28/Mac磁盘空间清理/" itemprop="url">
-              
-                <span itemprop="name">Mac磁盘空间清理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-28T09:40:46+08:00"
-              content="2017-12-28" >
-          12-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/27/记一次特殊需求实现/" itemprop="url">
-              
-                <span itemprop="name">记一次特殊需求实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-27T20:48:19+08:00"
-              content="2017-12-27" >
-          12-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/25/使用github愉快的写blog/" itemprop="url">
-              
-                <span itemprop="name">使用github愉快的写blog</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-25T12:28:08+08:00"
-              content="2017-12-25" >
-          12-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放在电脑上，字体大小随便调，更有搜索这种神器级别的功能，查找bug不是梦。</p>
+<p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
+<p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
+<p>服务端代码：</p>
+<p>客户端代码：</p>
+<p>最后想起来，每次测试同学传完日志，还要跑过来跟我说，哪里哪里有bug，日志已经上传了，这样貌似很不尊重有木有。<br>作为一个谦卑的程序员，要时刻想着服务大众，于是乎我觉得应该在每次上传日志的时候，给自己发条通知，这样我就好知道是测试大哥要查bug了。</p>
+<p>下一篇我们就来探索一下，如何使用Perfect后端进行APNS消息推送。</p>
 
       
     </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
 
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS-Swift-后端/" rel="tag"><i class="fa fa-tag"></i> iOS, Swift, 后端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/03/Windows-安装原版镜ISO像/" rel="next" title="Windows 安装原版镜ISO像">
+                <i class="fa fa-chevron-left"></i> Windows 安装原版镜ISO像
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/05/iOS设备型号-2018最新统计/" rel="prev" title="iOS设备型号 2018最新统计">
+                iOS设备型号 2018最新统计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -456,6 +460,13 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjU3Ni85MTM4"></div>
+    
+  </div>
+
+
         </div>
         
           
@@ -697,10 +708,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
@@ -729,6 +740,17 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
