@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+<meta name="description" content="我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。 网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。 点击工程文件 -&amp;gt; bu">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次特殊需求实现">
-<meta property="og:url" content="http://yoursite.com/2017/12/27/记一次特殊需求实现/index.html">
+<meta property="og:title" content="iOS开发 Archive时自动增加build版本">
+<meta property="og:url" content="http://yoursite.com/2018/01/09/iOS开发-Archive时自动增加build版本/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+<meta property="og:description" content="我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。 网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。 点击工程文件 -&amp;gt; bu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-28T01:37:31.771Z">
+<meta property="og:updated_time" content="2018-01-09T14:26:35.593Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次特殊需求实现">
-<meta name="twitter:description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+<meta name="twitter:title" content="iOS开发 Archive时自动增加build版本">
+<meta name="twitter:description" content="我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。 网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。 点击工程文件 -&amp;gt; bu">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/09/iOS开发-Archive时自动增加build版本/"/>
 
 
 
 
 
-  <title>记一次特殊需求实现 | Bruce's Blog</title>
+  <title>iOS开发 Archive时自动增加build版本 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Archive时自动增加build版本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">记一次特殊需求实现</h1>
+          <h1 class="post-title" itemprop="name headline">iOS开发 Archive时自动增加build版本</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T20:48:19+08:00">
-                2017-12-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T09:55:36+08:00">
+                2018-01-09
               </time>
             
 
@@ -366,21 +366,12 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">试看还剩：&lt;font color=#d7bf48&gt;47&lt;/font&gt;秒，请返回竖屏购买观看券观看完整版&lt;font color=#ff0000&gt;(￥6)&lt;/font&gt;, #ffffff</div></pre></td></tr></table></figure>
-<p>无奈安卓一端已经调通，再让做出修改貌似不太人性化，只好硬着头皮一通百度Google，尝试各种方案，终于得到一些比较有用的信息。</p>
-<h4 id="大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><a href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType" class="headerlink" title="大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType"></a>大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</h4><p>字符串中很明显能看出，有通过HTML标签包装的痕迹，那么我们可以通过加载HTML标签文本的方式，将这个字符串转化为带属性的字符串。API如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (nullable instancetype)initWithData:(NSData *)data options:(NSDictionary&lt;NSAttributedStringDocumentReadingOptionKey, id&gt; *)options documentAttributes:(NSDictionary&lt;NSAttributedStringDocumentAttributeKey, id&gt; * __nullable * __nullable)dict error:(NSError **)error NS_AVAILABLE(10_0, 7_0);</div></pre></td></tr></table></figure></p>
-<p>然后再对其属性做出调整，这就是设想的方案。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">NSString *toast = [NSString stringWithUTF8String:tip];</div><div class="line"></div><div class="line">UIColor *color = [UIColor whiteColor];</div><div class="line">NSString *colorStr = [NSString stringWithUTF8String:toastColor];</div><div class="line">if (colorStr &amp;&amp; [colorStr hasPrefix:@&quot;#&quot;]) &#123;</div><div class="line">    colorStr = [colorStr stringByReplacingOccurrencesOfString:@&quot;#&quot; withString:@&quot;0x&quot;];</div><div class="line"></div><div class="line">    NSInteger value = [IOSTools numberWithHexString:colorStr];</div><div class="line">    color = [UIColor colorWithHex:value];</div><div class="line">&#125;</div><div class="line">if (!color) &#123;</div><div class="line">    color = [UIColor whiteColor];</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];</div><div class="line">style.alignment = NSTextAlignmentCenter;</div><div class="line"></div><div class="line">NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[toast dataUsingEncoding:NSUnicodeStringEncoding] options:@&#123; NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType &#125; documentAttributes:nil error:nil];</div><div class="line">[attrStr addAttributes:@&#123; NSFontAttributeName: Unity_toast_font, NSParagraphStyleAttributeName: style &#125; range:NSMakeRange(0, attrStr.length)];</div></pre></td></tr></table></figure>
-<p>将参数第二部分转化为UIColor</p>
-<h4 id="大招2-将一个代表16数的字符串-转成10进制数字"><a href="#大招2-将一个代表16数的字符串-转成10进制数字" class="headerlink" title="大招2 将一个代表16数的字符串 转成10进制数字"></a>大招2 将一个代表16数的字符串 转成10进制数字</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+ (NSInteger)numberWithHexString:(NSString *)hexString &#123;</div><div class="line"></div><div class="line">    const char *hexChar = [hexString cStringUsingEncoding:NSUTF8StringEncoding];</div><div class="line"></div><div class="line">    int hexNumber;</div><div class="line"></div><div class="line">    sscanf(hexChar, &quot;%x&quot;, &amp;hexNumber);</div><div class="line"></div><div class="line">    return (NSInteger)hexNumber;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这一步其实是为了将字符串转化为颜色，方法有很多，能达到目的即可。</p>
-<p>弄好之后跑起来，看到最终效果后傻眼了：背景是黑色的，没有格式的字也会显示成黑色，这就导致大部分内容直接看不到。给无格式的部分加颜色属性又没有头绪，不知如何区分Rang，无奈搞成这样，倒不如不显示格式，全展示成白色算了。</p>
-<p>于是打开SourceTree，开始回退代码，回退过程中想着自己忙活了半天，就这么放弃了，总觉得不甘心，不自觉的去看代码，无意中进入NSAttributedString的类头文件，发现有这么一个API: <strong>enumerateAttribute:inRange:</strong>，出于职业的敏感，心里瞬间有点小兴奋，赶紧查找关于这个方法的说明，发现这个API可以枚举出AttributedString的Attributed并且能够判断条件，如果初始化的时候选择了NSAttributedString的子类NSMutableAttributedString，那么就可以实现对Attribute的修改，这下可好了，赶紧动手实验一番，run起来一看，成了！</p>
-<p>可能大家对block里面的代码有些疑问，问什么判断条件要那么写，其实也是有些无奈，经过调试，我发现没有被颜色标签包裹的文字，经过转换后默认的颜色是黑色（打印出来颜色描述为 0 0 0 1），但是[UIColor blackColor]的颜色描述为0 1，两者不能用==来判断，无奈只能取其白色色值来做匹配，也算是曲线救国吧。</p>
-<h4 id="大招3-enumerateAttribute-inRange-偷天换日"><a href="#大招3-enumerateAttribute-inRange-偷天换日" class="headerlink" title="大招3 enumerateAttribute:inRange: 偷天换日"></a>大招3 enumerateAttribute:inRange: 偷天换日</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">NSAttributedStringEnumerationOptions opts = NSAttributedStringEnumerationLongestEffectiveRangeNotRequired;</div><div class="line">[attrStr enumerateAttribute:NSForegroundColorAttributeName inRange:NSMakeRange(0, attrStr.length) options:opts usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) &#123;</div><div class="line"></div><div class="line">    UIColor *tmpColor = value;</div><div class="line">    CGFloat white = 1;</div><div class="line">    CGFloat alpha = 0;</div><div class="line">    [tmpColor getWhite:&amp;white alpha:&amp;alpha];</div><div class="line"></div><div class="line">    if (white == 0 &amp;&amp; alpha == 1) &#123;</div><div class="line">        [attrStr addAttributes:@&#123; NSForegroundColorAttributeName: color &#125; range:range];</div><div class="line">    &#125;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>欣喜之余颇有感慨，做人做事确实不能轻易放弃，说不定哪个不经意的瞬间，就会有惊喜(<em>^__^</em>)</p>
-<p>如果你有更好的方案，欢迎沟通交流！</p>
+        <p>我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。</p>
+<p>网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。</p>
+<p>点击工程文件 -&gt; build Phuases -&gt; add Run Script, 并将下面代码拷贝进去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">APP_PATH=&quot;$&#123;TARGET_BUILD_DIR&#125;/$&#123;WRAPPER_NAME&#125;&quot;</div><div class="line"></div><div class="line"># This script loops through the frameworks embedded in the application and</div><div class="line"># removes unused architectures.</div><div class="line">find &quot;$APP_PATH&quot; -name &apos;*.framework&apos; -type d | while read -r FRAMEWORK</div><div class="line">do</div><div class="line">FRAMEWORK_EXECUTABLE_NAME=$(defaults read &quot;$FRAMEWORK/Info.plist&quot; CFBundleExecutable)</div><div class="line">FRAMEWORK_EXECUTABLE_PATH=&quot;$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME&quot;</div><div class="line">echo &quot;Executable is $FRAMEWORK_EXECUTABLE_PATH&quot;</div><div class="line"></div><div class="line">EXTRACTED_ARCHS=()</div><div class="line"></div><div class="line">for ARCH in $ARCHS</div><div class="line">do</div><div class="line">echo &quot;Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME&quot;</div><div class="line">lipo -extract &quot;$ARCH&quot; &quot;$FRAMEWORK_EXECUTABLE_PATH&quot; -o &quot;$FRAMEWORK_EXECUTABLE_PATH-$ARCH&quot;</div><div class="line">EXTRACTED_ARCHS+=(&quot;$FRAMEWORK_EXECUTABLE_PATH-$ARCH&quot;)</div><div class="line">done</div><div class="line"></div><div class="line">echo &quot;Merging extracted architectures: $&#123;ARCHS&#125;&quot;</div><div class="line">lipo -o &quot;$FRAMEWORK_EXECUTABLE_PATH-merged&quot; -create &quot;$&#123;EXTRACTED_ARCHS[@]&#125;&quot;</div><div class="line">rm &quot;$&#123;EXTRACTED_ARCHS[@]&#125;&quot;</div><div class="line"></div><div class="line">echo &quot;Replacing original executable with thinned version&quot;</div><div class="line">rm &quot;$FRAMEWORK_EXECUTABLE_PATH&quot;</div><div class="line">mv &quot;$FRAMEWORK_EXECUTABLE_PATH-merged&quot; &quot;$FRAMEWORK_EXECUTABLE_PATH&quot;</div><div class="line"></div><div class="line">done</div><div class="line"></div><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;$INFOPLIST_FILE&quot;)</div><div class="line">buildNumber=$(($buildNumber + 1))</div><div class="line">git_version=$(/usr/bin/git log --oneline --no-notes -1 | /usr/bin/cut -d&quot; &quot; -f1)</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $buildNumber&quot; &quot;$INFOPLIST_FILE&quot;</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :ScmVersion $git_version&quot; &quot;$INFOPLIST_FILE&quot;</div></pre></td></tr></table></figure>
+<p>最后最好不要不要忘记勾选 run script only when installing, 否则每次运行都增加build版本，之后这个号码可能会很大，而且容易冲突。</p>
+<p>如果再配上自动化持续集成，那就完美了。</p>
 
       
     </div>
@@ -428,8 +419,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/25/使用github愉快的写blog/" rel="next" title="使用github愉快的写blog">
-                <i class="fa fa-chevron-left"></i> 使用github愉快的写blog
+              <a href="/2018/01/06/iOS开发-区分Home键和锁屏键事件/" rel="next" title="iOS开发 区分Home键和锁屏键事件">
+                <i class="fa fa-chevron-left"></i> iOS开发 区分Home键和锁屏键事件
               </a>
             
           </div>
@@ -438,8 +429,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/28/Mac磁盘空间清理/" rel="prev" title="Mac磁盘空间清理">
-                Mac磁盘空间清理 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/" rel="prev" title="iOS开发 Xcode一个工程引入另一个工程">
+                iOS开发 Xcode一个工程引入另一个工程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -494,17 +485,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -590,22 +572,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><span class="nav-number">1.</span> <span class="nav-text">大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大招2-将一个代表16数的字符串-转成10进制数字"><span class="nav-number">2.</span> <span class="nav-text">大招2 将一个代表16数的字符串 转成10进制数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大招3-enumerateAttribute-inRange-偷天换日"><span class="nav-number">3.</span> <span class="nav-text">大招3 enumerateAttribute:inRange: 偷天换日</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
