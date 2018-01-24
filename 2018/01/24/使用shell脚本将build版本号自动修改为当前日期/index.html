@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="test," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="test">
+<meta name="description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/08/15/hello-world/index.html">
+<meta property="og:title" content="使用shell脚本将build版本号自动修改为当前日期">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-21T04:59:14.708Z">
+<meta property="og:updated_time" content="2018-01-24T07:47:13.430Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="使用shell脚本将build版本号自动修改为当前日期">
+<meta name="twitter:description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/15/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/"/>
 
 
 
 
 
-  <title>Hello World | Bruce's Blog</title>
+  <title>使用shell脚本将build版本号自动修改为当前日期 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">使用shell脚本将build版本号自动修改为当前日期</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T10:17:43+08:00">
-                2017-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:27:21+08:00">
+                2018-01-24
               </time>
             
 
@@ -316,6 +316,28 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -344,15 +366,15 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。</p>
+<p>我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。</p>
+<p>看官们莫要着急，这就呈上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dateNum=$(date +%Y%m%d)</div><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;$INFOPLIST_FILE&quot;)</div><div class="line">buildDate=$(($buildNumber / 100))</div><div class="line">if [ $buildDate -ne $dateNum ]</div><div class="line">then</div><div class="line">buildNumber=$(($dateNum * 100 + 1))</div><div class="line">echo &quot;$buildDate != $dateNum&quot;</div><div class="line"># 日期不相等时重置build版本号</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $buildNumber&quot; &quot;$INFOPLIST_FILE&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>使用时有一点需要注意，这个脚本不需要勾选 run script only when installing，这样每次build、run、archive的时候都会去检查。而且这个脚本的执行顺序最好提前一些，一定要排在打包时build自增脚本的前面，才能保证每次都获取到正确的build版本号。</p>
+<p>本来觉得因为之前有过脚本实现build版本自增的经历，这个改起来应该也是不成问题。</p>
+<p>没想到还是掉了个坑，怪自己太异想天开，上次是直接拿了网上的代码，然后改写的。这次是为了自己学习一下独立写shell脚本，然后写的时候不自觉的带上了平时写编译语言的习惯：等号两边加空格！导致shell执行时出现问题，害我排查好几次才发觉。</p>
+<p>这也让我更加明白，作为一个开发人员，特别是如果想成为全栈开发，决不能有思维定势，多学习，注意细节。</p>
+<p>善用工具提高效率，才是王道！</p>
 
       
     </div>
@@ -387,7 +409,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <div class="post-tags">
           
-            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
           
         </div>
       
@@ -400,15 +422,15 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/24/记一次巧妙的宏定义的使用方式/" rel="next" title="记一次巧妙的宏定义的使用方式">
+                <i class="fa fa-chevron-left"></i> 记一次巧妙的宏定义的使用方式
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/15/blog/" rel="prev" title="我的博客">
-                我的博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -462,17 +484,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -558,22 +571,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
