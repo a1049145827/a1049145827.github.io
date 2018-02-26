@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？">
+<meta name="description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？ 如果你的项目之前已经选了某">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用MongoDB作为数据库">
 <meta property="og:url" content="http://yoursite.com/2018/01/19/使用MongoDB作为数据库/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？">
+<meta property="og:description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？ 如果你的项目之前已经选了某">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-20T13:06:29.042Z">
+<meta property="og:updated_time" content="2018-01-25T04:19:11.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用MongoDB作为数据库">
-<meta name="twitter:description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？">
+<meta name="twitter:description" content="最近在学习后端开发，需要存储一些数据 为什么使用MongoDB？ 作为一个前端开发人员 稳定性 强大的社区、丰富的文档  扩展性不需要专门维护（DB） MongoDB 应用场景? 之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。 不过关于这两者的选择也是挺纠结，推荐看一下知乎：PostgreSQL 与 MySQL 相比，优势何在？ 如果你的项目之前已经选了某">
 
 
 
@@ -376,6 +376,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p><a href="https://www.zhihu.com/question/32071167?sort=created" target="_blank" rel="external">MongoDB 应用场景?</a></p>
 <p>之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。</p>
 <p>不过关于这两者的选择也是挺纠结，推荐看一下知乎：<a href="https://www.zhihu.com/question/20010554" target="_blank" rel="external">PostgreSQL 与 MySQL 相比，优势何在？</a></p>
+<p>如果你的项目之前已经选了某个数据库，在没有出现瓶颈或问题的时候，最好在十分有把握的情况下再去折腾，毕竟数据无价，且行且珍惜。</p>
+<p>Mac下安装MongoDB后，有一个地方需要注意：db的文件目录如果在根目录下，需要对文件夹更改写权限，否则运行mongod服务会报错。</p>
 
       
     </div>
@@ -514,7 +516,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -525,7 +527,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -536,7 +538,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -643,7 +645,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共15.8k字</span>
+  <span class="post-count">博客全站共16.7k字</span>
 </div>
 
 
