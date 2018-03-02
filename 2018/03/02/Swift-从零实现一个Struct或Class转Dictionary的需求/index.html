@@ -101,18 +101,20 @@
 
 
 
-<meta name="description" content="最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。 要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。 如两个">
+<meta name="description" content="今天在逛知乎的时候无意间看到这样一个提问 swift中struct怎么转成字典？，心想应该不难实现，正好需要写点Swift练练手，于是乎开始搞起。 首先想到的是将Struct（遵守Codable协议）用JSONEncoder的encode转成Data，然后再用JSONSerialization反序列化成Dictionary对象。 1234567891011121314151617181920212">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发 Xcode一个工程引入另一个工程">
-<meta property="og:url" content="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/index.html">
+<meta property="og:title" content="Swift 从零实现一个Struct或Class转Dictionary的需求">
+<meta property="og:url" content="http://yoursite.com/2018/03/02/Swift-从零实现一个Struct或Class转Dictionary的需求/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。 要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。 如两个">
+<meta property="og:description" content="今天在逛知乎的时候无意间看到这样一个提问 swift中struct怎么转成字典？，心想应该不难实现，正好需要写点Swift练练手，于是乎开始搞起。 首先想到的是将Struct（遵守Codable协议）用JSONEncoder的encode转成Data，然后再用JSONSerialization反序列化成Dictionary对象。 1234567891011121314151617181920212">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T10:05:12.619Z">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Protocol-Of-Swift.png">
+<meta property="og:updated_time" content="2018-03-02T08:39:13.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发 Xcode一个工程引入另一个工程">
-<meta name="twitter:description" content="最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。 要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。 如两个">
+<meta name="twitter:title" content="Swift 从零实现一个Struct或Class转Dictionary的需求">
+<meta name="twitter:description" content="今天在逛知乎的时候无意间看到这样一个提问 swift中struct怎么转成字典？，心想应该不难实现，正好需要写点Swift练练手，于是乎开始搞起。 首先想到的是将Struct（遵守Codable协议）用JSONEncoder的encode转成Data，然后再用JSONSerialization反序列化成Dictionary对象。 1234567891011121314151617181920212">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/Protocol-Of-Swift.png">
 
 
 
@@ -141,13 +143,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/02/Swift-从零实现一个Struct或Class转Dictionary的需求/"/>
 
 
 
 
 
-  <title>iOS开发 Xcode一个工程引入另一个工程 | Bruce's Blog</title>
+  <title>Swift 从零实现一个Struct或Class转Dictionary的需求 | Bruce's Blog</title>
   
 
 
@@ -277,7 +279,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/02/Swift-从零实现一个Struct或Class转Dictionary的需求/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +296,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS开发 Xcode一个工程引入另一个工程</h1>
+          <h1 class="post-title" itemprop="name headline">Swift 从零实现一个Struct或Class转Dictionary的需求</h1>
         
 
         <div class="post-meta">
@@ -306,8 +308,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T10:37:38+08:00">
-                2018-01-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T14:26:51+08:00">
+                2018-03-02
               </time>
             
 
@@ -366,16 +368,21 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。</p>
-<p>要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。</p>
-<p>如两个工程A和B,a依赖b工程生成的静态库，但如果想在a中调试b的代码，就需要将b工程引入，以下为操作步骤：</p>
-<ol>
-<li>将b工程拷贝到a工程目录下，（当然也可以不拷贝，不过为了后面方便填写路径）；</li>
-<li>ctrl+右键点击a工程的工程文件名，然后add files to “xx”, 将b工程的.xcodeprj文件添加进来（注意只需要添加.xcodeprj文件，其他文件不需要添加）；</li>
-<li>选择a工程target，点击build setting选项，右上角搜索Header Search找到Header Search Paths双击，在弹出框里点有下角的+号，添加导入工程的路径，右侧选项选recursive(递归查找文件)；</li>
-<li>因为a工程要包含b工程的静态库/动态库，假如b工程生成的静态库为bb.a, 在a工程的General选项中，拉到link frameworks and libraries项，点击+号，将b工程下的bb.a静态库添加上（.Framework同理）。</li>
-</ol>
-<p>当然，这一切都是要有源代码为前提，否则只能另想办法了。</p>
+        <p>今天在逛知乎的时候无意间看到这样一个提问 <a href="https://www.zhihu.com/question/56606968" target="_blank" rel="external">swift中struct怎么转成字典？</a>，心想应该不难实现，正好需要写点Swift练练手，于是乎开始搞起。</p>
+<p>首先想到的是将Struct（遵守Codable协议）用JSONEncoder的encode转成Data，然后再用JSONSerialization反序列化成Dictionary对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">struct Student: Codable &#123;</div><div class="line"></div><div class="line">    var name: String</div><div class="line">    var age: Int</div><div class="line">    var classRoom: String</div><div class="line"></div><div class="line">    init(_ name: String, age: Int, classRoom: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line">        self.classRoom = classRoom</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let student = Student(&quot;xiaoming&quot;, age: 10, classRoom: &quot;五一班&quot;)</div><div class="line"></div><div class="line">do &#123;</div><div class="line">    print(&quot;init student&quot;)</div><div class="line">    let encoder = JSONEncoder()</div><div class="line">    let data = try encoder.encode(student)</div><div class="line">    print(&quot;struct convert to data&quot;)</div><div class="line"></div><div class="line">    let dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments)</div><div class="line">    print(type(of: dict))</div><div class="line">    print(dict)</div><div class="line"></div><div class="line">&#125; catch &#123;</div><div class="line">    print(error)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在回答完这个问题之后，我又想了一下，这要是每次转换一下，都这么写一遍，那不就疯了吗？</p>
+<p>一不做，二不休。继续写代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">func convertStructToDict&lt;T: Generator where T.Element:</div><div class="line">    Codable&gt;(structObj: T) -&gt; Dictionary&lt;String, Any&gt;? &#123;</div><div class="line"></div><div class="line">    let dict: Dictionary&lt;String, Any&gt;? = nil</div><div class="line"></div><div class="line">    do &#123;</div><div class="line">        print(&quot;init student&quot;)</div><div class="line">        let encoder = JSONEncoder()</div><div class="line"></div><div class="line">        if let obj = structObj as? Decodable &#123;</div><div class="line"></div><div class="line">            let data = try encoder.encode(obj)</div><div class="line">            print(&quot;struct convert to data&quot;)</div><div class="line"></div><div class="line">            dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments)</div><div class="line">            print(type(of: dict))</div><div class="line">            print(dict ?? &quot;&quot;)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; catch &#123;</div><div class="line">        print(error)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这次的思路是，封装一个方法，来实现 传入一个遵守Codable协议的Struct或Class实例，经过函数内部处理，返回一个转换好的Dictionary实例出来。</p>
+<p>结果编译器报错:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">error: MyPlayground.playground:260:39: error: &apos;where&apos; clause next to generic parameters is obsoleted</div><div class="line">func convertStructToDict&lt;T: Generator where T.Element:</div><div class="line">                                     ~^~~~~~~~~~~~~~~~</div></pre></td></tr></table></figure></p>
+<p>正一筹莫展之时，心想这不能在一棵树上吊死，试试别的方法，说不定可以通过协议扩展的方法来实现。但又不知道协议是否支持继承，经过查找得到了肯定的答案：</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Protocol-Of-Swift.png" alt="Swift中协议允许继承"></p>
+<p>图片出处链接：<a href="https://www.jianshu.com/p/ee92fcbb3d21" target="_blank" rel="external">Swift中的Protocol知道这些就够了</a>。</p>
+<p>看到这里，心中立马有了方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">/// 直接将Struct或Class转成Dictionary</div><div class="line">protocol Convertable: Codable &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">extension Convertable &#123;</div><div class="line"></div><div class="line">    /// 直接将Struct或Class转成Dictionary</div><div class="line">    func convertToDict() -&gt; Dictionary&lt;String, Any&gt;? &#123;</div><div class="line"></div><div class="line">        var dict: Dictionary&lt;String, Any&gt;? = nil</div><div class="line"></div><div class="line">        do &#123;</div><div class="line">            print(&quot;init student&quot;)</div><div class="line">            let encoder = JSONEncoder()</div><div class="line"></div><div class="line">            let data = try encoder.encode(self)</div><div class="line">            print(&quot;struct convert to data&quot;)</div><div class="line"></div><div class="line">            dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary&lt;String, Any&gt;</div><div class="line"></div><div class="line">        &#125; catch &#123;</div><div class="line">            print(error)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return dict</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">struct Student: Convertable &#123;</div><div class="line"></div><div class="line">    var name: String</div><div class="line">    var age: Int</div><div class="line">    var classRoom: String</div><div class="line"></div><div class="line">    init(_ name: String, age: Int, classRoom: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        self.age = age</div><div class="line">        self.classRoom = classRoom</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let student = Student(&quot;xiaoming&quot;, age: 10, classRoom: &quot;五一班&quot;)</div><div class="line"></div><div class="line">print(student.convertToDict() ?? &quot;nil&quot;)</div></pre></td></tr></table></figure>
+<p>现在只需要新建一个Struct或者Class，然后遵守Convertable协议，这个类或者结构体就获得了一行代码转换成Dictionary的能力，十分的方便，而且使用起来也能确保类型安全。</p>
+<p>附上我整理好的代码： <a href="https://github.com/a1049145827/ConvertableDemo.git" target="_blank" rel="external">github链接</a></p>
 
       
     </div>
@@ -423,8 +430,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/09/iOS开发-Archive时自动增加build版本/" rel="next" title="iOS开发 Archive时自动增加build版本">
-                <i class="fa fa-chevron-left"></i> iOS开发 Archive时自动增加build版本
+              <a href="/2018/03/02/尝试使用WCDBSwift/" rel="next" title="尝试使用WCDBSwift">
+                <i class="fa fa-chevron-left"></i> 尝试使用WCDBSwift
               </a>
             
           </div>
@@ -432,10 +439,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" rel="prev" title="AFNetworking用POST发送的parameters在Java后台接收失败的问题">
-                AFNetworking用POST发送的parameters在Java后台接收失败的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
