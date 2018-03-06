@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
-<meta name="keywords" content="iOS">
+<meta name="description" content="前言设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。 设计模式的基本原则设计模式的基本原则非常重要，只要真正">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用shell脚本将build版本号自动修改为当前日期">
-<meta property="og:url" content="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/index.html">
+<meta property="og:title" content="软件开发之设计模式">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/软件开发之设计模式/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
+<meta property="og:description" content="前言设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。 设计模式的基本原则设计模式的基本原则非常重要，只要真正">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T07:47:13.430Z">
+<meta property="og:updated_time" content="2018-03-06T08:34:18.244Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用shell脚本将build版本号自动修改为当前日期">
-<meta name="twitter:description" content="产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。 我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。 看官们莫要着急，这就呈上代码： 12345678910dateNum=$(date +%Y%m%d)buildNumbe">
+<meta name="twitter:title" content="软件开发之设计模式">
+<meta name="twitter:description" content="前言设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。 设计模式的基本原则设计模式的基本原则非常重要，只要真正">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/06/软件开发之设计模式/"/>
 
 
 
 
 
-  <title>使用shell脚本将build版本号自动修改为当前日期 | Bruce's Blog</title>
+  <title>软件开发之设计模式 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/软件开发之设计模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用shell脚本将build版本号自动修改为当前日期</h1>
+          <h1 class="post-title" itemprop="name headline">软件开发之设计模式</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:27:21+08:00">
-                2018-01-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T16:01:21+08:00">
+                2018-03-06
               </time>
             
 
@@ -329,8 +329,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
+                  <a href="/categories/软件开发/" itemprop="url" rel="index">
+                    <span itemprop="name">软件开发</span>
                   </a>
                 </span>
 
@@ -366,15 +366,44 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。</p>
-<p>我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。</p>
-<p>看官们莫要着急，这就呈上代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dateNum=$(date +%Y%m%d)</div><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;$INFOPLIST_FILE&quot;)</div><div class="line">buildDate=$(($buildNumber / 100))</div><div class="line">if [ $buildDate -ne $dateNum ]</div><div class="line">then</div><div class="line">buildNumber=$(($dateNum * 100 + 1))</div><div class="line">echo &quot;$buildDate != $dateNum&quot;</div><div class="line"># 日期不相等时重置build版本号</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $buildNumber&quot; &quot;$INFOPLIST_FILE&quot;</div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>使用时有一点需要注意，这个脚本不需要勾选 run script only when installing，这样每次build、run、archive的时候都会去检查。而且这个脚本的执行顺序最好提前一些，一定要排在打包时build自增脚本的前面，才能保证每次都获取到正确的build版本号。</p>
-<p>本来觉得因为之前有过脚本实现build版本自增的经历，这个改起来应该也是不成问题。</p>
-<p>没想到还是掉了个坑，怪自己太异想天开，上次是直接拿了网上的代码，然后改写的。这次是为了自己学习一下独立写shell脚本，然后写的时候不自觉的带上了平时写编译语言的习惯：等号两边加空格！导致shell执行时出现问题，害我排查好几次才发觉。</p>
-<p>这也让我更加明白，作为一个开发人员，特别是如果想成为全栈开发，决不能有思维定势，多学习，注意细节。</p>
-<p>善用工具提高效率，才是王道！</p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
+<h4 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a>设计模式的基本原则</h4><p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
+<ul>
+<li>单一职责原则（SRP），就一个类而言，应该仅有一个引起它变化的原因。</li>
+<li>开放-封闭原则（OCP），是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
+<li>依赖倒转原则（DIP），A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
+<li>里氏代换原则（LSP），子类型必须能够替换掉它们的父类型。</li>
+<li>迪米特法则（LoD），如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
+<li>合成/聚合复用原则（CARP），尽量使用合成/聚合，尽量不要使用类继承。</li>
+</ul>
+<p>注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</p>
+<h4 id="常用的-23-种设计模式"><a href="#常用的-23-种设计模式" class="headerlink" title="常用的 23 种设计模式"></a>常用的 23 种设计模式</h4><p>不管是 .NET 中的 C# 语言，还是 Java、VB.NET、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
+<ol>
+<li>策略模式（Strategy），它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
+<li>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
+<li>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li>工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li>原型模式（Prototype），用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
+<li>模板方法模式（Template Method），定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
+<li>外观模式（Facade），为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
+<li>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+<li>观察者模式（Observer），定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
+<li>抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
+<li>状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
+<li>适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
+<li>备忘录模式（Memento），在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
+<li>组合模式（Composite），将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
+<li>迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
+<li>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+<li>桥接模式（Bridge），将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
+<li>命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
+<li>职责链模式（Chain of Responsibility），使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
+<li>中介者模式（Mediator），用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
+<li>享元模式（Flyweight），运用共享技术有效地支持大量细粒度的对象。</li>
+<li>解释器模式（Interpreter），给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
+<li>访问者模式（Visitor），表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ol>
+<p><a href="http://www.runoob.com/design-pattern/design-pattern-intro.html" target="_blank" rel="external">以Java为例的设计模式讲解</a></p>
 
       
     </div>
@@ -409,7 +438,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
           
         </div>
       
@@ -422,8 +451,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/24/记一次巧妙的宏定义的使用方式/" rel="next" title="记一次巧妙的宏定义的使用方式">
-                <i class="fa fa-chevron-left"></i> 记一次巧妙的宏定义的使用方式
+              <a href="/2018/03/06/Swift-关键字（typealias、associatedtype）/" rel="next" title="Swift - 关键字（typealias、associatedtype）">
+                <i class="fa fa-chevron-left"></i> Swift - 关键字（typealias、associatedtype）
               </a>
             
           </div>
@@ -431,10 +460,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/25/如何打破Swift中的循环引用/" rel="prev" title="如何打破Swift中的循环引用">
-                如何打破Swift中的循环引用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -488,8 +513,17 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -575,6 +609,22 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式的基本原则"><span class="nav-number">2.</span> <span class="nav-text">设计模式的基本原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的-23-种设计模式"><span class="nav-number">3.</span> <span class="nav-text">常用的 23 种设计模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
