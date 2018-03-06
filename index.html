@@ -277,6 +277,173 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/Swift-关键字（typealias、associatedtype）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/06/Swift-关键字（typealias、associatedtype）/" itemprop="url">Swift - 关键字（typealias、associatedtype）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T09:38:38+08:00">
+                2018-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="typealias-类型别名"><a href="#typealias-类型别名" class="headerlink" title="typealias 类型别名"></a>typealias 类型别名</h4><p><strong>typealias 是用来为已经存在的类型重新定义名字的，通过命名，可以使代码变得更加清晰。</strong>使用的语法也很简单，使用 typealias 关键字像使用普通的赋值语句一样，可以将某个已经存在的类型赋值为新的名字。比如在计算二维平面上的距离和位置的时候，我们一般使用 Double 来表示距离，用 CGPoint 来表示位置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func distance(_ point: CGPoint, _ anotherPoint: CGPoint) -&gt; Double &#123;</div><div class="line">    let dx = Double(anotherPoint.x - point.x)</div><div class="line">    let dy = Double(anotherPoint.y - point.y)</div><div class="line">    return sqrt(dx * dx + dy * dy)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let origin = CGPoint(x: 3, y: 0)</div><div class="line">let point = CGPoint(x: 4, y: 0)</div><div class="line"></div><div class="line">let d = distance(origin, point)</div></pre></td></tr></table></figure>
+<p>虽然在数学上和最后的程序运行上都没什么问题，但是阅读和维护的时候总是觉得有哪里不对。 因为我们没有将数学抽象和实际问题结合起来，使得在阅读代码时我们还需要在大脑中进行一次额外的转换: CGPoint 代表一个点，而这个点就是我们在定义的坐标系里的位置; Double 是一个数字，它代表两个点之间的距离。</p>
+<p>如果我们使用 typealias，就可以将这种转换直接写在代码里，从而减轻阅读和维护的负担:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func distance(_ point: CGPoint, _ anotherPoint: CGPoint) -&gt; Double &#123;</div><div class="line">    let dx = Distance(anotherPoint.x - point.x)</div><div class="line">    let dy = Distance(anotherPoint.y - point.y)</div><div class="line">    return sqrt(dx * dx + dy * dy)</div><div class="line">&#125;</div><div class="line"></div><div class="line">let origin = Location(x: 3, y: 0)</div><div class="line">let point = Location(x: 4, y: 0)</div><div class="line"></div><div class="line">let d = distance(origin, point)</div></pre></td></tr></table></figure>
+<p>同样的代码，在 typealias 的帮助下，读起来就轻松多了。可能单单这个简单例子不会有特别多的体会，但是当遇到更复杂的实际问题时，我们就可以不再关心并去思考自己代码里那些成堆的Int或者String之类的基本类型到底代表的是什么东西了，这样应该能省下不少脑细胞。<strong>注意：开发过程中，当使用的闭包的时候，会经常使用typealias。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">typealias Success = (_ data: String) -&gt; Void</div><div class="line">typealias Failure = (_ error: String) -&gt; Void</div><div class="line"></div><div class="line">func request(_ url: String, success: Success, failure: Failure) &#123;</div><div class="line">    // do request here ....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="typealias与泛型"><a href="#typealias与泛型" class="headerlink" title="typealias与泛型"></a>typealias与泛型</h5><p><strong>typealias 是单一的，也就是说我们必须指定将某个特定的类型通过 typealias 赋值为新名字，而不能将整个泛型类型进行重命名。</strong>下面这样的命名都是无法通过编译的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Person&lt;T&gt; &#123;&#125;</div><div class="line">typealias Woker = Person</div><div class="line">typealias Worker = Person&lt;T&gt;</div></pre></td></tr></table></figure>
+<p>不过如果我们在别名中也引入泛型，是可以进行对应的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Person&lt;T&gt; &#123;&#125;</div><div class="line">typealias Woker = Person</div><div class="line">typealias Worker&lt;T&gt; = Person&lt;T&gt;</div></pre></td></tr></table></figure>
+<p>当泛型类型的确定性得到保证后，显然别名也是可以使用的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class Person&lt;T&gt; &#123;&#125;</div><div class="line">typealias WorkId = String</div><div class="line">typealias Worker = Person&lt;WorkId&gt;</div></pre></td></tr></table></figure>
+<p>另一个使用场景是某个类型同时实现多个协议的组合时。我们可以使用&amp;符号连接几个协议，然后给它们一个新的更符合上下文的名字，来增强代码可读性:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protocol Cat &#123;&#125;</div><div class="line">protocol Dog &#123;&#125;</div><div class="line">typealias Pat = Cat &amp; Dog</div></pre></td></tr></table></figure>
+<h4 id="associatedtype-关联类型"><a href="#associatedtype-关联类型" class="headerlink" title="associatedtype 关联类型"></a>associatedtype 关联类型</h4><p>定义一个协议时，有的时候声明一个或多个关联类型作为协议定义的一部分将会非常有用。 <strong>关联类型为协议中的某个类型提供了一个占位名（或者说别名），其代表的实际类型在协议被采纳时才会被指定。</strong> 我们可以通过 associatedtype 关键字来指定关联类型，比如使用协议声明更新cell 的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">// 模型</div><div class="line">struct Model &#123;</div><div class="line">    let age: Int</div><div class="line">    let name: String</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 协议，使用关联类型</div><div class="line">protocol TableViewCellProtocol &#123;</div><div class="line">    associatedtype T</div><div class="line">    func updateCell(_ data: T)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 遵守TableViewCellProtocol</div><div class="line">class MyTableViewCell: UITableViewCell, TableViewCellProtocol &#123;</div><div class="line">    typealias T = Model</div><div class="line">    func updateCell(_ data: Model) &#123;</div><div class="line">        // do something ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/02/Swift-从零实现一个Struct或Class转Dictionary的需求/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2034,167 +2201,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" itemprop="url">AFNetworking用POST发送的parameters在Java后台接收失败的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T10:43:24+08:00">
-                2018-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。</p>
-<h5 id="这时候需要修改AFNetworking的requestSerializer"><a href="#这时候需要修改AFNetworking的requestSerializer" class="headerlink" title="这时候需要修改AFNetworking的requestSerializer"></a>这时候需要修改AFNetworking的requestSerializer</h5><p>先检查是否改动过requestSerializer，如果之前设置成了AFJSONRequestSerializer，把AFJSONRequestSerializer改成了AFHTTPRequestSerializer就OK了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 如果之前有设置AFJSONRequestSerializer，下面这段也需要，一定要看清楚，很容易混淆</div><div class="line">AFHTTPRequestSerializer *request = [AFHTTPRequestSerializer serializer];</div><div class="line">manager.requestSerializer = request;</div></pre></td></tr></table></figure>
-<p>然后设置HTTPHeaderField，告知后台使用form表单格式提交参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[manager.requestSerializer setValue:@&quot;application/x-www-form-urlencoded&quot; forHTTPHeaderField:@&quot;Content-Type&quot;];</div></pre></td></tr></table></figure>
-<p>再次请求，服务端就不会返回参数找不到的错误啦。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2239,7 +2250,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2352,7 +2363,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共29.3k字</span>
+  <span class="post-count">博客全站共30.2k字</span>
 </div>
 
 
