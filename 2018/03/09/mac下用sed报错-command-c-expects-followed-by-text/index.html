@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="一条很简单的替换文本的命令： 12sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit files in-place, saving backups wit">
+<meta name="description" content="一条很简单的替换文本的命令： 123sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text# 也有可能报错 invalid command code W 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit fi">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac下用sed报错 command c expects  followed by text">
 <meta property="og:url" content="http://yoursite.com/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="一条很简单的替换文本的命令： 12sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit files in-place, saving backups wit">
+<meta property="og:description" content="一条很简单的替换文本的命令： 123sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text# 也有可能报错 invalid command code W 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit fi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-09T10:13:39.439Z">
+<meta property="og:updated_time" content="2018-03-10T03:08:40.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下用sed报错 command c expects  followed by text">
-<meta name="twitter:description" content="一条很简单的替换文本的命令： 12sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit files in-place, saving backups wit">
+<meta name="twitter:description" content="一条很简单的替换文本的命令： 123sed -i &apos;s/www.a.cn/www.b.com/g&apos; common.sh# 执行时报错command c expects \ followed by text# 也有可能报错 invalid command code W 但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释： 12345678910Edit fi">
 
 
 
@@ -367,7 +367,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>一条很简单的替换文本的命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div><div class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div><div class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></div><div class="line"><span class="comment"># 也有可能报错 invalid command code W</span></div></pre></td></tr></table></figure>
 <p>但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Edit files <span class="keyword">in</span>-place, saving backups with the specified extension.</div><div class="line"></div><div class="line">If a zero-length extension is given, no backup will be saved.  It</div><div class="line"></div><div class="line">is not recommended to give a zero-length extension when <span class="keyword">in</span>-place</div><div class="line"></div><div class="line">editing files, as you risk corruption or partial content <span class="keyword">in</span> situ-</div><div class="line"></div><div class="line">ations <span class="built_in">where</span> disk space is exhausted, etc.</div></pre></td></tr></table></figure>
 <p>大概的意思就是说用-i的选项时mac会进行强制备份，所以你必须给出一个后缀名进行备份，如果你不想进行备份，直接用空字符即可</p>
