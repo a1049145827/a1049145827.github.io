@@ -277,6 +277,364 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Swift-面向协议编程-组件化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/26/Swift-面向协议编程-组件化/" itemprop="url">Swift 面向协议编程/组件化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T15:50:58+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>得益于面向对象语言的特性 (封装、继承、多态) 在我们熟悉的设计模式中渐渐形成统一的软件开发思想，但是由于OC的局限性, 使得iOS开发组件化编程变得十分繁琐，需要将一些功能拆分为类，在抽取某些功能作为基类的不断运用中，代码的可移植性逐渐减弱。就如同一棵树，从主干到各个分支，每个分支再长成细枝末叶。代码的耦合性也相应增加。随着苹果 swift 语言的推出，对于传统OC 语言取其精华，弃其糟粕。 加上开源社区众大神的齐力维护。逐渐成为一门非常优秀的高级语言。其中Swift中的面向协议编程思想就是其中很有代表性的一项优秀组成部分。</strong></p>
+<p>Swift的 POP 是使用了继承的思想，它模拟了多继承关系，实现了代码的跨父类复用，同时也不存在 is-a 关系。swift中主类和 extension扩展类 的协同工作，保留了 在主类中定义方法 在所继承的类中进行实现的特性，又新增了在 extension拓展类 中定义并实现的方法在任何继承自此协议的类中可以任意调用，从而实现组件化编程。</p>
+<p>两个简单的使用场景可以充分体现swift组件化编程的优势：</p>
+<h3 id="1-实现一个能抖动的-View"><a href="#1-实现一个能抖动的-View" class="headerlink" title="1.实现一个能抖动的 View"></a>1.实现一个能抖动的 View</h3><p>让我们假设你的产品经理过来和你说，“我们在点击那个按钮时候出现一个视图，而且它会抖动。” 这是一个非常常见的动画，比如，在你的密码输入框上 – 当用户输入错误密码时，它就会抖动。</p>
+<p>我们常常都是从 Stack Overflow 开始的(笑)。一些人可能已经有了 Swift 抖动对象的基础代码。一些人甚至都有 Swift 的抖动对象的代码，我想都不用想，只要稍稍修改一下。最难的部分当然是架构：我在哪里集成这些代码呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//  FoodImageView.swift</div><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class FoodImageView: UIImageView &#123;</div><div class="line">    func shake() &#123;</div><div class="line">        let animation = CABasicAnimation(keyPath: &quot;position&quot;)</div><div class="line">        animation.duration = 0.05</div><div class="line">        animation.repeatCount = 5</div><div class="line">        animation.autoreverses = true</div><div class="line">        animation.fromValue = NSValue(CGPoint: CGPointMake(self.center.x - 4.0, self.center.y))</div><div class="line">        animation.toValue = NSValue(CGPoint: CGPointMake(self.center.x + 4.0, self.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: &quot;position&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我将创建一个 UIImageView 的子类，创建我的 FoodImageView 然后增加一个抖动的动画：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//  ViewController.swift</div><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    @IBOutlet weak var foodImageView: FoodImageView!</div><div class="line"></div><div class="line">    @IBAction func onShakeButtonTap(sender: AnyObject) &#123;</div><div class="line">        foodImageView.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在我的 view controller 里面，在 interface builder 里我连接我的 view，把它做为 FoodImageView 的子类，我有一个 shake 函数，然后 完成了！。10 分钟我就完成了这个功能。我很开心，我的代码工作得很正常。</p>
+<p>然后，你的产品经理过来说，”你需要在抖动视图的时候抖动按钮。” 然后我回去对按钮做了同样的事情。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//  ShakeableButton.swift</div><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">class ActionButton: UIButton &#123;</div><div class="line"></div><div class="line">    func shake() &#123;</div><div class="line">        let animation = CABasicAnimation(keyPath: &quot;position&quot;)</div><div class="line">        animation.duration = 0.05</div><div class="line">        animation.repeatCount = 5</div><div class="line">        animation.autoreverses = true</div><div class="line">        animation.fromValue = NSValue(CGPoint: CGPointMake(self.center.x - 4.0, self.center.y))</div><div class="line">        animation.toValue = NSValue(CGPoint: CGPointMake(self.center.x + 4.0, self.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: &quot;position&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建UIImageView子类，创建一个按钮，增加一个 shake() 函数，和我的 ViewController。现在我能抖动我的 foodImageView 和 Button 了，完成了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//  ViewController.swift</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line"></div><div class="line">    @IBOutlet weak var foodImageView: FoodImageView!</div><div class="line">    @IBOutlet weak var actionButton: ActionButton!</div><div class="line"></div><div class="line">    @IBAction func onShakeButtonTap(sender: AnyObject) &#123;</div><div class="line">      foodImageView.shake()</div><div class="line">      actionButton.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>幸运的是，这会给你一个警告：我在两个地方重复了抖动的代码。如果我想改变抖动的幅度，我需要改两处代码，这很不好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//  UIViewExtension.swift</div><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">extension UIView &#123;</div><div class="line"></div><div class="line">    func shake() &#123;</div><div class="line">        let animation = CABasicAnimation(keyPath: &quot;position&quot;)</div><div class="line">        animation.duration = 0.05</div><div class="line">        animation.repeatCount = 5</div><div class="line">        animation.autoreverses = true</div><div class="line">        animation.fromValue = NSValue(CGPoint: CGPointMake(self.center.x - 4.0, self.center.y))</div><div class="line">        animation.toValue = NSValue(CGPoint: CGPointMake(self.center.x + 4.0, self.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: &quot;position&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>作为一个优秀的程序员，我们马上会意识到这点，而且试图重构。如果你以前使用过 Objective-C，我会创建一个 UIView 的类别，在 Swift 里面，这就是扩展。</p>
+<p>我能这样做，因为 UIButton 和 UIImageView 都是 UI 视图。我能扩展 UI 视图而且增加一个 shake 函数。现在我仍然可以给我的按钮和图像视图都加上其他的逻辑，但是 shake 函数就到处都是了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">class FoodImageView: UIImageView &#123;</div><div class="line">    // other customization here</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ActionButton: UIButton &#123;</div><div class="line">    // other customization here</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ViewController: UIViewController &#123;</div><div class="line">    @IBOutlet weak var foodImageView: FoodImageView!</div><div class="line">    @IBOutlet weak var actionButton: ActionButton!</div><div class="line"></div><div class="line">    @IBAction func onShakeButtonTap(sender: AnyObject) &#123;</div><div class="line">        foodImageView.shake()</div><div class="line">        actionButton.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>马上我们就能发现可读性很差了。例如，对于 foodImageView 和 actionButton 来说，你看不出来任何抖动的意图。整个类里面没有任何东西能告诉你它需要抖动。这样表意不明确，因为别处可能会随机存在一个抖动函数，你甚至不知道它是从哪里来的。</p>
+<p>最主要的是，如果你常常为类别和 UIView 的扩展这样做的话，你可能会有更好的办法。在你增加了 shake 函数的地方，就成了所谓的 科学怪人的垃圾场。然后有人来和你说， “我想要一个可调暗的视图”，然后你增加一个 dim 函数和其他别处随机的调用函数。这样，代码文件文件就会变成一个很长的垃圾文件，因为这些随机调用的事情都是在 UI View 里面完成，尽管有些时候也许只有一两个地方需要这么做，这导致代码变得不可读，难以查看。我们该如何改变这点呢？</p>
+<p>这是一次面向协议编程的演讲，我们当然会用到协议。首先我们创建一个 Shakeable 的协议：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//  Shakeable.swift</div><div class="line"></div><div class="line">import UIKit</div><div class="line"></div><div class="line">protocol Shakeable &#123; &#125;</div><div class="line"></div><div class="line">extension Shakeable where Self: UIView &#123;</div><div class="line"></div><div class="line">    func shake() &#123;</div><div class="line">        // implementation code</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在协议扩展的帮助下，你可以把它们限制在一个特定的类里面。在这个例子里面，我能抽出我的 shake 函数，然后用类别，我能说这是我们需要遵循的唯一的东西，只有 UI 视图会有这个函数。</p>
+<p>你仍然可以使用你原来想用的同样强大的扩展功能，但是你有协议了。任何遵循协议的非视图不会工作。只有视图才能有这个 shake 的默认实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class FoodImageView: UIImageView, Shakeable &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">class ActionButton: UIButton, Shakeable &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到 FoodImageView 和 ActionButton 会遵循 Shakeable 协议。它们会有 shake 函数，现在的可读性强多了 –- 我可以理解 shaking 是有意存在的。如果你在别处使用视图，我需要想想，”在这也需要抖动吗？”。它增强了可读性，但是代码还是闭合的和可重用的。</p>
+<p>假设我们想抖动和调暗视图。我们会有另外一个协议，一个 Dimmable 协议，然后我们可以为了调暗做一个协议扩展。再强调一遍，通过看类的定义来知晓这个类的用途，这样意图就会很明显了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class FoodImageView: UIImageView, Shakeable, Dimmable &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于重构，当产品经理说 “我不想要抖动了” 的时候，你只需要删除相关的 Shakeable 协议就好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class FoodImageView: UIImageView, Dimmable &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在它只能调暗了。功能插拔是非常容易的，通过使用协议我们很容易获得乐高似的架构。如果你想学习使用协议的其他更强大的使用方式，可以看看<a href="https://archive.fo/h2ZTz" target="_blank" rel="external">这篇文章</a> ，然后尝试创建一个有过渡效果的可调暗的视图。</p>
+<h3 id="2-xib-加载-UIView"><a href="#2-xib-加载-UIView" class="headerlink" title="2.xib 加载 UIView"></a>2.xib 加载 UIView</h3><p>我们使用XIB加载的自定义View都会使用相同的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Bundle.main.loadNibNamed(&quot;RedView&quot;, owner: nil, options: nil)?.last</div></pre></td></tr></table></figure>
+<p>通常在自定义View的实现中定义一个类方法。<br>例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class func loadWithNib() -&gt; RedView &#123;</div><div class="line">    return Bundle.main.loadNibNamed(&quot;RedView&quot;, owner: nil, options: nil)?.last! as! RedView</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果我们定义一个可从XIB加载某类的协议,在自定义类中仅仅需要遵守这个协议,无需实现协议中的方法,便可实现此协议中实现的所有方法.例如定义一个 可从XIB加载的协议 NibLoadable。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">protocol NibLoadable &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">extension NibLoadable where Self: UIView &#123;</div><div class="line">    static func loadViewWithNib() -&gt; Self &#123;</div><div class="line">        return Bundle.main.loadNibNamed(&quot;\(self)&quot;, owner: nil, options: nil)?.last! as! Self</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>只要在xib加载的类中继承此协议。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"></div><div class="line">class GreenView: UIView , NibLoadable &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就可以在需要初始化此对象时直接调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GreenView.loadViewWithNib()</div></pre></td></tr></table></figure>
+<p><strong>写在最后，虽然Swift已经十分强大，但是技术毕竟是要为业务服务。缺少了运行时特性，也是很多项目无法从OC完全迁移到Swift的原因之一，所以在开发项目的时候需要慎重选择OC、Swift，或者在业务更新不是十分频繁的时候也可以选择OC与Swift混编（业务更新频繁的时候并不建议这么做，遇到坑耗时导致项目delay毕竟不是好事，OC虽老，尚能再战），希望今年即将发布的Swift5能够给我们带来惊喜</strong></p>
+<h5 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h5><p><a href="http://blog.csdn.net/qxuewei/article/details/53945445" target="_blank" rel="external">iOS-Swift 面向协议编程/组件化(模块化)编程思想</a><br><a href="https://academy.realm.io/cn/posts/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/" target="_blank" rel="external">基于 Swift 的面向协议编程</a><br><a href="http://www.cocoachina.com/swift/20161121/18144.html" target="_blank" rel="external">从 Swift 的面向协议编程说开去</a><br><a href="http://blog.csdn.net/xuehongnizhao/article/details/55258066" target="_blank" rel="external">Swift面向协议编程（附代码）</a><br><a href="https://medium.com/ios-os-x-development/swift-protocol-extension-method-dispatch-6a6bf270ba94" target="_blank" rel="external">Swift protocol extension method dispatch</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/如何打破Swift中的循环引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/25/如何打破Swift中的循环引用/" itemprop="url">如何打破Swift中的循环引用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T12:49:19+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Swift的内存管理也是使用的ARC(自动引用计数)：当我们初始化创建一个对象实例的时候,swift就会替我们管理和分配内存,此时的引用计数为1，当对其进行init(copy/mutableCopy)时，引用计数会+1，而当实例被销毁时，引用计数就会-1。当系统检测到引用计数为0的时候，就会释放掉这个内存。</p>
+<p>但是，这种引用计数会产生一个问题就是循环引用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">class A &#123;</div><div class="line">    var b: B?</div><div class="line"></div><div class="line">    init() &#123;</div><div class="line">      print(&quot;A初始化&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">      print(&quot;A析构掉&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class B &#123;</div><div class="line">    var a: A?</div><div class="line"></div><div class="line">    init() &#123;</div><div class="line">      print(&quot;B初始化&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">      print(&quot;B析构掉&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var a: A?;   a = A()</div><div class="line">var b: B?;   b = B()</div><div class="line"></div><div class="line">a!.b = b;   b!.a = a</div><div class="line">a = nil;    b = nil</div></pre></td></tr></table></figure>
+<p>你会发现，A和B的析构函数deinit都没有调用，因为当a执行析构的时候，b.a还在对其进行引用，当b析构的时候，a.b也在对b进行引用。这时候解决的方法就是对其中的某一个声明进行若引用，即加上weak：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">weak var b: B?</div></pre></td></tr></table></figure>
+<p>另外一种造成循环引用的问题就是闭包：闭包中对任何元素的引用都会被闭包自动持有，如果我们在闭包中需要使用self的话，那就相当于闭包对self持有，而block又是被self直接或间接持有，这样就造成了循环引用。例如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var name: String</div><div class="line"></div><div class="line">    lazy var block: ()-&gt;() = &#123;</div><div class="line">        print(self.name )</div><div class="line">    &#125;</div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        print(&quot;C初始化&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">        print(&quot;C析构&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var c: C? = C(name: &quot;c&quot;)</div><div class="line">c?.block()</div><div class="line">c = nil</div></pre></td></tr></table></figure>
+<p>这里C的析构函数也是没有执行的。block是self的属性，block里面又对self持有，这就形成了循环引用。所以这里我们可以使用unowned，也可以使用weak：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// unowned</div><div class="line">lazy var block: ()-&gt;() = &#123; [unowned self] in</div><div class="line">    print(self.name)</div><div class="line">&#125;</div><div class="line"></div><div class="line">// weak</div><div class="line">lazy var block: ()-&gt;() = &#123; [weak self] in</div><div class="line">    if let strongSelf = self &#123;</div><div class="line">        print(strongSelf.name)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么这两个使用有什么区别呢？接下来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var name: String</div><div class="line"></div><div class="line">    lazy var block: ()-&gt;() = &#123; [unowned self] in</div><div class="line">        print(self.name)</div><div class="line">    &#125;</div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        print(&quot;C初始化&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">        print(&quot;C析构&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class D &#123;</div><div class="line">    var block: (()-&gt;())!</div><div class="line"></div><div class="line">    init(callBack: (()-&gt;())?) &#123;</div><div class="line">        self.block = callBack!</div><div class="line">        print(&quot;D构造&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">        print(&quot;D析构&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var c: C? = C(name: &quot;c&quot;)</div><div class="line">var d = D.init(callBack: c?.block)</div><div class="line">c!.block()</div><div class="line">c = nil</div><div class="line">d.block()</div></pre></td></tr></table></figure>
+<p>这里当你运行到 d.block()的时候，是会有一个error。</p>
+<p>因为当d.block()执行的时候，c已经被析构掉了，而闭包里的self肯定也是不存在的，是一个nil，这个时候执行的话self.name就会报错。所以在我们不确定是否有外部变量在持有这个block的时候，我们就应该使用weak更为安全，因为使用weak的话self.name需要改成可选性的self?.name，这个时候self?.name肯定就为nil了。所以换成weak之后，在playground里的d.block()就不会有错误了，而且block也是会正常执行的，只不过print(self?.name)打印出来为nil。</p>
+<p>最终代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class C &#123;</div><div class="line">    var name: String</div><div class="line"></div><div class="line">    lazy var block: ()-&gt;() = &#123; [weak self] in</div><div class="line">        print(self?.name ?? &quot;nothing&quot;)</div><div class="line">    &#125;</div><div class="line">    init(name: String) &#123;</div><div class="line">        self.name = name</div><div class="line">        print(&quot;C初始化&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">        print(&quot;C析构&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class D &#123;</div><div class="line">    var block: (()-&gt;())!</div><div class="line"></div><div class="line">    init(callBack: (()-&gt;())?) &#123;</div><div class="line">        self.block = callBack!</div><div class="line">        print(&quot;D构造&quot;)</div><div class="line">    &#125;</div><div class="line">    deinit &#123;</div><div class="line">        print(&quot;D析构&quot;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var c: C? = C(name: &quot;c&quot;)</div><div class="line">var d = D.init(callBack: c?.block)</div><div class="line">c!.block()</div><div class="line">c = nil</div><div class="line">d.block()</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1531,313 +1889,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/Xcode运行程序时左侧memory不显示内存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/05/Xcode运行程序时左侧memory不显示内存/" itemprop="url">Xcode运行程序时左侧memory不显示内存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T14:47:51+08:00">
-                2018-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="运行程序后，xcode不显示当前使用的内存情况"><a href="#运行程序后，xcode不显示当前使用的内存情况" class="headerlink" title="运行程序后，xcode不显示当前使用的内存情况"></a>运行程序后，xcode不显示当前使用的内存情况</h4><p>问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可</p>
-<p>打开 product -&gt; SCheme -&gt; EditSCheme -&gt; Diagnostics -&gt; enable zoombie Objects  取消选中</p>
-<p>就可以继续显示了</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/iOS设备型号-2018最新统计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/05/iOS设备型号-2018最新统计/" itemprop="url">iOS设备型号 2018最新统计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T11:00:09+08:00">
-                2018-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近发现项目里设备型号没有匹配最近新发布的几款设备，于是去官网查看了下。</p>
-<h4 id="所有设备型号对应的官网地址："><a href="#所有设备型号对应的官网地址：" class="headerlink" title="所有设备型号对应的官网地址："></a>所有设备型号对应的官网地址：</h4><p>官网地址： <a href="https://www.theiphonewiki.com/wiki/Models" target="_blank" rel="external">https://www.theiphonewiki.com/wiki/Models</a></p>
-<p>来点更加暴力的，直接上代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">// 记得导入头文件</div><div class="line">#import &lt;sys/sysctl.h&gt;</div><div class="line"></div><div class="line">// 获取具体的设备型号（不包含Watch和TV）</div><div class="line">+ (NSString *)deviceModel &#123;</div><div class="line"></div><div class="line">    int mib[2];</div><div class="line">    size_t len;</div><div class="line">    char *machine;</div><div class="line"></div><div class="line">    mib[0] = CTL_HW;</div><div class="line">    mib[1] = HW_MACHINE;</div><div class="line">    sysctl(mib, 2, NULL, &amp;len, NULL, 0);</div><div class="line">    machine = malloc(len);</div><div class="line">    sysctl(mib, 2, machine, &amp;len, NULL, 0);</div><div class="line"></div><div class="line">    NSString *platform = [NSString stringWithCString:machine encoding:NSASCIIStringEncoding];</div><div class="line">    free(machine);</div><div class="line">    </div><div class="line">    // MARK: - Simulator</div><div class="line">    if ([platform isEqualToString:@&quot;i386&quot;] || [platform isEqualToString:@&quot;x86_64&quot;]) &#123; return @&quot;iPhoneSimulator&quot;; &#125;</div><div class="line"></div><div class="line">    // MARK: - iPhone</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone1,1&quot;]) &#123; return @&quot;iPhone2G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone1,2&quot;]) &#123; return @&quot;iPhone3G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone2,1&quot;]) &#123; return @&quot;iPhone3GS&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone3,1&quot;] || [platform isEqualToString:@&quot;iPhone3,2&quot;] || [platform isEqualToString:@&quot;iPhone3,3&quot;]) &#123; return @&quot;iPhone4&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone4,1&quot;]) &#123; return @&quot;iPhone4S&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone5,1&quot;] || [platform isEqualToString:@&quot;iPhone5,2&quot;]) &#123; return @&quot;iPhone5&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone5,3&quot;] || [platform isEqualToString:@&quot;iPhone5,4&quot;]) &#123; return @&quot;iPhone5c&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone6,1&quot;] || [platform isEqualToString:@&quot;iPhone6,2&quot;]) &#123; return @&quot;iPhone5s&quot;; &#125;</div><div class="line"></div><div class="line">    if ([platform isEqualToString:@&quot;iPhone7,2&quot;]) &#123; return @&quot;iPhone6&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone7,1&quot;]) &#123; return @&quot;iPhone6Plus&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone8,1&quot;]) &#123; return @&quot;iPhone6s&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone8,2&quot;]) &#123; return @&quot;iPhone6sPlus&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone8,3&quot;] || [platform isEqualToString:@&quot;iPhone8,4&quot;]) &#123; return @&quot;iPhoneSE&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone9,1&quot;] || [platform isEqualToString:@&quot;iPhone9,3&quot;]) &#123; return @&quot;iPhone7&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone9,2&quot;] || [platform isEqualToString:@&quot;iPhone9,4&quot;])   &#123; return @&quot;iPhone7Plus&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone10,1&quot;] || [platform isEqualToString:@&quot;iPhone10,4&quot;])   &#123; return @&quot;iPhone8&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone10,2&quot;] || [platform isEqualToString:@&quot;iPhone10,5&quot;])   &#123; return @&quot;iPhone8Plus&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPhone10,3&quot;] || [platform isEqualToString:@&quot;iPhone10,6&quot;])   &#123; return @&quot;iPhoneX&quot;; &#125;</div><div class="line"></div><div class="line">    // MARK: - iPod Touch</div><div class="line">    if ([platform isEqualToString:@&quot;iPod1,1&quot;])  &#123; return @&quot;iPodTouch&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPod2,1&quot;])  &#123; return @&quot;iPodTouch2G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPod3,1&quot;])  &#123; return @&quot;iPodTouch3G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPod4,1&quot;])  &#123; return @&quot;iPodTouch4G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPod5,1&quot;])  &#123; return @&quot;iPodTouch5G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPod7,1&quot;])  &#123; return @&quot;iPodTouch6G&quot;; &#125;</div><div class="line"></div><div class="line">    // MARK: - iPad</div><div class="line">    if ([platform isEqualToString:@&quot;iPad1,1&quot;])  &#123; return @&quot;iPad&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad2,1&quot;] || [platform isEqualToString:@&quot;iPad2,2&quot;] || [platform isEqualToString:@&quot;iPad2,3&quot;] || [platform isEqualToString:@&quot;iPad2,4&quot;])  &#123; return @&quot;iPad2&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad3,1&quot;] || [platform isEqualToString:@&quot;iPad3,2&quot;] || [platform isEqualToString:@&quot;iPad3,3&quot;])  &#123; return @&quot;iPad3&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad3,4&quot;] || [platform isEqualToString:@&quot;iPad3,5&quot;] || [platform isEqualToString:@&quot;iPad3,6&quot;])  &#123; return @&quot;iPad4&quot;; &#125;</div><div class="line"></div><div class="line">    // MARK: - iPad Air</div><div class="line">    if ([platform isEqualToString:@&quot;iPad4,1&quot;] || [platform isEqualToString:@&quot;iPad4,2&quot;] || [platform isEqualToString:@&quot;iPad4,3&quot;])  &#123; return @&quot;iPadAir&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad5,3&quot;] || [platform isEqualToString:@&quot;iPad5,4&quot;])  &#123; return @&quot;iPadAir2&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad6,11&quot;] || [platform isEqualToString:@&quot;iPad6,12&quot;])    return @&quot;iPadAir3&quot;;</div><div class="line"></div><div class="line">    // MARK: - iPad Pro</div><div class="line">    if ([platform isEqualToString:@&quot;iPad6,7&quot;] || [platform isEqualToString:@&quot;iPad6,8&quot;])   &#123; return @&quot;iPad Pro 12.9-inch&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad6,3&quot;] || [platform isEqualToString:@&quot;iPad6,4&quot;])   &#123; return @&quot;iPad Pro iPad 9.7-inch&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad7,1&quot;] || [platform isEqualToString:@&quot;iPad7,2&quot;])   &#123; return @&quot;iPad Pro 12.9-inch 2&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad7,3&quot;] || [platform isEqualToString:@&quot;iPad7,4&quot;])   &#123; return @&quot;iPad Pro 10.5-inch&quot;; &#125;</div><div class="line"></div><div class="line">    // MARK: - iPad mini</div><div class="line">    if ([platform isEqualToString:@&quot;iPad2,5&quot;] || [platform isEqualToString:@&quot;iPad2,6&quot;] || [platform isEqualToString:@&quot;iPad2,7&quot;])  &#123; return @&quot;iPadmini1G&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad4,4&quot;] || [platform isEqualToString:@&quot;iPad4,5&quot;] || [platform isEqualToString:@&quot;iPad4,6&quot;])  &#123; return @&quot;iPadmini2&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad4,7&quot;] || [platform isEqualToString:@&quot;iPad4,8&quot;] || [platform isEqualToString:@&quot;iPad4,9&quot;])  &#123; return @&quot;iPadmini3&quot;; &#125;</div><div class="line">    if ([platform isEqualToString:@&quot;iPad5,1&quot;] || [platform isEqualToString:@&quot;iPad5,2&quot;])  &#123; return @&quot;iPadmini4&quot;; &#125;</div><div class="line"></div><div class="line">    return platform;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1938,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2000,7 +2051,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共34.7k字</span>
+  <span class="post-count">博客全站共35.9k字</span>
 </div>
 
 
