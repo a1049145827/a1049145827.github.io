@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Bruce&#39;s Blog">
 <meta property="og:description" content="之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。 改变slider的高度不能靠约束在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-02T04:57:04.914Z">
+<meta property="og:updated_time" content="2018-03-19T09:20:34.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UISlider 使用采坑记">
 <meta name="twitter:description" content="之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。 改变slider的高度不能靠约束在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因">
@@ -369,7 +369,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <p>之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。</p>
 <h4 id="改变slider的高度不能靠约束"><a href="#改变slider的高度不能靠约束" class="headerlink" title="改变slider的高度不能靠约束"></a>改变slider的高度不能靠约束</h4><p>在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因为既稳定又快捷。</p>
 <p>下面就是我们所要修改的地方，只需要创建一个继承UISlider的类，在里面重写一个方法，即可搞定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</div><div class="line">- (CGRect)trackRectForBounds:(CGRect)bounds &#123;</div><div class="line"></div><div class="line">    return CGRectMake(0, 21, CGRectGetWidth(self.frame), 8);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></div><div class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="external">自定义UISlider Demo</a></p>
 <p>当然还有几个其他的方法，改变slider其他属性的。大家可以去查阅相应的API。</p>
 <p>最终我在初始化Slider的代码中将对控件高度的约束那行代码注释掉，bug修复。</p>

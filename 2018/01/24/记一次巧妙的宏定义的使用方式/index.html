@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&amp;quot;3&amp;quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define sec">
+<meta name="description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&quot;3&quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define section(_sect">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次巧妙的宏定义的使用方式">
 <meta property="og:url" content="http://yoursite.com/2018/01/24/记一次巧妙的宏定义的使用方式/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&amp;quot;3&amp;quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define sec">
+<meta property="og:description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&quot;3&quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define section(_sect">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T08:05:38.785Z">
+<meta property="og:updated_time" content="2018-03-19T09:20:24.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次巧妙的宏定义的使用方式">
-<meta name="twitter:description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&amp;quot;3&amp;quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define sec">
+<meta name="twitter:description" content="最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。 于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用 1@section(@&quot;3&quot;, NSStringFromClass([WVRADViewSection class])) 起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？ 赶紧点进去看看，是这么一个宏定义： 12345#define section(_sect">
 
 
 
@@ -368,10 +368,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <p>最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。</p>
 <p>于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@section(@&quot;3&quot;, NSStringFromClass([WVRADViewSection class]))</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@section(<span class="string">@"3"</span>, <span class="built_in">NSStringFromClass</span>([WVRADViewSection <span class="keyword">class</span>]))</div></pre></td></tr></table></figure>
 <p>起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？</p>
 <p>赶紧点进去看看，是这么一个宏定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#define section(_sectionID_, _className_) \</div><div class="line">compatibility_alias _WVRViewModelDispatcher WVRViewModelDispatcher; \</div><div class="line">+ (void)load &#123; \</div><div class="line">[WVRViewModelDispatcher registerSection:_sectionID_ className:_className_]; \</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define section(_sectionID_, _className_) \</span></div><div class="line">compatibility_alias _WVRViewModelDispatcher WVRViewModelDispatcher; \</div><div class="line">+ (<span class="keyword">void</span>)load &#123; \</div><div class="line">[WVRViewModelDispatcher registerSection:_sectionID_ className:_className_]; \</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>就是load方法的宏定义，方便通过映射来做类型匹配，不需要在管理类里导入太多头文件。</p>
 <p>但是我还是比较纠结 compatibility_alias 的用途。网上有解释说这个是苹果留的关键字，用来重构时方便改变类名，但是我查找 _WVRViewModelDispatcher，并没有地方引用，这就很奇怪，为什么要在这里放一行没有用到的代码。</p>
 <p>经过一番思考，我突然想起来问题的根源：这个宏定义使用的时候需要在前面加一个@，这么使用肯定要有理由的，我们看到这个宏定义使用了平时很常见的section作为名称，这本身就不合理，但是由于compatibility_alias的存在，使用时就必须在前面加上@，编译器才认为这是在调用一个宏定义，而不是一个变量或者方法。</p>

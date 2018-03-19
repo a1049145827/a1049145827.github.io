@@ -4,8 +4,105 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/</loc>
+    <lastmod>2018-03-19T09:44:49.667Z</lastmod>
+    <data>
+        <display>
+        <title>Create A Backend Use Perfect Power By Swift</title>
+        <pubTime>2017-12-21T04:31:58.000Z</pubTime>
+        
+        <tag>Backend Perfect Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="Swift后端开发" url="http://yoursite.com/categories/Swift%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2017/12/25/%E4%BD%BF%E7%94%A8github%E6%84%89%E5%BF%AB%E7%9A%84%E5%86%99blog/</loc>
+    <lastmod>2018-03-19T09:34:28.836Z</lastmod>
+    <data>
+        <display>
+        <title>使用github愉快的写blog</title>
+        <pubTime>2017-12-25T04:28:08.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/06/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-03-19T09:34:02.749Z</lastmod>
+    <data>
+        <display>
+        <title>软件开发之设计模式</title>
+        <pubTime>2018-03-06T08:01:21.000Z</pubTime>
+        
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件开发" url="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2017/08/15/ios/</loc>
+    <lastmod>2018-03-19T09:33:24.958Z</lastmod>
+    <data>
+        <display>
+        <title>iOS消除警告</title>
+        <pubTime>2017-08-15T08:45:19.000Z</pubTime>
+        
+        <tag>iOS 警告</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/06/Swift-%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88typealias%E3%80%81associatedtype%EF%BC%89/</loc>
+    <lastmod>2018-03-19T09:33:14.324Z</lastmod>
+    <data>
+        <display>
+        <title>Swift - 关键字（typealias、associatedtype）</title>
+        <pubTime>2018-03-06T01:38:38.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/03/13/Swift4-0%E4%B8%AD%E4%BD%BF%E7%94%A8NSSelectorFromString/</loc>
-    <lastmod>2018-03-13T10:22:54.476Z</lastmod>
+    <lastmod>2018-03-19T09:32:47.077Z</lastmod>
     <data>
         <display>
         <title>Swift4.0中使用NSSelectorFromString()</title>
@@ -24,8 +121,45 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2017/08/15/xcode/</loc>
+    <lastmod>2018-03-19T09:32:45.500Z</lastmod>
+    <data>
+        <display>
+        <title>xcode中使用正则表达式来搜索替换代码</title>
+        <pubTime>2017-08-15T04:56:44.000Z</pubTime>
+        
+        <tag>xcode 正则</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/04/%E4%BD%BF%E7%94%A8Swift%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6Perfect%E5%81%9A%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2018-03-19T09:27:20.533Z</lastmod>
+    <data>
+        <display>
+        <title>使用Swift后端框架Perfect做一个文件上传服务器</title>
+        <pubTime>2018-01-04T13:55:51.000Z</pubTime>
+        
+        <tag>iOS, Swift, 后端</tag>
+         
+         
+           
+             
+              <breadCrumb title="Swift后端开发" url="http://yoursite.com/categories/Swift%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/03/13/Xcode%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%9E%E7%8E%B0Swift%E5%92%8COC%E6%B7%B7%E7%BC%96-%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-03-13T08:37:28.697Z</lastmod>
+    <lastmod>2018-03-19T09:26:43.118Z</lastmod>
     <data>
         <display>
         <title>Xcode工程项目中实现Swift和OC混编 相互引用</title>
@@ -45,11 +179,331 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/13/Swift4-0%E4%B8%AD%E4%BD%BF%E7%94%A8NSClassFromString/</loc>
-    <lastmod>2018-03-13T06:58:08.646Z</lastmod>
+    <lastmod>2018-03-19T09:26:10.854Z</lastmod>
     <data>
         <display>
         <title>Swift4.0中使用NSClassFromString()</title>
         <pubTime>2018-03-13T05:59:54.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/02/27/Swift%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2018-03-19T09:25:56.788Z</lastmod>
+    <data>
+        <display>
+        <title>Swift代码风格指南（译）</title>
+        <pubTime>2018-02-27T06:27:46.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/02/26/Swift-%E9%9D%A2%E5%90%91%E5%8D%8F%E8%AE%AE%E7%BC%96%E7%A8%8B-%E7%BB%84%E4%BB%B6%E5%8C%96/</loc>
+    <lastmod>2018-03-19T09:25:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 面向协议编程/组件化</title>
+        <pubTime>2018-02-26T07:50:58.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/07/%E4%BD%BF%E7%94%A8fastlane%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/</loc>
+    <lastmod>2018-03-19T09:25:34.356Z</lastmod>
+    <data>
+        <display>
+        <title>使用fastlane进行自动化构建</title>
+        <pubTime>2018-03-07T02:50:12.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/02/Swift-%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAStruct%E6%88%96Class%E8%BD%ACDictionary%E7%9A%84%E9%9C%80%E6%B1%82/</loc>
+    <lastmod>2018-03-19T09:25:31.980Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 从零实现一个Struct或Class转Dictionary的需求</title>
+        <pubTime>2018-03-02T06:26:51.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/07/Swift-%E5%85%B3%E9%94%AE%E5%AD%97-defer/</loc>
+    <lastmod>2018-03-19T09:25:30.001Z</lastmod>
+    <data>
+        <display>
+        <title>Swift-关键字 defer</title>
+        <pubTime>2018-03-07T06:36:36.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/25/%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4Swift%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/</loc>
+    <lastmod>2018-03-19T09:24:27.891Z</lastmod>
+    <data>
+        <display>
+        <title>如何打破Swift中的循环引用</title>
+        <pubTime>2018-01-25T04:49:19.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/02/%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8WCDBSwift/</loc>
+    <lastmod>2018-03-19T09:23:03.829Z</lastmod>
+    <data>
+        <display>
+        <title>尝试使用WCDBSwift</title>
+        <pubTime>2018-03-02T01:39:27.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2017/12/29/UISlider-%E4%BD%BF%E7%94%A8%E9%87%87%E5%9D%91%E8%AE%B0/</loc>
+    <lastmod>2018-03-19T09:20:34.270Z</lastmod>
+    <data>
+        <display>
+        <title>UISlider 使用采坑记</title>
+        <pubTime>2017-12-29T06:35:13.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
+    <lastmod>2018-03-19T09:20:28.872Z</lastmod>
+    <data>
+        <display>
+        <title>iOS设备型号 2018最新统计</title>
+        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
+    <lastmod>2018-03-19T09:20:28.242Z</lastmod>
+    <data>
+        <display>
+        <title>iOS开发 Archive时自动增加build版本</title>
+        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/14/iOS%E5%BC%80%E5%8F%91-%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF%E8%A2%AB%E9%94%AE%E7%9B%98%E9%81%AE%E6%8C%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2018-03-19T09:20:27.543Z</lastmod>
+    <data>
+        <display>
+        <title>iOS开发 提示信息被键盘遮挡解决方案</title>
+        <pubTime>2018-01-14T09:11:00.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
+    <lastmod>2018-03-19T09:20:26.926Z</lastmod>
+    <data>
+        <display>
+        <title>iOS开发 区分Home键和锁屏键事件</title>
+        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-03-19T09:20:26.248Z</lastmod>
+    <data>
+        <display>
+        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
+        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
+        
+        <tag>iOS, AFNetworking</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2017/12/27/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%B9%E6%AE%8A%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/</loc>
+    <lastmod>2018-03-19T09:20:25.611Z</lastmod>
+    <data>
+        <display>
+        <title>记一次特殊需求实现</title>
+        <pubTime>2017-12-27T12:48:19.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/24/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%B7%A7%E5%A6%99%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/</loc>
+    <lastmod>2018-03-19T09:20:24.881Z</lastmod>
+    <data>
+        <display>
+        <title>记一次巧妙的宏定义的使用方式</title>
+        <pubTime>2018-01-24T07:15:36.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/01/24/%E4%BD%BF%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%B0%86build%E7%89%88%E6%9C%AC%E5%8F%B7%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/</loc>
+    <lastmod>2018-03-19T09:20:21.042Z</lastmod>
+    <data>
+        <display>
+        <title>使用shell脚本将build版本号自动修改为当前日期</title>
+        <pubTime>2018-01-24T07:27:21.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -77,66 +531,6 @@
            
              
               <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/07/%E4%BD%BF%E7%94%A8fastlane%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/</loc>
-    <lastmod>2018-03-09T09:12:51.206Z</lastmod>
-    <data>
-        <display>
-        <title>使用fastlane进行自动化构建</title>
-        <pubTime>2018-03-07T02:50:12.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/07/Swift-%E5%85%B3%E9%94%AE%E5%AD%97-defer/</loc>
-    <lastmod>2018-03-07T07:59:50.543Z</lastmod>
-    <data>
-        <display>
-        <title>Swift-关键字 defer</title>
-        <pubTime>2018-03-07T06:36:36.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/06/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2018-03-06T08:34:18.244Z</lastmod>
-    <data>
-        <display>
-        <title>软件开发之设计模式</title>
-        <pubTime>2018-03-06T08:01:21.000Z</pubTime>
-        
-        <tag>设计模式</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件开发" url="http://yoursite.com/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/"/>
           
         </display>
     </data>
@@ -241,46 +635,6 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-03-06T02:29:58.239Z</lastmod>
-    <data>
-        <display>
-        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
-        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
-        
-        <tag>iOS, AFNetworking</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/02/%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8WCDBSwift/</loc>
-    <lastmod>2018-03-06T02:29:48.961Z</lastmod>
-    <data>
-        <display>
-        <title>尝试使用WCDBSwift</title>
-        <pubTime>2018-03-02T01:39:27.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://a1049145827.github.io/2018/01/19/%E4%BD%BF%E7%94%A8MongoDB%E4%BD%9C%E4%B8%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2018-03-06T02:29:22.874Z</lastmod>
     <data>
@@ -301,266 +655,6 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/</loc>
-    <lastmod>2018-03-06T02:27:20.877Z</lastmod>
-    <data>
-        <display>
-        <title>Create A Backend Use Perfect Power By Swift</title>
-        <pubTime>2017-12-21T04:31:58.000Z</pubTime>
-        
-        <tag>Backend Perfect Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="Swift后端开发" url="http://yoursite.com/categories/Swift%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/02/27/Swift%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2018-03-06T02:25:12.573Z</lastmod>
-    <data>
-        <display>
-        <title>Swift代码风格指南（译）</title>
-        <pubTime>2018-02-27T06:27:46.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/02/Swift-%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAStruct%E6%88%96Class%E8%BD%ACDictionary%E7%9A%84%E9%9C%80%E6%B1%82/</loc>
-    <lastmod>2018-03-06T02:25:04.004Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 从零实现一个Struct或Class转Dictionary的需求</title>
-        <pubTime>2018-03-02T06:26:51.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/03/06/Swift-%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88typealias%E3%80%81associatedtype%EF%BC%89/</loc>
-    <lastmod>2018-03-06T02:25:00.979Z</lastmod>
-    <data>
-        <display>
-        <title>Swift - 关键字（typealias、associatedtype）</title>
-        <pubTime>2018-03-06T01:38:38.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/25/%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4Swift%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-03-06T02:08:47.434Z</lastmod>
-    <data>
-        <display>
-        <title>如何打破Swift中的循环引用</title>
-        <pubTime>2018-01-25T04:49:19.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/02/26/Swift-%E9%9D%A2%E5%90%91%E5%8D%8F%E8%AE%AE%E7%BC%96%E7%A8%8B-%E7%BB%84%E4%BB%B6%E5%8C%96/</loc>
-    <lastmod>2018-03-01T01:45:26.466Z</lastmod>
-    <data>
-        <display>
-        <title>Swift 面向协议编程/组件化</title>
-        <pubTime>2018-02-26T07:50:58.000Z</pubTime>
-        
-        <tag>iOS, Swift</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/04/%E4%BD%BF%E7%94%A8Swift%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6Perfect%E5%81%9A%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2018-02-26T07:59:15.947Z</lastmod>
-    <data>
-        <display>
-        <title>使用Swift后端框架Perfect做一个文件上传服务器</title>
-        <pubTime>2018-01-04T13:55:51.000Z</pubTime>
-        
-        <tag>iOS, Swift, 后端</tag>
-         
-         
-           
-             
-              <breadCrumb title="Swift后端开发" url="http://yoursite.com/categories/Swift%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/24/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%B7%A7%E5%A6%99%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/</loc>
-    <lastmod>2018-01-24T08:05:38.785Z</lastmod>
-    <data>
-        <display>
-        <title>记一次巧妙的宏定义的使用方式</title>
-        <pubTime>2018-01-24T07:15:36.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/24/%E4%BD%BF%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%B0%86build%E7%89%88%E6%9C%AC%E5%8F%B7%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/</loc>
-    <lastmod>2018-01-24T07:47:13.430Z</lastmod>
-    <data>
-        <display>
-        <title>使用shell脚本将build版本号自动修改为当前日期</title>
-        <pubTime>2018-01-24T07:27:21.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
-    <lastmod>2018-01-24T07:25:47.822Z</lastmod>
-    <data>
-        <display>
-        <title>iOS开发 Archive时自动增加build版本</title>
-        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/14/iOS%E5%BC%80%E5%8F%91-%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF%E8%A2%AB%E9%94%AE%E7%9B%98%E9%81%AE%E6%8C%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2018-01-14T09:50:29.981Z</lastmod>
-    <data>
-        <display>
-        <title>iOS开发 提示信息被键盘遮挡解决方案</title>
-        <pubTime>2018-01-14T09:11:00.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2018-01-09T14:05:04.759Z</lastmod>
-    <data>
-        <display>
-        <title>iOS开发 区分Home键和锁屏键事件</title>
-        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
-    <lastmod>2018-01-05T03:13:04.043Z</lastmod>
-    <data>
-        <display>
-        <title>iOS设备型号 2018最新统计</title>
-        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://a1049145827.github.io/2018/01/02/%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F-%E8%BD%AF%E4%BB%B6%E6%8D%9F%E5%9D%8F/</loc>
     <lastmod>2018-01-02T12:42:37.827Z</lastmod>
     <data>
@@ -574,66 +668,6 @@
            
              
               <breadCrumb title="macOS" url="http://yoursite.com/categories/macOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2017/12/29/UISlider-%E4%BD%BF%E7%94%A8%E9%87%87%E5%9D%91%E8%AE%B0/</loc>
-    <lastmod>2018-01-02T04:57:04.914Z</lastmod>
-    <data>
-        <display>
-        <title>UISlider 使用采坑记</title>
-        <pubTime>2017-12-29T06:35:13.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2017/12/27/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%B9%E6%AE%8A%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2017-12-28T01:37:31.771Z</lastmod>
-    <data>
-        <display>
-        <title>记一次特殊需求实现</title>
-        <pubTime>2017-12-27T12:48:19.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2017/12/25/%E4%BD%BF%E7%94%A8github%E6%84%89%E5%BF%AB%E7%9A%84%E5%86%99blog/</loc>
-    <lastmod>2017-12-27T02:21:11.088Z</lastmod>
-    <data>
-        <display>
-        <title>使用github愉快的写blog</title>
-        <pubTime>2017-12-25T04:28:08.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
           
         </display>
     </data>
@@ -675,40 +709,6 @@
              
               <breadCrumb title="git" url="http://yoursite.com/categories/git/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2017/08/15/ios/</loc>
-    <lastmod>2017-12-21T04:59:22.296Z</lastmod>
-    <data>
-        <display>
-        <title>iOS消除警告</title>
-        <pubTime>2017-08-15T08:45:19.000Z</pubTime>
-        
-        <tag>iOS 警告</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2017/08/15/xcode/</loc>
-    <lastmod>2017-12-21T04:59:20.854Z</lastmod>
-    <data>
-        <display>
-        <title>xcode中使用正则表达式来搜索替换代码</title>
-        <pubTime>2017-08-15T04:56:44.000Z</pubTime>
-        
-        <tag>xcode 正则</tag>
-         
-         
-           
         </display>
     </data>
     </url>

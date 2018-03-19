@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Bruce&#39;s Blog">
 <meta property="og:description" content="我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。 网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。 点击工程文件 -&amp;gt; bu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-24T07:25:47.822Z">
+<meta property="og:updated_time" content="2018-03-19T09:20:28.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发 Archive时自动增加build版本">
 <meta name="twitter:description" content="我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。 网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。 点击工程文件 -&amp;gt; bu">
@@ -369,7 +369,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <p>我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。</p>
 <p>网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。</p>
 <p>点击工程文件 -&gt; build Phuases -&gt; add Run Script, 并将下面代码拷贝进去</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;$INFOPLIST_FILE&quot;)</div><div class="line">buildNumber=$(($buildNumber + 1))</div><div class="line">git_version=$(/usr/bin/git log --oneline --no-notes -1 | /usr/bin/cut -d&quot; &quot; -f1)</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $buildNumber&quot; &quot;$INFOPLIST_FILE&quot;</div><div class="line">/usr/libexec/PlistBuddy -c &quot;Set :ScmVersion $git_version&quot; &quot;$INFOPLIST_FILE&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</div><div class="line">buildNumber=$(($buildNumber + <span class="number">1</span>))</div><div class="line">git_version=$(/usr/bin/git log --oneline --no-notes <span class="number">-1</span> | /usr/bin/cut -d<span class="string">" "</span> -f1)</div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :ScmVersion $git_version"</span> <span class="string">"$INFOPLIST_FILE"</span></div></pre></td></tr></table></figure>
 <p>其中有两行（第3、4行）是将当前代码的git版本号后六位写进info.plist文件，方便日后查bug，不需要的话可以直接移除。<br>最后最好不要不要忘记勾选 run script only when installing, 否则每次运行都增加build版本，之后这个号码可能会很大，而且容易冲突。</p>
 <p>如果再配上自动化持续集成，那就完美了。</p>
 
