@@ -277,6 +277,322 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" itemprop="url">AFNetworking用POST发送的parameters在Java后台接收失败的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T10:43:24+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。</p>
+<h5 id="这时候需要修改AFNetworking的requestSerializer"><a href="#这时候需要修改AFNetworking的requestSerializer" class="headerlink" title="这时候需要修改AFNetworking的requestSerializer"></a>这时候需要修改AFNetworking的requestSerializer</h5><p>先检查是否改动过requestSerializer，如果之前设置成了AFJSONRequestSerializer，把AFJSONRequestSerializer改成了AFHTTPRequestSerializer就OK了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果之前有设置AFJSONRequestSerializer，下面这段也需要，一定要看清楚，很容易混淆</span></div><div class="line">AFHTTPRequestSerializer *request = [AFHTTPRequestSerializer serializer];</div><div class="line">manager.requestSerializer = request;</div></pre></td></tr></table></figure>
+<p>然后设置HTTPHeaderField，告知后台使用form表单格式提交参数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[manager.requestSerializer setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];</div></pre></td></tr></table></figure>
+<p>再次请求，服务端就不会返回参数找不到的错误啦。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/" itemprop="url">iOS开发 Xcode一个工程引入另一个工程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T10:37:38+08:00">
+                2018-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。</p>
+<p>要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。</p>
+<p>如两个工程A和B,a依赖b工程生成的静态库，但如果想在a中调试b的代码，就需要将b工程引入，以下为操作步骤：</p>
+<ol>
+<li>将b工程拷贝到a工程目录下，（当然也可以不拷贝，不过为了后面方便填写路径）；</li>
+<li>ctrl+右键点击a工程的工程文件名，然后add files to “xx”, 将b工程的.xcodeprj文件添加进来（注意只需要添加.xcodeprj文件，其他文件不需要添加）；</li>
+<li>选择a工程target，点击build setting选项，右上角搜索Header Search找到Header Search Paths双击，在弹出框里点有下角的+号，添加导入工程的路径，右侧选项选recursive(递归查找文件)；</li>
+<li>因为a工程要包含b工程的静态库/动态库，假如b工程生成的静态库为bb.a, 在a工程的General选项中，拉到link frameworks and libraries项，点击+号，将b工程下的bb.a静态库添加上（.Framework同理）。</li>
+</ol>
+<p>当然，这一切都是要有源代码为前提，否则只能另想办法了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Archive时自动增加build版本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1522,332 +1838,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/Mac磁盘空间清理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/28/Mac磁盘空间清理/" itemprop="url">Mac磁盘空间清理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T09:40:46+08:00">
-                2017-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于自己喜欢瞎捣鼓，电脑上安装了不少软件，也存了不少资料，最近硬盘越来越吃紧了，今天电脑居然提示磁盘剩余空间不足的警告，赶紧看看有哪些东西可以删除。</p>
-<h4 id="大文件"><a href="#大文件" class="headerlink" title="大文件"></a>大文件</h4><p>用CleanMyMac等工具扫描可以查看硬盘上有哪些文件比较占用空间，暂时又用不到，删除之。</p>
-<h4 id="开发工具清理"><a href="#开发工具清理" class="headerlink" title="开发工具清理"></a>开发工具清理</h4><p><a href="http://www.cocoachina.com/ios/20170711/19814.html" target="_blank" rel="external">Xcode 清理存储空间</a></p>
-<p>不过开发工具没事还是尽量少折腾，出了问题，影响开发进度。</p>
-<h4 id="不常用的文件"><a href="#不常用的文件" class="headerlink" title="不常用的文件"></a>不常用的文件</h4><p>Finder里一般都记录了文件的创建和修改时间，并且支持按照时间排序，可以把不常用的文件清理掉。</p>
-<h4 id="做备份"><a href="#做备份" class="headerlink" title="做备份"></a>做备份</h4><p>Mac上的固态硬盘一般体积都不大，有条件的还是备一个移动硬盘，网盘也是不错的选择，或者土豪可以直接换个高配大硬盘的电脑也是极好的^_^</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/27/记一次特殊需求实现/" itemprop="url">记一次特殊需求实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T20:48:19+08:00">
-                2017-12-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">试看还剩：&lt;font color=<span class="meta">#d7bf48&gt;47<span class="meta-string">&lt;/font&gt;</span>秒，请返回竖屏购买观看券观看完整版<span class="meta-string">&lt;font color=#ff0000&gt;</span>(￥6)<span class="meta-string">&lt;/font&gt;</span>, #ffffff</span></div></pre></td></tr></table></figure>
-<p>无奈安卓一端已经调通，再让做出修改貌似不太人性化，只好硬着头皮一通百度Google，尝试各种方案，终于得到一些比较有用的信息。</p>
-<h4 id="大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><a href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType" class="headerlink" title="大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType"></a>大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</h4><p>字符串中很明显能看出，有通过HTML标签包装的痕迹，那么我们可以通过加载HTML标签文本的方式，将这个字符串转化为带属性的字符串。API如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)initWithData:(<span class="built_in">NSData</span> *)data options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentReadingOptionKey</span>, <span class="keyword">id</span>&gt; *)options documentAttributes:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentAttributeKey</span>, <span class="keyword">id</span>&gt; * __<span class="keyword">nullable</span> * __<span class="keyword">nullable</span>)dict error:(<span class="built_in">NSError</span> **)error <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_0, <span class="number">7</span>_0);</div></pre></td></tr></table></figure></p>
-<p>然后再对其属性做出调整，这就是设想的方案。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *toast = [<span class="built_in">NSString</span> stringWithUTF8String:tip];</div><div class="line"></div><div class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line"><span class="built_in">NSString</span> *colorStr = [<span class="built_in">NSString</span> stringWithUTF8String:toastColor];</div><div class="line"><span class="keyword">if</span> (colorStr &amp;&amp; [colorStr hasPrefix:<span class="string">@"#"</span>]) &#123;</div><div class="line">    colorStr = [colorStr stringByReplacingOccurrencesOfString:<span class="string">@"#"</span> withString:<span class="string">@"0x"</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSInteger</span> value = [IOSTools numberWithHexString:colorStr];</div><div class="line">    color = [<span class="built_in">UIColor</span> colorWithHex:value];</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (!color) &#123;</div><div class="line">    color = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableParagraphStyle</span> *style = [[<span class="built_in">NSMutableParagraphStyle</span> alloc] init];</div><div class="line">style.alignment = <span class="built_in">NSTextAlignmentCenter</span>;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableAttributedString</span> * attrStr = [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithData:[toast dataUsingEncoding:<span class="built_in">NSUnicodeStringEncoding</span>] options:@&#123; <span class="built_in">NSDocumentTypeDocumentAttribute</span>: <span class="built_in">NSHTMLTextDocumentType</span> &#125; documentAttributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">[attrStr addAttributes:@&#123; <span class="built_in">NSFontAttributeName</span>: Unity_toast_font, <span class="built_in">NSParagraphStyleAttributeName</span>: style &#125; range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length)];</div></pre></td></tr></table></figure>
-<p>将参数第二部分转化为UIColor</p>
-<h4 id="大招2-将一个代表16数的字符串-转成10进制数字"><a href="#大招2-将一个代表16数的字符串-转成10进制数字" class="headerlink" title="大招2 将一个代表16数的字符串 转成10进制数字"></a>大招2 将一个代表16数的字符串 转成10进制数字</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSInteger</span>)numberWithHexString:(<span class="built_in">NSString</span> *)hexString &#123;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *hexChar = [hexString cStringUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line"></div><div class="line">    <span class="keyword">int</span> hexNumber;</div><div class="line"></div><div class="line">    sscanf(hexChar, <span class="string">"%x"</span>, &amp;hexNumber);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (<span class="built_in">NSInteger</span>)hexNumber;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这一步其实是为了将字符串转化为颜色，方法有很多，能达到目的即可。</p>
-<p>弄好之后跑起来，看到最终效果后傻眼了：背景是黑色的，没有格式的字也会显示成黑色，这就导致大部分内容直接看不到。给无格式的部分加颜色属性又没有头绪，不知如何区分Rang，无奈搞成这样，倒不如不显示格式，全展示成白色算了。</p>
-<p>于是打开SourceTree，开始回退代码，回退过程中想着自己忙活了半天，就这么放弃了，总觉得不甘心，不自觉的去看代码，无意中进入NSAttributedString的类头文件，发现有这么一个API: <strong>enumerateAttribute:inRange:</strong>，出于职业的敏感，心里瞬间有点小兴奋，赶紧查找关于这个方法的说明，发现这个API可以枚举出AttributedString的Attributed并且能够判断条件，如果初始化的时候选择了NSAttributedString的子类NSMutableAttributedString，那么就可以实现对Attribute的修改，这下可好了，赶紧动手实验一番，run起来一看，成了！</p>
-<p>可能大家对block里面的代码有些疑问，问什么判断条件要那么写，其实也是有些无奈，经过调试，我发现没有被颜色标签包裹的文字，经过转换后默认的颜色是黑色（打印出来颜色描述为 0 0 0 1），但是[UIColor blackColor]的颜色描述为0 1，两者不能用==来判断，无奈只能取其白色色值来做匹配，也算是曲线救国吧。</p>
-<h4 id="大招3-enumerateAttribute-inRange-偷天换日"><a href="#大招3-enumerateAttribute-inRange-偷天换日" class="headerlink" title="大招3 enumerateAttribute:inRange: 偷天换日"></a>大招3 enumerateAttribute:inRange: 偷天换日</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSAttributedStringEnumerationOptions</span> opts = <span class="built_in">NSAttributedStringEnumerationLongestEffectiveRangeNotRequired</span>;</div><div class="line">[attrStr enumerateAttribute:<span class="built_in">NSForegroundColorAttributeName</span> inRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length) options:opts usingBlock:^(<span class="keyword">id</span>  _Nullable value, <span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line"></div><div class="line">    <span class="built_in">UIColor</span> *tmpColor = value;</div><div class="line">    <span class="built_in">CGFloat</span> white = <span class="number">1</span>;</div><div class="line">    <span class="built_in">CGFloat</span> alpha = <span class="number">0</span>;</div><div class="line">    [tmpColor getWhite:&amp;white alpha:&amp;alpha];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (white == <span class="number">0</span> &amp;&amp; alpha == <span class="number">1</span>) &#123;</div><div class="line">        [attrStr addAttributes:@&#123; <span class="built_in">NSForegroundColorAttributeName</span>: color &#125; range:range];</div><div class="line">    &#125;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>欣喜之余颇有感慨，做人做事确实不能轻易放弃，说不定哪个不经意的瞬间，就会有惊喜(<em>^__^</em>)</p>
-<p>如果你有更好的方案，欢迎沟通交流！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1892,7 +1887,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2005,7 +2000,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共36.8k字</span>
+  <span class="post-count">博客全站共37.2k字</span>
 </div>
 
 
