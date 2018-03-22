@@ -372,7 +372,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <h3 id="OC项目中的main函数"><a href="#OC项目中的main函数" class="headerlink" title="OC项目中的main函数"></a>OC项目中的main函数</h3><p>大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：</p>
 <p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Main.png" alt="OC的main函数"></p>
-<p>main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
+<p>main函数作为程序启动后的<a href="http://blog.csdn.net/yu_4074/article/details/54966782" target="_blank" rel="external">第二个函数被调用</a>，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
 <h3 id="Swift项目中的main函数为何隐藏"><a href="#Swift项目中的main函数为何隐藏" class="headerlink" title="Swift项目中的main函数为何隐藏"></a>Swift项目中的main函数为何隐藏</h3><p>创建过Swift项目的童鞋应该会发现，项目中没有一个名为main.swift的文件，为什么app的入口没有了？官方文档的说法是这样的:</p>
 <p><em>In Xcode, Mac templates default to including a “main.swift” file, but for iOS apps the default for new iOS project templates is to add @UIApplicationMain to a regular Swift file. This causes the compiler to synthesize a mainentry point for your iOS app, and eliminates the need for a “main.swift” file.</em></p>
 <p>这段话的意思是，Swift项目中添加了@UIApplicationMain 到swift文件中，使得编译器合成了一个app入口，所以不需要main.swift文件。</p>
