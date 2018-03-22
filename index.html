@@ -277,6 +277,200 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/Swift中消失的main函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/Swift中消失的main函数/" itemprop="url">Swift中消失的main函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T10:00:26+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="OC项目中的main函数"><a href="#OC项目中的main函数" class="headerlink" title="OC项目中的main函数"></a>OC项目中的main函数</h3><p>大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Main.png" alt="OC的main函数"></p>
+<p>main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
+<h3 id="Swift项目中的main函数为何隐藏"><a href="#Swift项目中的main函数为何隐藏" class="headerlink" title="Swift项目中的main函数为何隐藏"></a>Swift项目中的main函数为何隐藏</h3><p>创建过Swift项目的童鞋应该会发现，项目中没有一个名为main.swift的文件，为什么app的入口没有了？官方文档的说法是这样的:</p>
+<p><em>In Xcode, Mac templates default to including a “main.swift” file, but for iOS apps the default for new iOS project templates is to add @UIApplicationMain to a regular Swift file. This causes the compiler to synthesize a mainentry point for your iOS app, and eliminates the need for a “main.swift” file.</em></p>
+<p>这段话的意思是，Swift项目中添加了@UIApplicationMain 到swift文件中，使得编译器合成了一个app入口，所以不需要main.swift文件。</p>
+<p>细心的童鞋会发现AppDelegate文件中多了个@UIApplicationMain的标志，启动app并放置断点，会发现其实main函数还是存在的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Main.png" alt="Swift中@UIApplicationMain标志"></p>
+<p>可能苹果认为我们并不需要自行配置app入口，所以干脆简化了项目配置，使用更加简单的方式启动应用，但有时候我们可能需要自己配置入口，例如我们要创建一个UIApplication的子类时。</p>
+<h3 id="main-swift"><a href="#main-swift" class="headerlink" title="main.swift"></a>main.swift</h3><p>如果你希望通过自行配置入口的方式来创建一个UIApplication子类，那么就要创建一个main.swift文件。</p>
+<p>首先创建一个swift文件，命名为main。<br>main.swift中代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(<span class="type">AppDelegate</span>.<span class="keyword">self</span>))</div></pre></td></tr></table></figure>
+<p><strong>方法讲解</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">UIApplicationMain</span><span class="params">(<span class="number">_</span> argc: Int32,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> argv: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;Int8&gt;&gt;!,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> principalClassName: String?,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> delegateClassName: String?)</span></span> -&gt; <span class="type">Int32</span></div></pre></td></tr></table></figure>
+<ul>
+<li>argc:系统或者用户传入的参数</li>
+<li>argv:系统或用户传入的实际参数</li>
+<li>principalClassName:确定了主要应用程序类的名称，这个参数可为nil，这样UIKit就会使用默认的程序类UIApplication</li>
+<li>delegateClassName:程序自定义的代理类名，这个类负责系统和代码之间的交互，一般为AppDelegate，也可自定义子类。</li>
+</ul>
+<p>写好main.swift之后，还需要把AppDelegate中的@UIApplicationMain注释掉或者删掉。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Not_UIApplicationMain.png" alt="Swift注释@UIApplicationMain标志"></p>
+<p>重新运行项目，app就能正常启动了。</p>
+<h3 id="main函数的参数"><a href="#main函数的参数" class="headerlink" title="main函数的参数"></a>main函数的参数</h3><p>最后一个参数我们一般会传入应用程序入口类AppDelegate，不过有些时候，特别是需要执行单元测试的场景，我们可能并不希望把整个App都运行起来，那么我们就可以自定义一个单元测试的程序入口类。类似于下面的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Shared</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> appDelegate: <span class="type">AppDelegate</span>.<span class="type">Type</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="type">AppConstants</span>.<span class="type">IsRunningTest</span> &#123;</div><div class="line">    appDelegate = <span class="type">TestAppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    appDelegate = <span class="type">AppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(appDelegate))</div></pre></td></tr></table></figure>
+<p>具体的实现方式，大家可以参考Firefox的iOS版实现。<a href="https://github.com/mozilla-mobile/firefox-ios" target="_blank" rel="external">传送门</a></p>
+<h3 id="UIApplicationMain"><a href="#UIApplicationMain" class="headerlink" title="UIApplicationMain"></a>UIApplicationMain</h3><p>该部分介绍转自<a href="https://www.jianshu.com/p/5095220c099e" target="_blank" rel="external">木板钉钉</a>的简书<br>不管是通过 main.swift 文件还是 @UIApplicationMain 属性，最后都会调用<br>UIApplicationMain 函数。让我们来看看 UIApplicationMain 函数都做了什么：</p>
+<ol>
+<li><p>UIApplicationMain 创建app中的第一个实例，应用程序实例，<br>UIApplication.shared。 UIApplicationMain 函数的第三个参数指定了应用程序实例所属的类，默认该参数是 nil ，则其默认类就是 UIApplication。如果你想subclass一个UIApplication， 那就应该将 UIApplicationMain 函数的第三个参数指定为你的子类名字，例如 NSStringFromClass(MyAppSubclass.self) .</p>
+</li>
+<li><p>UIApplicationMain 创建app中的第二个实例，app delegate。UIApplicationMain 函数的第四个参数指定了app delegate所属的类，<br>NSStringFromClass(AppDelegate.self) 。如果使用 @UIApplicationMain 属性，该属性默认附加在 AppDelegate 类的声明中，其意义与UIApplicationMain 函数一样。</p>
+</li>
+<li><p>如果 Info.plist 文件指定了一个main storyboard， UIApplicationMain 函数就载入storyboard并找到其中的initial view controller（或者说是storyboard的入口点），并实例化该view controller，这是创建的第三个实例。对于Single View app模版，这个实例就是 ViewController 类的实例，该类定义在 ViewController.swift 中。</p>
+</li>
+<li><p>如果存在main.storyboard文件，UIApplicationMain 函数现在就该创建应用程序的window了，这是app中的第四个实例，一个UIWindow类的实例（或者在AppDelegate中，可以替换为一个UIWindow子类的实例）。创建window实例后，将其指定为AppDelegate的 window 属性，同时，将initial view controller实例的指定为window实例的 rootViewController属性。</p>
+</li>
+<li><p>UIApplicationMain 现在开始处理AppDelegate实例并调用它的一些方法，如 application(_:didFinishLaunchingWithOptions:)， 在该方法中，我们可以加入自己的代码进行一些初始化的设定，但不要进行一些比较耗时的工作，因为在这个时候，我们的app界面还没有显示出来。</p>
+</li>
+<li><p>如果存在main.storyboard文件， UIApplicationMain 函数开始调用UIWindow的实例方法 makeKeyAndVisible ，这样app界面就显示出来了。</p>
+</li>
+<li><p>在window显示的过程中，将获取root view controller的main view， 如果view controller的view是通过storyboard或xib文件获取的，那么该nib文件会被加载。nib文件中的实例化并初始化，并称为初始界面的对象，view及其subview将被放置在window中。view controller的 viewDidLoad 方法被调用，在这里可以写一些自己的代码。</p>
+</li>
+</ol>
+<p>然后应用程序已经启动完成并开始运行，UIApplicationMain 函数仍然运行而且永不return，它继续监视用户行为，管理eventloop等。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/不用官方SDK实现微信支付、支付宝支付-Swift版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1770,194 +1964,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/软件开发之设计模式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/06/软件开发之设计模式/" itemprop="url">软件开发之设计模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T16:01:21+08:00">
-                2018-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件开发/" itemprop="url" rel="index">
-                    <span itemprop="name">软件开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
-<h4 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a>设计模式的基本原则</h4><p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
-<ul>
-<li>单一职责原则（SRP），就一个类而言，应该仅有一个引起它变化的原因。</li>
-<li>开放-封闭原则（OCP），是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
-<li>依赖倒转原则（DIP），A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
-<li>里氏代换原则（LSP），子类型必须能够替换掉它们的父类型。</li>
-<li>迪米特法则（LoD），如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
-<li>合成/聚合复用原则（CARP），尽量使用合成/聚合，尽量不要使用类继承。</li>
-</ul>
-<p>注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</p>
-<h4 id="常用的-23-种设计模式"><a href="#常用的-23-种设计模式" class="headerlink" title="常用的 23 种设计模式"></a>常用的 23 种设计模式</h4><p>不管是 .NET 中的 C# 语言，还是 Java、VB.NET、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
-<ol>
-<li>策略模式（Strategy），它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
-<li>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
-<li>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</li>
-<li>工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
-<li>原型模式（Prototype），用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
-<li>模板方法模式（Template Method），定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
-<li>外观模式（Facade），为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
-<li>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
-<li>观察者模式（Observer），定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
-<li>抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
-<li>状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
-<li>适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
-<li>备忘录模式（Memento），在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
-<li>组合模式（Composite），将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
-<li>迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
-<li>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
-<li>桥接模式（Bridge），将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
-<li>命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
-<li>职责链模式（Chain of Responsibility），使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
-<li>中介者模式（Mediator），用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
-<li>享元模式（Flyweight），运用共享技术有效地支持大量细粒度的对象。</li>
-<li>解释器模式（Interpreter），给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
-<li>访问者模式（Visitor），表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
-</ol>
-<p><a href="https://juejin.im/post/5aaa2943f265da239c7b15c4" target="_blank" rel="external">23个经典设计模式的Swift实现</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2007,7 +2013,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2120,7 +2126,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共37.2k字</span>
+  <span class="post-count">博客全站共38.6k字</span>
 </div>
 
 

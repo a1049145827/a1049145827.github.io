@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="OC项目中的main函数大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：  main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。 Swift项目中的main函数为何隐藏创建过Swift项目的童">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift中消失的main函数">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/Swift中消失的main函数/index.html">
+<meta property="og:site_name" content="Bruce&#39;s Blog">
+<meta property="og:description" content="OC项目中的main函数大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：  main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。 Swift项目中的main函数为何隐藏创建过Swift项目的童">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/OC_Main.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_Main.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_Not_UIApplicationMain.png">
+<meta property="og:updated_time" content="2018-03-22T05:25:33.518Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift中消失的main函数">
+<meta name="twitter:description" content="OC项目中的main函数大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：  main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。 Swift项目中的main函数为何隐藏创建过Swift项目的童">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/OC_Main.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/Swift中消失的main函数/"/>
+
+
+
+
+
+  <title>Swift中消失的main函数 | Bruce's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<script type="text/javascript"
+color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bruce's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hi~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/Swift中消失的main函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift中消失的main函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T10:00:26+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="OC项目中的main函数"><a href="#OC项目中的main函数" class="headerlink" title="OC项目中的main函数"></a>OC项目中的main函数</h3><p>大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Main.png" alt="OC的main函数"></p>
+<p>main函数作为程序启动后的第二个函数被调用，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
+<h3 id="Swift项目中的main函数为何隐藏"><a href="#Swift项目中的main函数为何隐藏" class="headerlink" title="Swift项目中的main函数为何隐藏"></a>Swift项目中的main函数为何隐藏</h3><p>创建过Swift项目的童鞋应该会发现，项目中没有一个名为main.swift的文件，为什么app的入口没有了？官方文档的说法是这样的:</p>
+<p><em>In Xcode, Mac templates default to including a “main.swift” file, but for iOS apps the default for new iOS project templates is to add @UIApplicationMain to a regular Swift file. This causes the compiler to synthesize a mainentry point for your iOS app, and eliminates the need for a “main.swift” file.</em></p>
+<p>这段话的意思是，Swift项目中添加了@UIApplicationMain 到swift文件中，使得编译器合成了一个app入口，所以不需要main.swift文件。</p>
+<p>细心的童鞋会发现AppDelegate文件中多了个@UIApplicationMain的标志，启动app并放置断点，会发现其实main函数还是存在的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Main.png" alt="Swift中@UIApplicationMain标志"></p>
+<p>可能苹果认为我们并不需要自行配置app入口，所以干脆简化了项目配置，使用更加简单的方式启动应用，但有时候我们可能需要自己配置入口，例如我们要创建一个UIApplication的子类时。</p>
+<h3 id="main-swift"><a href="#main-swift" class="headerlink" title="main.swift"></a>main.swift</h3><p>如果你希望通过自行配置入口的方式来创建一个UIApplication子类，那么就要创建一个main.swift文件。</p>
+<p>首先创建一个swift文件，命名为main。<br>main.swift中代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(<span class="type">AppDelegate</span>.<span class="keyword">self</span>))</div></pre></td></tr></table></figure>
+<p><strong>方法讲解</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">UIApplicationMain</span><span class="params">(<span class="number">_</span> argc: Int32,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> argv: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;Int8&gt;&gt;!,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> principalClassName: String?,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> delegateClassName: String?)</span></span> -&gt; <span class="type">Int32</span></div></pre></td></tr></table></figure>
+<ul>
+<li>argc:系统或者用户传入的参数</li>
+<li>argv:系统或用户传入的实际参数</li>
+<li>principalClassName:确定了主要应用程序类的名称，这个参数可为nil，这样UIKit就会使用默认的程序类UIApplication</li>
+<li>delegateClassName:程序自定义的代理类名，这个类负责系统和代码之间的交互，一般为AppDelegate，也可自定义子类。</li>
+</ul>
+<p>写好main.swift之后，还需要把AppDelegate中的@UIApplicationMain注释掉或者删掉。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Not_UIApplicationMain.png" alt="Swift注释@UIApplicationMain标志"></p>
+<p>重新运行项目，app就能正常启动了。</p>
+<h3 id="main函数的参数"><a href="#main函数的参数" class="headerlink" title="main函数的参数"></a>main函数的参数</h3><p>最后一个参数我们一般会传入应用程序入口类AppDelegate，不过有些时候，特别是需要执行单元测试的场景，我们可能并不希望把整个App都运行起来，那么我们就可以自定义一个单元测试的程序入口类。类似于下面的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Shared</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> appDelegate: <span class="type">AppDelegate</span>.<span class="type">Type</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="type">AppConstants</span>.<span class="type">IsRunningTest</span> &#123;</div><div class="line">    appDelegate = <span class="type">TestAppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    appDelegate = <span class="type">AppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(appDelegate))</div></pre></td></tr></table></figure>
+<p>具体的实现方式，大家可以参考Firefox的iOS版实现。<a href="https://github.com/mozilla-mobile/firefox-ios" target="_blank" rel="external">传送门</a></p>
+<h3 id="UIApplicationMain"><a href="#UIApplicationMain" class="headerlink" title="UIApplicationMain"></a>UIApplicationMain</h3><p>该部分介绍转自<a href="https://www.jianshu.com/p/5095220c099e" target="_blank" rel="external">木板钉钉</a>的简书<br>不管是通过 main.swift 文件还是 @UIApplicationMain 属性，最后都会调用<br>UIApplicationMain 函数。让我们来看看 UIApplicationMain 函数都做了什么：</p>
+<ol>
+<li><p>UIApplicationMain 创建app中的第一个实例，应用程序实例，<br>UIApplication.shared。 UIApplicationMain 函数的第三个参数指定了应用程序实例所属的类，默认该参数是 nil ，则其默认类就是 UIApplication。如果你想subclass一个UIApplication， 那就应该将 UIApplicationMain 函数的第三个参数指定为你的子类名字，例如 NSStringFromClass(MyAppSubclass.self) .</p>
+</li>
+<li><p>UIApplicationMain 创建app中的第二个实例，app delegate。UIApplicationMain 函数的第四个参数指定了app delegate所属的类，<br>NSStringFromClass(AppDelegate.self) 。如果使用 @UIApplicationMain 属性，该属性默认附加在 AppDelegate 类的声明中，其意义与UIApplicationMain 函数一样。</p>
+</li>
+<li><p>如果 Info.plist 文件指定了一个main storyboard， UIApplicationMain 函数就载入storyboard并找到其中的initial view controller（或者说是storyboard的入口点），并实例化该view controller，这是创建的第三个实例。对于Single View app模版，这个实例就是 ViewController 类的实例，该类定义在 ViewController.swift 中。</p>
+</li>
+<li><p>如果存在main.storyboard文件，UIApplicationMain 函数现在就该创建应用程序的window了，这是app中的第四个实例，一个UIWindow类的实例（或者在AppDelegate中，可以替换为一个UIWindow子类的实例）。创建window实例后，将其指定为AppDelegate的 window 属性，同时，将initial view controller实例的指定为window实例的 rootViewController属性。</p>
+</li>
+<li><p>UIApplicationMain 现在开始处理AppDelegate实例并调用它的一些方法，如 application(_:didFinishLaunchingWithOptions:)， 在该方法中，我们可以加入自己的代码进行一些初始化的设定，但不要进行一些比较耗时的工作，因为在这个时候，我们的app界面还没有显示出来。</p>
+</li>
+<li><p>如果存在main.storyboard文件， UIApplicationMain 函数开始调用UIWindow的实例方法 makeKeyAndVisible ，这样app界面就显示出来了。</p>
+</li>
+<li><p>在window显示的过程中，将获取root view controller的main view， 如果view controller的view是通过storyboard或xib文件获取的，那么该nib文件会被加载。nib文件中的实例化并初始化，并称为初始界面的对象，view及其subview将被放置在window中。view controller的 viewDidLoad 方法被调用，在这里可以写一些自己的代码。</p>
+</li>
+</ol>
+<p>然后应用程序已经启动完成并开始运行，UIApplicationMain 函数仍然运行而且永不return，它继续监视用户行为，管理eventloop等。</p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/22/不用官方SDK实现微信支付、支付宝支付-Swift版/" rel="next" title="不用官方SDK实现微信支付、支付宝支付-Swift版">
+                <i class="fa fa-chevron-left"></i> 不用官方SDK实现微信支付、支付宝支付-Swift版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjU3Ni85MTM4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Coder bruce" />
+          <p class="site-author-name" itemprop="name">Coder bruce</p>
+           
+              <p class="site-description motion-element" itemprop="description">hello world</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/a1049145827" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ff82b16c5264" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                    
+                      简书
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OC项目中的main函数"><span class="nav-number">1.</span> <span class="nav-text">OC项目中的main函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift项目中的main函数为何隐藏"><span class="nav-number">2.</span> <span class="nav-text">Swift项目中的main函数为何隐藏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-swift"><span class="nav-number">3.</span> <span class="nav-text">main.swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main函数的参数"><span class="nav-number">4.</span> <span class="nav-text">main函数的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIApplicationMain"><span class="nav-number">5.</span> <span class="nav-text">UIApplicationMain</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder bruce</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+
+
+
+
+
+
+<div class="theme-info">
+  <!-- <div class="powered-by"></div> -->
+  <span class="post-count">博客全站共38.6k字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
