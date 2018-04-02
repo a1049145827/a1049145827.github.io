@@ -277,6 +277,164 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/" itemprop="url">使用Swift后端框架Perfect做一个文件上传服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T21:55:51+08:00">
+                2018-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放在电脑上，字体大小随便调，更有搜索这种神器级别的功能，查找bug不是梦。</p>
+<p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
+<p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
+<p>服务端代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// create uploads dir to store files</span></div><div class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileDir.create()</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> code = <span class="number">400</span></div><div class="line"></div><div class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></div><div class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</div><div class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></div><div class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</div><div class="line">            ary.append([</div><div class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</div><div class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</div><div class="line">                ])</div><div class="line"></div><div class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// move file</span></div><div class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</div><div class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</div><div class="line">                code = <span class="number">200</span></div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> &#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</div><div class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</div><div class="line"></div><div class="line">            <span class="type">Log</span>.info(message: strJson!)</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> response.setBody(json: dict)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.completed(status: .ok)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>客户端代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</div><div class="line"></div><div class="line">    kWeakSelf(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</div><div class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (fileName) &#123;</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</div><div class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</div><div class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</div><div class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</div><div class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</div><div class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</div><div class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</div><div class="line"></div><div class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</div><div class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</div><div class="line"></div><div class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</div><div class="line"></div><div class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</div><div class="line"></div><div class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (completeBlock) &#123;</div><div class="line">                completeBlock();</div><div class="line">            &#125;</div><div class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</div><div class="line"></div><div class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后有空了，还可以研究以下使用Perfect后端进行APNS消息推送。这样有日志上传好之后，就可以收到消息推送，再也不用去翻看文件夹或者盯着控制台日志啦。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/03/Windows-安装原版镜ISO像/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1689,179 +1847,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/" itemprop="url">Create A Backend Use Perfect Power By Swift</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T12:31:58+08:00">
-                2017-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。</p>
-<p>以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate</div></pre></td></tr></table></figure>
-<p>即可开启服务。</p>
-<p>当我们需要服务在后台执行的时候可以在命令后加上&amp;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.build/debug/PerfectTemplate &amp;</div></pre></td></tr></table></figure>
-<p><strong>如果需要在退出远程终端后，进程继续运行，可能要再加上nohup命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup .build/debug/PerfectTemplate &amp;</div></pre></td></tr></table></figure>
-<p>这里有说明: <a href="https://www.cnblogs.com/baby123/p/6477429.html" target="_blank" rel="external">nohup和&amp;后台运行，进程查看及终止</a></p>
-<p>执行后控制台会有类似于下面的日志👇</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1] 94640</div></pre></td></tr></table></figure>
-<p>这个表示当前服务运行的进程id。</p>
-<p>当我们修改完项目需要重新运行的时候，后天服务会占用端口导致新服务无法正常启动，这时我们就要杀掉旧服务的进程。之前控制台打印出来的id号去终止进程，命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo <span class="built_in">kill</span> -9 94640</div></pre></td></tr></table></figure>
-<p>不过有时候我们会关闭掉命令行窗口，并没有记录进程id，那么就需要手动去查找进程id，这里有两种方案：</p>
-<ol>
-<li>使用top命令查找</li>
-<li>通过端口号查找</li>
-</ol>
-<p>第一种方法是通过top命令查看服务名对应的pid即可</p>
-<p>第二种通过命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsof -i tcp:8181</div></pre></td></tr></table></figure>
-<p>即可查找到占用8181端口的服务。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1911,7 +1896,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2024,7 +2009,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共39.9k字</span>
+  <span class="post-count">博客全站共40.0k字</span>
 </div>
 
 
