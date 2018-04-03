@@ -277,6 +277,171 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/如何打破Swift中的循环引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/25/如何打破Swift中的循环引用/" itemprop="url">如何打破Swift中的循环引用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T12:49:19+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Swift的内存管理也是使用的ARC(自动引用计数)：当我们初始化创建一个对象实例的时候,swift就会替我们管理和分配内存,此时的引用计数为1，当对其进行init(copy/mutableCopy)时，引用计数会+1，而当实例被销毁时，引用计数就会-1。当系统检测到引用计数为0的时候，就会释放掉这个内存。</p>
+<p>但是，这种引用计数会产生一个问题就是循环引用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> b: <span class="type">B</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>() &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"A初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"A析构掉"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> a: <span class="type">A</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>() &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"B初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"B析构掉"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a: <span class="type">A</span>?;   a = <span class="type">A</span>()</div><div class="line"><span class="keyword">var</span> b: <span class="type">B</span>?;   b = <span class="type">B</span>()</div><div class="line"></div><div class="line">a!.b = b;   b!.a = a</div><div class="line">a = <span class="literal">nil</span>;    b = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<p>你会发现，A和B的析构函数deinit都没有调用，因为当a执行析构的时候，b.a还在对其进行引用，当b析构的时候，a.b也在对b进行引用。这时候解决的方法就是对其中的某一个声明进行若引用，即加上weak：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">weak</span> <span class="keyword">var</span> b: <span class="type">B</span>?</div></pre></td></tr></table></figure>
+<p>另外一种造成循环引用的问题就是闭包：闭包中对任何元素的引用都会被闭包自动持有，如果我们在闭包中需要使用self的话，那就相当于闭包对self持有，而block又是被self直接或间接持有，这样就造成了循环引用。例如下面的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>.name )</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="built_in">c</span>?.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<p>这里C的析构函数也是没有执行的。block是self的属性，block里面又对self持有，这就形成了循环引用。所以这里我们可以使用unowned，也可以使用weak：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// unowned</span></div><div class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="keyword">self</span>.name)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// weak</span></div><div class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> strongSelf = <span class="keyword">self</span> &#123;</div><div class="line">        <span class="built_in">print</span>(strongSelf.name)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么这两个使用有什么区别呢？接下来看一个例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>.name)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> block: (()-&gt;())!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(callBack: (()-&gt;())?) &#123;</div><div class="line">        <span class="keyword">self</span>.block = callBack!</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D构造"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="keyword">var</span> d = <span class="type">D</span>.<span class="keyword">init</span>(callBack: <span class="built_in">c</span>?.block)</div><div class="line"><span class="built_in">c</span>!.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div><div class="line">d.block()</div></pre></td></tr></table></figure>
+<p>这里当你运行到 d.block()的时候，是会有一个error。</p>
+<p>因为当d.block()执行的时候，c已经被析构掉了，而闭包里的self肯定也是不存在的，是一个nil，这个时候执行的话self.name就会报错。所以在我们不确定是否有外部变量在持有这个block的时候，我们就应该使用weak更为安全，因为使用weak的话self.name需要改成可选性的self?.name，这个时候self?.name肯定就为nil了。所以换成weak之后，在playground里的d.block()就不会有错误了，而且block也是会正常执行的，只不过print(self?.name)打印出来为nil。</p>
+<p>最终代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>?.name ?? <span class="string">"nothing"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> block: (()-&gt;())!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(callBack: (()-&gt;())?) &#123;</div><div class="line">        <span class="keyword">self</span>.block = callBack!</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D构造"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="keyword">var</span> d = <span class="type">D</span>.<span class="keyword">init</span>(callBack: <span class="built_in">c</span>?.block)</div><div class="line"><span class="built_in">c</span>!.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div><div class="line">d.block()</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1684,160 +1849,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/iOS设备型号-2018最新统计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/05/iOS设备型号-2018最新统计/" itemprop="url">iOS设备型号 2018最新统计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T11:00:09+08:00">
-                2018-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近发现项目里设备型号没有匹配最近新发布的几款设备，于是去官网查看了下。</p>
-<h4 id="所有设备型号对应的官网地址："><a href="#所有设备型号对应的官网地址：" class="headerlink" title="所有设备型号对应的官网地址："></a>所有设备型号对应的官网地址：</h4><p>官网地址： <a href="https://www.theiphonewiki.com/wiki/Models" target="_blank" rel="external">https://www.theiphonewiki.com/wiki/Models</a></p>
-<p>来点更加暴力的，直接上代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 记得导入头文件</span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 获取具体的设备型号（不包含Watch和TV）</span></div><div class="line">+ (<span class="built_in">NSString</span> *)deviceModel &#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> mib[<span class="number">2</span>];</div><div class="line">    size_t len;</div><div class="line">    <span class="keyword">char</span> *machine;</div><div class="line"></div><div class="line">    mib[<span class="number">0</span>] = <span class="built_in">CTL_HW</span>;</div><div class="line">    mib[<span class="number">1</span>] = HW_MACHINE;</div><div class="line">    sysctl(mib, <span class="number">2</span>, <span class="literal">NULL</span>, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line">    machine = malloc(len);</div><div class="line">    sysctl(mib, <span class="number">2</span>, machine, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="built_in">NSString</span> *platform = [<span class="built_in">NSString</span> stringWithCString:machine encoding:<span class="built_in">NSASCIIStringEncoding</span>];</div><div class="line">    free(machine);</div><div class="line">    </div><div class="line">    <span class="comment">// MARK: - Simulator</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"i386"</span>] || [platform isEqualToString:<span class="string">@"x86_64"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSimulator"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPhone</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone2G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone2,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3GS"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone3,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone4,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4S"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5c"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone6,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone6,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5s"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6s"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6sPlus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone8,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSE"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone7"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone7Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,5"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,6"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhoneX"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPod Touch</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod2,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch2G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod3,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch3G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod4,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch4G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod5,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch5G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod7,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch6G"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,1"</span>] || [platform isEqualToString:<span class="string">@"iPad2,2"</span>] || [platform isEqualToString:<span class="string">@"iPad2,3"</span>] || [platform isEqualToString:<span class="string">@"iPad2,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,1"</span>] || [platform isEqualToString:<span class="string">@"iPad3,2"</span>] || [platform isEqualToString:<span class="string">@"iPad3,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad3"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,4"</span>] || [platform isEqualToString:<span class="string">@"iPad3,5"</span>] || [platform isEqualToString:<span class="string">@"iPad3,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad4"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad Air</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,1"</span>] || [platform isEqualToString:<span class="string">@"iPad4,2"</span>] || [platform isEqualToString:<span class="string">@"iPad4,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,3"</span>] || [platform isEqualToString:<span class="string">@"iPad5,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,11"</span>] || [platform isEqualToString:<span class="string">@"iPad6,12"</span>])    <span class="keyword">return</span> <span class="string">@"iPadAir3"</span>;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad Pro</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,7"</span>] || [platform isEqualToString:<span class="string">@"iPad6,8"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,3"</span>] || [platform isEqualToString:<span class="string">@"iPad6,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro iPad 9.7-inch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,1"</span>] || [platform isEqualToString:<span class="string">@"iPad7,2"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch 2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,3"</span>] || [platform isEqualToString:<span class="string">@"iPad7,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 10.5-inch"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad mini</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,5"</span>] || [platform isEqualToString:<span class="string">@"iPad2,6"</span>] || [platform isEqualToString:<span class="string">@"iPad2,7"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini1G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,4"</span>] || [platform isEqualToString:<span class="string">@"iPad4,5"</span>] || [platform isEqualToString:<span class="string">@"iPad4,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,7"</span>] || [platform isEqualToString:<span class="string">@"iPad4,8"</span>] || [platform isEqualToString:<span class="string">@"iPad4,9"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini3"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,1"</span>] || [platform isEqualToString:<span class="string">@"iPad5,2"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini4"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> platform;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1898,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2000,7 +2011,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共40.0k字</span>
+  <span class="post-count">博客全站共40.2k字</span>
 </div>
 
 
