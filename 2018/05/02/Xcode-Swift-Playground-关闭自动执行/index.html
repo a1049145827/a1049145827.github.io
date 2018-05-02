@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -101,16 +101,21 @@
 
 
 
-<meta name="description" content="hello world">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bruce&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/Windows安装/index.html">
+<meta name="description" content="苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。 二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在使用过程中一直饱受占用性能和频繁闪退的困扰，究其原因，很大程度上是其自动执行导致频繁编译、执行，导致">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode Swift Playground 关闭自动执行">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/Xcode-Swift-Playground-关闭自动执行/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="hello world">
+<meta property="og:description" content="苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。 二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在使用过程中一直饱受占用性能和频繁闪退的困扰，究其原因，很大程度上是其自动执行导致频繁编译、执行，导致">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_statusbar.jpg">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_manuallyRun.jpg">
+<meta property="og:updated_time" content="2018-05-02T05:13:57.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bruce&#39;s Blog">
-<meta name="twitter:description" content="hello world">
+<meta name="twitter:title" content="Xcode Swift Playground 关闭自动执行">
+<meta name="twitter:description" content="苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。 二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在使用过程中一直饱受占用性能和频繁闪退的困扰，究其原因，很大程度上是其自动执行导致频繁编译、执行，导致">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_statusbar.jpg">
 
 
 
@@ -139,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Windows安装/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/02/Xcode-Swift-Playground-关闭自动执行/"/>
 
 
 
 
 
-  <title>分类: Windows安装 | Bruce's Blog</title>
+  <title>Xcode Swift Playground 关闭自动执行 | Bruce's Blog</title>
   
 
 
@@ -175,7 +180,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
@@ -261,55 +266,191 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Windows安装<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/Xcode-Swift-Playground-关闭自动执行/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/01/03/Windows-安装原版镜ISO像/" itemprop="url">
-              
-                <span itemprop="name">Windows 安装原版镜ISO像</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Xcode Swift Playground 关闭自动执行</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-03T21:35:26+08:00"
-              content="2018-01-03" >
-          01-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T12:36:37+08:00">
+                2018-05-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。</p>
+<p>二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在使用过程中一直饱受占用性能和频繁闪退的困扰，究其原因，很大程度上是其自动执行导致频繁编译、执行，导致设备CPU占用率过高。而且写代码的时候，即使代码没有完成，Xcode也会自动编译，弹出各种报错提示，体验非常不好。</p>
+<p>所以我决定关掉自动执行，在写好代码之后才手动去触发，设置完成后就会发现，整个世界都变得美好了 ^_^ 。</p>
+<h3 id="如何关闭Playground的自动执行"><a href="#如何关闭Playground的自动执行" class="headerlink" title="如何关闭Playground的自动执行"></a>如何关闭Playground的自动执行</h3><p>第一步：打开底部状态栏<br><img src="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_statusbar.jpg" alt="Xcode_playground_statusbar"></p>
+<p>第二步：长按底部状态栏的执行按钮，在弹出的菜单中选择手动执行<br><img src="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_manuallyRun.jpg" alt="Xcode_playground_manuallyRun"></p>
+<p>简单两步，告别烦恼（手动滑稽）。</p>
 
       
     </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
 
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/26/xcode在-release-模式下断点调试/" rel="next" title="Xcode在 release 模式下断点调试">
+                <i class="fa fa-chevron-left"></i> Xcode在 release 模式下断点调试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -317,6 +458,13 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjU3Ni85MTM4"></div>
+    
+  </div>
+
+
         </div>
         
           
@@ -336,8 +484,17 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -423,6 +580,22 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何关闭Playground的自动执行"><span class="nav-number">1.</span> <span class="nav-text">如何关闭Playground的自动执行</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -558,10 +731,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
@@ -590,6 +763,17 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
