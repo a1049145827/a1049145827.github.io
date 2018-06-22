@@ -277,6 +277,642 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/记一次巧妙的宏定义的使用方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/24/记一次巧妙的宏定义的使用方式/" itemprop="url">记一次巧妙的宏定义的使用方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:15:36+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。</p>
+<p>于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@section(<span class="string">@"3"</span>, <span class="built_in">NSStringFromClass</span>([WVRADViewSection <span class="keyword">class</span>]))</div></pre></td></tr></table></figure>
+<p>起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？</p>
+<p>赶紧点进去看看，是这么一个宏定义：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define section(_sectionID_, _className_) \</span></div><div class="line">compatibility_alias _WVRViewModelDispatcher WVRViewModelDispatcher; \</div><div class="line">+ (<span class="keyword">void</span>)load &#123; \</div><div class="line">[WVRViewModelDispatcher registerSection:_sectionID_ className:_className_]; \</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就是load方法的宏定义，方便通过映射来做类型匹配，不需要在管理类里导入太多头文件。</p>
+<p>但是我还是比较纠结 compatibility_alias 的用途。网上有解释说这个是苹果留的关键字，用来重构时方便改变类名，但是我查找 _WVRViewModelDispatcher，并没有地方引用，这就很奇怪，为什么要在这里放一行没有用到的代码。</p>
+<p>经过一番思考，我突然想起来问题的根源：这个宏定义使用的时候需要在前面加一个@，这么使用肯定要有理由的，我们看到这个宏定义使用了平时很常见的section作为名称，这本身就不合理，但是由于compatibility_alias的存在，使用时就必须在前面加上@，编译器才认为这是在调用一个宏定义，而不是一个变量或者方法。</p>
+<p>想到这里，我立即去工程里试了一下，这样果然有效的可以让编译器区分开宏定义和变量。</p>
+<p>不得不说，这么使用确实很巧妙，但是也很让人懵逼。</p>
+<p>经历此事，我再次深深的感到，项目中写好文档的重要性！！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/使用MongoDB作为数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/19/使用MongoDB作为数据库/" itemprop="url">使用MongoDB作为数据库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T19:03:47+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在学习后端开发，需要存储一些数据</p>
+<h5 id="为什么使用MongoDB？"><a href="#为什么使用MongoDB？" class="headerlink" title="为什么使用MongoDB？"></a>为什么使用MongoDB？</h5><ol>
+<li>作为一个前端开发人员</li>
+<li>稳定性</li>
+<li>强大的社区、丰富的文档</li>
+</ol>
+<p>扩展性<br>不需要专门维护（DB）</p>
+<p><a href="https://www.zhihu.com/question/32071167?sort=created" target="_blank" rel="external">MongoDB 应用场景?</a></p>
+<p>之后为了性能、业务需求、通用性等原因，可以学习使用PostgreSQL 或 MySQL。</p>
+<p>不过关于这两者的选择也是挺纠结，推荐看一下知乎：<a href="https://www.zhihu.com/question/20010554" target="_blank" rel="external">PostgreSQL 与 MySQL 相比，优势何在？</a></p>
+<p>如果你的项目之前已经选了某个数据库，在没有出现瓶颈或问题的时候，最好在十分有把握的情况下再去折腾，毕竟数据无价，且行且珍惜。</p>
+<p>Mac下安装MongoDB后，有一个地方需要注意：db的文件目录如果在根目录下，需要对文件夹更改写权限，否则运行mongod服务会报错。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/" itemprop="url">iOS开发 提示信息被键盘遮挡解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T17:11:00+08:00">
+                2018-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[[<span class="built_in">UIApplication</span> sharedApplication].windows lastObject] addSubview:view];</div></pre></td></tr></table></figure>
+<p>但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidden状态，这时候我们的view就会被添加到一个隐藏的window上面导致，直接导致无法正常显示。</p>
+<p>我们项目中使用了Toast这个第三方库，所以需要对其做一些封装，核心代码如下所示（已适配iOS11系统）：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)showMessageToWindowCenter:(<span class="built_in">NSString</span> *)msg &#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (msg.length &lt; <span class="number">1</span>) &#123; <span class="keyword">return</span>; &#125;</div><div class="line"></div><div class="line">    <span class="built_in">NSTimeInterval</span> duration = [<span class="keyword">self</span> durationForMsg:msg];</div><div class="line"></div><div class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">        <span class="built_in">UIWindow</span> *window = [<span class="keyword">self</span> findKeyWindow];</div><div class="line">        [window makeToast:msg duration:duration position:CSToastPositionCenter];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">UIWindow</span> *)findKeyWindow &#123;</div><div class="line"></div><div class="line">    <span class="built_in">UIApplication</span> *app = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</div><div class="line"></div><div class="line">    <span class="built_in">UIWindow</span> *realKeyWindow = app.windows.firstObject;</div><div class="line">    <span class="built_in">NSInteger</span> count = app.windows.count;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = count - <span class="number">1</span>; i &gt; <span class="number">0</span>; i --) &#123;</div><div class="line"></div><div class="line">        <span class="built_in">UIWindow</span> *showWindow = [app.windows objectAtIndex:i];</div><div class="line">        <span class="keyword">if</span> (showWindow.hidden) &#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        realKeyWindow = showWindow;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> realKeyWindow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>目前还有一种情况没有处理(没有大碍)：Toast先弹出来，然后再调起键盘，这个时候键盘还是会把已出现的Toast挡住。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" itemprop="url">AFNetworking用POST发送的parameters在Java后台接收失败的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T10:43:24+08:00">
+                2018-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。</p>
+<h5 id="这时候需要修改AFNetworking的requestSerializer"><a href="#这时候需要修改AFNetworking的requestSerializer" class="headerlink" title="这时候需要修改AFNetworking的requestSerializer"></a>这时候需要修改AFNetworking的requestSerializer</h5><p>先检查是否改动过requestSerializer，如果之前设置成了AFJSONRequestSerializer，把AFJSONRequestSerializer改成了AFHTTPRequestSerializer就OK了</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果之前有设置AFJSONRequestSerializer，下面这段也需要，一定要看清楚，很容易混淆</span></div><div class="line">AFHTTPRequestSerializer *request = [AFHTTPRequestSerializer serializer];</div><div class="line">manager.requestSerializer = request;</div></pre></td></tr></table></figure>
+<p>然后设置HTTPHeaderField，告知后台使用form表单格式提交参数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[manager.requestSerializer setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];</div></pre></td></tr></table></figure>
+<p>再次请求，服务端就不会返回参数找不到的错误啦。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1201,648 +1837,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/03/Windows-安装原版镜ISO像/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/03/Windows-安装原版镜ISO像/" itemprop="url">Windows 安装原版镜ISO像</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T21:35:26+08:00">
-                2018-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Windows安装/" itemprop="url" rel="index">
-                    <span itemprop="name">Windows安装</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="安装程序无法创建新的系统分区，也无法定位现有系统分区"><a href="#安装程序无法创建新的系统分区，也无法定位现有系统分区" class="headerlink" title="安装程序无法创建新的系统分区，也无法定位现有系统分区"></a>安装程序无法创建新的系统分区，也无法定位现有系统分区</h4><p>最近同事在闲鱼淘了个笔记本来玩，安装系统的时候发现主硬盘无法引导启动，用原版镜像安装的时候报错无法继续执行。</p>
-<p>报错问题：安装程序无法创建新的系统分区，也无法定位现有系统分区</p>
-<p>最终只能做个PE U盘来帮忙，顺便记录下这个烦人的问题。</p>
-<p>解决步骤：</p>
-<ol>
-<li><p>第一步：把win7或win8、win10镜像发在你电脑的非系统盘的其他硬盘上，或者放在U盘也可以。</p>
-</li>
-<li><p>第二步：重启机器，通过U 盘启动．进入win pe系统，关于这点我说一下，有些朋友也许不知道什么叫win pe系统，这个win pe 究竟有什么用途，其实你可以把win pe 理解为一个微缩版本win xp，他和win xp 使用差不多。只是大部分的功能被禁用了，所以他的体积也非常小，虽然大部分的功能被禁用，可是他不影响第三方软件使用，比如Ghost , PQ 等一些软件依旧在win pe运行自如。</p>
-</li>
-<li><p>第三步：如果PE里带虚拟光驱，此步骤可以忽略。（把windows 7的ISO镜像解压到电脑的非系统盘的其他硬盘上。如D:\windows.…。当然你也可以不用建立 win7 文件夹。在这里再说明一点就是，一定要把你想分的分区分好．尽量不要频繁调整硬盘各个分区的大小，尤其是主分区，一定要考虑周全。）</p>
-</li>
-<li><p>第四步：进入win pe系统，格式化C盘为NTFS。C盘最好有15 G以上的空间，安装完 win7 大概要用 8G 。我在这里建议大家分 50G 。</p>
-</li>
-<li><p>第五步（最关键一步）：从你解压的安装程序的文件夹中找到boot, bootmgr 和 sources 这三个文件或文件夹，并且复制到C盘根目录下。</p>
-</li>
-<li><p>第六步：在win pe系统中运行cmd ，输入“ c:\boot\bootsect.exe /nt60 c: ”（注意exe和/nt60、/nt60和c:之间有空格），然后回车，看到提示successful 字样（画面会很快闪过，以至于来不及看。）的语句即成功了！然后重起电脑。</p>
-</li>
-<li><p>第七步：可以把U盘从电脑中拔出，然后等待系统从硬盘启动。或者加载U盘启动项后选择从本地引导启动。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/文件损坏-软件损坏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/文件损坏-软件损坏/" itemprop="url">文件损坏 软件损坏</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T20:33:12+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/macOS/" itemprop="url" rel="index">
-                    <span itemprop="name">macOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="macOS-High-Sierra-10-13-文件损坏-软件损坏"><a href="#macOS-High-Sierra-10-13-文件损坏-软件损坏" class="headerlink" title="macOS High Sierra 10.13 文件损坏  软件损坏"></a>macOS High Sierra 10.13 文件损坏  软件损坏</h4><p>日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，<br>不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了：</p>
-<p>需要在终端输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo spctl --master-disable</div></pre></td></tr></table></figure></p>
-<p>就可以打开这些软件了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/UISlider-使用采坑记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/UISlider-使用采坑记/" itemprop="url">UISlider 使用采坑记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T14:35:13+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。</p>
-<h4 id="改变slider的高度不能靠约束"><a href="#改变slider的高度不能靠约束" class="headerlink" title="改变slider的高度不能靠约束"></a>改变slider的高度不能靠约束</h4><p>在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因为既稳定又快捷。</p>
-<p>下面就是我们所要修改的地方，只需要创建一个继承UISlider的类，在里面重写一个方法，即可搞定。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></div><div class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="external">自定义UISlider Demo</a></p>
-<p>当然还有几个其他的方法，改变slider其他属性的。大家可以去查阅相应的API。</p>
-<p>最终我在初始化Slider的代码中将对控件高度的约束那行代码注释掉，bug修复。</p>
-<p>时间长了，啥都容易忘，好记性不如烂笔头，还是把他们记下来比较靠谱。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/28/Mac磁盘空间清理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/28/Mac磁盘空间清理/" itemprop="url">Mac磁盘空间清理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T09:40:46+08:00">
-                2017-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于自己喜欢瞎捣鼓，电脑上安装了不少软件，也存了不少资料，最近硬盘越来越吃紧了，今天电脑居然提示磁盘剩余空间不足的警告，赶紧看看有哪些东西可以删除。</p>
-<h4 id="大文件"><a href="#大文件" class="headerlink" title="大文件"></a>大文件</h4><p>用CleanMyMac等工具扫描可以查看硬盘上有哪些文件比较占用空间，暂时又用不到，删除之。</p>
-<h4 id="开发工具清理"><a href="#开发工具清理" class="headerlink" title="开发工具清理"></a>开发工具清理</h4><p><a href="http://www.cocoachina.com/ios/20170711/19814.html" target="_blank" rel="external">Xcode 清理存储空间</a></p>
-<p>不过开发工具没事还是尽量少折腾，出了问题，影响开发进度。</p>
-<h4 id="不常用的文件"><a href="#不常用的文件" class="headerlink" title="不常用的文件"></a>不常用的文件</h4><p>Finder里一般都记录了文件的创建和修改时间，并且支持按照时间排序，可以把不常用的文件清理掉。</p>
-<h4 id="做备份"><a href="#做备份" class="headerlink" title="做备份"></a>做备份</h4><p>Mac上的固态硬盘一般体积都不大，有条件的还是备一个移动硬盘，网盘也是不错的选择，或者土豪可以直接换个高配大硬盘的电脑也是极好的^_^</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1887,7 +1886,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2000,7 +1999,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共41.3k字</span>
+  <span class="post-count">博客全站共45.2k字</span>
 </div>
 
 

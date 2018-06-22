@@ -4,8 +4,48 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2018/06/21/Swift-VS-Kotlin%E4%B9%8B%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%88%E8%AF%91%EF%BC%89/</loc>
+    <lastmod>2018-06-22T08:57:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Swift VS Kotlin之内存管理（译）</title>
+        <pubTime>2018-06-21T01:20:45.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/05/02/Xcode-%E5%B0%86%E9%9D%99%E6%80%81%E5%BA%93%E8%BD%AC%E4%B8%BA%E5%8A%A8%E6%80%81%E5%BA%93%E3%80%81%E5%A4%9A%E4%B8%AA%E5%BA%93%E5%90%88%E5%B9%B6/</loc>
+    <lastmod>2018-05-03T00:19:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode 将静态库转为动态库、多个库合并</title>
+        <pubTime>2018-05-02T05:16:33.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/05/02/Xcode-Swift-Playground-%E5%85%B3%E9%97%AD%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C/</loc>
-    <lastmod>2018-05-02T05:13:57.717Z</lastmod>
+    <lastmod>2018-05-02T05:13:57.000Z</lastmod>
     <data>
         <display>
         <title>Xcode Swift Playground 关闭自动执行</title>
@@ -25,7 +65,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/04/26/xcode%E5%9C%A8-release-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95/</loc>
-    <lastmod>2018-04-26T01:51:02.002Z</lastmod>
+    <lastmod>2018-04-26T01:51:02.000Z</lastmod>
     <data>
         <display>
         <title>Xcode在 release 模式下断点调试</title>
@@ -45,7 +85,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/04/18/Mac%E5%BC%80%E5%90%AF%E5%92%8C%E5%85%B3%E9%97%ADSSH/</loc>
-    <lastmod>2018-04-18T11:02:13.347Z</lastmod>
+    <lastmod>2018-04-18T11:02:13.000Z</lastmod>
     <data>
         <display>
         <title>Mac开启和关闭SSH</title>
@@ -65,7 +105,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/04/17/MonkeyDev%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E2%80%94%E2%80%94theos%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2018-04-18T01:36:47.247Z</lastmod>
+    <lastmod>2018-04-18T01:36:47.000Z</lastmod>
     <data>
         <display>
         <title>MonkeyDev工具使用前期准备——theos安装</title>
@@ -85,7 +125,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/04/03/%E5%83%8FPython%E4%B8%80%E6%A0%B7%E4%BD%BF%E7%94%A8Swift/</loc>
-    <lastmod>2018-04-03T01:57:21.143Z</lastmod>
+    <lastmod>2018-04-03T01:57:21.000Z</lastmod>
     <data>
         <display>
         <title>像Python一样使用Swift</title>
@@ -105,7 +145,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/04/02/Perfect%E5%86%99%E5%90%8E%E7%AB%AF%E4%BD%BF%E7%94%A8Xcode%E7%9B%B4%E6%8E%A5run%E6%89%BE%E4%B8%8D%E5%88%B0webroot%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-04-02T08:44:06.076Z</lastmod>
+    <lastmod>2018-04-02T08:44:06.000Z</lastmod>
     <data>
         <display>
         <title>Perfect写后端使用Xcode直接run找不到webroot文件夹的问题</title>
@@ -125,7 +165,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/28/iOS%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%BC%80%E7%AF%87/</loc>
-    <lastmod>2018-03-28T09:55:56.526Z</lastmod>
+    <lastmod>2018-03-28T09:55:56.000Z</lastmod>
     <data>
         <display>
         <title>iOS中的设计模式 开篇</title>
@@ -145,7 +185,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/24/Swift%E4%B8%ADSelf%E5%85%B3%E9%94%AE%E5%AD%97/</loc>
-    <lastmod>2018-03-24T14:38:46.061Z</lastmod>
+    <lastmod>2018-03-24T14:38:46.000Z</lastmod>
     <data>
         <display>
         <title>Swift中Self关键字</title>
@@ -165,7 +205,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/22/Swift%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84main%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2018-03-22T06:19:42.285Z</lastmod>
+    <lastmod>2018-03-22T06:19:42.000Z</lastmod>
     <data>
         <display>
         <title>Swift中消失的main函数</title>
@@ -185,7 +225,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/21/%E4%B8%80%E7%93%B6%E5%95%A4%E9%85%92%E5%BC%95%E5%8F%91%E7%9A%84%E8%B6%A3%E4%BA%8B/</loc>
-    <lastmod>2018-03-22T01:00:42.766Z</lastmod>
+    <lastmod>2018-03-22T01:00:42.000Z</lastmod>
     <data>
         <display>
         <title>一瓶啤酒引发的趣事</title>
@@ -205,7 +245,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/22/%E4%B8%8D%E7%94%A8%E5%AE%98%E6%96%B9SDK%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E3%80%81%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98-Swift%E7%89%88/</loc>
-    <lastmod>2018-03-22T01:00:41.044Z</lastmod>
+    <lastmod>2018-03-22T01:00:41.000Z</lastmod>
     <data>
         <display>
         <title>不用官方SDK实现微信支付、支付宝支付-Swift版</title>
@@ -225,7 +265,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/21/Swift%E4%B8%ADURL%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2018-03-21T08:45:03.918Z</lastmod>
+    <lastmod>2018-03-21T08:45:03.000Z</lastmod>
     <data>
         <display>
         <title>Swift中URL特殊字符的处理</title>
@@ -245,7 +285,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/</loc>
-    <lastmod>2018-03-19T09:44:49.667Z</lastmod>
+    <lastmod>2018-03-19T09:44:49.000Z</lastmod>
     <data>
         <display>
         <title>Create A Backend Use Perfect Power By Swift</title>
@@ -265,7 +305,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/25/%E4%BD%BF%E7%94%A8github%E6%84%89%E5%BF%AB%E7%9A%84%E5%86%99blog/</loc>
-    <lastmod>2018-03-19T09:34:28.836Z</lastmod>
+    <lastmod>2018-03-19T09:34:28.000Z</lastmod>
     <data>
         <display>
         <title>使用github愉快的写blog</title>
@@ -285,7 +325,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/06/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2018-03-19T09:34:02.749Z</lastmod>
+    <lastmod>2018-03-19T09:34:02.000Z</lastmod>
     <data>
         <display>
         <title>软件开发之设计模式</title>
@@ -304,12 +344,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2017/08/15/ios/</loc>
-    <lastmod>2018-03-19T09:33:24.958Z</lastmod>
+    <loc>https://a1049145827.github.io/2018/03/19/ios/</loc>
+    <lastmod>2018-03-19T09:33:24.000Z</lastmod>
     <data>
         <display>
         <title>iOS消除警告</title>
-        <pubTime>2017-08-15T08:45:19.000Z</pubTime>
+        <pubTime>2018-03-19T09:33:24.000Z</pubTime>
         
         <tag>iOS 警告</tag>
          
@@ -322,7 +362,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/06/Swift-%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%88typealias%E3%80%81associatedtype%EF%BC%89/</loc>
-    <lastmod>2018-03-19T09:33:14.324Z</lastmod>
+    <lastmod>2018-03-19T09:33:14.000Z</lastmod>
     <data>
         <display>
         <title>Swift - 关键字（typealias、associatedtype）</title>
@@ -342,7 +382,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/13/Swift4-0%E4%B8%AD%E4%BD%BF%E7%94%A8NSSelectorFromString/</loc>
-    <lastmod>2018-03-19T09:32:47.077Z</lastmod>
+    <lastmod>2018-03-19T09:32:47.000Z</lastmod>
     <data>
         <display>
         <title>Swift4.0中使用NSSelectorFromString()</title>
@@ -361,12 +401,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2017/08/15/xcode/</loc>
-    <lastmod>2018-03-19T09:32:45.500Z</lastmod>
+    <loc>https://a1049145827.github.io/2018/03/19/xcode/</loc>
+    <lastmod>2018-03-19T09:32:45.000Z</lastmod>
     <data>
         <display>
         <title>xcode中使用正则表达式来搜索替换代码</title>
-        <pubTime>2017-08-15T04:56:44.000Z</pubTime>
+        <pubTime>2018-03-19T09:32:45.000Z</pubTime>
         
         <tag>xcode 正则</tag>
          
@@ -379,7 +419,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/04/%E4%BD%BF%E7%94%A8Swift%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6Perfect%E5%81%9A%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2018-03-19T09:27:20.533Z</lastmod>
+    <lastmod>2018-03-19T09:27:20.000Z</lastmod>
     <data>
         <display>
         <title>使用Swift后端框架Perfect做一个文件上传服务器</title>
@@ -399,7 +439,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/13/Xcode%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%9E%E7%8E%B0Swift%E5%92%8COC%E6%B7%B7%E7%BC%96-%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-03-19T09:26:43.118Z</lastmod>
+    <lastmod>2018-03-19T09:26:43.000Z</lastmod>
     <data>
         <display>
         <title>Xcode工程项目中实现Swift和OC混编 相互引用</title>
@@ -419,7 +459,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/13/Swift4-0%E4%B8%AD%E4%BD%BF%E7%94%A8NSClassFromString/</loc>
-    <lastmod>2018-03-19T09:26:10.854Z</lastmod>
+    <lastmod>2018-03-19T09:26:10.000Z</lastmod>
     <data>
         <display>
         <title>Swift4.0中使用NSClassFromString()</title>
@@ -439,7 +479,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/02/27/Swift%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2018-03-19T09:25:56.788Z</lastmod>
+    <lastmod>2018-03-19T09:25:56.000Z</lastmod>
     <data>
         <display>
         <title>Swift代码风格指南（译）</title>
@@ -479,7 +519,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/07/%E4%BD%BF%E7%94%A8fastlane%E8%BF%9B%E8%A1%8C%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%84%E5%BB%BA/</loc>
-    <lastmod>2018-03-19T09:25:34.356Z</lastmod>
+    <lastmod>2018-03-19T09:25:34.000Z</lastmod>
     <data>
         <display>
         <title>使用fastlane进行自动化构建</title>
@@ -499,7 +539,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/02/Swift-%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAStruct%E6%88%96Class%E8%BD%ACDictionary%E7%9A%84%E9%9C%80%E6%B1%82/</loc>
-    <lastmod>2018-03-19T09:25:31.980Z</lastmod>
+    <lastmod>2018-03-19T09:25:31.000Z</lastmod>
     <data>
         <display>
         <title>Swift 从零实现一个Struct或Class转Dictionary的需求</title>
@@ -519,7 +559,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/07/Swift-%E5%85%B3%E9%94%AE%E5%AD%97-defer/</loc>
-    <lastmod>2018-03-19T09:25:30.001Z</lastmod>
+    <lastmod>2018-03-19T09:25:30.000Z</lastmod>
     <data>
         <display>
         <title>Swift-关键字 defer</title>
@@ -539,7 +579,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/25/%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4Swift%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-03-19T09:24:27.891Z</lastmod>
+    <lastmod>2018-03-19T09:24:27.000Z</lastmod>
     <data>
         <display>
         <title>如何打破Swift中的循环引用</title>
@@ -559,7 +599,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/02/%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8WCDBSwift/</loc>
-    <lastmod>2018-03-19T09:23:03.829Z</lastmod>
+    <lastmod>2018-03-19T09:23:03.000Z</lastmod>
     <data>
         <display>
         <title>尝试使用WCDBSwift</title>
@@ -579,7 +619,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/29/UISlider-%E4%BD%BF%E7%94%A8%E9%87%87%E5%9D%91%E8%AE%B0/</loc>
-    <lastmod>2018-03-19T09:20:34.270Z</lastmod>
+    <lastmod>2018-03-19T09:20:34.000Z</lastmod>
     <data>
         <display>
         <title>UISlider 使用采坑记</title>
@@ -598,28 +638,8 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
-    <lastmod>2018-03-19T09:20:28.872Z</lastmod>
-    <data>
-        <display>
-        <title>iOS设备型号 2018最新统计</title>
-        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
-    <lastmod>2018-03-19T09:20:28.242Z</lastmod>
+    <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 Archive时自动增加build版本</title>
@@ -638,8 +658,28 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
+    <lastmod>2018-03-19T09:20:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS设备型号 2018最新统计</title>
+        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/01/14/iOS%E5%BC%80%E5%8F%91-%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF%E8%A2%AB%E9%94%AE%E7%9B%98%E9%81%AE%E6%8C%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2018-03-19T09:20:27.543Z</lastmod>
+    <lastmod>2018-03-19T09:20:27.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 提示信息被键盘遮挡解决方案</title>
@@ -659,7 +699,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2018-03-19T09:20:26.926Z</lastmod>
+    <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 区分Home键和锁屏键事件</title>
@@ -679,7 +719,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-03-19T09:20:26.248Z</lastmod>
+    <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
         <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
@@ -699,7 +739,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/27/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%89%B9%E6%AE%8A%E9%9C%80%E6%B1%82%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2018-03-19T09:20:25.611Z</lastmod>
+    <lastmod>2018-03-19T09:20:25.000Z</lastmod>
     <data>
         <display>
         <title>记一次特殊需求实现</title>
@@ -719,7 +759,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/24/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%B7%A7%E5%A6%99%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/</loc>
-    <lastmod>2018-03-19T09:20:24.881Z</lastmod>
+    <lastmod>2018-03-19T09:20:24.000Z</lastmod>
     <data>
         <display>
         <title>记一次巧妙的宏定义的使用方式</title>
@@ -739,7 +779,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/24/%E4%BD%BF%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%B0%86build%E7%89%88%E6%9C%AC%E5%8F%B7%E8%87%AA%E5%8A%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F/</loc>
-    <lastmod>2018-03-19T09:20:21.042Z</lastmod>
+    <lastmod>2018-03-19T09:20:21.000Z</lastmod>
     <data>
         <display>
         <title>使用shell脚本将build版本号自动修改为当前日期</title>
@@ -759,7 +799,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/09/mac%E4%B8%8B%E7%94%A8sed%E6%8A%A5%E9%94%99-command-c-expects-followed-by-text/</loc>
-    <lastmod>2018-03-10T03:08:40.396Z</lastmod>
+    <lastmod>2018-03-10T03:08:40.000Z</lastmod>
     <data>
         <display>
         <title>Mac下用sed报错 command c expects  followed by text</title>
@@ -779,7 +819,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/28/Mac%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E6%B8%85%E7%90%86/</loc>
-    <lastmod>2018-03-06T06:26:43.443Z</lastmod>
+    <lastmod>2018-03-06T06:26:43.000Z</lastmod>
     <data>
         <display>
         <title>Mac磁盘空间清理</title>
@@ -799,7 +839,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Xcode%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B%E5%BC%95%E5%85%A5%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2018-03-06T06:26:37.770Z</lastmod>
+    <lastmod>2018-03-06T06:26:37.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 Xcode一个工程引入另一个工程</title>
@@ -819,7 +859,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/03/Windows-%E5%AE%89%E8%A3%85%E5%8E%9F%E7%89%88%E9%95%9CISO%E5%83%8F/</loc>
-    <lastmod>2018-03-06T02:34:18.914Z</lastmod>
+    <lastmod>2018-03-06T02:34:18.000Z</lastmod>
     <data>
         <display>
         <title>Windows 安装原版镜ISO像</title>
@@ -839,7 +879,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/21/hexo%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/</loc>
-    <lastmod>2018-03-06T02:32:37.921Z</lastmod>
+    <lastmod>2018-03-06T02:32:37.000Z</lastmod>
     <data>
         <display>
         <title>hexo使用小记</title>
@@ -856,7 +896,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/05/Xcode%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%97%B6%E5%B7%A6%E4%BE%A7memory%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2018-03-06T02:31:39.796Z</lastmod>
+    <lastmod>2018-03-06T02:31:39.000Z</lastmod>
     <data>
         <display>
         <title>Xcode运行程序时左侧memory不显示内存</title>
@@ -876,7 +916,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/19/%E4%BD%BF%E7%94%A8MongoDB%E4%BD%9C%E4%B8%BA%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2018-03-06T02:29:22.874Z</lastmod>
+    <lastmod>2018-03-06T02:29:22.000Z</lastmod>
     <data>
         <display>
         <title>使用MongoDB作为数据库</title>
@@ -896,7 +936,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/01/02/%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F-%E8%BD%AF%E4%BB%B6%E6%8D%9F%E5%9D%8F/</loc>
-    <lastmod>2018-01-02T12:42:37.827Z</lastmod>
+    <lastmod>2018-01-02T12:42:37.000Z</lastmod>
     <data>
         <display>
         <title>文件损坏 软件损坏</title>
@@ -916,7 +956,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/25/Adobe-After-Effects%E5%90%8D%E4%B8%BACheckbox%E7%9A%84%E7%A7%8D%E7%B1%BBeffect%E6%B2%A1%E6%9C%89%E5%B1%9E%E6%80%A7%E6%88%96%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2017-12-25T04:25:59.463Z</lastmod>
+    <lastmod>2017-12-25T04:25:59.000Z</lastmod>
     <data>
         <display>
         <title>Adobe After Effects名为Checkbox的种类effect没有属性或方法</title>
@@ -936,7 +976,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2017/12/22/Mac%E5%B9%B3%E5%8F%B0%E4%BD%BF%E7%94%A8gitblit%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2017-12-22T06:48:05.015Z</lastmod>
+    <lastmod>2017-12-22T06:48:05.000Z</lastmod>
     <data>
         <display>
         <title>Mac平台使用gitblit搭建git服务器</title>
@@ -955,12 +995,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2017/08/15/blog/</loc>
-    <lastmod>2017-12-21T04:59:16.243Z</lastmod>
+    <loc>https://a1049145827.github.io/2017/12/21/blog/</loc>
+    <lastmod>2017-12-21T04:59:16.000Z</lastmod>
     <data>
         <display>
         <title>我的博客</title>
-        <pubTime>2017-08-15T02:38:07.000Z</pubTime>
+        <pubTime>2017-12-21T04:59:16.000Z</pubTime>
         
         <tag>test</tag>
          
@@ -972,12 +1012,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2017/08/15/hello-world/</loc>
-    <lastmod>2017-12-21T04:59:14.708Z</lastmod>
+    <loc>https://a1049145827.github.io/2017/12/21/hello-world/</loc>
+    <lastmod>2017-12-21T04:59:14.000Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
-        <pubTime>2017-08-15T02:17:43.000Z</pubTime>
+        <pubTime>2017-12-21T04:59:14.000Z</pubTime>
         
         <tag>test</tag>
          

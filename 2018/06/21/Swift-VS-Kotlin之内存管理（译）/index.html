@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift VS Kotlin之内存管理（译）">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/Swift-VS-Kotlin之内存管理（译）/index.html">
+<meta property="og:site_name" content="Bruce&#39;s Blog">
+<meta property="og:description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Empty_memory_heap.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Memory_heap_with_allocated.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/removed_from_the_memory_heap.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/reachable.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/self_five.gif">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/check_the_picture.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/tracing_garbage_collection_type.gif">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/notice_the_references_counters.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/retain_cycle.png">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/kitten.gif">
+<meta property="og:updated_time" content="2018-06-22T08:57:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift VS Kotlin之内存管理（译）">
+<meta name="twitter:description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/21/Swift-VS-Kotlin之内存管理（译）/"/>
+
+
+
+
+
+  <title>Swift VS Kotlin之内存管理（译） | Bruce's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<script type="text/javascript"
+color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bruce's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hi~</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/Swift-VS-Kotlin之内存管理（译）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift VS Kotlin之内存管理（译）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T09:20:45+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>原文链接：<a href="https://blog.indoorway.com/swift-vs-kotlin-the-differences-in-memory-management-860828edf8" target="_blank" rel="external">blog.indoorway.com</a></strong></p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png" alt="Illustration by [Wojciech Tymicki](https://dribbble.com/Panweb)"></p>
+<p>在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在<a href="https://blog.indoorway.com/swift-v-kotlin-the-differences-that-matter-50b2d393f526" target="_blank" rel="external">这里</a>找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif" alt=""></p>
+<h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a><em>垃圾收集</em></h1><p>　　　　　<br>垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，<a href="http://www.memorymanagement.org/glossary/g.html#term-garbage-collection" target="_blank" rel="external">这里有解释</a>。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。</p>
+<p>这是你的内存堆（不要把它与分配给你应用的<a href="http://net informations.com/faq/net/stack-heap.htm" target="_blank" rel="external">stack</a>）混淆。它现在是空的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Empty_memory_heap.png" alt="1) 空内存堆"></p>
+<p><center> 1) 空内存堆 </center></p>
+<p>当App启动的时候，它在运行时将内存分配给对象(引用类型)。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Memory_heap_with_allocated.png" alt="2) 具有分配内存块的内存堆(蓝色矩形)"></p>
+<p><center> 2) 具有分配内存块的内存堆(蓝色矩形) </center></p>
+<p>过了一段时间，一些对象可以进行垃圾收集，然后从内存堆中删除。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/removed_from_the_memory_heap.png" alt="3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象"></p>
+<p><center> 3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象 </center></p>
+<p>当一个对象没有被引用时，就会成为垃圾收集的最佳候选者。例如，你有一个 TODO 应用程序，有一个任务列表屏幕和一个任务细节屏幕。首先，应用程序分配内存，以便在启动时显示任务列表。当用户点击列表上的一个条目时，将显示详情页面。对于这个操作，你的应用程序动态地分配额外的内存到堆。当用户关闭任务细节页面时，应该删除与之相关的所有对象。原因很简单。你没有无限的记忆，你必须重新获得它。这就是为什么系统删除不可访问的对象。好处是显而易见的，毫无疑问。这意味着程序员不负责删除未使用的对象。与 C、C++ 不同，Kotlin 和 Swift 都实现了这一过程的自动化。所以，如果我们有这个免费的功能，一切都神奇地发生了，你应该关心它吗？是的，你应该这样做，因为这并不意味着你不能犯错。此外，这些知识还可以让你编写更好的应用程序，使其运行更加顺畅。如果你想成为一名优秀的 Android 或 iOS 开发人员，你应该精通内存管理。</p>
+<p>尽管 Swift 和 Kotlin 让程序员从为应用程序释放内存的任务中解脱出来，但它们的方式不同。我将尽可能简单地描述这个高级主题。我不会过于关注细节，因为我想让大家都能理解这篇文章。对于那些想了解更多的人，我留下了一些参考资料。让我们先从 Kotlin 开始。</p>
+<h1 id="Kotlin-的内存管理-Android"><a href="#Kotlin-的内存管理-Android" class="headerlink" title="Kotlin 的内存管理 (Android)"></a><em>Kotlin 的内存管理 (Android)</em></h1><p>　　　<br>Android使用最常见的垃圾收集类型，即使用 CMS算法 跟踪垃圾收集。CMS 表示并发的标记清除。对于我们的需求，你可以忽略“C”字母。更重要的是理解基本的标记和清除算法是如何工作的。</p>
+<p>第一步是定义垃圾收集根。它们可以是静态变量，活动线程。g Android中的一个UI线程)，或其他<a href="https://developer.android.com/studio/profile/am-memory#treeroot" target="_blank" rel="external">如这里列出的</a>。完成此操作后，GC将启动 <strong>标记阶段</strong> 。为此，GC 遍历整个对象树。每个创建的对象都有一个标记位，默认设置为0。当一个对象在标记阶段被访问时，它的标记位被设置为1 —— 这意味着它是可到达的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/reachable.png" alt=""></p>
+<p>在上面的图片中，这个阶段后保持灰色的对象是不可访问的，因此我们的App不再需要它们了。但是，在你进一步讨论之前，请再看一看这幅画。你注意到那些互相指向的物体了吗？iOS 开发者称它们为保留周期。这个问题在 Android 世界中并不存在。当没有到 GC根 的路径时，将删除“循环”。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/self_five.gif" alt=""></p>
+<p>另一个值得一提的标志阶段是它的隐藏成本。你应该熟悉 <strong>全局停顿</strong> 这个词。在每个收集周期之前，GC 暂停我们的应用程序，以防止在遍历对象树时分配新对象。暂停持续时间取决于可访问对象的数量。对象的总数或堆大小并不重要。这就是为什么创建许多“活着的”不必要的对象是痛苦的 —— 例如，在循环中自动装箱。GC 在内存堆几乎满时启动进程。因此，当你创建许多不必要的对象时，你会更快地填充内存堆，这反过来又会生成更多的GC循环和更多的帧删除，因为每次暂停都会占用应用程序的时间。</p>
+<p>现在，我们来谈谈移除。为了消除任何浪费，GC 将运行下一阶段 —— <strong>清理</strong>。在这种情况下，GC 将搜索内存堆，以查找所有带有标记位的对象，设置为0。在最后一步中，删除它们，并将所有可访问对象的标记位重置为0。就这么简单。然而，这种解决方案有一个缺点。它可能导致内存堆碎片化。这意味着你的堆可能有相当多的空间(空闲内存)，但是这个空间被划分为小块。因此，当尝试将一个 2MB 的对象分配到4MB的空闲内存时，可能会遇到麻烦。为什么?因为，最大的一个块可能不足以容纳 2MB。这就是为什么 Android 使用一个名为 <em>Compact</em> 的改进版本。<em>Compact</em> 变体还有一个附加步骤。在扫描阶段幸存的对象将被移动到内存堆的开始 —— 检查图片。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/check_the_picture.png" alt=""></p>
+<p>天下没有免费的午餐。这加剧了 GC暂停。</p>
+<p>这就是 Android 的内存管理。当然，我没有涵盖所有方面。例如，我跳过了堆生成主题。如果你想了解这个问题，请点击<a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="external">这里</a>，并查看 <em>The Generational Garbage Collection Process</em> 章节。</p>
+<p>好了，现在是 Swift 的出场时间了。</p>
+<h1 id="Swift-的内存管理-iOS"><a href="#Swift-的内存管理-iOS" class="headerlink" title="Swift 的内存管理 (iOS)"></a><em>Swift 的内存管理 (iOS)</em></h1><p>　　　<br>Swift 使用一种简单的垃圾收集机制。它叫做 ARC（<strong>自动引用计数</strong>）。这种方法基于跟踪其他对象持有的对象的强引用计数。类的每个新创建实例都存储额外的信息——引用计数器。无论何时将对象分配给属性、变量或常量(对其进行强引用)，都要增加引用计数器的值。在该值不等于0之前，你的对象是安全的，不能被释放。但是当引用计数器变为0时，对象将立即被回收*，没有任何暂停，也不会启动GC收集周期。与跟踪垃圾收集类型相比，这是一个很大的优势。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tracing_garbage_collection_type.gif" alt=""></p>
+<p>好吧，我应该把星号（上一段话中出现的*）放在“立即”旁边。我这样做是因为你可以在<a href="https://www.quora.com/Why-doesnt-Apple-Swift-adopt-the-memory-management-method-of-garbage-collection-like-Java-uses" target="_blank" rel="external">互联网上找到一些信息</a>，这是内存管理的神话之一。我鼓励你去看看这个有趣的讨论 :)</p>
+<p>当然，还有另一方面 —— 之前提到的保留周期。首先，让我们看看如何创建一个 retain cycle，以及 iOS开发人员 需要做些什么来避免内存泄漏。让我们考虑两个类似的类：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> dog: <span class="type">Dog</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> owner: <span class="type">Person</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这两个类都有一个名字和一个可选的财产 —— 狗、狗主人，因为一个人可能并不总是有一只狗，狗也不一定属于某个人 —— 因为狗可能并不总是有主人的，这实在令人伤感 :(</p>
+<p>下一个代码片段创建每个类的实例，同时将引用计数设置为1:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> joe: <span class="type">Person</span>? = <span class="type">Person</span>(name: <span class="string">"Joe"</span>)</div><div class="line"><span class="keyword">var</span> lassie: <span class="type">Dog</span>? = <span class="type">Dog</span>(name: <span class="string">"Lassie"</span>)</div></pre></td></tr></table></figure>
+<p><em>Joe</em> 和 <em>Lassie</em> 分别强烈地引用了 Person 和 Dog 实例。到目前为止还好。如果将 <em>nil</em> 赋给 <em>joe</em> 变量，则回收内存，因为对 Person 实例不再有强引用。</p>
+<p>要创建一个强引用循环，即保留循环，只需将两个实例链接在一起。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">joe!.dog = lassie</div><div class="line">lassie!.owner = joe</div></pre></td></tr></table></figure>
+<p>请注意引用计数。它们的值都是2。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/notice_the_references_counters.png" alt=""></p>
+<p>现在，如果你破坏了 <em>joe</em> 和 <em>lassie</em> 持有的强引用，则引用计数器不会重置为0。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">joe = <span class="literal">nil</span></div><div class="line">lassie = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/retain_cycle.png" alt=""></p>
+<p>由于引用循环，ARC 无法释放实例。</p>
+<p>当然，这是有解决办法的。要解决强引用周期，应该使用 <em>weak</em> 或 <em>unowned</em> 引用。你只需在变量之前添加一个特殊的关键字，然后当你将一个对象赋给该变量时，对象的引用计数器就不会被提升。</p>
+<h1 id="内存管理如何影响我们的编码方式"><a href="#内存管理如何影响我们的编码方式" class="headerlink" title="内存管理如何影响我们的编码方式"></a><em>内存管理如何影响我们的编码方式</em></h1><p>　　　<br>坦白地说，当我开始学习 iOS 的时候，我认为 iOS 和 Android 中的 <em>weak</em>、<em>reference</em> 功能也是一样的。当然，这不是真的。</p>
+<p>在iOS中使用 <em>weak</em> 关键字是正常的，当你广泛使用 <em>代理模式</em> 时，甚至可以认为是良好的实践。谈到 Android，这并不是一种常见的实践，除非你仍然使用异步任务（我希望不是）。</p>
+<p>由于循环引用，iOS开发人员 有时需要编写比 Android开发人员 更复杂的代码。最好的例子是使用 <em>closure</em> (Swift)和 <em>lambda</em> (Android)。</p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    var actionAfterUpdate: (() -&gt; Unit) = &#123;&#125; <span class="comment">// Lambda</span></div><div class="line"></div><div class="line"><span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        actionAfterUpdate()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> actionAfterUpdate: () -&gt; <span class="type">Void</span> = &#123;&#125; <span class="comment">// Closure</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        actionAfterUpdate()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当 <em>update()</em> 方法完成时，<em>actionAfterUpdate</em> 将执行。现在，让我们检查如何使用 <em>UpdateHandler.</em></p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</div><div class="line">    val updateHandler = UpdateHandler()</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do important thing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">timeToUpdate</span><span class="params">()</span> </span>&#123;</div><div class="line">        updateHandler.actionAfterUpdate = &#123; doSomething() &#125;</div><div class="line">        updateHandler.update()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> updateHandler = <span class="type">UpdateHandler</span>()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="comment">// do important thing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">timeToUpdate</span><span class="params">()</span></span> &#123;</div><div class="line">        updateHandler.actionAfterUpdate = &#123; <span class="keyword">self</span>.doSomething() &#125;</div><div class="line">        updateHandler.update()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如你所见，使用 <em>UpdateHandler</em> 很简单。在调用 <em>update()</em> 方法之前，你要声明更新之后应该发生什么。一切似乎都很好，但是… iOS 版本的代码有一个严重的错误… 它很糟糕，因为它会导致内存泄漏。是什么问题?它是 <em>actionAfterUpdate</em> 闭包，它保存对 <em>self</em> 的强引用。 <em>Self</em> 是一个 <em>MyObject</em> 实例，它还包含对 <em>UpdateHandler</em> 的引用 —— 一个retain的循环!为了防止内存泄漏，我们必须在闭包中使用 <em>weak</em> (或 <em>unowned</em> 在本例中这就足够了)关键字:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">updateHandler.actionAfterUpdate = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span> <span class="keyword">self</span>?.doSomething()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另一个问题是 <em>已失效的侦听器问题</em> 。简而言之，当你注册一个侦听器并忘记取消注册时，会导致应用程序中的内存泄漏。</p>
+<p>我修改了以前使用的示例，以更详细地讨论这个尚未解决的复杂问题。</p>
+<p>现在，<em>UpdateHandler</em> 是一个单例，它的寿命和我们的应用程序的寿命一样长。</p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">object UpdateHandler &#123;</div><div class="line">    <span class="keyword">private</span> var listener: OnUpdateListener? = <span class="keyword">null</span></div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.listener = listener</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        listener?.onUpdateComplete()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnUpdateListener</span> </span>&#123;</div><div class="line">    <span class="function">fun <span class="title">onUpdateComplete</span><span class="params">()</span></span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = <span class="type">UpdateHandler</span>()</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span></span> &#123;</div><div class="line">        <span class="keyword">self</span>.listener = listener</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</div><div class="line"></div><div class="line">        <span class="comment">// do work</span></div><div class="line">        listener?.onUpdateComplete()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">OnUpdateListener</span>: <span class="title">class</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以及 <em>MyObject</em> 类中的一些修改。</p>
+<p>Android:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class MyObject: OnUpdateListener &#123;</div><div class="line">    <span class="function">override fun <span class="title">onUpdateComplete</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>iOS:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span>: <span class="title">OnUpdateListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span> &#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如你所见，<em>MyObject</em> 是一个更新侦听器，当更新完成时它会执行一定的操作。</p>
+<p>为了强调这个问题，我将代码放在一个地方，每当你退出并重新启动应用程序时，它都会被调用。但是，请注意，这个示例在产品代码中没有意义。这只是一个简单的例子 :)</p>
+<p>Android (<em>MainActivity.kt)</em>:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">override fun <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onStart()</div><div class="line">    val myObject = MyObject()</div><div class="line">    UpdateHandler.registerUpdateListener(myObject)</div><div class="line">    UpdateHandler.update()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>iOS <em>(AppDelegate.swift):</em><br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationWillEnterForeground</span><span class="params">(<span class="number">_</span> application: UIApplication)</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> myObject = <span class="type">MyObject</span>()</div><div class="line">    <span class="type">UpdateHandler</span>.sharedInstance.registerUpdateListener(listener: myObject)</div><div class="line">    <span class="type">UpdateHandler</span>.sharedInstance.update()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因此，我创建了一个 <em>myObject</em> ，并将其作为更新侦听器传递给 <em>UpdateHandler</em> ，并调用 <em>update()</em> 方法。<em>update()</em> 方法通知侦听器完成的工作，调用 <em>onUpdateComplete()</em> 方法（ <em>onUpdateComplete()</em> 方法在 <em>MyObject</em> 中执行）。</p>
+<p><em>MyObject</em> 类的实例应该在 <em>onStart()</em> 或 <em>applicationWillEnterForegorund(…)</em> 完成时删除，因为在方法中创建的对象只要方法时间执行，并且在该时间之后成为垃圾收集的条件，就可以存活。但是在本例中，<em>UpdateHandler</em> 将永远保存对 <em>MyObject</em> 实例的引用。如何管理潜在的内存泄漏？可能所有iOS开发人员都会说：“使用弱引用!””，他们是对的。在 <em>UpdateHandler</em> 类中使用带有 <em>listener</em> 变量的 <em>weak</em> 关键字可以达到这个目的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正因为如此，ARC 才能为我们移除监听器。</p>
+<p>但是Android呢？一些 Android 开发人员也会说同样的话 —— “把监听器当作弱引用!” 好吧，这可能会有帮助…… 有时…… 但我确信这是你问题的开始 :) 你应该知道，每当你拿回叫作为弱引用时，小猫就会死去。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/kitten.gif" alt=""></p>
+<p><em>WeakReference</em> 使对象适合进行垃圾收集。所以它可能比你想象的要早。唯一的解决方案是添加 <em>unregisterUpdateListener</em> 方法并手动清除 <em>listener</em> 。</p>
+<h1 id="相似但不相同"><a href="#相似但不相同" class="headerlink" title="相似但不相同"></a><em>相似但不相同</em></h1><p>　　　<br>祝贺每一个坚持到底的人！</p>
+<p>如果这篇文章能帮助人们理解这个复杂的话题，我会很高兴。我试着像你五岁一样，一步一步地解释。貌似两种类似的编程语言隐藏了引擎盖下的许多不同之处，我希望你们能意识到这一点。有时Android的常见做法在iOS上不起作用，反之亦然。从一个平台移动到另一个平台并不像看上去的那么简单。</p>
+<h1 id="再次编辑-19-06-2018"><a href="#再次编辑-19-06-2018" class="headerlink" title="再次编辑 (19.06.2018)"></a>再次编辑 (19.06.2018)</h1><p>　　　<br>请注意，我说的是：</p>
+<p>“Swift 使用一个简单的 GC 收集机制”</p>
+<p>是我不好，这可能是误导。我不是说 ARC 是一个垃圾收集器，我的意思是垃圾收集是一个处理垃圾（未使用的对象）的过程。ARC 是处理废物的另一种机制或技术。我也没有提到 Android 上的垃圾收集过程在你的应用运行时是有效的，而 ARC 是在编译时提供的。</p>
+<p>谢谢你们的反馈，也感谢你们关注这里的内容。</p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/Xcode-将静态库转为动态库、多个库合并/" rel="next" title="Xcode 将静态库转为动态库、多个库合并">
+                <i class="fa fa-chevron-left"></i> Xcode 将静态库转为动态库、多个库合并
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjU3Ni85MTM4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Coder bruce" />
+          <p class="site-author-name" itemprop="name">Coder bruce</p>
+           
+              <p class="site-description motion-element" itemprop="description">hello world</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/a1049145827" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/ff82b16c5264" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                    
+                      简书
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kotlin-的内存管理-Android"><span class="nav-number">2.</span> <span class="nav-text">Kotlin 的内存管理 (Android)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift-的内存管理-iOS"><span class="nav-number">3.</span> <span class="nav-text">Swift 的内存管理 (iOS)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存管理如何影响我们的编码方式"><span class="nav-number">4.</span> <span class="nav-text">内存管理如何影响我们的编码方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相似但不相同"><span class="nav-number">5.</span> <span class="nav-text">相似但不相同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#再次编辑-19-06-2018"><span class="nav-number">6.</span> <span class="nav-text">再次编辑 (19.06.2018)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder bruce</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+
+
+
+
+
+
+<div class="theme-info">
+  <!-- <div class="powered-by"></div> -->
+  <span class="post-count">博客全站共45.2k字</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
