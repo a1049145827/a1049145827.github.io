@@ -101,13 +101,13 @@
 
 
 
-<meta name="description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta name="description" content="原文链接：blog.indoorway.com   由 Wojciech Tymicki 设计  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我曾把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Swift VS Kotlin之内存管理（译）">
 <meta property="og:url" content="http://yoursite.com/2018/06/21/Swift-VS-Kotlin之内存管理（译）/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta property="og:description" content="原文链接：blog.indoorway.com   由 Wojciech Tymicki 设计  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我曾把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png">
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif">
@@ -121,10 +121,10 @@
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/notice_the_references_counters.png">
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/retain_cycle.png">
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/kitten.gif">
-<meta property="og:updated_time" content="2018-06-22T09:29:35.000Z">
+<meta property="og:updated_time" content="2018-06-22T09:36:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift VS Kotlin之内存管理（译）">
-<meta name="twitter:description" content="原文链接：blog.indoorway.com  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。 这是你的内存堆（不要把它与分配给">
+<meta name="twitter:description" content="原文链接：blog.indoorway.com   由 Wojciech Tymicki 设计  在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在这里找到它。我曾把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。  垃圾收集　　　　　垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，这里有解释。也许你还不太明白？好的，那我用一些图片和一个简化的">
 <meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png">
 
 
@@ -381,7 +381,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <p><strong>原文链接：<a href="https://blog.indoorway.com/swift-vs-kotlin-the-differences-in-memory-management-860828edf8" target="_blank" rel="external">blog.indoorway.com</a></strong></p>
 <p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png" alt="Illustration by [Wojciech Tymicki](https://dribbble.com/Panweb)"></p>
-<p>在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在<a href="https://blog.indoorway.com/swift-v-kotlin-the-differences-that-matter-50b2d393f526" target="_blank" rel="external">这里</a>找到它。我把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。</p>
+<p><center> 由 <a href="https://dribbble.com/Panweb" target="_blank" rel="external">Wojciech Tymicki</a> 设计 </center></p>
+<p>在我的上一篇文章中，我提到了Swift和Kotlin的内存管理，这是你可以在<a href="https://blog.indoorway.com/swift-v-kotlin-the-differences-that-matter-50b2d393f526" target="_blank" rel="external">这里</a>找到它。我曾把这个问题留给你一个人，现在我想通过描述他们之间的不同来弥补你。</p>
 <p><img src="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif" alt=""></p>
 <h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a><em>垃圾收集</em></h1><p>　　　　　<br>垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，<a href="http://www.memorymanagement.org/glossary/g.html#term-garbage-collection" target="_blank" rel="external">这里有解释</a>。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。</p>
 <p>这是你的内存堆（不要把它与分配给你应用的<a href="http://net informations.com/faq/net/stack-heap.htm" target="_blank" rel="external">stack</a>）混淆。它现在是空的。</p>
