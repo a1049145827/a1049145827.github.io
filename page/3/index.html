@@ -277,6 +277,162 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/" itemprop="url">Mac下用sed报错 command c expects  followed by text</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T18:11:02+08:00">
+                2018-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一条很简单的替换文本的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div><div class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></div><div class="line"><span class="comment"># 也有可能报错 invalid command code W</span></div></pre></td></tr></table></figure>
+<p>但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Edit files <span class="keyword">in</span>-place, saving backups with the specified extension.</div><div class="line"></div><div class="line">If a zero-length extension is given, no backup will be saved.  It</div><div class="line"></div><div class="line">is not recommended to give a zero-length extension when <span class="keyword">in</span>-place</div><div class="line"></div><div class="line">editing files, as you risk corruption or partial content <span class="keyword">in</span> situ-</div><div class="line"></div><div class="line">ations <span class="built_in">where</span> disk space is exhausted, etc.</div></pre></td></tr></table></figure>
+<p>大概的意思就是说用-i的选项时mac会进行强制备份，所以你必须给出一个后缀名进行备份，如果你不想进行备份，直接用空字符即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">''</span> <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/07/Swift-关键字-defer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2122,165 +2278,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/" itemprop="url">使用shell脚本将build版本号自动修改为当前日期</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:27:21+08:00">
-                2018-01-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。</p>
-<p>我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。</p>
-<p>看官们莫要着急，这就呈上代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dateNum=$(date +%Y%m%d)</div><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</div><div class="line">buildDate=$(($buildNumber / <span class="number">100</span>))</div><div class="line"><span class="keyword">if</span> [ $buildDate -ne $dateNum ]</div><div class="line">then</div><div class="line">buildNumber=$(($dateNum * <span class="number">100</span> + <span class="number">1</span>))</div><div class="line">echo <span class="string">"$buildDate != $dateNum"</span></div><div class="line"><span class="meta"># 日期不相等时重置build版本号</span></div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></div><div class="line">fi</div></pre></td></tr></table></figure>
-<p>使用时有一点需要注意，这个脚本不需要勾选 run script only when installing，这样每次build、run、archive的时候都会去检查。而且这个脚本的执行顺序最好提前一些，一定要排在打包时build自增脚本的前面，才能保证每次都获取到正确的build版本号。</p>
-<p>本来觉得因为之前有过脚本实现build版本自增的经历，这个改起来应该也是不成问题。</p>
-<p>没想到还是掉了个坑，怪自己太异想天开，上次是直接拿了网上的代码，然后改写的。这次是为了自己学习一下独立写shell脚本，然后写的时候不自觉的带上了平时写编译语言的习惯：等号两边加空格！导致shell执行时出现问题，害我排查好几次才发觉。</p>
-<p>这也让我更加明白，作为一个开发人员，特别是如果想成为全栈开发，决不能有思维定势，多学习，注意细节。</p>
-<p>善用工具提高效率，才是王道！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2330,7 +2327,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2443,7 +2440,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共45.2k字</span>
+  <span class="post-count">博客全站共46.4k字</span>
 </div>
 
 
