@@ -277,6 +277,186 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Xcode工程项目中实现Swift和OC混编-相互引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/13/Xcode工程项目中实现Swift和OC混编-相互引用/" itemprop="url">Xcode工程项目中实现Swift和OC混编 相互引用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T11:45:25+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、OC工程中的相互引用"><a href="#一、OC工程中的相互引用" class="headerlink" title="一、OC工程中的相互引用"></a>一、OC工程中的相互引用</h3><p><strong>适用于初始工程为OC后续引入Swift的场景, 初始工程为Swift后续引入OC的直接看第二节</strong></p>
+<h4 id="OC工程中引用Swift"><a href="#OC工程中引用Swift" class="headerlink" title="OC工程中引用Swift"></a>OC工程中引用Swift</h4><p>1.通过CocoaClass新建一个Swift文件</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Create_Swift_File.jpg" alt="创建Swift文件"></p>
+<p>2.填好文件名 ，-&gt;create, 弹出是否要创建桥接文件的提示框</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Create_Swift_Class.jpg" alt="填写Swift文件名"><br><img src="https://github.com/a1049145827/Resources/raw/master/Create_Bridging_Header.jpg" alt="创建桥接文件"></p>
+<p>3.如果没有弹出是否创建桥接文件的提示框，则进入配置工程里看看此处是否为空，如果不是空的，就删掉，因为是否创建桥接文件只会弹出一次，若你已经选择了一次not create，则下次不会再提示，想要再次创建桥接文件需在自己创建一个头文件，并在这里填写对应路径。或者这里将设置清空，再从1开始。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Swift_Bridge.jpg" alt="设置桥接文件"></p>
+<p>4.至此，文件创建好了，配置也做好啦，开始上代码，在需要引用Swift的OC文件中导入头文件</p>
+<p>#import “xxx-Swift.h”。（xxx（一般为工程名）-Swift.h，此文件为Xcode隐式创建)</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 此文件为OC工程中的OC文件</span></div><div class="line"><span class="comment">// ViewController.m</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"xxx-Swift.h"</span>     // xxx（一般为工程名）-Swift.h，此文件为Xcode隐式创建</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">    TestClass *ar = [[TestClass alloc] init];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>OC中引用Swift完毕</p>
+<h4 id="OC工程中新建Swift并引用OC"><a href="#OC工程中新建Swift并引用OC" class="headerlink" title="OC工程中新建Swift并引用OC"></a>OC工程中新建Swift并引用OC</h4><p>刚刚已经创建了Swift文件和桥接文件，现在我们需要在桥接文件里引入要引用的OC类的头文件。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// OCSwiftDemo-Bridging-Header.h 桥接文件</span></div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Use this file to import your target's public headers that you would like to expose to Swift.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#include <span class="meta-string">"ViewController.h"</span></span></div></pre></td></tr></table></figure>
+<p>之后便可以在TestClass文件里进行引用。</p>
+<p>ObjC<br>// 此文件为OC工程中创建的Swift文件<br>// Swift文件中调用OC的类<br>import UIKit</p>
+<p>class TestClass: NSObject {<br>    let vc: ViewController = ViewController()<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 二、Swift工程中的相互引用</div><div class="line"></div><div class="line">**适用于初始工程为Swift后续引入OC的场景**</div><div class="line"></div><div class="line">#### Swift工程中新建OC文件并引用Swift</div><div class="line"></div><div class="line">如果你是看到前面的提示，直接过来看这里的话，很抱歉，您可能还需要看一遍前面的步骤，因为有配图更好理解。</div><div class="line"></div><div class="line">Swift工程中创建OC类并和Swift相互引用的方式，和前面OC工程创建Swift文件并相互引用的步骤是一致的（所以没有配图）。</div><div class="line"></div><div class="line">1.通过CocoaClass新建一个OC文件</div><div class="line"></div><div class="line">2.填好文件名 ，-&gt;create, 弹出是否要创建桥接文件的提示框</div><div class="line"></div><div class="line">3.如果没有弹出是否创建桥接文件的提示框，则进入配置工程里看看此处是否为空，如果不是空的，就删掉，因为是否创建桥接文件只会弹出一次，若你已经选择了一次not create，则下次不会再提示，想要再次创建桥接文件需在自己创建一个头文件，并在这里填写对应路径。或者这里将设置清空，再从1开始。</div><div class="line"></div><div class="line">4.至此，文件创建好了，配置也做好啦，在需要引用Swift的OC文件中导入头文件(#import &quot;xxx-Swift.h&quot;   // xxx（一般为工程名）-Swift.h，此文件为Xcode隐式创建)，即可调用相关类文件。代码如下：</div><div class="line"></div><div class="line">``` ObjC</div><div class="line">// 此文件为Swift工程中的OC文件</div><div class="line">// TestClass.m</div><div class="line"></div><div class="line">#import &quot;TestClass.h&quot;</div><div class="line">#import &quot;xxx-Swift.h&quot;   // xxx（一般为工程名）-Swift.h，此文件为Xcode隐式创建</div><div class="line"></div><div class="line">@implementation TestClass</div><div class="line"></div><div class="line">- (instancetype)init &#123;</div><div class="line">    self = [super init];</div><div class="line">    if (self) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)updateView &#123;</div><div class="line">    ViewController *vc = [[ViewController alloc] init];</div><div class="line">    NSLog(@&quot;%@&quot;, vc);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<h4 id="Swift工程中引用OC文件"><a href="#Swift工程中引用OC文件" class="headerlink" title="Swift工程中引用OC文件"></a>Swift工程中引用OC文件</h4><p>5.刚刚已经创建了OC文件和桥接文件，现在我们需要在桥接文件里引入要引用的OC类的头文件。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// SwiftOCDemo-Bridging-Header.h 桥接文件</span></div><div class="line"></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Use this file to import your target's public headers that you would like to expose to Swift.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="meta">#include <span class="meta-string">"TestClass.h"</span></span></div></pre></td></tr></table></figure>
+<p>6.之后便可以在Swift文件里进行引用。</p>
+<p>ObjC<br>// 此文件为Swift工程中的Swift文件<br>//  ViewController.swift  Swift文件中调用OC类</p>
+<p>import UIKit</p>
+<p>class ViewController: UIViewController {</p>
+<pre><code>override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let tc = TestClass()
+    tc.updateView()
+}
+</code></pre><p>}</p>
+<p>```</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2113,171 +2293,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/如何打破Swift中的循环引用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/25/如何打破Swift中的循环引用/" itemprop="url">如何打破Swift中的循环引用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T12:49:19+08:00">
-                2018-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Swift的内存管理也是使用的ARC(自动引用计数)：当我们初始化创建一个对象实例的时候,swift就会替我们管理和分配内存,此时的引用计数为1，当对其进行init(copy/mutableCopy)时，引用计数会+1，而当实例被销毁时，引用计数就会-1。当系统检测到引用计数为0的时候，就会释放掉这个内存。</p>
-<p>但是，这种引用计数会产生一个问题就是循环引用：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> b: <span class="type">B</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>() &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"A初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"A析构掉"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> a: <span class="type">A</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>() &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"B初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"B析构掉"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a: <span class="type">A</span>?;   a = <span class="type">A</span>()</div><div class="line"><span class="keyword">var</span> b: <span class="type">B</span>?;   b = <span class="type">B</span>()</div><div class="line"></div><div class="line">a!.b = b;   b!.a = a</div><div class="line">a = <span class="literal">nil</span>;    b = <span class="literal">nil</span></div></pre></td></tr></table></figure>
-<p>你会发现，A和B的析构函数deinit都没有调用，因为当a执行析构的时候，b.a还在对其进行引用，当b析构的时候，a.b也在对b进行引用。这时候解决的方法就是对其中的某一个声明进行若引用，即加上weak：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">weak</span> <span class="keyword">var</span> b: <span class="type">B</span>?</div></pre></td></tr></table></figure>
-<p>另外一种造成循环引用的问题就是闭包：闭包中对任何元素的引用都会被闭包自动持有，如果我们在闭包中需要使用self的话，那就相当于闭包对self持有，而block又是被self直接或间接持有，这样就造成了循环引用。例如下面的代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>.name )</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="built_in">c</span>?.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div></pre></td></tr></table></figure>
-<p>这里C的析构函数也是没有执行的。block是self的属性，block里面又对self持有，这就形成了循环引用。所以这里我们可以使用unowned，也可以使用weak：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// unowned</span></div><div class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="keyword">self</span>.name)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// weak</span></div><div class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> strongSelf = <span class="keyword">self</span> &#123;</div><div class="line">        <span class="built_in">print</span>(strongSelf.name)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么这两个使用有什么区别呢？接下来看一个例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>.name)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> block: (()-&gt;())!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(callBack: (()-&gt;())?) &#123;</div><div class="line">        <span class="keyword">self</span>.block = callBack!</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D构造"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="keyword">var</span> d = <span class="type">D</span>.<span class="keyword">init</span>(callBack: <span class="built_in">c</span>?.block)</div><div class="line"><span class="built_in">c</span>!.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div><div class="line">d.block()</div></pre></td></tr></table></figure>
-<p>这里当你运行到 d.block()的时候，是会有一个error。</p>
-<p>因为当d.block()执行的时候，c已经被析构掉了，而闭包里的self肯定也是不存在的，是一个nil，这个时候执行的话self.name就会报错。所以在我们不确定是否有外部变量在持有这个block的时候，我们就应该使用weak更为安全，因为使用weak的话self.name需要改成可选性的self?.name，这个时候self?.name肯定就为nil了。所以换成weak之后，在playground里的d.block()就不会有错误了，而且block也是会正常执行的，只不过print(self?.name)打印出来为nil。</p>
-<p>最终代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> block: ()-&gt;() = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="built_in">print</span>(<span class="keyword">self</span>?.name ?? <span class="string">"nothing"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C初始化"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"C析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> block: (()-&gt;())!</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(callBack: (()-&gt;())?) &#123;</div><div class="line">        <span class="keyword">self</span>.block = callBack!</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D构造"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"D析构"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>: <span class="type">C</span>? = <span class="type">C</span>(name: <span class="string">"c"</span>)</div><div class="line"><span class="keyword">var</span> d = <span class="type">D</span>.<span class="keyword">init</span>(callBack: <span class="built_in">c</span>?.block)</div><div class="line"><span class="built_in">c</span>!.block()</div><div class="line"><span class="built_in">c</span> = <span class="literal">nil</span></div><div class="line">d.block()</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2327,7 +2342,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2440,7 +2455,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共46.4k字</span>
+  <span class="post-count">博客全站共46.8k字</span>
 </div>
 
 

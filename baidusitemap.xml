@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2018/06/25/Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
+    <lastmod>2018-06-25T06:12:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown语法的一些小技巧（持续更新）</title>
+        <pubTime>2018-06-25T05:40:32.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/06/25/iOS%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%E3%80%81%E5%86%85%E5%AD%98%E5%AF%B9%E6%AF%94%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E8%BD%AC/</loc>
     <lastmod>2018-06-25T05:38:13.000Z</lastmod>
     <data>
@@ -658,12 +678,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
+    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS设备型号 2018最新统计</title>
-        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
+        <title>iOS开发 Archive时自动增加build版本</title>
+        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -678,12 +698,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
+    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS开发 Archive时自动增加build版本</title>
-        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
+        <title>iOS设备型号 2018最新统计</title>
+        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
         
         <tag>iOS</tag>
          
