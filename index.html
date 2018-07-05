@@ -378,7 +378,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>Swift4.0 之前，OC类中直接导入桥接头文件，就能访问到 Swift 类及方法，但是 Swift4.0 之后，为了降低不必要的编译性能损耗，Xcode中默认不再将所有的Swift类及方法暴露给OC。</p>
 <p>我们需要在要暴露的类和文件前加上 <strong>@objc</strong> 关键字，如下所示：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果此类要暴露给OC使用，则必须继承于OC类（例如NSObject），此时前面写不写 @objc 都可以</span></div><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@objc</span></div><div class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">foo</span>() -&gt; <span class="title">Void</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="built_in">print</span>(<span class="string">"Swift"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="三、扩展：Objc和Swift混编时import"><a href="#三、扩展：Objc和Swift混编时import" class="headerlink" title="三、扩展：Objc和Swift混编时import"></a>三、扩展：Objc和Swift混编时import</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
+<h2 id="三、扩展：Objc和Swift混编时如何互相调用"><a href="#三、扩展：Objc和Swift混编时如何互相调用" class="headerlink" title="三、扩展：Objc和Swift混编时如何互相调用"></a>三、扩展：Objc和Swift混编时如何互相调用</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
 <p>如果你接受了，Xcode 就会创建这个头文件并且以 Product Module 名字 ＋ “-Bridging-Header.h” 的形式来新建。  </p>
 <p>你也可以自己通过 File &gt; New &gt; File &gt; (iOS, watchOS, tvOS, <em>or</em> macOS) &gt; Source &gt; Header File. 的方式来添加  </p>
 <p>你需要编辑这个桥接头文件来把 Objc 代码暴露给 Swift 代码。</p>
@@ -401,18 +401,16 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <li><code>let myCell = XYZCustomCell()</code></li>
 <li><code>myCell.subtitle = &quot;A custom cell&quot;</code></li>
 </ol>
-<p><em><strong><code>总结：</code></strong></em></p>
-<p><em><strong><code>1. Xcode 会在你试图做mix的时候，创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</code></strong></em></p>
-<p><em><strong><code>2. 在这个文件中import进你想要访问的 Objc 头文件</code></strong></em></p>
-<p><code>_**3.在Swift文件中就可以访问到 Objc 文件中的方法**_</code>  </p>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. Xcode 会在你试图做混合开发的时候，自动创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</strong></em></p>
+<p><em><strong>2. 在这个文件中导入你想要访问的 Objc 头文件</strong></em></p>
+<p><em><strong>3.在 Swift 文件中就可以访问到 Objc 文件中的方法</strong></em></p>
 <h4 id="将-Swift-代码导入到-Objective-C-中"><a href="#将-Swift-代码导入到-Objective-C-中" class="headerlink" title="将 Swift 代码导入到 Objective-C 中"></a>将 Swift 代码导入到 Objective-C 中</h4><p>当你把 Swift 代码 import 到 Objective-C 中时，你依赖的是 Xcode 产生的 Header File 来把这些文件暴露给 Objective-C。这个自动生成的文件是一个 Objective-C 头文件声明了你 Target 中的 Swift 接口。这个头文件的名称就是产品模块名称加上 - Swift.h 后缀。</p>
 <p>注意：不论你初始创建的是 Swift 还是 Objective-C 的工程，其实 Xcode 都已经为你自动创建好了这个头文件。不过有的时候需要反复 Clean 几次后再 Build 才能编译上。否则会运行时出错。  </p>
 <p><strong>同一个 Target 下把 Swift 代码 import 到 Objective-C 中</strong></p>
 <p>要在同一个 Target 下的 Swift 代码导入到任何 Objective-C 类中。使用下面语法修改其 .m文件:</p>
-<pre><code>1.  `#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。  
-    `
-</code></pre><p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
+<p><code>#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。</code></p>
+<p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
+<h5 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
 <p><em><strong>2. 只要在需要使用 Swift 的 Objc 文件中 import 这个自动生成的头文件就可以访问 Swift 中的方法了</strong></em></p>
 <p><em><strong>3. Swift 中的类最终必须集成于 NSObject, 否则调用时运行出错</strong></em></p>
 <p><em><strong>4. 自动生成的这个头文件可能需要一定时间生成，因此会出现访问不到的情况，需要多次 clean 后编译</strong></em></p>
