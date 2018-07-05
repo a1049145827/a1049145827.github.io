@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="在用逆向神器MonkeyDev的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。 环境准备Xcode，相信大家已经都安装了，这里我的Xcode的版本是Xcode9.3 安装theos需要先装上ldid 1brew install ldid 如果还没安装brew，这里有传送门Homebrew 然后安装Perl模块 12bre">
+<meta name="description" content="一、Swift文件间相互调用时，Swift中的几个权限描述关键字1&amp;gt;  internal : 内部的121. 默认情况下所有的类&amp;amp;属性&amp;amp;方法的访问权限都是internal2. 在本模块(项目/包/target)中可以访问 2&amp;gt;  private : 私有的11. 只有在本类中可以访问 3&amp;gt;  open : 公开的11. 可以跨模块(项目/包/target)都是可以">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MonkeyDev工具使用前期准备——theos安装">
-<meta property="og:url" content="http://yoursite.com/2018/04/17/MonkeyDev工具使用前期准备——theos安装/index.html">
+<meta property="og:title" content="Swift访问权限">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/Swift访问权限/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="在用逆向神器MonkeyDev的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。 环境准备Xcode，相信大家已经都安装了，这里我的Xcode的版本是Xcode9.3 安装theos需要先装上ldid 1brew install ldid 如果还没安装brew，这里有传送门Homebrew 然后安装Perl模块 12bre">
+<meta property="og:description" content="一、Swift文件间相互调用时，Swift中的几个权限描述关键字1&amp;gt;  internal : 内部的121. 默认情况下所有的类&amp;amp;属性&amp;amp;方法的访问权限都是internal2. 在本模块(项目/包/target)中可以访问 2&amp;gt;  private : 私有的11. 只有在本类中可以访问 3&amp;gt;  open : 公开的11. 可以跨模块(项目/包/target)都是可以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-18T01:36:47.000Z">
+<meta property="og:updated_time" content="2018-07-05T05:59:53.561Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MonkeyDev工具使用前期准备——theos安装">
-<meta name="twitter:description" content="在用逆向神器MonkeyDev的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。 环境准备Xcode，相信大家已经都安装了，这里我的Xcode的版本是Xcode9.3 安装theos需要先装上ldid 1brew install ldid 如果还没安装brew，这里有传送门Homebrew 然后安装Perl模块 12bre">
+<meta name="twitter:title" content="Swift访问权限">
+<meta name="twitter:description" content="一、Swift文件间相互调用时，Swift中的几个权限描述关键字1&amp;gt;  internal : 内部的121. 默认情况下所有的类&amp;amp;属性&amp;amp;方法的访问权限都是internal2. 在本模块(项目/包/target)中可以访问 2&amp;gt;  private : 私有的11. 只有在本类中可以访问 3&amp;gt;  open : 公开的11. 可以跨模块(项目/包/target)都是可以">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/17/MonkeyDev工具使用前期准备——theos安装/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/05/Swift访问权限/"/>
 
 
 
 
 
-  <title>MonkeyDev工具使用前期准备——theos安装 | Bruce's Blog</title>
+  <title>Swift访问权限 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/MonkeyDev工具使用前期准备——theos安装/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Swift访问权限/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">MonkeyDev工具使用前期准备——theos安装</h1>
+          <h1 class="post-title" itemprop="name headline">Swift访问权限</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T20:08:57+08:00">
-                2018-04-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T10:41:49+08:00">
+                2018-07-05
               </time>
             
 
@@ -366,25 +366,52 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>在用逆向神器<a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="external">MonkeyDev</a>的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。</p>
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>Xcode，相信大家已经都安装了，这里我的Xcode的版本是Xcode9.3</p>
-<p>安装theos需要先装上ldid</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ldid</div></pre></td></tr></table></figure>
-<p>如果还没安装brew，这里有传送门<a href="https://brew.sh/" target="_blank" rel="external">Homebrew</a></p>
-<p>然后安装Perl模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew install xz</div><div class="line">sudo cpan IO::Compress::Lzma</div></pre></td></tr></table></figure>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>我是直接安装在根目录下，因为我的MonkeyDev是直接安装在根目录下的 /opt</p>
-<p>先切换到root权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo su</div></pre></td></tr></table></figure>
-<p>从git上clone下来theos</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> THEOS=/opt/theos</div><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/theos/theos.git <span class="variable">$THEOS</span></div></pre></td></tr></table></figure>
-<p>日后要跟新的话，直接切换到root用户，然后执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$THEOS</span>/bin/update-theos</div></pre></td></tr></table></figure>
-<p>更改所有权为自己</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R $(id -u):$(id -g) <span class="variable">$THEOS</span></div></pre></td></tr></table></figure>
-<p>为了可以使用make故障诊断，还需要安装Ghostbin的ghost sh脚本。（不安装应该也可以）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl https://ghostbin.com/ghost.sh -o <span class="variable">$THEOS</span>/bin/ghost</div><div class="line">chmod +x <span class="variable">$THEOS</span>/bin/ghost</div></pre></td></tr></table></figure>
-<p>由于机器环境不一致可能导致安装失败，大家还可以参照<a href="https://github.com/theos/theos/wiki/Installation" target="_blank" rel="external">theos官方文档</a>尝试一下。PS，我是参照官方文档安装无效，改用文中的方法安装的（MonkeyDev的推荐安装到根目录下的）。</p>
+        <h2 id="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"><a href="#一、Swift文件间相互调用时，Swift中的几个权限描述关键字" class="headerlink" title="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"></a>一、Swift文件间相互调用时，Swift中的几个权限描述关键字</h2><h4 id="1-gt-internal-内部的"><a href="#1-gt-internal-内部的" class="headerlink" title="1&gt;  internal : 内部的"></a>1&gt;  internal : 内部的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 默认情况下所有的类&amp;属性&amp;方法的访问权限都是internal</div><div class="line">2. 在本模块(项目/包/target)中可以访问</div></pre></td></tr></table></figure>
+<h4 id="2-gt-private-私有的"><a href="#2-gt-private-私有的" class="headerlink" title="2&gt;  private : 私有的"></a>2&gt;  private : 私有的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只有在本类中可以访问</div></pre></td></tr></table></figure>
+<h4 id="3-gt-open-公开的"><a href="#3-gt-open-公开的" class="headerlink" title="3&gt;  open : 公开的"></a>3&gt;  open : 公开的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 可以跨模块(项目/包/target)都是可以访问</div></pre></td></tr></table></figure>
+<h4 id="4-gt-fileprivate-Swift3-0"><a href="#4-gt-fileprivate-Swift3-0" class="headerlink" title="4&gt;  fileprivate : Swift3.0"></a>4&gt;  fileprivate : Swift3.0</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只要是在本文件中都是可以进行访问</div></pre></td></tr></table></figure>
+<h2 id="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"><a href="#二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法" class="headerlink" title="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"></a>二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法</h2><p>Objc和Swift混编时，需要建立桥接头文件（此文件供Swift调用OC类时使用）。另外，Xcode还会在 <strong>编译时</strong> 默认生成一个Swift桥接文件 ProjectName-Swift.h。</p>
+<p>Swift4.0 之前，OC类中直接导入桥接头文件，就能访问到 Swift 类及方法，但是 Swift4.0 之后，为了降低不必要的编译性能损耗，Xcode中默认不再将所有的Swift类及方法暴露给OC。</p>
+<p>我们需要在要暴露的类和文件前加上 <strong>@objc</strong> 关键字，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果此类要暴露给OC使用，则必须继承于OC类（例如NSObject），此时前面写不写 @objc 都可以</span></div><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@objc</span></div><div class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">foo</span>() -&gt; <span class="title">Void</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="built_in">print</span>(<span class="string">"Swift"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="三、扩展：Objc和Swift混编时import"><a href="#三、扩展：Objc和Swift混编时import" class="headerlink" title="三、扩展：Objc和Swift混编时import"></a>三、扩展：Objc和Swift混编时import</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
+<p>如果你接受了，Xcode 就会创建这个头文件并且以 Product Module 名字 ＋ “-Bridging-Header.h” 的形式来新建。  </p>
+<p>你也可以自己通过 File &gt; New &gt; File &gt; (iOS, watchOS, tvOS, <em>or</em> macOS) &gt; Source &gt; Header File. 的方式来添加  </p>
+<p>你需要编辑这个桥接头文件来把 Objc 代码暴露给 Swift 代码。</p>
+<p><strong>同一个 Target 下把 Objective-C 代码 import 到 Swift 中</strong></p>
+<ol>
+<li><p>在 Objc 桥接头文件中，import 每一个你想要暴露给 Swift 的头文件，例如：</p>
+</li>
+<li><ol>
+<li><code>#import &quot;XYZCustomCell.h&quot;</code></li>
+<li><code>#import &quot;XYZCustomView.h&quot;</code></li>
+<li><code>#import &quot;XYZCustomViewController.h&quot;</code></li>
+</ol>
+</li>
+<li><p>在 Swift Compiler － Code Generation 中，确保 Objc Bridging Header 设置下有一个指向 Bridging Header File 的路径。  </p>
+<p>这个路径需要是相对的，类似于在 info.plist 文件中指定的形式。多数情况下你不需要修改这个设置。</p>
+</li>
+</ol>
+<p>任何公共的 Objc 头文件都需要罗列在这个桥接文件中。Objc 功能会自动在 Target 中在任何的 Swift 文件中可用。而且不需要再 import 声明。  </p>
+<ol>
+<li><code>let myCell = XYZCustomCell()</code></li>
+<li><code>myCell.subtitle = &quot;A custom cell&quot;</code></li>
+</ol>
+<p><em><strong><code>总结：</code></strong></em></p>
+<p><em><strong><code>1. Xcode 会在你试图做mix的时候，创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</code></strong></em></p>
+<p><em><strong><code>2. 在这个文件中import进你想要访问的 Objc 头文件</code></strong></em></p>
+<p><code>_**3.在Swift文件中就可以访问到 Objc 文件中的方法**_</code>  </p>
+<h4 id="将-Swift-代码导入到-Objective-C-中"><a href="#将-Swift-代码导入到-Objective-C-中" class="headerlink" title="将 Swift 代码导入到 Objective-C 中"></a>将 Swift 代码导入到 Objective-C 中</h4><p>当你把 Swift 代码 import 到 Objective-C 中时，你依赖的是 Xcode 产生的 Header File 来把这些文件暴露给 Objective-C。这个自动生成的文件是一个 Objective-C 头文件声明了你 Target 中的 Swift 接口。这个头文件的名称就是产品模块名称加上 - Swift.h 后缀。</p>
+<p>注意：不论你初始创建的是 Swift 还是 Objective-C 的工程，其实 Xcode 都已经为你自动创建好了这个头文件。不过有的时候需要反复 Clean 几次后再 Build 才能编译上。否则会运行时出错。  </p>
+<p><strong>同一个 Target 下把 Swift 代码 import 到 Objective-C 中</strong></p>
+<p>要在同一个 Target 下的 Swift 代码导入到任何 Objective-C 类中。使用下面语法修改其 .m文件:</p>
+<pre><code>1.  `#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。  
+    `
+</code></pre><p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
+<p><em><strong>2. 只要在需要使用 Swift 的 Objc 文件中 import 这个自动生成的头文件就可以访问 Swift 中的方法了</strong></em></p>
+<p><em><strong>3. Swift 中的类最终必须集成于 NSObject, 否则调用时运行出错</strong></em></p>
+<p><em><strong>4. 自动生成的这个头文件可能需要一定时间生成，因此会出现访问不到的情况，需要多次 clean 后编译</strong></em></p>
 
       
     </div>
@@ -432,8 +459,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/像Python一样使用Swift/" rel="next" title="像Python一样使用Swift">
-                <i class="fa fa-chevron-left"></i> 像Python一样使用Swift
+              <a href="/2018/06/25/Markdown语法的一些小技巧（持续更新）/" rel="next" title="Markdown语法的一些小技巧（持续更新）">
+                <i class="fa fa-chevron-left"></i> Markdown语法的一些小技巧（持续更新）
               </a>
             
           </div>
@@ -441,10 +468,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/18/Mac开启和关闭SSH/" rel="prev" title="Mac开启和关闭SSH">
-                Mac开启和关闭SSH <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,7 +627,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Swift文件间相互调用时，Swift中的几个权限描述关键字"><span class="nav-number">1.</span> <span class="nav-text">一、Swift文件间相互调用时，Swift中的几个权限描述关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-gt-internal-内部的"><span class="nav-number">1.0.1.</span> <span class="nav-text">1>  internal : 内部的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-gt-private-私有的"><span class="nav-number">1.0.2.</span> <span class="nav-text">2>  private : 私有的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-gt-open-公开的"><span class="nav-number">1.0.3.</span> <span class="nav-text">3>  open : 公开的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-gt-fileprivate-Swift3-0"><span class="nav-number">1.0.4.</span> <span class="nav-text">4>  fileprivate : Swift3.0</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"><span class="nav-number">2.</span> <span class="nav-text">二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、扩展：Objc和Swift混编时import"><span class="nav-number">3.</span> <span class="nav-text">三、扩展：Objc和Swift混编时import</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#将-Objective-C-代码导入到-Swift-中"><span class="nav-number">3.0.1.</span> <span class="nav-text">将 Objective-C 代码导入到 Swift 中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将-Swift-代码导入到-Objective-C-中"><span class="nav-number">3.0.2.</span> <span class="nav-text">将 Swift 代码导入到 Objective-C 中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">3.0.3.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

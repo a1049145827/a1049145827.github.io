@@ -277,6 +277,163 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Swift4-0中使用NSClassFromString/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/13/Swift4-0中使用NSClassFromString/" itemprop="url">Swift4.0中使用NSClassFromString()</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T13:59:54+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
+<p>编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。</p>
+<p><strong>Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个人认为应该是Target名）</strong></p>
+<p>正确写法:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 拼接类名字</span></div><div class="line"><span class="keyword">let</span> className = <span class="string">"xxx."</span> + <span class="string">"your className"</span> <span class="comment">// xxx替换为你的Xcode工程里对应Target的名字，而且中间还要加一点 "."</span></div><div class="line"></div><div class="line"><span class="comment">// 然后使用NSClassFromString()获取Class</span></div><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
+<p><strong>同理，在OC中调用NSClassFromString()方法获取Swift语言写的类，也需要用在类名前加上工程名（个人认为应该是Target名）和路径连接符 “.” 。</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Xcode工程项目中实现Swift和OC混编-相互引用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2100,199 +2257,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/Swift-面向协议编程-组件化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/26/Swift-面向协议编程-组件化/" itemprop="url">Swift 面向协议编程/组件化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T15:50:58+08:00">
-                2018-02-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>得益于面向对象语言的特性 (封装、继承、多态) 在我们熟悉的设计模式中渐渐形成统一的软件开发思想，但是由于OC的局限性, 使得iOS开发组件化编程变得十分繁琐，需要将一些功能拆分为类，在抽取某些功能作为基类的不断运用中，代码的可移植性逐渐减弱。就如同一棵树，从主干到各个分支，每个分支再长成细枝末叶。代码的耦合性也相应增加。随着苹果 swift 语言的推出，对于传统OC 语言取其精华，弃其糟粕。 加上开源社区众大神的齐力维护。逐渐成为一门非常优秀的高级语言。其中Swift中的面向协议编程思想就是其中很有代表性的一项优秀组成部分。</strong></p>
-<p>Swift的 POP 是使用了继承的思想，它模拟了多继承关系，实现了代码的跨父类复用，同时也不存在 is-a 关系。swift中主类和 extension扩展类 的协同工作，保留了 在主类中定义方法 在所继承的类中进行实现的特性，又新增了在 extension拓展类 中定义并实现的方法在任何继承自此协议的类中可以任意调用，从而实现组件化编程。</p>
-<p>两个简单的使用场景可以充分体现swift组件化编程的优势：</p>
-<h3 id="1-实现一个能抖动的-View"><a href="#1-实现一个能抖动的-View" class="headerlink" title="1.实现一个能抖动的 View"></a>1.实现一个能抖动的 View</h3><p>让我们假设你的产品经理过来和你说，“我们在点击那个按钮时候出现一个视图，而且它会抖动。” 这是一个非常常见的动画，比如，在你的密码输入框上 – 当用户输入错误密码时，它就会抖动。</p>
-<p>我们常常都是从 Stack Overflow 开始的(笑)。一些人可能已经有了 Swift 抖动对象的基础代码。一些人甚至都有 Swift 的抖动对象的代码，我想都不用想，只要稍稍修改一下。最难的部分当然是架构：我在哪里集成这些代码呢？</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  FoodImageView.swift</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodImageView</span>: <span class="title">UIImageView</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">shake</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> animation = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"position"</span>)</div><div class="line">        animation.duration = <span class="number">0.05</span></div><div class="line">        animation.repeatCount = <span class="number">5</span></div><div class="line">        animation.autoreverses = <span class="literal">true</span></div><div class="line">        animation.fromValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x - <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        animation.toValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x + <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: <span class="string">"position"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我将创建一个 UIImageView 的子类，创建我的 FoodImageView 然后增加一个抖动的动画：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  ViewController.swift</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> foodImageView: <span class="type">FoodImageView</span>!</div><div class="line"></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">onShakeButtonTap</span><span class="params">(sender: AnyObject)</span></span> &#123;</div><div class="line">        foodImageView.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在我的 view controller 里面，在 interface builder 里我连接我的 view，把它做为 FoodImageView 的子类，我有一个 shake 函数，然后 完成了！。10 分钟我就完成了这个功能。我很开心，我的代码工作得很正常。</p>
-<p>然后，你的产品经理过来说，”你需要在抖动视图的时候抖动按钮。” 然后我回去对按钮做了同样的事情。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  ShakeableButton.swift</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActionButton</span>: <span class="title">UIButton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">shake</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> animation = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"position"</span>)</div><div class="line">        animation.duration = <span class="number">0.05</span></div><div class="line">        animation.repeatCount = <span class="number">5</span></div><div class="line">        animation.autoreverses = <span class="literal">true</span></div><div class="line">        animation.fromValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x - <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        animation.toValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x + <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: <span class="string">"position"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>新建UIImageView子类，创建一个按钮，增加一个 shake() 函数，和我的 ViewController。现在我能抖动我的 foodImageView 和 Button 了，完成了。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  ViewController.swift</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> foodImageView: <span class="type">FoodImageView</span>!</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> actionButton: <span class="type">ActionButton</span>!</div><div class="line"></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">onShakeButtonTap</span><span class="params">(sender: AnyObject)</span></span> &#123;</div><div class="line">      foodImageView.shake()</div><div class="line">      actionButton.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>幸运的是，这会给你一个警告：我在两个地方重复了抖动的代码。如果我想改变抖动的幅度，我需要改两处代码，这很不好。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  UIViewExtension.swift</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIView</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">shake</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> animation = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"position"</span>)</div><div class="line">        animation.duration = <span class="number">0.05</span></div><div class="line">        animation.repeatCount = <span class="number">5</span></div><div class="line">        animation.autoreverses = <span class="literal">true</span></div><div class="line">        animation.fromValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x - <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        animation.toValue = <span class="type">NSValue</span>(<span class="type">CGPoint</span>: <span class="type">CGPointMake</span>(<span class="keyword">self</span>.center.x + <span class="number">4.0</span>, <span class="keyword">self</span>.center.y))</div><div class="line">        layer.addAnimation(animation, forKey: <span class="string">"position"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>作为一个优秀的程序员，我们马上会意识到这点，而且试图重构。如果你以前使用过 Objective-C，我会创建一个 UIView 的类别，在 Swift 里面，这就是扩展。</p>
-<p>我能这样做，因为 UIButton 和 UIImageView 都是 UI 视图。我能扩展 UI 视图而且增加一个 shake 函数。现在我仍然可以给我的按钮和图像视图都加上其他的逻辑，但是 shake 函数就到处都是了。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodImageView</span>: <span class="title">UIImageView</span> </span>&#123;</div><div class="line">    <span class="comment">// other customization here</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActionButton</span>: <span class="title">UIButton</span> </span>&#123;</div><div class="line">    <span class="comment">// other customization here</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> foodImageView: <span class="type">FoodImageView</span>!</div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> actionButton: <span class="type">ActionButton</span>!</div><div class="line"></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">onShakeButtonTap</span><span class="params">(sender: AnyObject)</span></span> &#123;</div><div class="line">        foodImageView.shake()</div><div class="line">        actionButton.shake()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>马上我们就能发现可读性很差了。例如，对于 foodImageView 和 actionButton 来说，你看不出来任何抖动的意图。整个类里面没有任何东西能告诉你它需要抖动。这样表意不明确，因为别处可能会随机存在一个抖动函数，你甚至不知道它是从哪里来的。</p>
-<p>最主要的是，如果你常常为类别和 UIView 的扩展这样做的话，你可能会有更好的办法。在你增加了 shake 函数的地方，就成了所谓的 科学怪人的垃圾场。然后有人来和你说， “我想要一个可调暗的视图”，然后你增加一个 dim 函数和其他别处随机的调用函数。这样，代码文件文件就会变成一个很长的垃圾文件，因为这些随机调用的事情都是在 UI View 里面完成，尽管有些时候也许只有一两个地方需要这么做，这导致代码变得不可读，难以查看。我们该如何改变这点呢？</p>
-<p>这是一次面向协议编程的演讲，我们当然会用到协议。首先我们创建一个 Shakeable 的协议：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  Shakeable.swift</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Shakeable</span> </span>&#123; &#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Shakeable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">shake</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="comment">// implementation code</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在协议扩展的帮助下，你可以把它们限制在一个特定的类里面。在这个例子里面，我能抽出我的 shake 函数，然后用类别，我能说这是我们需要遵循的唯一的东西，只有 UI 视图会有这个函数。</p>
-<p>你仍然可以使用你原来想用的同样强大的扩展功能，但是你有协议了。任何遵循协议的非视图不会工作。只有视图才能有这个 shake 的默认实现。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodImageView</span>: <span class="title">UIImageView</span>, <span class="title">Shakeable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActionButton</span>: <span class="title">UIButton</span>, <span class="title">Shakeable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们可以看到 FoodImageView 和 ActionButton 会遵循 Shakeable 协议。它们会有 shake 函数，现在的可读性强多了 –- 我可以理解 shaking 是有意存在的。如果你在别处使用视图，我需要想想，”在这也需要抖动吗？”。它增强了可读性，但是代码还是闭合的和可重用的。</p>
-<p>假设我们想抖动和调暗视图。我们会有另外一个协议，一个 Dimmable 协议，然后我们可以为了调暗做一个协议扩展。再强调一遍，通过看类的定义来知晓这个类的用途，这样意图就会很明显了。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodImageView</span>: <span class="title">UIImageView</span>, <span class="title">Shakeable</span>, <span class="title">Dimmable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>关于重构，当产品经理说 “我不想要抖动了” 的时候，你只需要删除相关的 Shakeable 协议就好了。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoodImageView</span>: <span class="title">UIImageView</span>, <span class="title">Dimmable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在它只能调暗了。功能插拔是非常容易的，通过使用协议我们很容易获得乐高似的架构。如果你想学习使用协议的其他更强大的使用方式，可以看看<a href="https://archive.fo/h2ZTz" target="_blank" rel="external">这篇文章</a> ，然后尝试创建一个有过渡效果的可调暗的视图。</p>
-<h3 id="2-xib-加载-UIView"><a href="#2-xib-加载-UIView" class="headerlink" title="2.xib 加载 UIView"></a>2.xib 加载 UIView</h3><p>我们使用XIB加载的自定义View都会使用相同的方法:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"RedView"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last</div></pre></td></tr></table></figure>
-<p>通常在自定义View的实现中定义一个类方法。<br>例如:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">loadWithNib</span>() -&gt; <span class="title">RedView</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"RedView"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">RedView</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果我们定义一个可从XIB加载某类的协议,在自定义类中仅仅需要遵守这个协议,无需实现协议中的方法,便可实现此协议中实现的所有方法.例如定义一个 可从XIB加载的协议 NibLoadable。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NibLoadable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">loadViewWithNib</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"\(self)"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">Self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只要在xib加载的类中继承此协议。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GreenView</span>: <span class="title">UIView</span> , <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>就可以在需要初始化此对象时直接调用。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">GreenView</span>.loadViewWithNib()</div></pre></td></tr></table></figure>
-<p><strong>写在最后，虽然Swift已经十分强大，但是技术毕竟是要为业务服务。缺少了运行时特性，也是很多项目无法从OC完全迁移到Swift的原因之一，所以在开发项目的时候需要慎重选择OC、Swift，或者在业务更新不是十分频繁的时候也可以选择OC与Swift混编（业务更新频繁的时候并不建议这么做，遇到坑耗时导致项目delay毕竟不是好事，OC虽老，尚能再战），希望今年即将发布的Swift5能够给我们带来惊喜</strong></p>
-<h5 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h5><p><a href="http://blog.csdn.net/qxuewei/article/details/53945445" target="_blank" rel="external">iOS-Swift 面向协议编程/组件化(模块化)编程思想</a><br><a href="https://academy.realm.io/cn/posts/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/" target="_blank" rel="external">基于 Swift 的面向协议编程</a><br><a href="http://www.cocoachina.com/swift/20161121/18144.html" target="_blank" rel="external">从 Swift 的面向协议编程说开去</a><br><a href="http://blog.csdn.net/xuehongnizhao/article/details/55258066" target="_blank" rel="external">Swift面向协议编程（附代码）</a><br><a href="https://medium.com/ios-os-x-development/swift-protocol-extension-method-dispatch-6a6bf270ba94" target="_blank" rel="external">Swift protocol extension method dispatch</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2342,7 +2306,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2455,7 +2419,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共46.8k字</span>
+  <span class="post-count">博客全站共48.0k字</span>
 </div>
 
 
