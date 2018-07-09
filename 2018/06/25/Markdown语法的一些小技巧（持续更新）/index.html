@@ -109,10 +109,12 @@
 <meta property="og:site_name" content="Bruce&#39;s Blog">
 <meta property="og:description" content="用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。 　　得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整 关于字体和颜色，关于代码展示，有三种方式： 使用HTML标签： class aaa {    func add(_ a: Int, _ b: Int) -&amp;gt; Int {        return a + b    }">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-25T06:13:37.000Z">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/md_code.png">
+<meta property="og:updated_time" content="2018-07-09T08:37:32.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown语法的一些小技巧（持续更新）">
 <meta name="twitter:description" content="用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。 　　得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整 关于字体和颜色，关于代码展示，有三种方式： 使用HTML标签： class aaa {    func add(_ a: Int, _ b: Int) -&amp;gt; Int {        return a + b    }">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/md_code.png">
 
 
 
@@ -390,18 +392,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <li>使用反引号（数字键1左边的那个符号），我一般会选择使用这种方式这种方式，因为它可以在后面拼上开发语言，进而对关键字高亮显示。就像这里👇<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(<span class="number">_</span> a: Int, <span class="number">_</span> b: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> a + b</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>它的写法是这样的：</p>
-<pre><code>```Swift
-class aaa {
-    func add(_ a: Int, _ b: Int) -> Int {
-        return a + b
-    }
-}
-```</code></pre>
-
-
+<p>它的写法是这样的：<br><img src="https://github.com/a1049145827/Resources/raw/master/md_code.png" alt="Swift Code"></p>
 <h3 id="关于空行和缩进"><a href="#关于空行和缩进" class="headerlink" title="关于空行和缩进"></a>关于空行和缩进</h3><p>　　<strong>缩进</strong>：直接在段落前敲空格，Markdown会默认把整个段落都执行缩进，如果只想首行缩进，可以把输入法切换到全角输入状态，在第一行前输入两个空格即可。<br>　　<strong>空行</strong>：Markdown会默认忽略空白行，想要在展示的时候出现空行，最简单的做法就是全角状态下在空行输入一个空格，展示的时候，这个空格就会占位一行。</p>
-<h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3>
+<h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;![图片描述](图片链接)&quot;</div></pre></td></tr></table></figure>
+<h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3><p>文字居中我用的是HTML标签，写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;&lt;center&gt;这里是要居中的文字&lt;/center&gt;&quot;</div></pre></td></tr></table></figure></p>
+
       
     </div>
     
