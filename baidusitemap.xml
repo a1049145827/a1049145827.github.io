@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/06/25/Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-07-09T08:37:32.780Z</lastmod>
+    <lastmod>2018-07-10T08:53:11.255Z</lastmod>
     <data>
         <display>
         <title>Markdown语法的一些小技巧（持续更新）</title>
@@ -18,6 +18,21 @@
              
               <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/07/10/Swift%E4%B8%ADimport%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</loc>
+    <lastmod>2018-07-10T08:49:26.848Z</lastmod>
+    <data>
+        <display>
+        <title>Swift语言中 "@_exported import" 和 "import"  的区别是什么</title>
+        <pubTime>2018-07-10T08:43:29.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>
@@ -758,14 +773,14 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
-        <title>iOS开发 区分Home键和锁屏键事件</title>
-        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
+        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
+        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
         
-        <tag>iOS</tag>
+        <tag>iOS, AFNetworking</tag>
          
          
            
@@ -778,14 +793,14 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
-        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
-        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
+        <title>iOS开发 区分Home键和锁屏键事件</title>
+        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
         
-        <tag>iOS, AFNetworking</tag>
+        <tag>iOS</tag>
          
          
            

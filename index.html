@@ -277,6 +277,140 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Swift中import的区别是什么/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/Swift中import的区别是什么/" itemprop="url">Swift语言中 "@_exported import" 和 "import"  的区别是什么</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T16:43:29+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天浏览Vapor源代码的时候发现了一个之前没有见过的关键字：<code>@_exported</code></p>
+<p>查了一下资料发现：</p>
+<p><code>@_exported</code> 用于在自己模块中导出其他模块。</p>
+<p>比如，自己定义了一个 <code>A</code> 模块。<br>在 <code>A</code> 模块中定义：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@_exported <span class="keyword">import</span> UIKit</div></pre></td></tr></table></figure>
+<p>当我们引入 <code>A</code> 模块（<code>import A</code>）时，可以直接使用 <code>UIKit</code> 中的符号。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Swift访问权限/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,6 +726,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <h3 id="关于空行和缩进"><a href="#关于空行和缩进" class="headerlink" title="关于空行和缩进"></a>关于空行和缩进</h3><p>　　<strong>缩进</strong>：直接在段落前敲空格，Markdown会默认把整个段落都执行缩进，如果只想首行缩进，可以把输入法切换到全角输入状态，在第一行前输入两个空格即可。<br>　　<strong>空行</strong>：Markdown会默认忽略空白行，想要在展示的时候出现空行，最简单的做法就是全角状态下在空行输入一个空格，展示的时候，这个空格就会占位一行。</p>
 <h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;![图片描述](图片链接)&quot;</div></pre></td></tr></table></figure>
 <h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3><p>文字居中我用的是HTML标签，写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;&lt;center&gt;这里是要居中的文字&lt;/center&gt;&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="高亮显示"><a href="#高亮显示" class="headerlink" title="高亮显示"></a>高亮显示</h3><p>我们在编辑段落的时候，有时候想要突出显示某个词汇，可以使用<code>反引号</code>将词汇包裹起来，效果就像这里显示的一样。它的写法是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以使用`反引号`将词汇包裹起来</div></pre></td></tr></table></figure></p>
 
           
         
@@ -1857,162 +1992,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/像Python一样使用Swift/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/像Python一样使用Swift/" itemprop="url">像Python一样使用Swift</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T09:43:34+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Swift在命令行模式下使用与退出"><a href="#Swift在命令行模式下使用与退出" class="headerlink" title="Swift在命令行模式下使用与退出"></a>Swift在命令行模式下使用与退出</h3><p>最近4.1版本发布之后，关于Swift的新闻又多了起来。得益于Chris Lattner跳槽到了Google，Swift的发展前景似乎变得更加宽广了，昨天看到了<a href="https://youtu.be/Yze693W4MaU" target="_blank" rel="external">Swift for TensorFlow</a>的发布视频，里面有提到Swift可以在命令行下执行，就像Python一样。</p>
-<p>我忽然想起来，这个特性在Swift发布的时候貌似就有了，只是一直没有怎么用过，以至于忽略了它的存在。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ swift</div><div class="line"><span class="type">Welcome</span> to <span class="type">Apple</span> <span class="type">Swift</span> version <span class="number">4.1</span> (swiftlang-<span class="number">902.0</span>.<span class="number">48</span> clang-<span class="number">902.0</span>.<span class="number">39.1</span>). <span class="type">Type</span> :help <span class="keyword">for</span> assistance.</div><div class="line">  <span class="number">1</span>&gt; <span class="keyword">let</span> n = <span class="number">1</span> + <span class="number">1</span></div><div class="line">n: <span class="type">Int</span> = <span class="number">2</span></div><div class="line">  <span class="number">2</span>&gt; <span class="keyword">let</span> a = n * n</div><div class="line">a: <span class="type">Int</span> = <span class="number">4</span></div><div class="line">  <span class="number">3</span>&gt;</div></pre></td></tr></table></figure>
-<p>试用一下感觉还不错，不过又遇到了刚开始使用Python命令行和Vim时的尴尬——不知道怎么退出。。。</p>
-<p>查了下才发现Swift命令行模式下退出时使用  <strong>:q   或者  :quit</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">localhost:<span class="type">Documents</span> bruce$ swift</div><div class="line"><span class="type">Welcome</span> to <span class="type">Apple</span> <span class="type">Swift</span> version <span class="number">4.1</span> (swiftlang-<span class="number">902.0</span>.<span class="number">48</span> clang-<span class="number">902.0</span>.<span class="number">39.1</span>). <span class="type">Type</span> :help <span class="keyword">for</span> assistance.</div><div class="line">  <span class="number">1</span>&gt; <span class="keyword">let</span> n = <span class="number">1</span> + <span class="number">1</span></div><div class="line">n: <span class="type">Int</span> = <span class="number">2</span></div><div class="line">  <span class="number">2</span>&gt; <span class="keyword">let</span> a = n * n</div><div class="line">a: <span class="type">Int</span> = <span class="number">4</span></div><div class="line">  <span class="number">3</span>&gt; :q</div><div class="line">localhost:<span class="type">Documents</span> bruce$</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2062,7 +2041,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2175,7 +2154,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共48.0k字</span>
+  <span class="post-count">博客全站共48.2k字</span>
 </div>
 
 
