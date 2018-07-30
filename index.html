@@ -451,7 +451,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/25/Swift实现字符串倒序排列/" itemprop="url">Swift实现字符串倒序排列</a></h1>
+                <a class="post-title-link" href="/2018/07/25/Swift实现字符串倒序排列/" itemprop="url">Swift实现字符串倒序排列，String字符串反转</a></h1>
         
 
         <div class="post-meta">
@@ -525,7 +525,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         
           
-            <p>最近在工作的时候，遇到一个需求，希望能将字符串倒序排列并输出。</p>
+            <p><strong>（2018.7.30更新）</strong><br>最近在看 Swift 的一篇 <a href="https://juejin.im/post/5ab4b2a66fb9a028e33b60d6" target="_blank" rel="external">博客</a> 的时候，发现了一个神级 API：reverse()，这个函数用来反转一个序列，Swift4 中 String 做了一些调整。我们可以直接将 String 作为一个序列进行反转，然后使用 String 的便利初始化方法将反转后的序列转为 String 类型，整个过程只需要一行代码，而且性能比我们自行封装方法要高不少，如果你正在查找 Swift 中反转字符串的方法，请看下面示例代码。然后就不必再往下看了。。。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> abc: <span class="type">String</span> = <span class="string">"abc"</span></div><div class="line"><span class="built_in">print</span>(<span class="type">String</span>(abc.reversed()))</div><div class="line"><span class="comment">// cba</span></div></pre></td></tr></table></figure>
+<p>　<br>最近在工作的时候，遇到一个需求，希望能将字符串倒序排列并输出。</p>
 <p>先来看一下OC的实现方式：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 字符串倒序 输入"1234" 输出"4321"</span></div><div class="line">- (<span class="built_in">NSString</span> *)invertString:(<span class="built_in">NSString</span> *)str &#123;</div><div class="line"></div><div class="line">    <span class="built_in">NSMutableString</span> *newString = [<span class="built_in">NSMutableString</span> string];</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length; i ++) &#123;</div><div class="line"></div><div class="line">        [newString appendString:[str substringWithRange:<span class="built_in">NSMakeRange</span>(str.length-i<span class="number">-1</span>, <span class="number">1</span>)]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> newString;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 单词逆序 输入"hello world" 输出"world hello"</span></div><div class="line">- (<span class="built_in">NSString</span> *)invertWord:(<span class="built_in">NSString</span> *)str &#123;</div><div class="line"></div><div class="line">    <span class="built_in">NSArray</span> *stringArr = [str componentsSeparatedByString:<span class="string">@" "</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSMutableArray</span> *newStringArr = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringArr.count; i ++) &#123;</div><div class="line"></div><div class="line">        [newStringArr addObject:stringArr[stringArr.count - i - <span class="number">1</span>]];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">NSString</span> *string = [newStringArr componentsJoinedByString:<span class="string">@" "</span>];</div><div class="line"></div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>　<br>搞定之后，我灵机一动，又有好些天没有碰 Swift 了，这样下去岂不是要荒废？赶紧打开 Playground，用 Swift 实现一波。</p>
@@ -2144,7 +2146,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共49.4k字</span>
+  <span class="post-count">博客全站共49.6k字</span>
 </div>
 
 
