@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写： 1let cls = NSClassFromString(className)! 编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。 Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个">
+<meta name="description" content="最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。 百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。 我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。 具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift4.0中使用NSClassFromString()">
-<meta property="og:url" content="http://yoursite.com/2018/03/13/Swift4-0中使用NSClassFromString/index.html">
+<meta property="og:title" content="访问GitHub很慢的问题解决">
+<meta property="og:url" content="http://yoursite.com/2018/07/31/访问GitHub很慢的问题解决/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写： 1let cls = NSClassFromString(className)! 编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。 Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个">
+<meta property="og:description" content="最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。 百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。 我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。 具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T09:26:10.000Z">
+<meta property="og:updated_time" content="2018-07-31T08:02:32.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift4.0中使用NSClassFromString()">
-<meta name="twitter:description" content="如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写： 1let cls = NSClassFromString(className)! 编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。 Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个">
+<meta name="twitter:title" content="访问GitHub很慢的问题解决">
+<meta name="twitter:description" content="最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。 百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。 我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。 具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径">
 
 
 
@@ -141,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/13/Swift4-0中使用NSClassFromString/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/31/访问GitHub很慢的问题解决/"/>
 
 
 
 
 
-  <title>Swift4.0中使用NSClassFromString() | Bruce's Blog</title>
+  <title>访问GitHub很慢的问题解决 | Bruce's Blog</title>
   
 
 
@@ -277,7 +277,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/Swift4-0中使用NSClassFromString/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/访问GitHub很慢的问题解决/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -294,7 +294,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift4.0中使用NSClassFromString()</h1>
+          <h1 class="post-title" itemprop="name headline">访问GitHub很慢的问题解决</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T13:59:54+08:00">
-                2018-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T15:35:00+08:00">
+                2018-07-31
               </time>
             
 
@@ -366,13 +366,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
-<p>编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。</p>
-<p><strong>Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个人认为应该是Target名）</strong></p>
-<p>正确写法:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 拼接类名字</span></div><div class="line"><span class="keyword">let</span> className = <span class="string">"xxx."</span> + <span class="string">"your className"</span> <span class="comment">// xxx替换为你的Xcode工程里对应Target的名字，而且中间还要加一点 "."</span></div><div class="line"></div><div class="line"><span class="comment">// 然后使用NSClassFromString()获取Class</span></div><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
-<p><strong>同理，在OC中调用NSClassFromString()方法获取Swift语言写的类，也需要用在类名前加上工程名（个人认为应该是Target名）和路径连接符 “.” 。</strong></p>
+        <p>最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。</p>
+<p>百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。</p>
+<p>我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。</p>
+<p>具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径为 /etc/hosts 。Windows 的是 C:\Windows\System32\Drivers\etc\hosts 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># GitHub Start</span></div><div class="line">192.30.253.112 github.com</div><div class="line">192.30.253.119 gist.github.com</div><div class="line">151.101.100.133 assets-cdn.github.com</div><div class="line">151.101.100.133 raw.githubusercontent.com</div><div class="line">151.101.100.133 gist.githubusercontent.com</div><div class="line">151.101.100.133 cloud.githubusercontent.com</div><div class="line">151.101.100.133 camo.githubusercontent.com</div><div class="line">151.101.100.133 avatars0.githubusercontent.com</div><div class="line">151.101.100.133 avatars1.githubusercontent.com</div><div class="line">151.101.100.133 avatars2.githubusercontent.com</div><div class="line">151.101.100.133 avatars3.githubusercontent.com</div><div class="line">151.101.100.133 avatars4.githubusercontent.com</div><div class="line">151.101.100.133 avatars5.githubusercontent.com</div><div class="line">151.101.100.133 avatars6.githubusercontent.com</div><div class="line">151.101.100.133 avatars7.githubusercontent.com</div><div class="line">151.101.100.133 avatars8.githubusercontent.com</div><div class="line"><span class="comment"># GitHub End</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -420,8 +418,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/13/Xcode工程项目中实现Swift和OC混编-相互引用/" rel="next" title="Xcode工程项目中实现Swift和OC混编 相互引用">
-                <i class="fa fa-chevron-left"></i> Xcode工程项目中实现Swift和OC混编 相互引用
+              <a href="/2018/07/27/记一次-IQKeyboardManager-失效导致输入框被键盘遮挡的问题/" rel="next" title="记一次 IQKeyboardManager 失效导致输入框被键盘遮挡的问题">
+                <i class="fa fa-chevron-left"></i> 记一次 IQKeyboardManager 失效导致输入框被键盘遮挡的问题
               </a>
             
           </div>
@@ -429,10 +427,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/13/Swift4-0中使用NSSelectorFromString/" rel="prev" title="Swift4.0中使用NSSelectorFromString()">
-                Swift4.0中使用NSSelectorFromString() <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

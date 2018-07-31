@@ -277,6 +277,161 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/访问GitHub很慢的问题解决/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/访问GitHub很慢的问题解决/" itemprop="url">访问GitHub很慢的问题解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T15:35:00+08:00">
+                2018-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。</p>
+<p>百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。</p>
+<p>我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。</p>
+<p>具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径为 /etc/hosts 。Windows 的是 C:\Windows\System32\Drivers\etc\hosts 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># GitHub Start</span></div><div class="line">192.30.253.112 github.com</div><div class="line">192.30.253.119 gist.github.com</div><div class="line">151.101.100.133 assets-cdn.github.com</div><div class="line">151.101.100.133 raw.githubusercontent.com</div><div class="line">151.101.100.133 gist.githubusercontent.com</div><div class="line">151.101.100.133 cloud.githubusercontent.com</div><div class="line">151.101.100.133 camo.githubusercontent.com</div><div class="line">151.101.100.133 avatars0.githubusercontent.com</div><div class="line">151.101.100.133 avatars1.githubusercontent.com</div><div class="line">151.101.100.133 avatars2.githubusercontent.com</div><div class="line">151.101.100.133 avatars3.githubusercontent.com</div><div class="line">151.101.100.133 avatars4.githubusercontent.com</div><div class="line">151.101.100.133 avatars5.githubusercontent.com</div><div class="line">151.101.100.133 avatars6.githubusercontent.com</div><div class="line">151.101.100.133 avatars7.githubusercontent.com</div><div class="line">151.101.100.133 avatars8.githubusercontent.com</div><div class="line"><span class="comment"># GitHub End</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/记一次-IQKeyboardManager-失效导致输入框被键盘遮挡的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1828,162 +1983,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/xcode在-release-模式下断点调试/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/xcode在-release-模式下断点调试/" itemprop="url">Xcode在 release 模式下断点调试</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T09:30:22+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Xcode在 release 模式下进行调试，打印的时候可以正常输出，断点调试却无法获取到对象的值, 这是怎么回事?</p>
-<p>原因：Xcode在release 模式下默认开启编译优化，关掉断点时候读取变量的上下文环境，以提高运行速度。</p>
-<p><strong>Xcode工程设置，选择对应Target -&gt; build setting -&gt; optimization level</strong></p>
-<p>如图:<br><img src="https://github.com/a1049145827/Resources/raw/master/xcode_build_release.png" alt="optimization level"></p>
-<p>想要在release模式下进行断点调试，我们需要调整编译优化等级，简单粗暴，直接设置成None就行了：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/xcode_build_optimization_none.png" alt="optimization level none"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2033,7 +2032,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2146,7 +2145,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共49.6k字</span>
+  <span class="post-count">博客全站共49.8k字</span>
 </div>
 
 

@@ -277,6 +277,173 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/Swift-关键字（typealias、associatedtype）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/06/Swift-关键字（typealias、associatedtype）/" itemprop="url">Swift - 关键字（typealias、associatedtype）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T09:38:38+08:00">
+                2018-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="typealias-类型别名"><a href="#typealias-类型别名" class="headerlink" title="typealias 类型别名"></a>typealias 类型别名</h4><p><strong>typealias 是用来为已经存在的类型重新定义名字的，通过命名，可以使代码变得更加清晰。</strong>使用的语法也很简单，使用 typealias 关键字像使用普通的赋值语句一样，可以将某个已经存在的类型赋值为新的名字。比如在计算二维平面上的距离和位置的时候，我们一般使用 Double 来表示距离，用 CGPoint 来表示位置:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">distance</span><span class="params">(<span class="number">_</span> point: CGPoint, <span class="number">_</span> anotherPoint: CGPoint)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">let</span> dx = <span class="type">Double</span>(anotherPoint.x - point.x)</div><div class="line">    <span class="keyword">let</span> dy = <span class="type">Double</span>(anotherPoint.y - point.y)</div><div class="line">    <span class="keyword">return</span> sqrt(dx * dx + dy * dy)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> origin = <span class="type">CGPoint</span>(x: <span class="number">3</span>, y: <span class="number">0</span>)</div><div class="line"><span class="keyword">let</span> point = <span class="type">CGPoint</span>(x: <span class="number">4</span>, y: <span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> d = <span class="built_in">distance</span>(origin, point)</div></pre></td></tr></table></figure>
+<p>虽然在数学上和最后的程序运行上都没什么问题，但是阅读和维护的时候总是觉得有哪里不对。 因为我们没有将数学抽象和实际问题结合起来，使得在阅读代码时我们还需要在大脑中进行一次额外的转换: CGPoint 代表一个点，而这个点就是我们在定义的坐标系里的位置; Double 是一个数字，它代表两个点之间的距离。</p>
+<p>如果我们使用 typealias，就可以将这种转换直接写在代码里，从而减轻阅读和维护的负担:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">distance</span><span class="params">(<span class="number">_</span> point: CGPoint, <span class="number">_</span> anotherPoint: CGPoint)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">    <span class="keyword">let</span> dx = <span class="type">Distance</span>(anotherPoint.x - point.x)</div><div class="line">    <span class="keyword">let</span> dy = <span class="type">Distance</span>(anotherPoint.y - point.y)</div><div class="line">    <span class="keyword">return</span> sqrt(dx * dx + dy * dy)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> origin = <span class="type">Location</span>(x: <span class="number">3</span>, y: <span class="number">0</span>)</div><div class="line"><span class="keyword">let</span> point = <span class="type">Location</span>(x: <span class="number">4</span>, y: <span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="keyword">let</span> d = <span class="built_in">distance</span>(origin, point)</div></pre></td></tr></table></figure>
+<p>同样的代码，在 typealias 的帮助下，读起来就轻松多了。可能单单这个简单例子不会有特别多的体会，但是当遇到更复杂的实际问题时，我们就可以不再关心并去思考自己代码里那些成堆的Int或者String之类的基本类型到底代表的是什么东西了，这样应该能省下不少脑细胞。<strong>注意：开发过程中，当使用的闭包的时候，会经常使用typealias。</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typealias</span> <span class="type">Success</span> = (<span class="number">_</span> data: <span class="type">String</span>) -&gt; <span class="type">Void</span></div><div class="line"><span class="keyword">typealias</span> <span class="type">Failure</span> = (<span class="number">_</span> error: <span class="type">String</span>) -&gt; <span class="type">Void</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">request</span><span class="params">(<span class="number">_</span> url: String, success: Success, failure: Failure)</span></span> &#123;</div><div class="line">    <span class="comment">// do request here ....</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="typealias与泛型"><a href="#typealias与泛型" class="headerlink" title="typealias与泛型"></a>typealias与泛型</h5><p><strong>typealias 是单一的，也就是说我们必须指定将某个特定的类型通过 typealias 赋值为新名字，而不能将整个泛型类型进行重命名。</strong>下面这样的命名都是无法通过编译的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="title">T</span>&gt; </span>&#123;&#125;</div><div class="line"><span class="keyword">typealias</span> <span class="type">Woker</span> = <span class="type">Person</span></div><div class="line"><span class="keyword">typealias</span> <span class="type">Worker</span> = <span class="type">Person</span>&lt;<span class="type">T</span>&gt;</div></pre></td></tr></table></figure>
+<p>不过如果我们在别名中也引入泛型，是可以进行对应的</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="title">T</span>&gt; </span>&#123;&#125;</div><div class="line"><span class="keyword">typealias</span> <span class="type">Woker</span> = <span class="type">Person</span></div><div class="line"><span class="keyword">typealias</span> <span class="type">Worker</span>&lt;<span class="type">T</span>&gt; = <span class="type">Person</span>&lt;<span class="type">T</span>&gt;</div></pre></td></tr></table></figure>
+<p>当泛型类型的确定性得到保证后，显然别名也是可以使用的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>&lt;<span class="title">T</span>&gt; </span>&#123;&#125;</div><div class="line"><span class="keyword">typealias</span> <span class="type">WorkId</span> = <span class="type">String</span></div><div class="line"><span class="keyword">typealias</span> <span class="type">Worker</span> = <span class="type">Person</span>&lt;<span class="type">WorkId</span>&gt;</div></pre></td></tr></table></figure>
+<p>另一个使用场景是某个类型同时实现多个协议的组合时。我们可以使用&amp;符号连接几个协议，然后给它们一个新的更符合上下文的名字，来增强代码可读性:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Cat</span> </span>&#123;&#125;</div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Dog</span> </span>&#123;&#125;</div><div class="line"><span class="keyword">typealias</span> <span class="type">Pat</span> = <span class="type">Cat</span> &amp; <span class="type">Dog</span></div></pre></td></tr></table></figure>
+<h4 id="associatedtype-关联类型"><a href="#associatedtype-关联类型" class="headerlink" title="associatedtype 关联类型"></a>associatedtype 关联类型</h4><p>定义一个协议时，有的时候声明一个或多个关联类型作为协议定义的一部分将会非常有用。 <strong>关联类型为协议中的某个类型提供了一个占位名（或者说别名），其代表的实际类型在协议被采纳时才会被指定。</strong> 我们可以通过 associatedtype 关键字来指定关联类型，比如使用协议声明更新cell 的方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 模型</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Model</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> age: <span class="type">Int</span></div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 协议，使用关联类型</span></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">TableViewCellProtocol</span> </span>&#123;</div><div class="line">    associatedtype <span class="type">T</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">updateCell</span><span class="params">(<span class="number">_</span> data: T)</span></span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 遵守TableViewCellProtocol</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTableViewCell</span>: <span class="title">UITableViewCell</span>, <span class="title">TableViewCellProtocol</span> </span>&#123;</div><div class="line">    <span class="keyword">typealias</span> <span class="type">T</span> = <span class="type">Model</span></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">updateCell</span><span class="params">(<span class="number">_</span> data: Model)</span></span> &#123;</div><div class="line">        <span class="comment">// do something ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/02/Swift-从零实现一个Struct或Class转Dictionary的需求/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -815,7 +982,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <ul>
 <li>1.9 遵守Xcode内置的缩进格式（如果已经遵守，按下CTRL-i 组合键文件格式没有变化）。当声明的一个函数需要跨多行时，推荐使用Xcode默认的格式，以 Xcode7.3 为例。</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Xcode针对跨多行函数声明缩进</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myFunctionWithManyParameters</span><span class="params">(parameterOne: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterTwo: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterThree: String)</span></span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"\(parameterOne) \(parameterTwo) \(parameterThree)"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Xcode针对多行 if 语句的缩进</span></div><div class="line"><span class="keyword">if</span> myFirstVariable &gt; (mySecondVariable + myThirdVariable)</div><div class="line">    &amp;&amp; myFourthVariable == .<span class="type">SomeEnumValue</span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Hello, World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Xcode针对跨多行函数声明缩进</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myFunctionWithManyParameters</span><span class="params">(parameterOne: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterTwo: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterThree: String)</span></span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(parameterOne)</span> <span class="subst">\(parameterTwo)</span> <span class="subst">\(parameterThree)</span>"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Xcode针对多行 if 语句的缩进</span></div><div class="line"><span class="keyword">if</span> myFirstVariable &gt; (mySecondVariable + myThirdVariable)</div><div class="line">    &amp;&amp; myFourthVariable == .<span class="type">SomeEnumValue</span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Hello, World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>1.10 当调用的函数有多个参数时，每一个参数另起一行，并比函数名多一个缩进。</li>
 </ul>
@@ -910,10 +1077,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>3.4.2 因为Swift 里 switch 中的选项默认是包含break的，如果不需要不用使用 break关键词。</p>
 <p>3.4.3 case语句 应和 switch语句 左对齐，并在 标准的default语句 之上。</p>
 <p>3.4.4 当定义的选项有关联值时，确保关联值有恰当的名称，而不只是类型。(如. 使用 case Hunger(hungerLevel: Int) 而不是 case Hunger(Int)).</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Problem</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> attitude</div><div class="line">    <span class="keyword">case</span> hair</div><div class="line">    <span class="keyword">case</span> hunger(hungerLevel: <span class="type">Int</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleProblem</span><span class="params">(problem: Problem)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> problem &#123;</div><div class="line">    <span class="keyword">case</span> .attitude:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"At least I don't have a hair problem."</span>)</div><div class="line">    <span class="keyword">case</span> .hair:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your barber didn't know when to stop."</span>)</div><div class="line">    <span class="keyword">case</span> .hunger(<span class="keyword">let</span> hungerLevel):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"The hunger level is \(hungerLevel)."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Problem</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> attitude</div><div class="line">    <span class="keyword">case</span> hair</div><div class="line">    <span class="keyword">case</span> hunger(hungerLevel: <span class="type">Int</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleProblem</span><span class="params">(problem: Problem)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> problem &#123;</div><div class="line">    <span class="keyword">case</span> .attitude:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"At least I don't have a hair problem."</span>)</div><div class="line">    <span class="keyword">case</span> .hair:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your barber didn't know when to stop."</span>)</div><div class="line">    <span class="keyword">case</span> .hunger(<span class="keyword">let</span> hungerLevel):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"The hunger level is <span class="subst">\(hungerLevel)</span>."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.4.5 推荐尽可能使用fall through。</p>
 <p>3.4.6 如果default 的选项不应该触发，可以抛出错误 或 断言类似的做法。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleDigit</span><span class="params">(<span class="number">_</span> digit: Int)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">    <span class="keyword">switch</span> digit &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Yes, \(digit) is a digit!"</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"The given number was not a digit."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleDigit</span><span class="params">(<span class="number">_</span> digit: Int)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">    <span class="keyword">switch</span> digit &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Yes, <span class="subst">\(digit)</span> is a digit!"</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"The given number was not a digit."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.5 可选类型<br>3.5.1 唯一使用隐式拆包可选型（implicitly unwrapped optionals）的场景是结合@IBOutlets，在其他场景使用 非可选类型 和 常规可选类型，即使有的场景你确定有的变量使用的时候永远不会为 nil， 但这样做可以保持一致性和程序更加健壮。</p>
 <p>3.5.2 不要使用 as! 或 try!。</p>
@@ -929,29 +1096,29 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <li><p>3.7 属性<br>3.7.1 对于只读属性，计算后(Computed)属性, 提供 getter 而不是 get {}。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">if</span> someBool &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">"I'm selling these fine leather jackets."</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.7.2 对于属性相关方法 get {}, set {}, willSet, 和 didSet, 确保缩进相关代码块。<br>3.7.3 对于willSet/didSet 和 set 中的旧值和新值虽然可以自定义名称，但推荐使用默认标准名称 newValue/oldValue。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> storedProperty: <span class="type">String</span> = <span class="string">"I'm selling these fine leather jackets."</span> &#123;</div><div class="line">    <span class="keyword">willSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"will set to \(newValue)"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">didSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"did set from \(oldValue) to \(storedProperty)"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span>  &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">if</span> someBool &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> storedProperty</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        storedProperty = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> storedProperty: <span class="type">String</span> = <span class="string">"I'm selling these fine leather jackets."</span> &#123;</div><div class="line">    <span class="keyword">willSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"will set to <span class="subst">\(newValue)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">didSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"did set from <span class="subst">\(oldValue)</span> to <span class="subst">\(storedProperty)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span>  &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">if</span> someBool &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> storedProperty</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        storedProperty = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.7.4 声明单例属性可以通过下面方式进行：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PirateManager</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shared = <span class="type">PirateManager</span>()</div><div class="line"></div><div class="line">    <span class="comment">/* ... */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.8 闭包<br>3.8.1 如果参数的类型很明显，可以在函数名里可以省略参数类型, 但明确声明类型也是允许的。 代码的可读性有时候是添加详细的信息，而有时候部分重复，根据你的判断力做出选择吧，但前后要保持一致性。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 省略类型</span></div><div class="line">doSomethingWithClosure() &#123; response <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(response)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 明确指出类型</span></div><div class="line">doSomethingWithClosure() &#123; response: <span class="type">NSURLResponse</span> <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(response)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// map 语句使用简写</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].flatMap &#123; <span class="type">String</span>($<span class="number">0</span>) &#125;</div></pre></td></tr></table></figure>
 <p>3.8.2 如果闭包是变量类型，不需把变量值放在括号中，除非需要，如变量类型是可选类型(Optional?)， 或当前闭包在另一个闭包内。确保闭包里的所以参数放在小括号中，这样()表示没有参数，Void表示不需要返回值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> completionBlock: (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = &#123; (success) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success? \(success)"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: () -&gt; <span class="type">Void</span> = &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Completed!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: (() -&gt; <span class="type">Void</span>)? = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> completionBlock: (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = &#123; (success) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success? <span class="subst">\(success)</span>"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: () -&gt; <span class="type">Void</span> = &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Completed!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: (() -&gt; <span class="type">Void</span>)? = <span class="literal">nil</span></div></pre></td></tr></table></figure>
 <p>3.8.3 在可能的情况下，将参数名称保持在同一行上，避免过多的水平溢出(即确保行少于160个字符)。</p>
 <p>3.8.4 如果闭包是变量类型，不需把变量值放在括号中，除非需要，如变量类型是可选类型(Optional?)， 或当前闭包在另一个闭包内。确保闭包里的所以参数放在小括号中，这样()表示没有参数，Void 表示不需要返回值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>) &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Parameter 1 is \(parameter1)"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 非 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>, success: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success with \(parameter1)"</span>)</div><div class="line">&#125;, failure: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Failure with \(parameter1)"</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>) &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Parameter 1 is <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 非 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>, success: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success with <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;, failure: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Failure with <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.9 数组<br>3.9.1 基本上不要通过下标直接访问数组内容，如果可能使用如 .first 或 .last, 因为这些方法是非强制类型并不会崩溃。推荐尽可能使用 for item in items 而不是 for i in 0..&lt; items.count 。</p>
 <p>3.9.2 不要使用 += 或 + 操作符给数组添加新元素，使用性能较好的.append() 或.appendContentsOf()，如果需要声明数组基于其他的数组并保持不可变类型， 使用 let myNewArray = [arr1, arr2].flatten()，而不是 let myNewArray = arr1 + arr2 。</p>
 </li>
 <li><p>3.10 错误处理<br>假设一个函数 myFunction 返回类型声明为 String，但是总有可能函数会遇到error，有一种解决方案是返回类型声明为 String?, 当遇到错误的时候返回 nil。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> -&gt; <span class="type">String</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> filename = <span class="string">"somefile.txt"</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> fileContents = readFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Unable to open file \(filename)."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(fileContents)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> -&gt; <span class="type">String</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> filename = <span class="string">"somefile.txt"</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> fileContents = readFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Unable to open file <span class="subst">\(filename)</span>."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(fileContents)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>实际上如果预知失败的原因，我们应该使用Swift中的 try/catch 。<br>定义错误对象结构体如下:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Error</span>: <span class="title">Swift</span>.<span class="title">Error</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> file: <span class="type">StaticString</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> function: <span class="type">StaticString</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> line: <span class="type">UInt</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> message: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(message: <span class="type">String</span>, file: <span class="type">StaticString</span> = #file, function: <span class="type">StaticString</span> = #function, line: <span class="type">UInt</span> = #line) &#123;</div><div class="line">        <span class="keyword">self</span>.file = file</div><div class="line">        <span class="keyword">self</span>.function = function</div><div class="line">        <span class="keyword">self</span>.line = line</div><div class="line">        <span class="keyword">self</span>.message = message</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>使用案例:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"Unable to open file named \(filename)."</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">let</span> fileContents = <span class="keyword">try</span> readFile(named: filename)</div><div class="line">        <span class="built_in">print</span>(fileContents)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"Unable to open file named <span class="subst">\(filename)</span>."</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">let</span> fileContents = <span class="keyword">try</span> readFile(named: filename)</div><div class="line">        <span class="built_in">print</span>(fileContents)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其实项目中还是有一些场景更适合声明为可选类型，而不是错误捕捉和处理，比如在获取远端数据过程中遇到错误，nil作为返回结果是合理的，也就是声明返回可选类型比错误处理更合理。<br>整体上说，如果一个方法有可能失败，并且使用可选类型作为返回类型会导致错误原因湮没，不妨考虑抛出错误而不是吃掉它。</p>
 <ul>
 <li><p>3.11 使用 guard 语句<br>3.11.1 总体上，我们推荐使用提前返回的策略，而不是 if 语句的嵌套。使用 guard 语句可以改善代码的可读性。</p>
@@ -1179,7 +1346,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>通常在自定义View的实现中定义一个类方法。<br>例如:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">loadWithNib</span>() -&gt; <span class="title">RedView</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"RedView"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">RedView</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果我们定义一个可从XIB加载某类的协议,在自定义类中仅仅需要遵守这个协议,无需实现协议中的方法,便可实现此协议中实现的所有方法.例如定义一个 可从XIB加载的协议 NibLoadable。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NibLoadable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">loadViewWithNib</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"\(self)"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">Self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NibLoadable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">loadViewWithNib</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"<span class="subst">\(<span class="keyword">self</span>)</span>"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">Self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>只要在xib加载的类中继承此协议。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GreenView</span>: <span class="title">UIView</span> , <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>就可以在需要初始化此对象时直接调用。</p>
@@ -2034,162 +2201,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" itemprop="url">AFNetworking用POST发送的parameters在Java后台接收失败的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T10:43:24+08:00">
-                2018-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。</p>
-<h5 id="这时候需要修改AFNetworking的requestSerializer"><a href="#这时候需要修改AFNetworking的requestSerializer" class="headerlink" title="这时候需要修改AFNetworking的requestSerializer"></a>这时候需要修改AFNetworking的requestSerializer</h5><p>先检查是否改动过requestSerializer，如果之前设置成了AFJSONRequestSerializer，把AFJSONRequestSerializer改成了AFHTTPRequestSerializer就OK了</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果之前有设置AFJSONRequestSerializer，下面这段也需要，一定要看清楚，很容易混淆</span></div><div class="line">AFHTTPRequestSerializer *request = [AFHTTPRequestSerializer serializer];</div><div class="line">manager.requestSerializer = request;</div></pre></td></tr></table></figure>
-<p>然后设置HTTPHeaderField，告知后台使用form表单格式提交参数</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[manager.requestSerializer setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];</div></pre></td></tr></table></figure>
-<p>再次请求，服务端就不会返回参数找不到的错误啦。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2239,7 +2250,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2352,7 +2363,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共49.6k字</span>
+  <span class="post-count">博客全站共49.8k字</span>
 </div>
 
 
