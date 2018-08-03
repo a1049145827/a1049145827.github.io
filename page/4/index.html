@@ -277,6 +277,194 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/软件开发之设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/06/软件开发之设计模式/" itemprop="url">软件开发之设计模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T16:01:21+08:00">
+                2018-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件开发/" itemprop="url" rel="index">
+                    <span itemprop="name">软件开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>设计模式（Design pattern）代表了最佳的实践，通常被有经验的面向对象的软件开发人员所采用。设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。理解了设计模式的原理和其中所蕴含的大智慧后可以帮助我们写出结构更合理、风格更优雅、更容易复用的代码。</p>
+<h4 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a>设计模式的基本原则</h4><p>设计模式的基本原则非常重要，只要真正深入地理解了设计原则，很多设计模式其实就是原则的应用而已，或许在不知不觉中就在使用设计模式了：</p>
+<ul>
+<li>单一职责原则（SRP），就一个类而言，应该仅有一个引起它变化的原因。</li>
+<li>开放-封闭原则（OCP），是说软件实体（类、模块、函数等等）应该可以拓展，但是不可修改。</li>
+<li>依赖倒转原则（DIP），A. 高层模块不应该依赖低层模块，两个都应该依赖抽象。B. 抽象不应该依赖细节，细节应该依赖抽象。</li>
+<li>里氏代换原则（LSP），子类型必须能够替换掉它们的父类型。</li>
+<li>迪米特法则（LoD），如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</li>
+<li>合成/聚合复用原则（CARP），尽量使用合成/聚合，尽量不要使用类继承。</li>
+</ul>
+<p>注：SRP-Single Responsibility Principle，OCP-Open-Closed Principle，DIP-Dependency Inversion Principle，LSP-Liskov Subsitution Principle，LoD-Law of Demeter，CARP-Composition/Aggregation Principle。</p>
+<h4 id="常用的-23-种设计模式"><a href="#常用的-23-种设计模式" class="headerlink" title="常用的 23 种设计模式"></a>常用的 23 种设计模式</h4><p>不管是 .NET 中的 C# 语言，还是 Java、VB.NET、C++ 或 Objective-C 语言，面向对象语言在设计模式的层面上都是相通的，只不过在设计模式的具体实现上语法稍有差异罢了：</p>
+<ol>
+<li>策略模式（Strategy），它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化，不会影响到使用算法的客户。</li>
+<li>装饰模式（Decorator），动态地给一个对象添加一些额外的职责，就增加功能来说，装饰模式比生成子类更为灵活。</li>
+<li>代理模式（Proxy），为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li>工厂方法模式（Factory Method），定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li>原型模式（Prototype），用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
+<li>模板方法模式（Template Method），定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</li>
+<li>外观模式（Facade），为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</li>
+<li>建造者模式（Builder），将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+<li>观察者模式（Observer），定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
+<li>抽象工厂模式（Abstract Factory），提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</li>
+<li>状态模式（State），当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类。</li>
+<li>适配器模式（Adapter），将一个类的接口转换成客户希望的另外一个接口。Adapter 模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</li>
+<li>备忘录模式（Memento），在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到原先保存的状态。</li>
+<li>组合模式（Composite），将对象组合成树形结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</li>
+<li>迭代器模式（Iterator），提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。</li>
+<li>单例模式（Singleton），保证一个类仅有一个实例，并提供一个访问它的全局访问点。</li>
+<li>桥接模式（Bridge），将抽象部分与它的实现部分分离，使它们都可以独立地变化。</li>
+<li>命令模式（Command），将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。</li>
+<li>职责链模式（Chain of Responsibility），使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。</li>
+<li>中介者模式（Mediator），用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</li>
+<li>享元模式（Flyweight），运用共享技术有效地支持大量细粒度的对象。</li>
+<li>解释器模式（Interpreter），给定一个语言，定义它的文法的一种表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</li>
+<li>访问者模式（Visitor），表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ol>
+<p><a href="https://juejin.im/post/5aaa2943f265da239c7b15c4" target="_blank" rel="external">23个经典设计模式的Swift实现</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/06/Swift-关键字（typealias、associatedtype）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -982,7 +1170,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <ul>
 <li>1.9 遵守Xcode内置的缩进格式（如果已经遵守，按下CTRL-i 组合键文件格式没有变化）。当声明的一个函数需要跨多行时，推荐使用Xcode默认的格式，以 Xcode7.3 为例。</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Xcode针对跨多行函数声明缩进</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myFunctionWithManyParameters</span><span class="params">(parameterOne: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterTwo: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterThree: String)</span></span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(parameterOne)</span> <span class="subst">\(parameterTwo)</span> <span class="subst">\(parameterThree)</span>"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Xcode针对多行 if 语句的缩进</span></div><div class="line"><span class="keyword">if</span> myFirstVariable &gt; (mySecondVariable + myThirdVariable)</div><div class="line">    &amp;&amp; myFourthVariable == .<span class="type">SomeEnumValue</span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Hello, World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Xcode针对跨多行函数声明缩进</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">myFunctionWithManyParameters</span><span class="params">(parameterOne: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterTwo: String,</span></span></div><div class="line"><span class="function"><span class="params">                                  parameterThree: String)</span></span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"\(parameterOne) \(parameterTwo) \(parameterThree)"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Xcode针对多行 if 语句的缩进</span></div><div class="line"><span class="keyword">if</span> myFirstVariable &gt; (mySecondVariable + myThirdVariable)</div><div class="line">    &amp;&amp; myFourthVariable == .<span class="type">SomeEnumValue</span> &#123;</div><div class="line">    <span class="comment">// Xcode会自动缩进</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Hello, World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>1.10 当调用的函数有多个参数时，每一个参数另起一行，并比函数名多一个缩进。</li>
 </ul>
@@ -1077,10 +1265,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>3.4.2 因为Swift 里 switch 中的选项默认是包含break的，如果不需要不用使用 break关键词。</p>
 <p>3.4.3 case语句 应和 switch语句 左对齐，并在 标准的default语句 之上。</p>
 <p>3.4.4 当定义的选项有关联值时，确保关联值有恰当的名称，而不只是类型。(如. 使用 case Hunger(hungerLevel: Int) 而不是 case Hunger(Int)).</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Problem</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> attitude</div><div class="line">    <span class="keyword">case</span> hair</div><div class="line">    <span class="keyword">case</span> hunger(hungerLevel: <span class="type">Int</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleProblem</span><span class="params">(problem: Problem)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> problem &#123;</div><div class="line">    <span class="keyword">case</span> .attitude:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"At least I don't have a hair problem."</span>)</div><div class="line">    <span class="keyword">case</span> .hair:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your barber didn't know when to stop."</span>)</div><div class="line">    <span class="keyword">case</span> .hunger(<span class="keyword">let</span> hungerLevel):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"The hunger level is <span class="subst">\(hungerLevel)</span>."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Problem</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> attitude</div><div class="line">    <span class="keyword">case</span> hair</div><div class="line">    <span class="keyword">case</span> hunger(hungerLevel: <span class="type">Int</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleProblem</span><span class="params">(problem: Problem)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> problem &#123;</div><div class="line">    <span class="keyword">case</span> .attitude:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"At least I don't have a hair problem."</span>)</div><div class="line">    <span class="keyword">case</span> .hair:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your barber didn't know when to stop."</span>)</div><div class="line">    <span class="keyword">case</span> .hunger(<span class="keyword">let</span> hungerLevel):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"The hunger level is \(hungerLevel)."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.4.5 推荐尽可能使用fall through。</p>
 <p>3.4.6 如果default 的选项不应该触发，可以抛出错误 或 断言类似的做法。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleDigit</span><span class="params">(<span class="number">_</span> digit: Int)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">    <span class="keyword">switch</span> digit &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Yes, <span class="subst">\(digit)</span> is a digit!"</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"The given number was not a digit."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleDigit</span><span class="params">(<span class="number">_</span> digit: Int)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">    <span class="keyword">switch</span> digit &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Yes, \(digit) is a digit!"</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"The given number was not a digit."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.5 可选类型<br>3.5.1 唯一使用隐式拆包可选型（implicitly unwrapped optionals）的场景是结合@IBOutlets，在其他场景使用 非可选类型 和 常规可选类型，即使有的场景你确定有的变量使用的时候永远不会为 nil， 但这样做可以保持一致性和程序更加健壮。</p>
 <p>3.5.2 不要使用 as! 或 try!。</p>
@@ -1096,29 +1284,29 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <li><p>3.7 属性<br>3.7.1 对于只读属性，计算后(Computed)属性, 提供 getter 而不是 get {}。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">if</span> someBool &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">"I'm selling these fine leather jackets."</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.7.2 对于属性相关方法 get {}, set {}, willSet, 和 didSet, 确保缩进相关代码块。<br>3.7.3 对于willSet/didSet 和 set 中的旧值和新值虽然可以自定义名称，但推荐使用默认标准名称 newValue/oldValue。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> storedProperty: <span class="type">String</span> = <span class="string">"I'm selling these fine leather jackets."</span> &#123;</div><div class="line">    <span class="keyword">willSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"will set to <span class="subst">\(newValue)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">didSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"did set from <span class="subst">\(oldValue)</span> to <span class="subst">\(storedProperty)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span>  &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">if</span> someBool &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> storedProperty</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        storedProperty = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> storedProperty: <span class="type">String</span> = <span class="string">"I'm selling these fine leather jackets."</span> &#123;</div><div class="line">    <span class="keyword">willSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"will set to \(newValue)"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">didSet</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"did set from \(oldValue) to \(storedProperty)"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> computedProperty: <span class="type">String</span>  &#123;</div><div class="line">    <span class="keyword">get</span> &#123;</div><div class="line">        <span class="keyword">if</span> someBool &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"I'm a mighty pirate!"</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> storedProperty</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">set</span> &#123;</div><div class="line">        storedProperty = newValue</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>3.7.4 声明单例属性可以通过下面方式进行：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PirateManager</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shared = <span class="type">PirateManager</span>()</div><div class="line"></div><div class="line">    <span class="comment">/* ... */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.8 闭包<br>3.8.1 如果参数的类型很明显，可以在函数名里可以省略参数类型, 但明确声明类型也是允许的。 代码的可读性有时候是添加详细的信息，而有时候部分重复，根据你的判断力做出选择吧，但前后要保持一致性。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 省略类型</span></div><div class="line">doSomethingWithClosure() &#123; response <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(response)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 明确指出类型</span></div><div class="line">doSomethingWithClosure() &#123; response: <span class="type">NSURLResponse</span> <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(response)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// map 语句使用简写</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].flatMap &#123; <span class="type">String</span>($<span class="number">0</span>) &#125;</div></pre></td></tr></table></figure>
 <p>3.8.2 如果闭包是变量类型，不需把变量值放在括号中，除非需要，如变量类型是可选类型(Optional?)， 或当前闭包在另一个闭包内。确保闭包里的所以参数放在小括号中，这样()表示没有参数，Void表示不需要返回值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> completionBlock: (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = &#123; (success) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success? <span class="subst">\(success)</span>"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: () -&gt; <span class="type">Void</span> = &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Completed!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: (() -&gt; <span class="type">Void</span>)? = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> completionBlock: (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = &#123; (success) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success? \(success)"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: () -&gt; <span class="type">Void</span> = &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Completed!"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> completionBlock: (() -&gt; <span class="type">Void</span>)? = <span class="literal">nil</span></div></pre></td></tr></table></figure>
 <p>3.8.3 在可能的情况下，将参数名称保持在同一行上，避免过多的水平溢出(即确保行少于160个字符)。</p>
 <p>3.8.4 如果闭包是变量类型，不需把变量值放在括号中，除非需要，如变量类型是可选类型(Optional?)， 或当前闭包在另一个闭包内。确保闭包里的所以参数放在小括号中，这样()表示没有参数，Void 表示不需要返回值。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>) &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Parameter 1 is <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 非 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>, success: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success with <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;, failure: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Failure with <span class="subst">\(parameter1)</span>"</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>) &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Parameter 1 is \(parameter1)"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 非 尾随闭包</span></div><div class="line">doSomething(<span class="number">1.0</span>, success: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Success with \(parameter1)"</span>)</div><div class="line">&#125;, failure: &#123; (parameter1) <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Failure with \(parameter1)"</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 </li>
 <li><p>3.9 数组<br>3.9.1 基本上不要通过下标直接访问数组内容，如果可能使用如 .first 或 .last, 因为这些方法是非强制类型并不会崩溃。推荐尽可能使用 for item in items 而不是 for i in 0..&lt; items.count 。</p>
 <p>3.9.2 不要使用 += 或 + 操作符给数组添加新元素，使用性能较好的.append() 或.appendContentsOf()，如果需要声明数组基于其他的数组并保持不可变类型， 使用 let myNewArray = [arr1, arr2].flatten()，而不是 let myNewArray = arr1 + arr2 。</p>
 </li>
 <li><p>3.10 错误处理<br>假设一个函数 myFunction 返回类型声明为 String，但是总有可能函数会遇到error，有一种解决方案是返回类型声明为 String?, 当遇到错误的时候返回 nil。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> -&gt; <span class="type">String</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> filename = <span class="string">"somefile.txt"</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> fileContents = readFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Unable to open file <span class="subst">\(filename)</span>."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(fileContents)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> -&gt; <span class="type">String</span>? &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> filename = <span class="string">"somefile.txt"</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> fileContents = readFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Unable to open file \(filename)."</span>)</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(fileContents)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>实际上如果预知失败的原因，我们应该使用Swift中的 try/catch 。<br>定义错误对象结构体如下:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Error</span>: <span class="title">Swift</span>.<span class="title">Error</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> file: <span class="type">StaticString</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> function: <span class="type">StaticString</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> line: <span class="type">UInt</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">let</span> message: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(message: <span class="type">String</span>, file: <span class="type">StaticString</span> = #file, function: <span class="type">StaticString</span> = #function, line: <span class="type">UInt</span> = #line) &#123;</div><div class="line">        <span class="keyword">self</span>.file = file</div><div class="line">        <span class="keyword">self</span>.function = function</div><div class="line">        <span class="keyword">self</span>.line = line</div><div class="line">        <span class="keyword">self</span>.message = message</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>使用案例:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"Unable to open file named <span class="subst">\(filename)</span>."</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">let</span> fileContents = <span class="keyword">try</span> readFile(named: filename)</div><div class="line">        <span class="built_in">print</span>(fileContents)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFile</span><span class="params">(named filename: String)</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> file = openFile(named: filename) <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="type">Error</span>(message: <span class="string">"Unable to open file named \(filename)."</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> fileContents = file.read()</div><div class="line">    file.close()</div><div class="line">    <span class="keyword">return</span> fileContents</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSomeFile</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">let</span> fileContents = <span class="keyword">try</span> readFile(named: filename)</div><div class="line">        <span class="built_in">print</span>(fileContents)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其实项目中还是有一些场景更适合声明为可选类型，而不是错误捕捉和处理，比如在获取远端数据过程中遇到错误，nil作为返回结果是合理的，也就是声明返回可选类型比错误处理更合理。<br>整体上说，如果一个方法有可能失败，并且使用可选类型作为返回类型会导致错误原因湮没，不妨考虑抛出错误而不是吃掉它。</p>
 <ul>
 <li><p>3.11 使用 guard 语句<br>3.11.1 总体上，我们推荐使用提前返回的策略，而不是 if 语句的嵌套。使用 guard 语句可以改善代码的可读性。</p>
@@ -1346,7 +1534,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>通常在自定义View的实现中定义一个类方法。<br>例如:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">loadWithNib</span>() -&gt; <span class="title">RedView</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"RedView"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">RedView</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果我们定义一个可从XIB加载某类的协议,在自定义类中仅仅需要遵守这个协议,无需实现协议中的方法,便可实现此协议中实现的所有方法.例如定义一个 可从XIB加载的协议 NibLoadable。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NibLoadable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">loadViewWithNib</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"<span class="subst">\(<span class="keyword">self</span>)</span>"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">Self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NibLoadable</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">loadViewWithNib</span><span class="params">()</span></span> -&gt; <span class="type">Self</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="type">Bundle</span>.main.loadNibNamed(<span class="string">"\(self)"</span>, owner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)?.last! <span class="keyword">as</span>! <span class="type">Self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>只要在xib加载的类中继承此协议。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GreenView</span>: <span class="title">UIView</span> , <span class="title">NibLoadable</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>就可以在需要初始化此对象时直接调用。</p>
@@ -2045,162 +2233,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/" itemprop="url">iOS开发 提示信息被键盘遮挡解决方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T17:11:00+08:00">
-                2018-01-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[[<span class="built_in">UIApplication</span> sharedApplication].windows lastObject] addSubview:view];</div></pre></td></tr></table></figure>
-<p>但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidden状态，这时候我们的view就会被添加到一个隐藏的window上面导致，直接导致无法正常显示。</p>
-<p>我们项目中使用了Toast这个第三方库，所以需要对其做一些封装，核心代码如下所示（已适配iOS11系统）：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)showMessageToWindowCenter:(<span class="built_in">NSString</span> *)msg &#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (msg.length &lt; <span class="number">1</span>) &#123; <span class="keyword">return</span>; &#125;</div><div class="line"></div><div class="line">    <span class="built_in">NSTimeInterval</span> duration = [<span class="keyword">self</span> durationForMsg:msg];</div><div class="line"></div><div class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">        <span class="built_in">UIWindow</span> *window = [<span class="keyword">self</span> findKeyWindow];</div><div class="line">        [window makeToast:msg duration:duration position:CSToastPositionCenter];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">UIWindow</span> *)findKeyWindow &#123;</div><div class="line"></div><div class="line">    <span class="built_in">UIApplication</span> *app = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</div><div class="line"></div><div class="line">    <span class="built_in">UIWindow</span> *realKeyWindow = app.windows.firstObject;</div><div class="line">    <span class="built_in">NSInteger</span> count = app.windows.count;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = count - <span class="number">1</span>; i &gt; <span class="number">0</span>; i --) &#123;</div><div class="line"></div><div class="line">        <span class="built_in">UIWindow</span> *showWindow = [app.windows objectAtIndex:i];</div><div class="line">        <span class="keyword">if</span> (showWindow.hidden) &#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        realKeyWindow = showWindow;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> realKeyWindow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>目前还有一种情况没有处理(没有大碍)：Toast先弹出来，然后再调起键盘，这个时候键盘还是会把已出现的Toast挡住。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2250,7 +2282,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2363,7 +2395,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共49.8k字</span>
+  <span class="post-count">博客全站共50.3k字</span>
 </div>
 
 

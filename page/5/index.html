@@ -277,6 +277,162 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/" itemprop="url">iOS开发 提示信息被键盘遮挡解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T17:11:00+08:00">
+                2018-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[[<span class="built_in">UIApplication</span> sharedApplication].windows lastObject] addSubview:view];</div></pre></td></tr></table></figure>
+<p>但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidden状态，这时候我们的view就会被添加到一个隐藏的window上面导致，直接导致无法正常显示。</p>
+<p>我们项目中使用了Toast这个第三方库，所以需要对其做一些封装，核心代码如下所示（已适配iOS11系统）：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)showMessageToWindowCenter:(<span class="built_in">NSString</span> *)msg &#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (msg.length &lt; <span class="number">1</span>) &#123; <span class="keyword">return</span>; &#125;</div><div class="line"></div><div class="line">    <span class="built_in">NSTimeInterval</span> duration = [<span class="keyword">self</span> durationForMsg:msg];</div><div class="line"></div><div class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">        <span class="built_in">UIWindow</span> *window = [<span class="keyword">self</span> findKeyWindow];</div><div class="line">        [window makeToast:msg duration:duration position:CSToastPositionCenter];</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">UIWindow</span> *)findKeyWindow &#123;</div><div class="line"></div><div class="line">    <span class="built_in">UIApplication</span> *app = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</div><div class="line"></div><div class="line">    <span class="built_in">UIWindow</span> *realKeyWindow = app.windows.firstObject;</div><div class="line">    <span class="built_in">NSInteger</span> count = app.windows.count;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = count - <span class="number">1</span>; i &gt; <span class="number">0</span>; i --) &#123;</div><div class="line"></div><div class="line">        <span class="built_in">UIWindow</span> *showWindow = [app.windows objectAtIndex:i];</div><div class="line">        <span class="keyword">if</span> (showWindow.hidden) &#123;</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        realKeyWindow = showWindow;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> realKeyWindow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>目前还有一种情况没有处理(没有大碍)：Toast先弹出来，然后再调起键盘，这个时候键盘还是会把已出现的Toast挡住。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1309,7 +1465,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
 <p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
 <p>服务端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// create uploads dir to store files</span></div><div class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileDir.create()</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> code = <span class="number">400</span></div><div class="line"></div><div class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></div><div class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</div><div class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></div><div class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</div><div class="line">            ary.append([</div><div class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</div><div class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</div><div class="line">                ])</div><div class="line"></div><div class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// move file</span></div><div class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</div><div class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: <span class="subst">\(upload.fieldName)</span>"</span>)</div><div class="line">                code = <span class="number">200</span></div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> &#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</div><div class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</div><div class="line"></div><div class="line">            <span class="type">Log</span>.info(message: strJson!)</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            <span class="type">Log</span>.info(message: <span class="string">"<span class="subst">\(error)</span>"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"<span class="subst">\(code)</span>"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> response.setBody(json: dict)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"response error: <span class="subst">\(error)</span>"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.completed(status: .ok)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// create uploads dir to store files</span></div><div class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileDir.create()</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> code = <span class="number">400</span></div><div class="line"></div><div class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></div><div class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</div><div class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></div><div class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</div><div class="line">            ary.append([</div><div class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</div><div class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</div><div class="line">                ])</div><div class="line"></div><div class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// move file</span></div><div class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</div><div class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</div><div class="line">                code = <span class="number">200</span></div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> &#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</div><div class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</div><div class="line"></div><div class="line">            <span class="type">Log</span>.info(message: strJson!)</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> response.setBody(json: dict)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.completed(status: .ok)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>客户端代码：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</div><div class="line"></div><div class="line">    kWeakSelf(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</div><div class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (fileName) &#123;</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</div><div class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</div><div class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</div><div class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</div><div class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</div><div class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</div><div class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</div><div class="line"></div><div class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</div><div class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</div><div class="line"></div><div class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</div><div class="line"></div><div class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</div><div class="line"></div><div class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (completeBlock) &#123;</div><div class="line">                completeBlock();</div><div class="line">            &#125;</div><div class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</div><div class="line"></div><div class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>之后有空了，还可以研究以下使用Perfect后端进行APNS消息推送。这样有日志上传好之后，就可以收到消息推送，再也不用去翻看文件夹或者盯着控制台日志啦。</p>
@@ -1680,164 +1836,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/29/UISlider-使用采坑记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/29/UISlider-使用采坑记/" itemprop="url">UISlider 使用采坑记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T14:35:13+08:00">
-                2017-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。</p>
-<h4 id="改变slider的高度不能靠约束"><a href="#改变slider的高度不能靠约束" class="headerlink" title="改变slider的高度不能靠约束"></a>改变slider的高度不能靠约束</h4><p>在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因为既稳定又快捷。</p>
-<p>下面就是我们所要修改的地方，只需要创建一个继承UISlider的类，在里面重写一个方法，即可搞定。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></div><div class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="external">自定义UISlider Demo</a></p>
-<p>当然还有几个其他的方法，改变slider其他属性的。大家可以去查阅相应的API。</p>
-<p>最终我在初始化Slider的代码中将对控件高度的约束那行代码注释掉，bug修复。</p>
-<p>时间长了，啥都容易忘，好记性不如烂笔头，还是把他们记下来比较靠谱。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1887,7 +1885,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2000,7 +1998,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共49.8k字</span>
+  <span class="post-count">博客全站共50.3k字</span>
 </div>
 
 
