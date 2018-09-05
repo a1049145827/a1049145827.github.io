@@ -277,6 +277,359 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/24/Swift中Self关键字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/24/Swift中Self关键字/" itemprop="url">Swift中Self关键字</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T21:38:09+08:00">
+                2018-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用OC开发时大家都知道有一个self关键字，但Swift还有个Self关键字，看它第一个字母是大写的，大家应该能猜到应该是和类或者类型相关，今天我们就来探究一下它的作用。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_class.png" alt="类中使用Self关键字"></p>
+<p>这段代码里有self和Self，self指向类对象；Self只能作为函数关键字，setValue函数的返回值是ClassA类型。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_Struct_error.png" alt="结构体中使用Self报错"></p>
+<p>这段代码中，可以看到在Struct中使用Self关键字，编译器报错，提示我们结构体不支持Self关键字！</p>
+<p><strong>Self关键字只能用在类或者协议里，作为函数返回值类型，表示当前类。</strong></p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_Extension.png" alt="协议中使用Self关键字"></p>
+<p>这也就解释了为什么当我们想要在协议扩展中使用where子句进行条件限定的时候，Self后匹配条件只能是类。如果是结构体的话，编译器就会报错。</p>
+<p><strong>PS:如果想在协议扩展的where子句中做结构体的类型限定，可以在协议中使用关联类型</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/Swift中消失的main函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/22/Swift中消失的main函数/" itemprop="url">Swift中消失的main函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T10:00:26+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="OC项目中的main函数"><a href="#OC项目中的main函数" class="headerlink" title="OC项目中的main函数"></a>OC项目中的main函数</h3><p>大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Main.png" alt="OC的main函数"></p>
+<p>main函数作为程序启动后的<a href="http://blog.csdn.net/yu_4074/article/details/54966782" target="_blank" rel="external">第二个函数被调用</a>，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
+<h3 id="Swift项目中的main函数为何隐藏"><a href="#Swift项目中的main函数为何隐藏" class="headerlink" title="Swift项目中的main函数为何隐藏"></a>Swift项目中的main函数为何隐藏</h3><p>创建过Swift项目的童鞋应该会发现，项目中没有一个名为main.swift的文件，为什么app的入口没有了？官方文档的说法是这样的:</p>
+<p><em>In Xcode, Mac templates default to including a “main.swift” file, but for iOS apps the default for new iOS project templates is to add @UIApplicationMain to a regular Swift file. This causes the compiler to synthesize a mainentry point for your iOS app, and eliminates the need for a “main.swift” file.</em></p>
+<p>这段话的意思是，Swift项目中添加了@UIApplicationMain 到swift文件中，使得编译器合成了一个app入口，所以不需要main.swift文件。</p>
+<p>细心的童鞋会发现AppDelegate文件中多了个@UIApplicationMain的标志，启动app并放置断点，会发现其实main函数还是存在的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Main.png" alt="Swift中@UIApplicationMain标志"></p>
+<p>可能苹果认为我们并不需要自行配置app入口，所以干脆简化了项目配置，使用更加简单的方式启动应用，但有时候我们可能需要自己配置入口，例如我们要创建一个UIApplication的子类时。</p>
+<h3 id="main-swift"><a href="#main-swift" class="headerlink" title="main.swift"></a>main.swift</h3><p>如果你希望通过自行配置入口的方式来创建一个UIApplication子类，那么就要创建一个main.swift文件。</p>
+<p>首先创建一个swift文件，命名为main。<br>main.swift中代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(<span class="type">AppDelegate</span>.<span class="keyword">self</span>))</div></pre></td></tr></table></figure>
+<p><strong>方法讲解</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">UIApplicationMain</span><span class="params">(<span class="number">_</span> argc: Int32,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> argv: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;Int8&gt;&gt;!,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> principalClassName: String?,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> delegateClassName: String?)</span></span> -&gt; <span class="type">Int32</span></div></pre></td></tr></table></figure>
+<ul>
+<li>argc:系统或者用户传入的参数</li>
+<li>argv:系统或用户传入的实际参数</li>
+<li>principalClassName:确定了主要应用程序类的名称，这个参数可为nil，这样UIKit就会使用默认的程序类UIApplication</li>
+<li>delegateClassName:程序自定义的代理类名，这个类负责系统和代码之间的交互，一般为AppDelegate，也可自定义子类。</li>
+</ul>
+<p>写好main.swift之后，还需要把AppDelegate中的@UIApplicationMain注释掉或者删掉。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Not_UIApplicationMain.png" alt="Swift注释@UIApplicationMain标志"></p>
+<p>重新运行项目，app就能正常启动了。</p>
+<h3 id="main函数的参数"><a href="#main函数的参数" class="headerlink" title="main函数的参数"></a>main函数的参数</h3><p>最后一个参数我们一般会传入应用程序入口类AppDelegate，不过有些时候，特别是需要执行单元测试的场景，我们可能并不希望把整个App都运行起来，那么我们就可以自定义一个单元测试的程序入口类。类似于下面的代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Shared</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> appDelegate: <span class="type">AppDelegate</span>.<span class="type">Type</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="type">AppConstants</span>.<span class="type">IsRunningTest</span> &#123;</div><div class="line">    appDelegate = <span class="type">TestAppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    appDelegate = <span class="type">AppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(appDelegate))</div></pre></td></tr></table></figure>
+<p>具体的实现方式，大家可以参考Firefox的iOS版实现。<a href="https://github.com/mozilla-mobile/firefox-ios" target="_blank" rel="external">传送门</a></p>
+<h3 id="UIApplicationMain"><a href="#UIApplicationMain" class="headerlink" title="UIApplicationMain"></a>UIApplicationMain</h3><p>该部分介绍转自<a href="https://www.jianshu.com/p/5095220c099e" target="_blank" rel="external">木板钉钉</a>的简书<br>不管是通过 main.swift 文件还是 @UIApplicationMain 属性，最后都会调用<br>UIApplicationMain 函数。让我们来看看 UIApplicationMain 函数都做了什么：</p>
+<ol>
+<li><p>UIApplicationMain 创建app中的第一个实例，应用程序实例，<br>UIApplication.shared。 UIApplicationMain 函数的第三个参数指定了应用程序实例所属的类，默认该参数是 nil ，则其默认类就是 UIApplication。如果你想subclass一个UIApplication， 那就应该将 UIApplicationMain 函数的第三个参数指定为你的子类名字，例如 NSStringFromClass(MyAppSubclass.self) .</p>
+</li>
+<li><p>UIApplicationMain 创建app中的第二个实例，app delegate。UIApplicationMain 函数的第四个参数指定了app delegate所属的类，<br>NSStringFromClass(AppDelegate.self) 。如果使用 @UIApplicationMain 属性，该属性默认附加在 AppDelegate 类的声明中，其意义与UIApplicationMain 函数一样。</p>
+</li>
+<li><p>如果 Info.plist 文件指定了一个main storyboard， UIApplicationMain 函数就载入storyboard并找到其中的initial view controller（或者说是storyboard的入口点），并实例化该view controller，这是创建的第三个实例。对于Single View app模版，这个实例就是 ViewController 类的实例，该类定义在 ViewController.swift 中。</p>
+</li>
+<li><p>如果存在main.storyboard文件，UIApplicationMain 函数现在就该创建应用程序的window了，这是app中的第四个实例，一个UIWindow类的实例（或者在AppDelegate中，可以替换为一个UIWindow子类的实例）。创建window实例后，将其指定为AppDelegate的 window 属性，同时，将initial view controller实例的指定为window实例的 rootViewController属性。</p>
+</li>
+<li><p>UIApplicationMain 现在开始处理AppDelegate实例并调用它的一些方法，如 application(_:didFinishLaunchingWithOptions:)， 在该方法中，我们可以加入自己的代码进行一些初始化的设定，但不要进行一些比较耗时的工作，因为在这个时候，我们的app界面还没有显示出来。</p>
+</li>
+<li><p>如果存在main.storyboard文件， UIApplicationMain 函数开始调用UIWindow的实例方法 makeKeyAndVisible ，这样app界面就显示出来了。</p>
+</li>
+<li><p>在window显示的过程中，将获取root view controller的main view， 如果view controller的view是通过storyboard或xib文件获取的，那么该nib文件会被加载。nib文件中的实例化并初始化，并称为初始界面的对象，view及其subview将被放置在window中。view controller的 viewDidLoad 方法被调用，在这里可以写一些自己的代码。</p>
+</li>
+</ol>
+<p>然后应用程序已经启动完成并开始运行，UIApplicationMain 函数仍然运行而且永不return，它继续监视用户行为，管理eventloop等。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/不用官方SDK实现微信支付、支付宝支付-Swift版/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1514,352 +1867,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/09/mac下用sed报错-command-c-expects-followed-by-text/" itemprop="url">Mac下用sed报错 command c expects  followed by text</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T18:11:02+08:00">
-                2018-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一条很简单的替换文本的命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div><div class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></div><div class="line"><span class="comment"># 也有可能报错 invalid command code W</span></div></pre></td></tr></table></figure>
-<p>但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Edit files <span class="keyword">in</span>-place, saving backups with the specified extension.</div><div class="line"></div><div class="line">If a zero-length extension is given, no backup will be saved.  It</div><div class="line"></div><div class="line">is not recommended to give a zero-length extension when <span class="keyword">in</span>-place</div><div class="line"></div><div class="line">editing files, as you risk corruption or partial content <span class="keyword">in</span> situ-</div><div class="line"></div><div class="line">ations <span class="built_in">where</span> disk space is exhausted, etc.</div></pre></td></tr></table></figure>
-<p>大概的意思就是说用-i的选项时mac会进行强制备份，所以你必须给出一个后缀名进行备份，如果你不想进行备份，直接用空字符即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">''</span> <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/07/Swift-关键字-defer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/07/Swift-关键字-defer/" itemprop="url">Swift-关键字 defer</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T14:36:36+08:00">
-                2018-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="defer-关键字有什么作用"><a href="#defer-关键字有什么作用" class="headerlink" title="defer 关键字有什么作用"></a>defer 关键字有什么作用</h2><p>Swift2.0 中加入了 defer 新语法声明。defer 译为延缓、推迟之意。那么在 Swift 中它应该如何执行呢？<br>很简单，用一句话概括，就是 defer block 里的代码会在函数（scope） return 之前执行，无论函数是从哪个分支 return 的，还是有 throw，还是自然而然走到最后一行。</p>
-<p>这个关键字就跟 Java 里的 try-catch-finally 的finally一样，不管 try catch 走哪个分支，它都会在函数 return 之前执行。而且它比 Java 的 finally 还更强大的一点是，它可以独立于 try catch 存在，所以它也可以成为整理函数流程的一个小帮手。在函数 return 之前无论如何都要做的处理，可以放进这个 block 里，让代码看起来更整洁一些~</p>
-<p>下面是 swift 文档上的例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fridgeIsOpen = <span class="literal">false</span></div><div class="line"><span class="keyword">let</span> fridgeContent = [<span class="string">"milk"</span>, <span class="string">"eggs"</span>, <span class="string">"leftovers"</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fridgeContains</span><span class="params">(<span class="number">_</span> food: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    fridgeIsOpen = <span class="literal">true</span></div><div class="line">    <span class="keyword">defer</span> &#123;</div><div class="line">        fridgeIsOpen = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> result = fridgeContent.<span class="built_in">contains</span>(food)</div><div class="line">    <span class="keyword">return</span> result</div><div class="line">&#125;</div><div class="line">fridgeContains(<span class="string">"banana"</span>)</div><div class="line"><span class="built_in">print</span>(fridgeIsOpen)</div></pre></td></tr></table></figure>
-<p>这个例子里执行的顺序是，先 fridgeIsOpen = true，然后是函数体正常的流程，最后在 return 之前执行 fridgeIsOpen = false。</p>
-<h2 id="几个简单的使用场景"><a href="#几个简单的使用场景" class="headerlink" title="几个简单的使用场景"></a>几个简单的使用场景</h2><h3 id="try-catch-结构"><a href="#try-catch-结构" class="headerlink" title="try catch 结构"></a>try catch 结构</h3><p>最典型的场景，我想也是 defer 这个关键字诞生的主要原因吧：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"finally"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">do</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="type">NSError</span>()</div><div class="line">    <span class="built_in">print</span>(<span class="string">"impossible"</span>)</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"handle error"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>不管 do block 是否 throw error，有没有 catch 到，还是 throw 出去了，都会保证在整个函数 return 前执行 defer。在这个例子里，就是先 print 出 “handle error” 再 print 出 “finally”。</p>
-<p>do block 里也可以写 defer：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"finally"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">throw</span> <span class="type">NSError</span>()</div><div class="line">  <span class="built_in">print</span>(<span class="string">"impossible"</span>)</div><div class="line">&#125; <span class="keyword">catch</span> &#123;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"handle error"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么它执行的顺序就会是在 catch block 之前，也就是先 print 出 “finally” 再 print 出 “handle error”。</p>
-<h3 id="清理工作、回收资源"><a href="#清理工作、回收资源" class="headerlink" title="清理工作、回收资源"></a>清理工作、回收资源</h3><p>跟 swift 文档举的例子类似，defer 有一个很适合的使用场景就是用来做清理工作。文件操作就是一个很好的例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 关闭文件</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">let</span> fileDescriptor = <span class="keyword">open</span>(url.path, <span class="type">O_EVTONLY</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    close(fileDescriptor)</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// use fileDescriptor...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样就不怕哪个分支忘了写，或者中间 throw 个 error，导致 fileDescriptor 没法正常关闭。还有一些类似的场景：</p>
-<h3 id="dealloc-手动分配的空间"><a href="#dealloc-手动分配的空间" class="headerlink" title="dealloc 手动分配的空间"></a>dealloc 手动分配的空间</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">let</span> valuePointer = <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">T</span>&gt;.allocate(capacity: <span class="number">1</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    valuePointer.deallocate(capacity: <span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// use pointer...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="加-解锁："><a href="#加-解锁：" class="headerlink" title="加/解锁："></a>加/解锁：</h3><p>下面是 swift 里类似 Objective-C 的 synchronized block 的一种写法，可以使用任何一个 NSObject 作 lock。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  objc_sync_enter(lock)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    objc_sync_exit(lock)</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// do something...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>像这种成对调用的方法，可以用 defer 把它们放在一起，一目了然。</p>
-<h3 id="调用-completion-block"><a href="#调用-completion-block" class="headerlink" title="调用 completion block"></a>调用 completion block</h3><p>这是一个让我感觉 “如果当时知道 defer” 就好了的场景，就是有时候一个函数分支比较多，可能某个小分支 return 之前就忘了调 completion block，结果藏下一个不易发现的 bug。用 defer 就可以不用担心这个问题了：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(completion: <span class="params">()</span></span></span> -&gt; <span class="type">Void</span>) &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="keyword">self</span>.isLoading = <span class="literal">false</span></div><div class="line">    completion()</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">guard</span> error == <span class="literal">nil</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="comment">// handle success</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有时候 completion 要根据情况传不同的参数，这时 defer 就不好使了。不过如果 completion block 被存下来了，我们还是可以用它来确保执行后能释放：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="keyword">self</span>.completion = <span class="literal">nil</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (succeed) &#123;</div><div class="line">    <span class="keyword">self</span>.completion(.success(result))</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">self</span>.completion(.error(error))</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="调-super-方法"><a href="#调-super-方法" class="headerlink" title="调 super 方法"></a>调 super 方法</h3><p>有时候 override 一个方法，主要目的是在 super 方法之前做一些准备工作，比如 UICollectionViewLayout 的 prepare(forCollectionViewUpdates:)，那么我们就可以把调用 super 的部分放在 defer 里：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">override</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="keyword">super</span>.foo()</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// some preparation before super.foo()...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h2><h3 id="任意-scope-都可以有-defer"><a href="#任意-scope-都可以有-defer" class="headerlink" title="任意 scope 都可以有 defer"></a>任意 scope 都可以有 defer</h3><p>虽然大部分的使用场景是在函数里，不过理论上任何一个 { } 之间都是可以写 defer 的。比如一个普通的循环：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sumOfOdd = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>...<span class="number">10</span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Look! It's \(i)"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> &#123;</div><div class="line">    <span class="keyword">continue</span></div><div class="line">  &#125;</div><div class="line">  sumOfOdd += i</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>continue 或者 break 都不会妨碍 defer 的执行。甚至一个平白无故的 closure 里也可以写 defer：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"bye!"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"hello!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>只不过这样就没什么意义了</p>
-<h3 id="必须执行到-defer-才会触发"><a href="#必须执行到-defer-才会触发" class="headerlink" title="必须执行到 defer 才会触发"></a>必须执行到 defer 才会触发</h3><p>假设有这样一个问题：一个 scope 里的 defer 能保证一定会执行吗？<br>答案是否。。。比如下面这个例子：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">  <span class="keyword">do</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="type">NSError</span>()</div><div class="line">    <span class="built_in">print</span>(<span class="string">"impossible"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"finally"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">try</span>? foo()</div></pre></td></tr></table></figure>
-<p>不会执行 defer，不会 print 任何东西。这个故事告诉我们，至少要执行到 defer 这一行，它才保证后面会触发。同样道理，提前 return 也是不行的：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="keyword">guard</span> <span class="literal">false</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"finally"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="多个-defer"><a href="#多个-defer" class="headerlink" title="多个 defer"></a>多个 defer</h3><p>一个 scope 可以有多个 defer，顺序是像栈一样倒着执行的：每遇到一个 defer 就像压进一个栈里，到 scope 结束的时候，后进栈的先执行。如下面的代码，会按 1、2、3、4、5、6 的顺序 print 出来。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">()</span></span> &#123;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"1"</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"6"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"2"</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"5"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"3"</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"4"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是我强烈建议不要这么写。我是建议一个 scope 里不要有多个 defer，感觉除了让读代码的人感觉混乱之外没有什么好处。</p>
-<h3 id="defer-的作用域（重要）"><a href="#defer-的作用域（重要）" class="headerlink" title="defer 的作用域（重要）"></a>defer 的作用域（重要）</h3><p><strong>注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">lookforSomething</span><span class="params">(<span class="number">_</span> name: String)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">  <span class="comment">// 这里是作用域1 整个函数作用域</span></div><div class="line"></div><div class="line">  <span class="built_in">print</span>(<span class="string">"1-1"</span>)</div><div class="line">  <span class="keyword">if</span> name == <span class="string">""</span> &#123;</div><div class="line">    <span class="comment">// 这里是作用域2 if的作用域</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"2-1"</span>)</div><div class="line">    <span class="keyword">defer</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"2-2"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"2-3"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"1-2"</span>)</div><div class="line">  <span class="keyword">defer</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"1-3"</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">print</span>(<span class="string">"1-4"</span>)</div><div class="line"></div><div class="line">  <span class="keyword">if</span> name == <span class="string">"hello"</span> &#123;</div><div class="line">    <span class="comment">// 作用域3</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"3-1"</span>)</div><div class="line">    <span class="keyword">defer</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"3-2"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"3-3"</span>)</div><div class="line">    <span class="keyword">defer</span> &#123;</div><div class="line">      <span class="built_in">print</span>(<span class="string">"3-4"</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 有兴趣的看看依次输出什么</span></div><div class="line"><span class="comment">// try! lookforSomething("")</span></div><div class="line"><span class="comment">// 调出 debug Area 快捷键 shift+ command + y</span></div><div class="line"><span class="keyword">try</span>! lookforSomething(<span class="string">"hello"</span>)</div></pre></td></tr></table></figure>
-<p>之前有个地方描述可能不准确，并不是函数结束时开始执行 defer 栈推出操作，而是每当一个作用域结束就进行该作用域 defer 执行。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://link.jianshu.com/?t=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F24045895%2Fwhat-is-the-swift-equivalent-to-objective-cs-synchronized" target="_blank" rel="external">What is the Swift equivalent to Objective-C’s “@synchronized”?</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1909,7 +1916,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2022,7 +2029,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共50.4k字</span>
+  <span class="post-count">博客全站共52.3k字</span>
 </div>
 
 

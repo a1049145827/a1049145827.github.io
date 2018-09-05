@@ -277,6 +277,327 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/24/使用shell脚本将build版本号自动修改为当前日期/" itemprop="url">使用shell脚本将build版本号自动修改为当前日期</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:27:21+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>产品部要求App内加入BI埋点，好用来统计产品热点以及一些运营数据。其中一个需求是要知道我们打包上传的日期。</p>
+<p>我思来想去，发现还是把它放在build版本号比较好，类似于2018012401这样比价直观，而且也符合build版本号的常规用途，在网络请求时也有助于后端同学区分版本。</p>
+<p>看官们莫要着急，这就呈上代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dateNum=$(date +%Y%m%d)</div><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</div><div class="line">buildDate=$(($buildNumber / <span class="number">100</span>))</div><div class="line"><span class="keyword">if</span> [ $buildDate -ne $dateNum ]</div><div class="line">then</div><div class="line">buildNumber=$(($dateNum * <span class="number">100</span> + <span class="number">1</span>))</div><div class="line">echo <span class="string">"$buildDate != $dateNum"</span></div><div class="line"><span class="meta"># 日期不相等时重置build版本号</span></div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>使用时有一点需要注意，这个脚本不需要勾选 run script only when installing，这样每次build、run、archive的时候都会去检查。而且这个脚本的执行顺序最好提前一些，一定要排在打包时build自增脚本的前面，才能保证每次都获取到正确的build版本号。</p>
+<p>本来觉得因为之前有过脚本实现build版本自增的经历，这个改起来应该也是不成问题。</p>
+<p>没想到还是掉了个坑，怪自己太异想天开，上次是直接拿了网上的代码，然后改写的。这次是为了自己学习一下独立写shell脚本，然后写的时候不自觉的带上了平时写编译语言的习惯：等号两边加空格！导致shell执行时出现问题，害我排查好几次才发觉。</p>
+<p>这也让我更加明白，作为一个开发人员，特别是如果想成为全栈开发，决不能有思维定势，多学习，注意细节。</p>
+<p>善用工具提高效率，才是王道！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/记一次巧妙的宏定义的使用方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/24/记一次巧妙的宏定义的使用方式/" itemprop="url">记一次巧妙的宏定义的使用方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T15:15:36+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近有个需求，需要将原来的一个界面扩展出新的样式，供活动使用。</p>
+<p>于是翻看工程里原有的代码，发现有些类里都有这样的宏定义调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@section(<span class="string">@"3"</span>, <span class="built_in">NSStringFromClass</span>([WVRADViewSection <span class="keyword">class</span>]))</div></pre></td></tr></table></figure>
+<p>起初看着有点不解，宏定义不都是直接调用的么，为啥要在前面加个@？</p>
+<p>赶紧点进去看看，是这么一个宏定义：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#define section(_sectionID_, _className_) \</span></div><div class="line">compatibility_alias _WVRViewModelDispatcher WVRViewModelDispatcher; \</div><div class="line">+ (<span class="keyword">void</span>)load &#123; \</div><div class="line">[WVRViewModelDispatcher registerSection:_sectionID_ className:_className_]; \</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就是load方法的宏定义，方便通过映射来做类型匹配，不需要在管理类里导入太多头文件。</p>
+<p>但是我还是比较纠结 compatibility_alias 的用途。网上有解释说这个是苹果留的关键字，用来重构时方便改变类名，但是我查找 _WVRViewModelDispatcher，并没有地方引用，这就很奇怪，为什么要在这里放一行没有用到的代码。</p>
+<p>经过一番思考，我突然想起来问题的根源：这个宏定义使用的时候需要在前面加一个@，这么使用肯定要有理由的，我们看到这个宏定义使用了平时很常见的section作为名称，这本身就不合理，但是由于compatibility_alias的存在，使用时就必须在前面加上@，编译器才认为这是在调用一个宏定义，而不是一个变量或者方法。</p>
+<p>想到这里，我立即去工程里试了一下，这样果然有效的可以让编译器区分开宏定义和变量。</p>
+<p>不得不说，这么使用确实很巧妙，但是也很让人懵逼。</p>
+<p>经历此事，我再次深深的感到，项目中写好文档的重要性！！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/19/使用MongoDB作为数据库/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1517,334 +1838,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/" itemprop="url">使用Swift后端框架Perfect做一个文件上传服务器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T21:55:51+08:00">
-                2018-01-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Swift后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放在电脑上，字体大小随便调，更有搜索这种神器级别的功能，查找bug不是梦。</p>
-<p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
-<p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
-<p>服务端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// create uploads dir to store files</span></div><div class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileDir.create()</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> code = <span class="number">400</span></div><div class="line"></div><div class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></div><div class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</div><div class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></div><div class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</div><div class="line">            ary.append([</div><div class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</div><div class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</div><div class="line">                ])</div><div class="line"></div><div class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// move file</span></div><div class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</div><div class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</div><div class="line">                code = <span class="number">200</span></div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> &#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</div><div class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</div><div class="line"></div><div class="line">            <span class="type">Log</span>.info(message: strJson!)</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> response.setBody(json: dict)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.completed(status: .ok)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>客户端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</div><div class="line"></div><div class="line">    kWeakSelf(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</div><div class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (fileName) &#123;</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</div><div class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</div><div class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</div><div class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</div><div class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</div><div class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</div><div class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</div><div class="line"></div><div class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</div><div class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</div><div class="line"></div><div class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</div><div class="line"></div><div class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</div><div class="line"></div><div class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (completeBlock) &#123;</div><div class="line">                completeBlock();</div><div class="line">            &#125;</div><div class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</div><div class="line"></div><div class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>之后有空了，还可以研究以下使用Perfect后端进行APNS消息推送。这样有日志上传好之后，就可以收到消息推送，再也不用去翻看文件夹或者盯着控制台日志啦。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/03/Windows-安装原版镜ISO像/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/03/Windows-安装原版镜ISO像/" itemprop="url">Windows 安装原版镜ISO像</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-03T21:35:26+08:00">
-                2018-01-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Windows安装/" itemprop="url" rel="index">
-                    <span itemprop="name">Windows安装</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="安装程序无法创建新的系统分区，也无法定位现有系统分区"><a href="#安装程序无法创建新的系统分区，也无法定位现有系统分区" class="headerlink" title="安装程序无法创建新的系统分区，也无法定位现有系统分区"></a>安装程序无法创建新的系统分区，也无法定位现有系统分区</h4><p>最近同事在闲鱼淘了个笔记本来玩，安装系统的时候发现主硬盘无法引导启动，用原版镜像安装的时候报错无法继续执行。</p>
-<p>报错问题：安装程序无法创建新的系统分区，也无法定位现有系统分区</p>
-<p>最终只能做个PE U盘来帮忙，顺便记录下这个烦人的问题。</p>
-<p>解决步骤：</p>
-<ol>
-<li><p>第一步：把win7或win8、win10镜像发在你电脑的非系统盘的其他硬盘上，或者放在U盘也可以。</p>
-</li>
-<li><p>第二步：重启机器，通过U 盘启动．进入win pe系统，关于这点我说一下，有些朋友也许不知道什么叫win pe系统，这个win pe 究竟有什么用途，其实你可以把win pe 理解为一个微缩版本win xp，他和win xp 使用差不多。只是大部分的功能被禁用了，所以他的体积也非常小，虽然大部分的功能被禁用，可是他不影响第三方软件使用，比如Ghost , PQ 等一些软件依旧在win pe运行自如。</p>
-</li>
-<li><p>第三步：如果PE里带虚拟光驱，此步骤可以忽略。（把windows 7的ISO镜像解压到电脑的非系统盘的其他硬盘上。如D:\windows.…。当然你也可以不用建立 win7 文件夹。在这里再说明一点就是，一定要把你想分的分区分好．尽量不要频繁调整硬盘各个分区的大小，尤其是主分区，一定要考虑周全。）</p>
-</li>
-<li><p>第四步：进入win pe系统，格式化C盘为NTFS。C盘最好有15 G以上的空间，安装完 win7 大概要用 8G 。我在这里建议大家分 50G 。</p>
-</li>
-<li><p>第五步（最关键一步）：从你解压的安装程序的文件夹中找到boot, bootmgr 和 sources 这三个文件或文件夹，并且复制到C盘根目录下。</p>
-</li>
-<li><p>第六步：在win pe系统中运行cmd ，输入“ c:\boot\bootsect.exe /nt60 c: ”（注意exe和/nt60、/nt60和c:之间有空格），然后回车，看到提示successful 字样（画面会很快闪过，以至于来不及看。）的语句即成功了！然后重起电脑。</p>
-</li>
-<li><p>第七步：可以把U盘从电脑中拔出，然后等待系统从硬盘启动。或者加载U盘启动项后选择从本地引导启动。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1894,7 +1887,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2007,7 +2000,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共50.4k字</span>
+  <span class="post-count">博客全站共52.3k字</span>
 </div>
 
 

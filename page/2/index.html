@@ -277,6 +277,417 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/iOS中的图片使用方式、内存对比和最佳实践-转/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/25/iOS中的图片使用方式、内存对比和最佳实践-转/" itemprop="url">iOS中的图片使用方式、内存对比和最佳实践(转)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T13:08:13+08:00">
+                2018-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><a href="https://juejin.im/post/5b2ddfa7e51d4553156be305" target="_blank" rel="external">原文链接</a></strong></p>
+<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>　　我们的对比主要关注内存的占用情况。对比的格式是jpg和png这两种最广泛使用的格式，分别代表了有损压缩和无损压缩；关于它们的特点和介绍，可以参考郭耀源的这篇文章：<a href="https://link.juejin.im?target=https%3A%2F%2Fblog.ibireme.com%2F2015%2F11%2F02%2Fmobile_image_benchmark%2F" target="_blank" rel="external">移动端图片格式调研</a>。我们可以看到，在iOS设备上它们的解码消耗在一个量级，速度较快。<br>　　WWDC2018苹果重点关注了图片的内存占用情况（因为此前大家的通用做法实际上是相对低效的），并且给了大家一些指导。这里我们会用demo实验的方式（并且通过工具来进行benchmark），为大家揭示一些事实和现象，供大家去理解和分析，从而去形成我们代码的最佳实践。</p>
+<h3 id="Demo-DownSampleDemo"><a href="#Demo-DownSampleDemo" class="headerlink" title="Demo: DownSampleDemo"></a>Demo: <a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fdustturtle%2FDownSampleDemo" target="_blank" rel="external">DownSampleDemo</a></h3><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>　　首先，苹果告诉我们，图片在应用中主要的内存占用（这通常发生在图片要被载入并显示时）和图片本身的大小实际是无关的；重要的是图片的尺寸。decode buffer的计算方式是width*height*N,这里的N通常是4(最常见的ARGB888格式)，N取决于你显示所使用的格式。但很多时候，我们会直接把一个UIImage传递给UIImageView， 实际上该View的尺寸可能远远的小于UIImage本身。</p>
+<h3 id="使用图片的三种方式"><a href="#使用图片的三种方式" class="headerlink" title="使用图片的三种方式:"></a>使用图片的三种方式:</h3><h4 id="方式A"><a href="#方式A" class="headerlink" title="方式A"></a>方式A</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">image1.image = <span class="built_in">UIImage</span>(named: <span class="string">"000.jpg"</span>)</div></pre></td></tr></table></figure>
+<p>　<br>　　这是我们最通常使用图片的方式，可能有人会想到imagewithcontentsoffile,实际上它和上面的方法只有一个不同之处： 正常情况下imageNamed会缓存这个图片在整个App存续期间，这样就无需重复的decode；而imagewithcontentsoffile则没有这个缓存，图片不使用了就会释放内存。但这对我们的case并无帮助，因为我们是在使用这些图片，并且观察它们的内存占用.</p>
+<h4 id="方式B"><a href="#方式B" class="headerlink" title="方式B"></a>方式B</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">UIImage</span> *)OriginImage:(<span class="built_in">UIImage</span> *)image scaleToSize:(<span class="built_in">CGSize</span>)size &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 创建一个bitmap的context</span></div><div class="line">    <span class="comment">// 并把它设置成为当前正在使用的context</span></div><div class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(size);</div><div class="line"></div><div class="line">    <span class="comment">// 绘制改变大小的图片</span></div><div class="line">    [image drawInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, size.width, size.height)];</div><div class="line"></div><div class="line">    <span class="comment">// 从当前context中创建一个改变大小后的图片</span></div><div class="line">    <span class="built_in">UIImage</span>* scaledImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</div><div class="line"></div><div class="line">    <span class="comment">// 使当前的context出堆栈</span></div><div class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</div><div class="line"></div><div class="line">    <span class="comment">// 返回新的改变大小后的图片</span></div><div class="line">    <span class="keyword">return</span> scaledImage;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　<br>　　这是一种被广泛使用的缩放图片的办法。</p>
+<h4 id="方式C"><a href="#方式C" class="headerlink" title="方式C"></a>方式C</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">downsample</span><span class="params">(imageAt imageURL: URL, to pointSize: CGSize, scale: CGFloat)</span></span> -&gt; <span class="type">UIImage</span> &#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> sourceOpt = [kCGImageSourceShouldCache : <span class="literal">false</span>] <span class="keyword">as</span> <span class="type">CFDictionary</span></div><div class="line">    <span class="comment">// 其他场景可以用createwithdata (data并未decode,所占内存没那么大),</span></div><div class="line">    <span class="keyword">let</span> source = <span class="type">CGImageSourceCreateWithURL</span>(imageURL <span class="keyword">as</span> <span class="type">CFURL</span>, sourceOpt)!</div><div class="line"></div><div class="line">    <span class="keyword">let</span> maxDimension = <span class="built_in">max</span>(pointSize.width, pointSize.height) * scale</div><div class="line">    <span class="keyword">let</span> downsampleOpt = [kCGImageSourceCreateThumbnailFromImageAlways : <span class="literal">true</span>,</div><div class="line">                         kCGImageSourceShouldCacheImmediately : <span class="literal">true</span> ,</div><div class="line">                         kCGImageSourceCreateThumbnailWithTransform : <span class="literal">true</span>,</div><div class="line">                         kCGImageSourceThumbnailMaxPixelSize : maxDimension] <span class="keyword">as</span> <span class="type">CFDictionary</span></div><div class="line">    <span class="keyword">let</span> downsampleImage = <span class="type">CGImageSourceCreateThumbnailAtIndex</span>(source, <span class="number">0</span>, downsampleOpt)!</div><div class="line">    <span class="keyword">return</span> <span class="type">UIImage</span>(cgImage: downsampleImage)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　<br>　　这是苹果介绍给我们的新方法。</p>
+<h4 id="关于测试"><a href="#关于测试" class="headerlink" title="关于测试"></a>关于测试</h4><p>　　<font color="#FF0000">测试设备</font> ： 1.iPhone8 11.4， 2.iPhone6 12beta2<br>　　<font color="#FF0000">测试图片格式</font> ： png/jpg<br>　　<font color="#FF0000">测试的图片使用方式</font> ：3种<br>　　我们将2560*1440大小的图片放到282*138的View中，对于缩放我们使用2x的格式来显示以保证其效果。</p>
+<p>　　实验数据的细节在DownSampleDemo的ViewController.swift的注释中，这里直接告诉大家结论：</p>
+<ol>
+<li>xcode面板上所显示的内存占用并不可靠，在很多case下应用占用的内存要比其上显示的多的多（特别是对于iOS11.4的设备）。但可以用来粗略的查看内存占用，如果这里超了很多，那肯定是超了</li>
+<li>可以使用instruments的allocation和memory debugging的memgraph+命令行分析这两种方式来观测内存的占用</li>
+<li>第一种方式下jpg载入后的内存分为imageIO和IOkit两部分，png载入只有imageIO部分，jpg内存占用比png要少不少</li>
+<li>第二种方式的数据在xcode面板上失真，通过另外两种方式可以看到它非常不靠谱。内存消耗甚至可能超过第一种。</li>
+<li>第三种方式的内存占用非常完美，严格的遵守了公式计算出来的大小（跟downsample后的尺寸有关），内存占用在CG raster data中。</li>
+<li><strong>memgraph命令： vmmap –summary xxx.memgraph</strong></li>
+<li><strong>allocation我们只需要看VM allocation栏目下的dirty size和swapped size，这里需要手动的打开snapshot才能看到该栏目的数据,并且需要适当的重复多次运行才能保证结果的正确性</strong></li>
+</ol>
+<p><strong>VMTracker运行截图：</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/23/1642b31a1e330470?imageView2/0/w/1280/h/960/ignore-error/1" alt=""></p>
+<p><strong>memgraph命令结果截图：</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/23/1642b31a1ca8fc80?imageView2/0/w/1280/h/960/ignore-error/1" alt=""></p>
+<h3 id="最后，来自苹果的最佳实践-强烈推荐大家使用downsample来处理大图！"><a href="#最后，来自苹果的最佳实践-强烈推荐大家使用downsample来处理大图！" class="headerlink" title="最后，来自苹果的最佳实践:强烈推荐大家使用downsample来处理大图！"></a>最后，来自苹果的最佳实践:强烈推荐大家使用downsample来处理大图！</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/Swift-VS-Kotlin之内存管理（译）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/21/Swift-VS-Kotlin之内存管理（译）/" itemprop="url">Swift VS Kotlin之内存管理（译）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T09:20:45+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>原文链接：<a href="https://blog.indoorway.com/swift-vs-kotlin-the-differences-in-memory-management-860828edf8" target="_blank" rel="external">blog.indoorway.com</a></strong></p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png" alt="Illustration by [Wojciech Tymicki](https://dribbble.com/Panweb)"></p>
+<p><center> 由 <a href="https://dribbble.com/Panweb" target="_blank" rel="external">Wojciech Tymicki</a> 设计 </center></p>
+<p>在我的上一篇文章中，我提到了 Swift 和 Kotlin 的内存管理，这是你可以在<a href="https://blog.indoorway.com/swift-v-kotlin-the-differences-that-matter-50b2d393f526" target="_blank" rel="external">这里</a>找到它。我曾把这个问题留给你一个人，现在我想要补偿你为你描述他们之间的不同。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif" alt=""></p>
+<h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a><em>垃圾收集</em></h1><p>　　　　　<br>垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，<a href="http://www.memorymanagement.org/glossary/g.html#term-garbage-collection" target="_blank" rel="external">这里有解释</a>。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。</p>
+<p>这是你的内存堆（不要把它与分配给你应用的<a href="http://net informations.com/faq/net/stack-heap.htm" target="_blank" rel="external">stack</a>）混淆。它现在是空的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Empty_memory_heap.png" alt="1) 空内存堆"></p>
+<p><center> 1) 空内存堆 </center></p>
+<p>当App启动的时候，它在运行时将内存分配给对象(引用类型)。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/Memory_heap_with_allocated.png" alt="2) 具有分配内存块的内存堆(蓝色矩形)"></p>
+<p><center> 2) 具有分配内存块的内存堆(蓝色矩形) </center></p>
+<p>过了一段时间，一些对象可以进行垃圾收集，然后从内存堆中删除。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/removed_from_the_memory_heap.png" alt="3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象"></p>
+<p><center> 3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象 </center></p>
+<p>当一个对象没有被引用时，就会成为垃圾收集的最佳候选者。例如，你有一个 TODO 应用程序，有一个任务列表屏幕和一个任务细节屏幕。首先，应用程序分配内存，以便在启动时显示任务列表。当用户点击列表上的一个条目时，将显示详情页面。对于这个操作，你的应用程序动态地分配额外的内存到堆。当用户关闭任务细节页面时，应该删除与之相关的所有对象。原因很简单。你没有无限的记忆，你必须重新获得它。这就是为什么系统删除不可访问的对象。好处是显而易见的，毫无疑问。这意味着程序员不负责删除未使用的对象。与 C、C++ 不同，Kotlin 和 Swift 都实现了这一过程的自动化。所以，如果我们有这个免费的功能，一切都神奇地发生了，你应该关心它吗？是的，你应该这样做，因为这并不意味着你不能犯错。此外，这些知识还可以让你编写更好的应用程序，使其运行更加顺畅。如果你想成为一名优秀的 Android 或 iOS 开发人员，你应该精通内存管理。</p>
+<p>尽管 Swift 和 Kotlin 让程序员从为应用程序释放内存的任务中解脱出来，但它们的方式不同。我将尽可能简单地描述这个高级主题，我不会过于关注细节，因为我想让大家都能理解这篇文章。对于那些想了解更多的人，我留下了一些参考资料。让我们先从 Kotlin 开始。</p>
+<h1 id="Kotlin-的内存管理-Android"><a href="#Kotlin-的内存管理-Android" class="headerlink" title="Kotlin 的内存管理 (Android)"></a><em>Kotlin 的内存管理 (Android)</em></h1><p>　　　<br>Android 使用最常见的垃圾收集类型，即使用 CMS算法 跟踪垃圾收集。CMS 表示并发的标记清除。对于我们的需求，你可以忽略“C”字母。更重要的是理解基本的标记和清除算法是如何工作的。</p>
+<p>第一步是定义垃圾收集根。它们可以是静态变量、活动线程（例如 Android 中的 UI 线程），或者其他在<a href="https://developer.android.com/studio/profile/am-memory#treeroot" target="_blank" rel="external">这里列出的</a>。完成此操作后，GC将开始 <strong>标记阶段</strong> 。为此，GC 遍历整个对象树。每个创建的对象都有一个标记位，默认设置为0。当一个对象在标记阶段被访问时，它的标记位被设置为1 —— 这意味着它是可用的。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/reachable.png" alt=""></p>
+<p>在上面的图片中，这个阶段后保持灰色的对象是不可访问的，因此我们的App不再需要它们了。但是，在你进一步讨论之前，请再看一看这幅画。你注意到那些互相指向的对象了吗？iOS 开发者称它们为引用周期。这个问题在 Android 世界中并不存在。当没有到 GC根 的路径时，将删除“循环”。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/self_five.gif" alt=""></p>
+<p>另一个值得一提的标志阶段是它的隐性成本。你应该熟悉 <strong>全局停顿</strong> 这个词。在每个收集周期之前，GC 暂停我们的应用程序，以防止在遍历对象树时分配新对象。暂停持续时间取决于可访问对象的数量。对象的总数或堆大小并不重要。这就是为什么创建许多“活着的”不必要的对象是痛苦的 —— 例如，在循环中自动装箱。GC 在内存堆几乎满时启动进程。因此，当你创建许多不必要的对象时，你会更快地填充内存堆，这反过来又会生成更多的 GC循环 和更多的帧丢失，因为每次暂停都会占用应用程序的时间。</p>
+<p>现在，我们来谈谈移除。为了不造成任何浪费，GC 将运行下一阶段 —— <strong>清理</strong> 。在这种情况下，GC 将搜索内存堆，以查找所有带有标记位的对象，设置为0。在最后一步中，删除它们，并将所有可访问对象的标记位重置为0，就这么简单。然而，这种解决方案有一个缺点，它可能导致内存堆碎片化。这意味着你的堆可能有相当多的空间(空闲内存)，但是这个空间被划分为小块。因此，当尝试将一个 2MB 的对象分配到4MB的空闲内存时，可能会遇到麻烦。为什么？因为，最大的一个块可能不足以容纳 2MB。这就是为什么 Android 使用一个名为 <em>Compact</em> 的改进版本。<em>Compact</em> 变体还有一个附加步骤。在扫描阶段幸存的对象将被移动到内存堆的开始 —— 检查图片。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/check_the_picture.png" alt=""></p>
+<p>天下没有免费的午餐。这加剧了 GC暂停。</p>
+<p>这就是 Android 的内存管理。当然，我没有涵盖所有方面。例如，我跳过了堆生成主题。如果你想了解这个问题，请点击<a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="external">这里</a>，并查看 <em>The Generational Garbage Collection Process</em> 章节。</p>
+<p>好了，现在是 Swift 的出场时间了。</p>
+<h1 id="Swift-的内存管理-iOS"><a href="#Swift-的内存管理-iOS" class="headerlink" title="Swift 的内存管理 (iOS)"></a><em>Swift 的内存管理 (iOS)</em></h1><p>　　　<br>Swift 使用一种简单的垃圾收集机制。它叫做 ARC（<strong>自动引用计数</strong>）。这种方法基于跟踪其他对象持有的对象的强引用计数。类的每个新创建实例都存储额外的信息 —— 引用计数器。无论何时将对象分配给属性、变量或常量(对其进行强引用)，都要增加引用计数器的值。在该值不等于0之前，你的对象是安全的，不能被释放。但是当引用计数器变为0时，对象将立即被回收*，没有任何暂停，也不会启动GC收集周期。与跟踪垃圾收集类型相比，这是一个很大的优势。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tracing_garbage_collection_type.gif" alt=""></p>
+<p>好吧，我应该把星号（上一段话中出现的*）放在“立即”旁边。我这样做是因为你可以在<a href="https://www.quora.com/Why-doesnt-Apple-Swift-adopt-the-memory-management-method-of-garbage-collection-like-Java-uses" target="_blank" rel="external">互联网上找到一些信息</a>，这是内存管理的神话之一。我鼓励你去看看这个有趣的讨论 :)</p>
+<p>当然，还有另一方面 —— 之前提到的引用周期。首先，让我们看看如何创建一个 <strong>引用循环</strong> ，以及 iOS开发人员 需要做些什么来避免内存泄漏。让我们考虑两个类似的类：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> dog: <span class="type">Dog</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> owner: <span class="type">Person</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.name = name</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这两个类都有一个名字和一个可选的财产 —— 狗、狗主人，因为一个人可能并不总是有一只狗，狗也不一定属于某个人 —— 因为狗可能并不总是有主人的，这实在令人伤感 :(</p>
+<p>下一个代码片段创建每个类的实例，同时将引用计数设置为1:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> joe: <span class="type">Person</span>? = <span class="type">Person</span>(name: <span class="string">"Joe"</span>)</div><div class="line"><span class="keyword">var</span> lassie: <span class="type">Dog</span>? = <span class="type">Dog</span>(name: <span class="string">"Lassie"</span>)</div></pre></td></tr></table></figure>
+<p><em>Joe</em> 和 <em>Lassie</em> 分别强引用了 Person 和 Dog 实例。到目前为止还好。如果将 <em>nil</em> 赋给 <em>joe</em> 变量，则回收内存，因为对 Person 实例不再有强引用。</p>
+<p>要创建一个强引用循环，只需将两个实例链接在一起。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">joe!.dog = lassie</div><div class="line">lassie!.owner = joe</div></pre></td></tr></table></figure>
+<p>请注意引用计数。它们的值都是2。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/notice_the_references_counters.png" alt=""></p>
+<p>现在，如果你破坏了 <em>joe</em> 和 <em>lassie</em> 持有的强引用，则引用计数器不会重置为0。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">joe = <span class="literal">nil</span></div><div class="line">lassie = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/retain_cycle.png" alt=""></p>
+<p>由于引用循环，ARC 无法释放实例。</p>
+<p>当然，这是有解决办法的。要解决强引用循环，应该使用 <em>weak</em> 或 <em>unowned</em> 进行修饰。你只需在变量之前添加一个特殊的关键字，然后当你将一个对象赋给该变量时，对象的引用计数器就不会被提升。</p>
+<h1 id="内存管理如何影响我们的编码方式"><a href="#内存管理如何影响我们的编码方式" class="headerlink" title="内存管理如何影响我们的编码方式"></a><em>内存管理如何影响我们的编码方式</em></h1><p>　　　<br>坦白地说，当我开始学习 iOS 的时候，我认为 iOS 和 Android 中的 <em>weak</em>、<em>reference</em> 功能也是一样的。当然，这不是真的。</p>
+<p>在iOS中使用 <em>weak</em> 关键字是正常的，当你广泛使用 <em>代理模式</em> 时，甚至可以认为是良好的实践。谈到 Android，这并不是一种常见的实践，除非你仍然使用异步任务（我希望不是）。</p>
+<p>由于循环引用，iOS开发人员 有时需要编写比 Android开发人员 更复杂的代码。最好的例子是使用 <em>closure</em> (Swift)和 <em>lambda</em> (Android)。</p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    var actionAfterUpdate: (() -&gt; Unit) = &#123;&#125; <span class="comment">// Lambda</span></div><div class="line"></div><div class="line"><span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        actionAfterUpdate()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> actionAfterUpdate: () -&gt; <span class="type">Void</span> = &#123;&#125; <span class="comment">// Closure</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        actionAfterUpdate()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当 <em>update()</em> 方法完成时，<em>actionAfterUpdate</em> 将执行。现在，让我们检查如何使用 <em>UpdateHandler.</em></p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</div><div class="line">    val updateHandler = UpdateHandler()</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do important thing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">timeToUpdate</span><span class="params">()</span> </span>&#123;</div><div class="line">        updateHandler.actionAfterUpdate = &#123; doSomething() &#125;</div><div class="line">        updateHandler.update()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> updateHandler = <span class="type">UpdateHandler</span>()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="comment">// do important thing</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">timeToUpdate</span><span class="params">()</span></span> &#123;</div><div class="line">        updateHandler.actionAfterUpdate = &#123; <span class="keyword">self</span>.doSomething() &#125;</div><div class="line">        updateHandler.update()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如你所见，使用 <em>UpdateHandler</em> 很简单。在调用 <em>update()</em> 方法之前，你要声明更新之后应该发生什么。一切似乎都很好，但是… iOS 版本的代码有一个严重的错误… 它很糟糕，因为它会导致内存泄漏。是什么问题?它是 <em>actionAfterUpdate</em> 闭包，它保存对 <em>self</em> 的强引用。 <em>Self</em> 是一个 <em>MyObject</em> 实例，它还包含对 <em>UpdateHandler</em> 的引用 —— 一个retain的循环!为了防止内存泄漏，我们必须在闭包中使用 <em>weak</em> (或 <em>unowned</em> 在本例中这就足够了)关键字:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">updateHandler.actionAfterUpdate = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span> <span class="keyword">self</span>?.doSomething()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另一个问题是 <em>已失效的侦听器问题</em> 。简而言之，当你注册一个侦听器并忘记取消注册时，会导致应用程序中的内存泄漏。</p>
+<p>我修改了以前使用的示例，以更详细地讨论这个尚未解决的复杂问题。</p>
+<p>现在，<em>UpdateHandler</em> 是一个单例，它的寿命和我们的应用程序的寿命一样长。</p>
+<p>Android:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">object UpdateHandler &#123;</div><div class="line">    <span class="keyword">private</span> var listener: OnUpdateListener? = <span class="keyword">null</span></div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.listener = listener</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// do work</span></div><div class="line">        listener?.onUpdateComplete()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnUpdateListener</span> </span>&#123;</div><div class="line">    <span class="function">fun <span class="title">onUpdateComplete</span><span class="params">()</span></span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>iOS:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = <span class="type">UpdateHandler</span>()</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span></span> &#123;</div><div class="line">        <span class="keyword">self</span>.listener = listener</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</div><div class="line"></div><div class="line">        <span class="comment">// do work</span></div><div class="line">        listener?.onUpdateComplete()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">OnUpdateListener</span>: <span class="title">class</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以及 <em>MyObject</em> 类中的一些修改。</p>
+<p>Android:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class MyObject: OnUpdateListener &#123;</div><div class="line">    <span class="function">override fun <span class="title">onUpdateComplete</span><span class="params">()</span> </span>&#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>iOS:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span>: <span class="title">OnUpdateListener</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span> &#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如你所见，<em>MyObject</em> 是一个更新侦听器，当更新完成时它会执行一定的操作。</p>
+<p>为了强调这个问题，我将代码放在一个地方，每当你退出并重新启动应用程序时，它都会被调用。但是，请注意，这个示例在产品代码中没有意义。这只是一个简单的例子 :)</p>
+<p>Android ( <em>MainActivity.kt</em> ):<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">override fun <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onStart()</div><div class="line">    val myObject = MyObject()</div><div class="line">    UpdateHandler.registerUpdateListener(myObject)</div><div class="line">    UpdateHandler.update()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>iOS ( <em>AppDelegate.swift</em> ):<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationWillEnterForeground</span><span class="params">(<span class="number">_</span> application: UIApplication)</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> myObject = <span class="type">MyObject</span>()</div><div class="line">    <span class="type">UpdateHandler</span>.sharedInstance.registerUpdateListener(listener: myObject)</div><div class="line">    <span class="type">UpdateHandler</span>.sharedInstance.update()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因此，我创建了一个 <em>myObject</em> ，并将其作为更新侦听器传递给 <em>UpdateHandler</em> ，并调用 <em>update()</em> 方法。<em>update()</em> 方法通知侦听器完成的工作，调用 <em>onUpdateComplete()</em> 方法（ <em>onUpdateComplete()</em> 方法在 <em>MyObject</em> 中执行）。</p>
+<p><em>MyObject</em> 类的实例应该在 <em>onStart()</em> 或 <em>applicationWillEnterForegorund(…)</em> 完成时删除，因为在方法中创建的对象只要方法时间执行，并且在该时间之后成为垃圾收集的条件，就可以存活。但是在本例中，<em>UpdateHandler</em> 将永远保存对 <em>MyObject</em> 实例的引用。如何管理潜在的内存泄漏？可能所有iOS开发人员都会说：“使用弱引用!””，他们是对的。在 <em>UpdateHandler</em> 类中使用带有 <em>listener</em> 变量的 <em>weak</em> 关键字可以达到这个目的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正因为如此，ARC 才能为我们移除监听器。</p>
+<p>但是Android呢？一些 Android 开发人员也会说同样的话 —— “把监听器当作弱引用!” 好吧，这可能会有帮助…… 有时…… 但我确信这是你问题的开始 :) 你应该知道，每当你拿回叫作为弱引用时，小猫就会死去。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/kitten.gif" alt=""></p>
+<p><em>WeakReference</em> 使对象适合进行垃圾收集。所以它可能比你想象的要早。唯一的解决方案是添加 <em>unregisterUpdateListener</em> 方法并手动清除 <em>listener</em> 。</p>
+<h1 id="相似但不相同"><a href="#相似但不相同" class="headerlink" title="相似但不相同"></a><em>相似但不相同</em></h1><p>　　　<br>祝贺每一个坚持到底的人！</p>
+<p>如果这篇文章能帮助人们理解这个复杂的话题，我会很高兴。我试着像你五岁一样，一步一步地解释。貌似两种类似的编程语言隐藏了引擎盖下的许多不同之处，我希望你们能意识到这一点。有时Android的常见做法在iOS上不起作用，反之亦然。从一个平台移动到另一个平台并不像看上去的那么简单。</p>
+<h1 id="再次编辑-19-06-2018"><a href="#再次编辑-19-06-2018" class="headerlink" title="再次编辑 (19.06.2018)"></a>再次编辑 (19.06.2018)</h1><p>　　　<br>请注意，我说的是：</p>
+<p>“Swift 使用一个简单的 GC 收集机制”</p>
+<p>是我不好，这可能是误导。我不是说 ARC 是一个垃圾收集器，我的意思是垃圾收集是一个处理垃圾（未使用的对象）的过程。ARC 是处理废物的另一种机制或技术。我也没有提到 Android 上的垃圾收集过程在你的应用运行时是有效的，而 ARC 是在编译时提供的。</p>
+<p>谢谢你们的反馈，也感谢你们关注这里的内容。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/02/Xcode-将静态库转为动态库、多个库合并/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1597,359 +2008,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/24/Swift中Self关键字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/24/Swift中Self关键字/" itemprop="url">Swift中Self关键字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-24T21:38:09+08:00">
-                2018-03-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用OC开发时大家都知道有一个self关键字，但Swift还有个Self关键字，看它第一个字母是大写的，大家应该能猜到应该是和类或者类型相关，今天我们就来探究一下它的作用。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_class.png" alt="类中使用Self关键字"></p>
-<p>这段代码里有self和Self，self指向类对象；Self只能作为函数关键字，setValue函数的返回值是ClassA类型。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_Struct_error.png" alt="结构体中使用Self报错"></p>
-<p>这段代码中，可以看到在Struct中使用Self关键字，编译器报错，提示我们结构体不支持Self关键字！</p>
-<p><strong>Self关键字只能用在类或者协议里，作为函数返回值类型，表示当前类。</strong></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Self_Extension.png" alt="协议中使用Self关键字"></p>
-<p>这也就解释了为什么当我们想要在协议扩展中使用where子句进行条件限定的时候，Self后匹配条件只能是类。如果是结构体的话，编译器就会报错。</p>
-<p><strong>PS:如果想在协议扩展的where子句中做结构体的类型限定，可以在协议中使用关联类型</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/Swift中消失的main函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/22/Swift中消失的main函数/" itemprop="url">Swift中消失的main函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T10:00:26+08:00">
-                2018-03-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="OC项目中的main函数"><a href="#OC项目中的main函数" class="headerlink" title="OC项目中的main函数"></a>OC项目中的main函数</h3><p>大家是否发现，以前用OC语言创建的项目，一定会有一个main.m文件，里面有一个main函数，在这个函数中唤醒app。如果在app启动时放置断点，可以看到应用程序调用栈，如下图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/OC_Main.png" alt="OC的main函数"></p>
-<p>main函数作为程序启动后的<a href="http://blog.csdn.net/yu_4074/article/details/54966782" target="_blank" rel="external">第二个函数被调用</a>，然后在main函数中再启动UIApplication，并绑定AppDelegate。</p>
-<h3 id="Swift项目中的main函数为何隐藏"><a href="#Swift项目中的main函数为何隐藏" class="headerlink" title="Swift项目中的main函数为何隐藏"></a>Swift项目中的main函数为何隐藏</h3><p>创建过Swift项目的童鞋应该会发现，项目中没有一个名为main.swift的文件，为什么app的入口没有了？官方文档的说法是这样的:</p>
-<p><em>In Xcode, Mac templates default to including a “main.swift” file, but for iOS apps the default for new iOS project templates is to add @UIApplicationMain to a regular Swift file. This causes the compiler to synthesize a mainentry point for your iOS app, and eliminates the need for a “main.swift” file.</em></p>
-<p>这段话的意思是，Swift项目中添加了@UIApplicationMain 到swift文件中，使得编译器合成了一个app入口，所以不需要main.swift文件。</p>
-<p>细心的童鞋会发现AppDelegate文件中多了个@UIApplicationMain的标志，启动app并放置断点，会发现其实main函数还是存在的。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Main.png" alt="Swift中@UIApplicationMain标志"></p>
-<p>可能苹果认为我们并不需要自行配置app入口，所以干脆简化了项目配置，使用更加简单的方式启动应用，但有时候我们可能需要自己配置入口，例如我们要创建一个UIApplication的子类时。</p>
-<h3 id="main-swift"><a href="#main-swift" class="headerlink" title="main.swift"></a>main.swift</h3><p>如果你希望通过自行配置入口的方式来创建一个UIApplication子类，那么就要创建一个main.swift文件。</p>
-<p>首先创建一个swift文件，命名为main。<br>main.swift中代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(<span class="type">AppDelegate</span>.<span class="keyword">self</span>))</div></pre></td></tr></table></figure>
-<p><strong>方法讲解</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">UIApplicationMain</span><span class="params">(<span class="number">_</span> argc: Int32,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> argv: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;Int8&gt;&gt;!,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> principalClassName: String?,</span></span></div><div class="line"><span class="function"><span class="params">              <span class="number">_</span> delegateClassName: String?)</span></span> -&gt; <span class="type">Int32</span></div></pre></td></tr></table></figure>
-<ul>
-<li>argc:系统或者用户传入的参数</li>
-<li>argv:系统或用户传入的实际参数</li>
-<li>principalClassName:确定了主要应用程序类的名称，这个参数可为nil，这样UIKit就会使用默认的程序类UIApplication</li>
-<li>delegateClassName:程序自定义的代理类名，这个类负责系统和代码之间的交互，一般为AppDelegate，也可自定义子类。</li>
-</ul>
-<p>写好main.swift之后，还需要把AppDelegate中的@UIApplicationMain注释掉或者删掉。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_Not_UIApplicationMain.png" alt="Swift注释@UIApplicationMain标志"></p>
-<p>重新运行项目，app就能正常启动了。</p>
-<h3 id="main函数的参数"><a href="#main函数的参数" class="headerlink" title="main函数的参数"></a>main函数的参数</h3><p>最后一个参数我们一般会传入应用程序入口类AppDelegate，不过有些时候，特别是需要执行单元测试的场景，我们可能并不希望把整个App都运行起来，那么我们就可以自定义一个单元测试的程序入口类。类似于下面的代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Shared</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">var</span> appDelegate: <span class="type">AppDelegate</span>.<span class="type">Type</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="type">AppConstants</span>.<span class="type">IsRunningTest</span> &#123;</div><div class="line">    appDelegate = <span class="type">TestAppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    appDelegate = <span class="type">AppDelegate</span>.<span class="keyword">self</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">let</span> pointer = <span class="type">UnsafeMutableRawPointer</span>(<span class="type">CommandLine</span>.unsafeArgv).bindMemory(to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int8</span>&gt;.<span class="keyword">self</span>, capacity: <span class="type">Int</span>(<span class="type">CommandLine</span>.argc))</div><div class="line"><span class="type">UIApplicationMain</span>(<span class="type">CommandLine</span>.argc, pointer, <span class="type">NSStringFromClass</span>(<span class="type">UIApplication</span>.<span class="keyword">self</span>), <span class="type">NSStringFromClass</span>(appDelegate))</div></pre></td></tr></table></figure>
-<p>具体的实现方式，大家可以参考Firefox的iOS版实现。<a href="https://github.com/mozilla-mobile/firefox-ios" target="_blank" rel="external">传送门</a></p>
-<h3 id="UIApplicationMain"><a href="#UIApplicationMain" class="headerlink" title="UIApplicationMain"></a>UIApplicationMain</h3><p>该部分介绍转自<a href="https://www.jianshu.com/p/5095220c099e" target="_blank" rel="external">木板钉钉</a>的简书<br>不管是通过 main.swift 文件还是 @UIApplicationMain 属性，最后都会调用<br>UIApplicationMain 函数。让我们来看看 UIApplicationMain 函数都做了什么：</p>
-<ol>
-<li><p>UIApplicationMain 创建app中的第一个实例，应用程序实例，<br>UIApplication.shared。 UIApplicationMain 函数的第三个参数指定了应用程序实例所属的类，默认该参数是 nil ，则其默认类就是 UIApplication。如果你想subclass一个UIApplication， 那就应该将 UIApplicationMain 函数的第三个参数指定为你的子类名字，例如 NSStringFromClass(MyAppSubclass.self) .</p>
-</li>
-<li><p>UIApplicationMain 创建app中的第二个实例，app delegate。UIApplicationMain 函数的第四个参数指定了app delegate所属的类，<br>NSStringFromClass(AppDelegate.self) 。如果使用 @UIApplicationMain 属性，该属性默认附加在 AppDelegate 类的声明中，其意义与UIApplicationMain 函数一样。</p>
-</li>
-<li><p>如果 Info.plist 文件指定了一个main storyboard， UIApplicationMain 函数就载入storyboard并找到其中的initial view controller（或者说是storyboard的入口点），并实例化该view controller，这是创建的第三个实例。对于Single View app模版，这个实例就是 ViewController 类的实例，该类定义在 ViewController.swift 中。</p>
-</li>
-<li><p>如果存在main.storyboard文件，UIApplicationMain 函数现在就该创建应用程序的window了，这是app中的第四个实例，一个UIWindow类的实例（或者在AppDelegate中，可以替换为一个UIWindow子类的实例）。创建window实例后，将其指定为AppDelegate的 window 属性，同时，将initial view controller实例的指定为window实例的 rootViewController属性。</p>
-</li>
-<li><p>UIApplicationMain 现在开始处理AppDelegate实例并调用它的一些方法，如 application(_:didFinishLaunchingWithOptions:)， 在该方法中，我们可以加入自己的代码进行一些初始化的设定，但不要进行一些比较耗时的工作，因为在这个时候，我们的app界面还没有显示出来。</p>
-</li>
-<li><p>如果存在main.storyboard文件， UIApplicationMain 函数开始调用UIWindow的实例方法 makeKeyAndVisible ，这样app界面就显示出来了。</p>
-</li>
-<li><p>在window显示的过程中，将获取root view controller的main view， 如果view controller的view是通过storyboard或xib文件获取的，那么该nib文件会被加载。nib文件中的实例化并初始化，并称为初始界面的对象，view及其subview将被放置在window中。view controller的 viewDidLoad 方法被调用，在这里可以写一些自己的代码。</p>
-</li>
-</ol>
-<p>然后应用程序已经启动完成并开始运行，UIApplicationMain 函数仍然运行而且永不return，它继续监视用户行为，管理eventloop等。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1999,7 +2057,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2112,7 +2170,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共50.4k字</span>
+  <span class="post-count">博客全站共52.3k字</span>
 </div>
 
 
