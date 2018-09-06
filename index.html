@@ -277,6 +277,180 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/使用Vapor3进行APNS推送/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/06/使用Vapor3进行APNS推送/" itemprop="url">使用Vapor3进行APNS推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-06T15:46:37+08:00">
+                2018-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文不完全翻译自<a href="https://medium.com/@nathantannar4/supporting-push-notifications-with-vapor-3-3f6cc959c789" target="_blank" rel="external">Medium</a>（由于完全按照原文教程并不能正常使用，本人采坑后总结了不少经验，希望能帮助大家少走弯路，一次性成功）。</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*AnprRRx9EpqSEo72f23H5g.png" alt="img"></p>
+<p><strong>从Swift内部执行cURL命令</strong></p>
+<p>几周前，我决定学习 Vapor3 框架。我希望能够为未来的项目开发一个后端API，而不需要依赖我的goto, Parse Server。这是一个快速操作指南，告诉你 Vapor 完全可以胜任！本文涉及到的所有代码都可以在我的 GitHub 里找到。</p>
+<p>为了获得对框架的一些经验，并查看一些用例示例，我从 Ray Wenderlich 的网站上购买了 “Server Side Swift with Vapor” 电子书。我把书从头到尾读了一遍以了解基本知识。下一步准备尝试将我常用的解析服务器的功能移植到一个 Vapor3 应用程序上。不过当我要实现推送通知时，我遇到了一个障碍。</p>
+<p>苹果的APNs需要使用HTTP/2进行连接，但是SwiftNIO （Vapor3的核心网络依赖）还不支持HTTP/2协议。我想我可能需要使用一些第三方的解决方案，但我不想要那种依赖。我决定浏览一下<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiy9f3btYzdAhVDHTQIHZl4B2cQFjAAegQICRAB&amp;url=https%3A%2F%2Fdeveloper.apple.com%2Fgo%2F%3Fid%3Dpush-notifications&amp;usg=AOvVaw0e_Cv59CoeHYuKK70RqK38" target="_blank" rel="external">苹果的开发文档</a>，看看使用cURL连接APNs需要做些什么。</p>
+<p>首先，您需要一个付费的Apple Developer帐户和一个您已经配置了推送通知的演示应用程序。您将需要运行演示应用程序并获得设备令牌，该令牌将稍后发送到测试APNs。</p>
+<p>HTTP/2 cURL请求需要一个证书。第一步是从Apple developer帐户生成所需的证书。我不会详细介绍如何做到这一点，因为已经有几个教程了。需要合并.cer文件和.p12文件。要做到这一点，请遵循以下bash脚本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment"># Convert the .cer file into a .pem file:</span></div><div class="line">openssl x509 -<span class="keyword">in</span> aps_development.cer -inform der -out cert.pem</div><div class="line"></div><div class="line"><span class="comment"># Convert the private key’s .p12 file into a .pem file:</span></div><div class="line">openssl pkcs12 -nocerts -<span class="keyword">in</span> aps_development.p12 -out key.pem</div><div class="line"></div><div class="line"><span class="comment"># Finally, combine the certificate and key into a single .pem file</span></div><div class="line">cat cert.pem key.pem &gt; aps_development.pem</div></pre></td></tr></table></figure>
+<p>　</p>
+<p>有了新的公共/私有组合证书，我们现在可以尝试使用cURL与APNs通信。</p>
+<p><strong>（译者注）这里有个注意点，一般情况下我们使用的curl工具是系统自带的，版本可能较低</strong></p>
+<p>如果出现了<code>curl: (1) Unsupported protocol http2</code>错误，则需要更新curl或者安装带有nghttp2的版本，这里墙裂推荐使用Homebrew进行安装，一条命令搞定：<code>brew install curl --with-nghttp2</code>，如果已经安装过了，就重装一下：<code>brew reinstall curl --with-nghttp2</code>，安装好了之后不要忘记 <strong>根据提示</strong> 添加并刷新环境变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -d &lt;apns_payload&gt; -H <span class="string">"apns-topic:&lt;bundleId&gt;"</span> -H <span class="string">"apns-expiration:1"</span> -H <span class="string">"apns-priority:10"</span> --http2-prior-knowledge --cert /Users/bruce/Desktop/Demo/Hello/private/aps_development.pem:&lt;password&gt; https://api.development.push.apple.com/3/device/&lt;device_token&gt;</div></pre></td></tr></table></figure>
+<hr>
+<p>请求成功了（没有报错即代表成功）！现在我们能够在App上收到通知。最后一步是把代码封装一下，便于将其接入到 Vapor3 应用程序中，在后台启动cURL请求。你可以在这里找到注册 Shell 服务的代码：</p>
+<p><a href="https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift" target="_blank" rel="external">https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift</a></p>
+<p>该服务可以加入我们所需的参数并执行 bash 命令。下面是 Vapor3 的简单示例：</p>
+<p><strong>（译者注）为了避免大家采坑，这里给出一个完整的示例，请一定要按照格式来填充内容，否则Shell很可能执行出错。</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> shell = <span class="keyword">try</span> req.make(<span class="type">Shell</span>.<span class="keyword">self</span>)</div><div class="line"><span class="keyword">let</span> jsonAPNSPayloadString = <span class="string">"&#123;\"aps\":&#123;\"alert\":&#123;\"body\":\"您有一条新消息\"&#125;,\"badge\":1,\"sound\":\"default\"&#125;,\"f\":\"6001\",\"t\":\"6006\",\"m\":\"373360335316321408\"&#125;"</span></div><div class="line"><span class="keyword">let</span> bundleId = <span class="string">"com.qianbao.merchantApp"</span></div><div class="line"><span class="keyword">let</span> certPath = <span class="string">"/Users/bruce/Desktop/Demo/Hello/private/aps_development.pem"</span></div><div class="line"><span class="keyword">let</span> password = <span class="string">"123456"</span></div><div class="line"><span class="keyword">let</span> apnsURL = <span class="string">"https://api.development.push.apple.com/3/device/"</span></div><div class="line"><span class="keyword">let</span> token = <span class="string">"a452171d01a3df308449a63a730d616190a1cd587bda4cd8086c2651a32ba383"</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> arguments = [<span class="string">"-d"</span>, jsonAPNSPayloadString, <span class="string">"-H"</span>, <span class="string">"\"apns-topic:<span class="subst">\(bundleId)</span>\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-expiration:1\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-priority:10\""</span>, <span class="string">"--http2-prior-knowledge"</span>, <span class="string">"-E"</span>, <span class="string">"<span class="subst">\(certPath)</span>:<span class="subst">\(password)</span>"</span>, apnsURL + token]</div><div class="line"><span class="built_in">print</span>(arguments.joined(separator: <span class="string">" "</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> res = <span class="keyword">try</span> shell.execute(commandName: <span class="string">"/usr/local/opt/curl/bin/curl"</span>, arguments: arguments)</div><div class="line"><span class="keyword">let</span> <span class="number">_</span> = res.<span class="built_in">map</span> &#123; (data: <span class="type">Data</span>) <span class="keyword">in</span></div><div class="line">    <span class="keyword">let</span> s = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8) ?? <span class="string">"null"</span>;</div><div class="line">    <span class="built_in">print</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>（译者注）不要忘记在configure.swift中添加服务</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">services.register(<span class="type">Shell</span>.<span class="keyword">self</span>)</div></pre></td></tr></table></figure>
+<p>这只是一个简单的临时方案。很快，SwiftNIO将支持HTTP/2，届时，Vapor3 也会支持HTTP/2。在社区中已经存在一个很好的repo (<a href="https://github.com/vapor-community/apns" target="_blank" rel="external">https://github.com/vapor-community/apns</a>)。到时候在 Vapor3应用中进行 APNs 请求的编码/解码将变得更加简单。</p>
+<p>iOS端只需要创建个壳工程，把推送的代码集成进去，启动一次，允许发送通知，然后拿到 APNS 的 DeviceToken 就可以愉快的进行推送测试啦，have a enjoy day 😄。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/05/JS中出现的兼容性问题的总结-（持续更新）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1749,185 +1923,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/Markdown语法的一些小技巧（持续更新）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/25/Markdown语法的一些小技巧（持续更新）/" itemprop="url">Markdown语法的一些小技巧（持续更新）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T13:40:32+08:00">
-                2018-06-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>　　用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。</p>
-<p>　　<strong>得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整</strong></p>
-<h3 id="关于字体和颜色，"><a href="#关于字体和颜色，" class="headerlink" title="关于字体和颜色，"></a>关于字体和颜色，</h3><h3 id="关于代码展示，有三种方式："><a href="#关于代码展示，有三种方式：" class="headerlink" title="关于代码展示，有三种方式："></a>关于代码展示，有三种方式：</h3><ol>
-<li><p>使用HTML标签：</p>
-<pre><code>class aaa {
-   func add(_ a: Int, _ b: Int) -> Int {
-       return a + b
-   }
-}</code></pre>
-
-<p>他的写法是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;pre&gt;&lt;code&gt;class aaa &#123;</div><div class="line">    func add(_ a: Int, _ b: Int) -&gt; Int &#123;</div><div class="line">        return a + b</div><div class="line">    &#125;</div><div class="line">&#125;&lt;/code&gt;&lt;/pre&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用table键缩进，这种方式的优势是方便，直接把代码所在的行都选中，然后一个table键就可以了。缺点就是不会显示关键字高亮，所有代码都是一个颜色。就像下面这段代码👇（代码上面横线是hexo转HTML的时候的问题）：
-　</p>
-<pre><code>class aaa {
-    func add(_ a: Int, _ b: Int) -&gt; Int {
-        return a + b
-    }
-}
-</code></pre></li>
-<li>使用反引号（数字键1左边的那个符号），我一般会选择使用这种方式这种方式，因为它可以在后面拼上开发语言，进而对关键字高亮显示。就像这里👇<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(<span class="number">_</span> a: Int, <span class="number">_</span> b: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> a + b</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>它的写法是这样的：<br><img src="https://github.com/a1049145827/Resources/raw/master/md_code.png" alt="Swift Code"></p>
-<h3 id="关于空行和缩进"><a href="#关于空行和缩进" class="headerlink" title="关于空行和缩进"></a>关于空行和缩进</h3><p>　　<strong>缩进</strong>：直接在段落前敲空格，Markdown会默认把整个段落都执行缩进，如果只想首行缩进，可以把输入法切换到全角输入状态，在第一行前输入两个空格即可。<br>　　<strong>空行</strong>：Markdown会默认忽略空白行，想要在展示的时候出现空行，最简单的做法就是全角状态下在空行输入一个空格，展示的时候，这个空格就会占位一行。</p>
-<h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;![图片描述](图片链接)&quot;</div></pre></td></tr></table></figure>
-<h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3><p>文字居中我用的是HTML标签，写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;&lt;center&gt;这里是要居中的文字&lt;/center&gt;&quot;</div></pre></td></tr></table></figure></p>
-<h3 id="高亮显示"><a href="#高亮显示" class="headerlink" title="高亮显示"></a>高亮显示</h3><p>我们在编辑段落的时候，有时候想要突出显示某个词汇，可以使用<code>反引号</code>将词汇包裹起来，效果就像这里显示的一样。它的写法是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以使用`反引号`将词汇包裹起来</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1977,7 +1972,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2090,7 +2085,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共52.3k字</span>
+  <span class="post-count">博客全站共53.5k字</span>
 </div>
 
 

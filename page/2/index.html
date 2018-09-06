@@ -277,6 +277,185 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/Markdown语法的一些小技巧（持续更新）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/25/Markdown语法的一些小技巧（持续更新）/" itemprop="url">Markdown语法的一些小技巧（持续更新）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T13:40:32+08:00">
+                2018-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>　　用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。</p>
+<p>　　<strong>得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整</strong></p>
+<h3 id="关于字体和颜色，"><a href="#关于字体和颜色，" class="headerlink" title="关于字体和颜色，"></a>关于字体和颜色，</h3><h3 id="关于代码展示，有三种方式："><a href="#关于代码展示，有三种方式：" class="headerlink" title="关于代码展示，有三种方式："></a>关于代码展示，有三种方式：</h3><ol>
+<li><p>使用HTML标签：</p>
+<pre><code>class aaa {
+   func add(_ a: Int, _ b: Int) -> Int {
+       return a + b
+   }
+}</code></pre>
+
+<p>他的写法是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;pre&gt;&lt;code&gt;class aaa &#123;</div><div class="line">    func add(_ a: Int, _ b: Int) -&gt; Int &#123;</div><div class="line">        return a + b</div><div class="line">    &#125;</div><div class="line">&#125;&lt;/code&gt;&lt;/pre&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用table键缩进，这种方式的优势是方便，直接把代码所在的行都选中，然后一个table键就可以了。缺点就是不会显示关键字高亮，所有代码都是一个颜色。就像下面这段代码👇（代码上面横线是hexo转HTML的时候的问题）：
+　</p>
+<pre><code>class aaa {
+    func add(_ a: Int, _ b: Int) -&gt; Int {
+        return a + b
+    }
+}
+</code></pre></li>
+<li>使用反引号（数字键1左边的那个符号），我一般会选择使用这种方式这种方式，因为它可以在后面拼上开发语言，进而对关键字高亮显示。就像这里👇<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(<span class="number">_</span> a: Int, <span class="number">_</span> b: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">return</span> a + b</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>它的写法是这样的：<br><img src="https://github.com/a1049145827/Resources/raw/master/md_code.png" alt="Swift Code"></p>
+<h3 id="关于空行和缩进"><a href="#关于空行和缩进" class="headerlink" title="关于空行和缩进"></a>关于空行和缩进</h3><p>　　<strong>缩进</strong>：直接在段落前敲空格，Markdown会默认把整个段落都执行缩进，如果只想首行缩进，可以把输入法切换到全角输入状态，在第一行前输入两个空格即可。<br>　　<strong>空行</strong>：Markdown会默认忽略空白行，想要在展示的时候出现空行，最简单的做法就是全角状态下在空行输入一个空格，展示的时候，这个空格就会占位一行。</p>
+<h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;![图片描述](图片链接)&quot;</div></pre></td></tr></table></figure>
+<h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3><p>文字居中我用的是HTML标签，写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;&lt;center&gt;这里是要居中的文字&lt;/center&gt;&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="高亮显示"><a href="#高亮显示" class="headerlink" title="高亮显示"></a>高亮显示</h3><p>我们在编辑段落的时候，有时候想要突出显示某个词汇，可以使用<code>反引号</code>将词汇包裹起来，效果就像这里显示的一样。它的写法是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以使用`反引号`将词汇包裹起来</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/iOS中的图片使用方式、内存对比和最佳实践-转/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1796,218 +1975,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/iOS中的设计模式-开篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/28/iOS中的设计模式-开篇/" itemprop="url">iOS中的设计模式 开篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T17:49:37+08:00">
-                2018-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>埋头做了几天业务，发现博客又落下好几天了，这样下去也不是办法，想想如何能督促自己养成一个习惯并且保持下去？正好最近在学习设计模式相关的知识，不如整理一下，来个专题吧。</p>
-<p>看好多大神，博客都是很规律的发布，想效仿大神们进步的方式，心动不如行动。当一个技术人员闲下来的时候，要么就该转管理层，要么就要被淘汰了吧。。。</p>
-<p>话不多说，切入正题，说说软件开发中的设计模式。</p>
-<p><strong>总体来说设计模式分为三大类：</strong></p>
-<ul>
-<li>Creational 创建型 5<ul>
-<li>Factory Method 工厂方法模式</li>
-<li>Abstract Factory 抽象工厂模式</li>
-<li>Singleton 单例模式</li>
-<li>Builder 建造者模式</li>
-<li>Prototype 原型模式</li>
-</ul>
-</li>
-<li>Structural 结构型 7<ul>
-<li>Adapter 适配器模式</li>
-<li>Decorator 装饰者模式</li>
-<li>Proxy 代理模式</li>
-<li>Facade 外观模式</li>
-<li>Bridge 桥接模式</li>
-<li>Composite 组合模式</li>
-<li>Flyweight 享元模式</li>
-</ul>
-</li>
-<li>Behavioral 行为型 11<ul>
-<li>Strategy 策略模式</li>
-<li>Template Method 模板方法模式</li>
-<li>Observer 观察者模式</li>
-<li>Iterator 迭代器模式</li>
-<li>Chain of responsibility 责任链模式</li>
-<li>Command 命令模式</li>
-<li>Memento 备忘录模式</li>
-<li>State 状态模式</li>
-<li>Visitor 访问者模式</li>
-<li>Mediator 中介者模式</li>
-<li>Interpreter 解释器模式</li>
-</ul>
-</li>
-</ul>
-<p>从大神那里引用一个设计模式关系图<a href="https://blog.csdn.net/zhangerqing/article/details/8194653" target="_blank" rel="external"></a>：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Design_Patterns_Relationship.jpg" alt="设计模式关系图"></p>
-<p><strong>接下来比较重要的就是设计模式的六大原则了</strong></p>
-<ol>
-<li><p>开闭原则（Open Close Principle）</p>
-<p> 开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
-</li>
-<li><p>里氏代换原则（Liskov Substitution Principle）</p>
-<p> 里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。 LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
-</li>
-<li><p>依赖倒转原则（Dependence Inversion Principle）</p>
-<p> 这个是开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。</p>
-</li>
-<li><p>接口隔离原则（Interface Segregation Principle）</p>
-<p> 这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。</p>
-</li>
-<li><p>迪米特法则（最少知道原则）（Demeter Principle）</p>
-<p> 为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用（尽量少的直接引用），使得系统功能模块相对独立。</p>
-</li>
-<li><p>合成复用原则（Composite Reuse Principle）</p>
-<p> 原则是尽量使用合成/聚合的方式，而不是使用继承。</p>
-</li>
-</ol>
-<p>刚开始看这些的时候可能会没什么感觉，不过随着技能的提升，再回过头多看几遍，理解会更加深刻。推荐对设计模式不是特别理解的同学读读程杰编写的《大话设计模式》，作者通过非常简单的故事将设计模式讲述出来，对初学者十分友好。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2057,7 +2024,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2170,7 +2137,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共52.3k字</span>
+  <span class="post-count">博客全站共53.5k字</span>
 </div>
 
 
