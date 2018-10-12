@@ -277,6 +277,237 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/12/iOS开发——RunLoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/12/iOS开发——RunLoop/" itemprop="url">iOS开发——RunLoop</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T09:52:50+08:00">
+                2018-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想要理解 RunLoop 其实并不难，但是由于 RunLoop 非常抽象化，很容易忘记，所以需要把它记下来，常回顾一下。</p>
+<h3 id="何为-RunLoop-？"><a href="#何为-RunLoop-？" class="headerlink" title="何为 RunLoop ？"></a>何为 RunLoop ？</h3><ol>
+<li><p>什么是 RunLoop？</p>
+<p>​        顾名思义，RunLoop 就是在程序运行过程中循环做一些事情。准确是说，RunLoop 就是为了让线程处于激活状态。其作用如下：</p>
+<ol>
+<li>保持程序的持续运行</li>
+<li>处理App中的各种事件（触摸、滑动、定时器等等）</li>
+<li>节省CPU资源，提高程序性能：该做事的时候做事，该休息的时候休息</li>
+</ol>
+</li>
+<li><p>项目中哪些地方会用到 RunLoop ？</p>
+<ol>
+<li>控制线程的生命周期（线程保活 - 经常使用一个子线程）</li>
+<li>解决 NSTimer 在 ScrollView 滑动时停止工作的问题</li>
+<li>监控 App 卡顿</li>
+<li>性能优化</li>
+</ol>
+</li>
+</ol>
+<h3 id="RunLoop与线程"><a href="#RunLoop与线程" class="headerlink" title="RunLoop与线程"></a>RunLoop与线程</h3><ol>
+<li>每一个线程都有一个唯一的RunLoop对象与之对应。</li>
+<li>这些 RunLoop 对象保存在一个全局的 CFMutableDictionary 里，以线程为 key，以 RunLoop 对象为 Value。</li>
+<li>线程刚创建的时候并没有 RunLoop 对象，RunLoop 会在第一次获取它的时候创建，main 线程的 RunLoop 刚开始会有人获取。 子线程默认是没有的，所以子线程默认情况下会在代码执行完毕后自动退出。</li>
+<li>RunLoop 会在线程结束时销毁。</li>
+<li>主线程的 RunLoop 已经自动获取（创建），子线程默认没有开启 RunLoop。</li>
+</ol>
+<p><strong>个人理解：</strong>RunLoop其实就是用来线程保活的，频繁的创建销毁线程会消耗资源。</p>
+<h3 id="RunLoop-的-Mode（CFRunLoopModeRef）"><a href="#RunLoop-的-Mode（CFRunLoopModeRef）" class="headerlink" title="RunLoop 的 Mode（CFRunLoopModeRef）"></a>RunLoop 的 Mode（CFRunLoopModeRef）</h3><ol>
+<li><p>CFRunLoopModeRef 代表 RunLoop 的运行模式。</p>
+</li>
+<li><p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source0、Source1、Timers、Observers</p>
+</li>
+<li><p>RunLoop 启动的时候只能选择其中一个 Mode，作为 CurrentMode。多个 Mode 相互独立 互不干扰。</p>
+</li>
+<li><p>RunLoop 同时可以有多个Mode，但当前只能有一个 Mode。要切换 Mode，需要退出 Loop， 重新选择 Mode 再进来执行。</p>
+</li>
+<li><p>如果 Mode 里没有任何 Source0、Source1、Timers、Observers， RunLoop会立即退出。</p>
+</li>
+</ol>
+<p><strong>细节</strong>：通过 Foundation API 和 C语言 API 获取到的 RunLoop 对象的内存地址是不一样的，因为 NSRunLoop 是对 CFRunLoopRef 的一层封装。</p>
+<p><strong>常见的两种 Mode</strong></p>
+<ol>
+<li><strong>KCFRunLoopDefaultMode</strong>（NSDefaultRunLoopMode）：App 的默认 Mode，通常主线程是在这个 Mode 下运行。</li>
+<li><strong>UITrackingRunLoopMode</strong>：界面跟踪 Mode ，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</li>
+<li>还有一个假的模式：<strong>NSRunLoopCommonModes</strong>，注意它后面带了个 s ，它只是一个标记，意为着在设置了 common 标记的模式下都能运行。KCFRunLoopDefaultMode，UITrackingRunLoopMode 正好都在 _commonModes 数组中（有 common 标记）。</li>
+</ol>
+<p><strong>Mode 内包含的 字段的含义</strong></p>
+<ol>
+<li>Source0，处理 UI点击事件，performSelector:onThread。</li>
+<li>Source1，基于 Port 的线程间通信，系统事件的捕捉（然后分发到 Source0进行处理）。</li>
+<li>Timers，NSTimer，performSelector:withObject:afterDelay: 。</li>
+<li>Observers，用于监听 RunLoop 的状态，UI 刷新（beforeWaiting），Autorelease Pool。</li>
+</ol>
+<h3 id="RunLoop-的执行流程"><a href="#RunLoop-的执行流程" class="headerlink" title="RunLoop 的执行流程"></a>RunLoop 的执行流程</h3><ol>
+<li>通知Observers：进入 RunLoop</li>
+<li>通知Observers：即将处理 Timers</li>
+<li>通知Observers：即将处理 Sources</li>
+<li>处理 Blocks</li>
+<li>处理 Source0（可能会再次处理 Blocks）</li>
+<li>如果存在 Source1，直接跳转到第8步里的第3步</li>
+<li>通知 Observers：开始休眠（等待消息唤醒）</li>
+<li>通知 Observers：结束休眠（被某个消息唤醒）<ol>
+<li>处理 Timers</li>
+<li>处理 GCD Async To Main Queue</li>
+<li>处理 Source1</li>
+</ol>
+</li>
+<li>处理 Blocks</li>
+<li>根据前面的执行结果，决定接下来如何操作<ol>
+<li>回到第2步</li>
+<li>退出当前 Loop</li>
+</ol>
+</li>
+<li>通知 Observers：退出 Loop</li>
+</ol>
+<h3 id="RunLoop-休眠的实现原理"><a href="#RunLoop-休眠的实现原理" class="headerlink" title="RunLoop 休眠的实现原理"></a>RunLoop 休眠的实现原理</h3><p>RunLoop 中调用了由操作系统提供的 mach_msg() 函数，让线程由用户态转变为内核态，从而实现既不占用 CPU 资源也不退出的休眠状态。</p>
+<h3 id="一些零碎的注意点"><a href="#一些零碎的注意点" class="headerlink" title="一些零碎的注意点"></a>一些零碎的注意点</h3><p>注意：<strong>控制器</strong>的 -dealloc 默认是在<strong>主线程</strong>执行的。</p>
+<p>注意：performSelector:withObject:afterDelay: 的本质是往Runloop中添加定时器，子线程默认没有启动RunLoop。</p>
+<p>注意：一个线程一旦执行完任务就会销毁，再也无法执行其他任务。例如下面的 NSThread 对象，一旦 block 里的代码执行完，这个 thread 将不再执行任何代码。如果需要线程保活，就要用到 RunLoop。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithBlock:^&#123;</div><div class="line">    <span class="comment">// 默认情况下，执行完这个打印，该线程就会销毁</span></div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"abc"</span>);</div><div class="line">&#125;];</div><div class="line">[thread start];</div></pre></td></tr></table></figure>
+<p>注意：主线程几乎所有的事情都交给了 RunLoop 去做，比如 UI 刷新，点击事件的处理，performSelector 等。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/使用Vapor3进行APNS推送/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +620,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p><a href="https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift" target="_blank" rel="external">https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift</a></p>
 <p>该服务可以加入我们所需的参数并执行 bash 命令。下面是 Vapor3 的简单示例：</p>
 <p><strong>（译者注）为了避免大家采坑，这里给出一个完整的示例，请一定要按照格式来填充内容，否则Shell很可能执行出错。</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> shell = <span class="keyword">try</span> req.make(<span class="type">Shell</span>.<span class="keyword">self</span>)</div><div class="line"><span class="keyword">let</span> jsonAPNSPayloadString = <span class="string">"&#123;\"aps\":&#123;\"alert\":&#123;\"body\":\"您有一条新消息\"&#125;,\"badge\":1,\"sound\":\"default\"&#125;,\"f\":\"6001\",\"t\":\"6006\",\"m\":\"373360335316321408\"&#125;"</span></div><div class="line"><span class="keyword">let</span> bundleId = <span class="string">"com.qianbao.merchantApp"</span></div><div class="line"><span class="keyword">let</span> certPath = <span class="string">"/Users/bruce/Desktop/Demo/Hello/private/aps_development.pem"</span></div><div class="line"><span class="keyword">let</span> password = <span class="string">"123456"</span></div><div class="line"><span class="keyword">let</span> apnsURL = <span class="string">"https://api.development.push.apple.com/3/device/"</span></div><div class="line"><span class="keyword">let</span> token = <span class="string">"a452171d01a3df308449a63a730d616190a1cd587bda4cd8086c2651a32ba383"</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> arguments = [<span class="string">"-d"</span>, jsonAPNSPayloadString, <span class="string">"-H"</span>, <span class="string">"\"apns-topic:<span class="subst">\(bundleId)</span>\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-expiration:1\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-priority:10\""</span>, <span class="string">"--http2-prior-knowledge"</span>, <span class="string">"-E"</span>, <span class="string">"<span class="subst">\(certPath)</span>:<span class="subst">\(password)</span>"</span>, apnsURL + token]</div><div class="line"><span class="built_in">print</span>(arguments.joined(separator: <span class="string">" "</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> res = <span class="keyword">try</span> shell.execute(commandName: <span class="string">"/usr/local/opt/curl/bin/curl"</span>, arguments: arguments)</div><div class="line"><span class="keyword">let</span> <span class="number">_</span> = res.<span class="built_in">map</span> &#123; (data: <span class="type">Data</span>) <span class="keyword">in</span></div><div class="line">    <span class="keyword">let</span> s = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8) ?? <span class="string">"null"</span>;</div><div class="line">    <span class="built_in">print</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> shell = <span class="keyword">try</span> req.make(<span class="type">Shell</span>.<span class="keyword">self</span>)</div><div class="line"><span class="keyword">let</span> jsonAPNSPayloadString = <span class="string">"&#123;\"aps\":&#123;\"alert\":&#123;\"body\":\"您有一条新消息\"&#125;,\"badge\":1,\"sound\":\"default\"&#125;,\"f\":\"6001\",\"t\":\"6006\",\"m\":\"373360335316321408\"&#125;"</span></div><div class="line"><span class="keyword">let</span> bundleId = <span class="string">"com.qianbao.merchantApp"</span></div><div class="line"><span class="keyword">let</span> certPath = <span class="string">"/Users/bruce/Desktop/Demo/Hello/private/aps_development.pem"</span></div><div class="line"><span class="keyword">let</span> password = <span class="string">"123456"</span></div><div class="line"><span class="keyword">let</span> apnsURL = <span class="string">"https://api.development.push.apple.com/3/device/"</span></div><div class="line"><span class="keyword">let</span> token = <span class="string">"a452171d01a3df308449a63a730d616190a1cd587bda4cd8086c2651a32ba383"</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> arguments = [<span class="string">"-d"</span>, jsonAPNSPayloadString, <span class="string">"-H"</span>, <span class="string">"\"apns-topic:\(bundleId)\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-expiration:1\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-priority:10\""</span>, <span class="string">"--http2-prior-knowledge"</span>, <span class="string">"-E"</span>, <span class="string">"\(certPath):\(password)"</span>, apnsURL + token]</div><div class="line"><span class="built_in">print</span>(arguments.joined(separator: <span class="string">" "</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> res = <span class="keyword">try</span> shell.execute(commandName: <span class="string">"/usr/local/opt/curl/bin/curl"</span>, arguments: arguments)</div><div class="line"><span class="keyword">let</span> <span class="number">_</span> = res.<span class="built_in">map</span> &#123; (data: <span class="type">Data</span>) <span class="keyword">in</span></div><div class="line">    <span class="keyword">let</span> s = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8) ?? <span class="string">"null"</span>;</div><div class="line">    <span class="built_in">print</span>(s)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>（译者注）不要忘记在configure.swift中添加服务</strong></p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">services.register(<span class="type">Shell</span>.<span class="keyword">self</span>)</div></pre></td></tr></table></figure>
 <p>这只是一个简单的临时方案。很快，SwiftNIO将支持HTTP/2，届时，Vapor3 也会支持HTTP/2。在社区中已经存在一个很好的repo (<a href="https://github.com/vapor-community/apns" target="_blank" rel="external">https://github.com/vapor-community/apns</a>)。到时候在 Vapor3应用中进行 APNs 请求的编码/解码将变得更加简单。</p>
@@ -1729,200 +1960,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Swift访问权限/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/05/Swift访问权限/" itemprop="url">Swift访问权限</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T10:41:49+08:00">
-                2018-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"><a href="#一、Swift文件间相互调用时，Swift中的几个权限描述关键字" class="headerlink" title="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"></a>一、Swift文件间相互调用时，Swift中的几个权限描述关键字</h2><h4 id="1-gt-internal-内部的"><a href="#1-gt-internal-内部的" class="headerlink" title="1&gt;  internal : 内部的"></a>1&gt;  internal : 内部的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 默认情况下所有的类&amp;属性&amp;方法的访问权限都是internal</div><div class="line">2. 在本模块(项目/包/target)中可以访问</div></pre></td></tr></table></figure>
-<h4 id="2-gt-private-私有的"><a href="#2-gt-private-私有的" class="headerlink" title="2&gt;  private : 私有的"></a>2&gt;  private : 私有的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只有在本类中可以访问</div></pre></td></tr></table></figure>
-<h4 id="3-gt-open-公开的"><a href="#3-gt-open-公开的" class="headerlink" title="3&gt;  open : 公开的"></a>3&gt;  open : 公开的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 可以跨模块(项目/包/target)都是可以访问</div></pre></td></tr></table></figure>
-<h4 id="4-gt-fileprivate-Swift3-0"><a href="#4-gt-fileprivate-Swift3-0" class="headerlink" title="4&gt;  fileprivate : Swift3.0"></a>4&gt;  fileprivate : Swift3.0</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只要是在本文件中都是可以进行访问</div></pre></td></tr></table></figure>
-<h2 id="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"><a href="#二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法" class="headerlink" title="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"></a>二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法</h2><p>Objc和Swift混编时，需要建立桥接头文件（此文件供Swift调用OC类时使用）。另外，Xcode还会在 <strong>编译时</strong> 默认生成一个Swift桥接文件 ProjectName-Swift.h。</p>
-<p>Swift4.0 之前，OC类中直接导入桥接头文件，就能访问到 Swift 类及方法，但是 Swift4.0 之后，为了降低不必要的编译性能损耗，Xcode中默认不再将所有的Swift类及方法暴露给OC。</p>
-<p>我们需要在要暴露的类和文件前加上 <strong>@objc</strong> 关键字，如下所示：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果此类要暴露给OC使用，则必须继承于OC类（例如NSObject），此时前面写不写 @objc 都可以</span></div><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@objc</span></div><div class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">foo</span>() -&gt; <span class="title">Void</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="built_in">print</span>(<span class="string">"Swift"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="三、扩展：Objc和Swift混编时如何互相调用"><a href="#三、扩展：Objc和Swift混编时如何互相调用" class="headerlink" title="三、扩展：Objc和Swift混编时如何互相调用"></a>三、扩展：Objc和Swift混编时如何互相调用</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
-<p>如果你接受了，Xcode 就会创建这个头文件并且以 Product Module 名字 ＋ “-Bridging-Header.h” 的形式来新建。  </p>
-<p>你也可以自己通过 File &gt; New &gt; File &gt; (iOS, watchOS, tvOS, <em>or</em> macOS) &gt; Source &gt; Header File. 的方式来添加  </p>
-<p>你需要编辑这个桥接头文件来把 Objc 代码暴露给 Swift 代码。</p>
-<p><strong>同一个 Target 下把 Objective-C 代码 import 到 Swift 中</strong></p>
-<ol>
-<li><p>在 Objc 桥接头文件中，import 每一个你想要暴露给 Swift 的头文件，例如：</p>
-</li>
-<li><ol>
-<li><code>#import &quot;XYZCustomCell.h&quot;</code></li>
-<li><code>#import &quot;XYZCustomView.h&quot;</code></li>
-<li><code>#import &quot;XYZCustomViewController.h&quot;</code></li>
-</ol>
-</li>
-<li><p>在 Swift Compiler － Code Generation 中，确保 Objc Bridging Header 设置下有一个指向 Bridging Header File 的路径。  </p>
-<p>这个路径需要是相对的，类似于在 info.plist 文件中指定的形式。多数情况下你不需要修改这个设置。</p>
-</li>
-</ol>
-<p>任何公共的 Objc 头文件都需要罗列在这个桥接文件中。Objc 功能会自动在 Target 中在任何的 Swift 文件中可用。而且不需要再 import 声明。  </p>
-<ol>
-<li><code>let myCell = XYZCustomCell()</code></li>
-<li><code>myCell.subtitle = &quot;A custom cell&quot;</code></li>
-</ol>
-<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. Xcode 会在你试图做混合开发的时候，自动创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</strong></em></p>
-<p><em><strong>2. 在这个文件中导入你想要访问的 Objc 头文件</strong></em></p>
-<p><em><strong>3.在 Swift 文件中就可以访问到 Objc 文件中的方法</strong></em></p>
-<h4 id="将-Swift-代码导入到-Objective-C-中"><a href="#将-Swift-代码导入到-Objective-C-中" class="headerlink" title="将 Swift 代码导入到 Objective-C 中"></a>将 Swift 代码导入到 Objective-C 中</h4><p>当你把 Swift 代码 import 到 Objective-C 中时，你依赖的是 Xcode 产生的 Header File 来把这些文件暴露给 Objective-C。这个自动生成的文件是一个 Objective-C 头文件声明了你 Target 中的 Swift 接口。这个头文件的名称就是产品模块名称加上 - Swift.h 后缀。</p>
-<p>注意：不论你初始创建的是 Swift 还是 Objective-C 的工程，其实 Xcode 都已经为你自动创建好了这个头文件。不过有的时候需要反复 Clean 几次后再 Build 才能编译上。否则会运行时出错。  </p>
-<p><strong>同一个 Target 下把 Swift 代码 import 到 Objective-C 中</strong></p>
-<p>要在同一个 Target 下的 Swift 代码导入到任何 Objective-C 类中。使用下面语法修改其 .m文件:</p>
-<p><code>#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。</code></p>
-<p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
-<h5 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
-<p><em><strong>2. 只要在需要使用 Swift 的 Objc 文件中 import 这个自动生成的头文件就可以访问 Swift 中的方法了</strong></em></p>
-<p><em><strong>3. Swift 中的类最终必须集成于 NSObject, 否则调用时运行出错</strong></em></p>
-<p><em><strong>4. 自动生成的这个头文件可能需要一定时间生成，因此会出现访问不到的情况，需要多次 clean 后编译</strong></em></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1972,7 +2009,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2085,7 +2122,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共53.5k字</span>
+  <span class="post-count">博客全站共54.6k字</span>
 </div>
 
 

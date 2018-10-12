@@ -277,6 +277,200 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Swift访问权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/Swift访问权限/" itemprop="url">Swift访问权限</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T10:41:49+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"><a href="#一、Swift文件间相互调用时，Swift中的几个权限描述关键字" class="headerlink" title="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"></a>一、Swift文件间相互调用时，Swift中的几个权限描述关键字</h2><h4 id="1-gt-internal-内部的"><a href="#1-gt-internal-内部的" class="headerlink" title="1&gt;  internal : 内部的"></a>1&gt;  internal : 内部的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 默认情况下所有的类&amp;属性&amp;方法的访问权限都是internal</div><div class="line">2. 在本模块(项目/包/target)中可以访问</div></pre></td></tr></table></figure>
+<h4 id="2-gt-private-私有的"><a href="#2-gt-private-私有的" class="headerlink" title="2&gt;  private : 私有的"></a>2&gt;  private : 私有的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只有在本类中可以访问</div></pre></td></tr></table></figure>
+<h4 id="3-gt-open-公开的"><a href="#3-gt-open-公开的" class="headerlink" title="3&gt;  open : 公开的"></a>3&gt;  open : 公开的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 可以跨模块(项目/包/target)都是可以访问</div></pre></td></tr></table></figure>
+<h4 id="4-gt-fileprivate-Swift3-0"><a href="#4-gt-fileprivate-Swift3-0" class="headerlink" title="4&gt;  fileprivate : Swift3.0"></a>4&gt;  fileprivate : Swift3.0</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1. 只要是在本文件中都是可以进行访问</div></pre></td></tr></table></figure>
+<h2 id="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"><a href="#二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法" class="headerlink" title="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"></a>二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法</h2><p>Objc和Swift混编时，需要建立桥接头文件（此文件供Swift调用OC类时使用）。另外，Xcode还会在 <strong>编译时</strong> 默认生成一个Swift桥接文件 ProjectName-Swift.h。</p>
+<p>Swift4.0 之前，OC类中直接导入桥接头文件，就能访问到 Swift 类及方法，但是 Swift4.0 之后，为了降低不必要的编译性能损耗，Xcode中默认不再将所有的Swift类及方法暴露给OC。</p>
+<p>我们需要在要暴露的类和文件前加上 <strong>@objc</strong> 关键字，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 如果此类要暴露给OC使用，则必须继承于OC类（例如NSObject），此时前面写不写 @objc 都可以</span></div><div class="line"><span class="meta">@objc</span></div><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@objc</span></div><div class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">foo</span>() -&gt; <span class="title">Void</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="built_in">print</span>(<span class="string">"Swift"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="三、扩展：Objc和Swift混编时如何互相调用"><a href="#三、扩展：Objc和Swift混编时如何互相调用" class="headerlink" title="三、扩展：Objc和Swift混编时如何互相调用"></a>三、扩展：Objc和Swift混编时如何互相调用</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
+<p>如果你接受了，Xcode 就会创建这个头文件并且以 Product Module 名字 ＋ “-Bridging-Header.h” 的形式来新建。  </p>
+<p>你也可以自己通过 File &gt; New &gt; File &gt; (iOS, watchOS, tvOS, <em>or</em> macOS) &gt; Source &gt; Header File. 的方式来添加  </p>
+<p>你需要编辑这个桥接头文件来把 Objc 代码暴露给 Swift 代码。</p>
+<p><strong>同一个 Target 下把 Objective-C 代码 import 到 Swift 中</strong></p>
+<ol>
+<li><p>在 Objc 桥接头文件中，import 每一个你想要暴露给 Swift 的头文件，例如：</p>
+</li>
+<li><ol>
+<li><code>#import &quot;XYZCustomCell.h&quot;</code></li>
+<li><code>#import &quot;XYZCustomView.h&quot;</code></li>
+<li><code>#import &quot;XYZCustomViewController.h&quot;</code></li>
+</ol>
+</li>
+<li><p>在 Swift Compiler － Code Generation 中，确保 Objc Bridging Header 设置下有一个指向 Bridging Header File 的路径。  </p>
+<p>这个路径需要是相对的，类似于在 info.plist 文件中指定的形式。多数情况下你不需要修改这个设置。</p>
+</li>
+</ol>
+<p>任何公共的 Objc 头文件都需要罗列在这个桥接文件中。Objc 功能会自动在 Target 中在任何的 Swift 文件中可用。而且不需要再 import 声明。  </p>
+<ol>
+<li><code>let myCell = XYZCustomCell()</code></li>
+<li><code>myCell.subtitle = &quot;A custom cell&quot;</code></li>
+</ol>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. Xcode 会在你试图做混合开发的时候，自动创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</strong></em></p>
+<p><em><strong>2. 在这个文件中导入你想要访问的 Objc 头文件</strong></em></p>
+<p><em><strong>3.在 Swift 文件中就可以访问到 Objc 文件中的方法</strong></em></p>
+<h4 id="将-Swift-代码导入到-Objective-C-中"><a href="#将-Swift-代码导入到-Objective-C-中" class="headerlink" title="将 Swift 代码导入到 Objective-C 中"></a>将 Swift 代码导入到 Objective-C 中</h4><p>当你把 Swift 代码 import 到 Objective-C 中时，你依赖的是 Xcode 产生的 Header File 来把这些文件暴露给 Objective-C。这个自动生成的文件是一个 Objective-C 头文件声明了你 Target 中的 Swift 接口。这个头文件的名称就是产品模块名称加上 - Swift.h 后缀。</p>
+<p>注意：不论你初始创建的是 Swift 还是 Objective-C 的工程，其实 Xcode 都已经为你自动创建好了这个头文件。不过有的时候需要反复 Clean 几次后再 Build 才能编译上。否则会运行时出错。  </p>
+<p><strong>同一个 Target 下把 Swift 代码 import 到 Objective-C 中</strong></p>
+<p>要在同一个 Target 下的 Swift 代码导入到任何 Objective-C 类中。使用下面语法修改其 .m文件:</p>
+<p><code>#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。</code></p>
+<p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
+<h5 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
+<p><em><strong>2. 只要在需要使用 Swift 的 Objc 文件中 import 这个自动生成的头文件就可以访问 Swift 中的方法了</strong></em></p>
+<p><em><strong>3. Swift 中的类最终必须集成于 NSObject, 否则调用时运行出错</strong></em></p>
+<p><em><strong>4. 自动生成的这个头文件可能需要一定时间生成，因此会出现访问不到的情况，需要多次 clean 后编译</strong></em></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/Markdown语法的一些小技巧（持续更新）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1820,161 +2014,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/Perfect写后端使用Xcode直接run找不到webroot文件夹的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/02/Perfect写后端使用Xcode直接run找不到webroot文件夹的问题/" itemprop="url">Perfect写后端使用Xcode直接run找不到webroot文件夹的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T16:34:24+08:00">
-                2018-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>使用Perfect写后端的时候，使用Xcode直接run会遇到找不到webroot文件夹的问题，调试非常不方便。</p>
-<p>其实这个可以通过指定工作路径的方式解决：</p>
-<p>Xcode -&gt; run-scheme -&gt; working directory, 设置成 $(PROJECT_DIR)</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Perfect_Edit_Scheme.jpg" alt="Edit Scheme"></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Perfect_Working_Directory.jpg" alt="Working Directory"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2024,7 +2063,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2137,7 +2176,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共53.5k字</span>
+  <span class="post-count">博客全站共54.6k字</span>
 </div>
 
 
