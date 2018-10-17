@@ -178,7 +178,7 @@
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
-
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -403,53 +403,28 @@
       
         
           
-            <p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-App.png" alt="img"></p>
-<hr>
-
-<p>今天 Mac App Store 提示软件更新，一看是 InjectionIII 更新了，而且这次更新是针对 Xcode10 的支持，赶紧上车更新一波。</p>
-<p>由于这次更新后，配合 Xcode10 使用方式和之前的版本略有差异，所以在此介绍一下。</p>
-<p>在介绍这款工具之前首先得感谢 John Holdsworth 开发者给我们iOS开发提供了帮助。假如你的项目每次 build 时间在半分钟以上，或者你电脑的配置不高，导致每次运行项目都很慢，那么你完全可以尝试一下这个神一样的工具！（提示：目前好像只支持在模拟器上使用，而且支持 OC 和 Swift）</p>
-<p><strong>废话不多说，先来欣赏一下功能演示：</strong></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/injection-demo.gif" alt="img"></p>
-<p>真正的所见即所得！</p>
-<p>另外，在使用 Injection 的时候需要先打开 Injection App，然后通过 Open Project 菜单按钮打开 Xcode工程所在的目录让 Injection 监控其文件变化，然后就可以打开 Xcode，将 Injection 启动代码加入 AppDelegate，把项目跑在模拟器上，接下来就可以愉快的编码啦（<strong>具体的流程，下面也会提到</strong>）。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-menu.png" alt="img"></p>
-<h3 id="提高开发效率"><a href="#提高开发效率" class="headerlink" title="提高开发效率"></a>提高开发效率</h3><p>每当我写页面或者改 bug 的时候难免需要即时查看运行效果，有时候改了一个 label 的字体，或者背景颜色，或者 frame，都需要重新运行，但是现在不需要了，只要按下 command + S，保存当前文件。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-normal.png" alt="img"></p>
-<p>文件保存的时候可以看到 Injection 的图标会变成绿色，这个时候表示正在执行热更新，过一会儿颜色又变成红色（这个过程可能很快，仔细观察可以看到）。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-worked.png" alt="img"></p>
-<p>变成红色以后热修复就执行完了，可以查看效果了，官方表示保存以后可以立马看到效果，实际上是在修改的代码执行的时候会看到变化，所以往往都是退出这个页面，重新进入，如果是列表需要上下滑动才能看到效果。</p>
-<h3 id="使用十分便捷"><a href="#使用十分便捷" class="headerlink" title="使用十分便捷"></a>使用十分便捷</h3><p>这个是 Mac 上的一款 App，可以在 Mac App Store 中搜索 Injection，那款免费的 App 就是，现在已经更新到第三个版本，点击安装</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII.png" alt="img"></p>
-<p>找到你的 AppDelegate 实现文件，上代码：</p>
-<p>OC 版</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="meta">#if DEBUG</span></span><br><span class="line">    [[<span class="built_in">NSBundle</span> bundleWithPath:<span class="string">@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle"</span>] load];</span><br><span class="line">    <span class="comment">// [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/macOSInjection10.bundle"] load];</span></span><br><span class="line">    <span class="comment">// [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/tvOSInjection10.bundle"] load];</span></span><br><span class="line">    <span class="meta">#endif</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Swift 版</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    #<span class="keyword">if</span> <span class="type">DEBUG</span></span><br><span class="line">    <span class="type">Bundle</span>(path: <span class="string">"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle"</span>)?.load()</span><br><span class="line">    <span class="comment">// Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection10.bundle")?.load()</span></span><br><span class="line">    <span class="comment">// Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/tvOSInjection10.bundle")?.load()</span></span><br><span class="line">    #endif</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意这里路径不要写错，建议复制粘贴</strong>。</p>
-<p>打开你的项目，command + R，运行项目，（如果你之前没有通过 Injection 添加项目路径，这个时候会弹出来一个选择框，让你选择项目的根路径。）</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-dir.png" alt="img"></p>
-<p>选择好当前项目的根目录，然后点击 <code>Select Project Directory</code> 按钮。</p>
-<p>这个时候程序会继续运行，注意看 Xcode 控制台的 log日志。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Injection connected, watching /Users/bruce/Desktop/Demo/Timer<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
-<p>看到这句话的时候说明已经OK了，可以开始你的表演了！</p>
-<p>在每次修改保存文件以后都会看到下面这句话 👇，如果没有看到效果，请排查下面列举的原因。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*** Compiling /Users/bruce/Desktop/Demo/Timer/Timer/ViewController.m ***</span><br><span class="line">Loading .dylib - Ignore any duplicate <span class="keyword">class</span> warning...</span><br><span class="line">objc[<span class="number">63140</span>]: Class ViewController is implemented <span class="keyword">in</span> both /Users/bruce/Library/Developer/CoreSimulator/Devices/<span class="number">0461</span>F832<span class="number">-5260</span><span class="number">-420</span>C<span class="number">-982</span>D-ACD9AB847B36/data/Containers/Bundle/Application/<span class="number">36</span>D73A95-DAD4<span class="number">-4</span>CD6<span class="number">-8</span>C12-EADFF552C83C/Timer.app/Timer (<span class="number">0x107e986a0</span>) and /Users/bruce/Library/Containers/com.johnholdsworth.InjectionIII/Data/eval101.dylib (<span class="number">0x125d356f8</span>). One of the two will be used. Which one is undefined.</span><br></pre></td></tr></table></figure>
-<p>下面说一下有时候没有看到效果的原因。</p>
-<h3 id="没有看到效果的问题的总结"><a href="#没有看到效果的问题的总结" class="headerlink" title="没有看到效果的问题的总结"></a>没有看到效果的问题的总结</h3><ul>
-<li>确认 Injection 监听的目录和 Xcode 项目目录是否一致。</li>
-<li>再看下有没有保存成功，也就是针筒的颜色由绿色变成红色。</li>
-<li>确认上面那句话有没有打印，也就是说有没有真的运行这个工具。</li>
-<li>如果修改的是 cell / item 上面的内容，需要上下滚动才能看到效果。</li>
-<li>如果修改的是一个普通页面的内容，最好是退出这个页面，再进入这个页面。</li>
-<li>确认 Xcode 的版本和启动时添加的代码是否匹配，Xcode10 需要 <code>iOSInjection10.bundle</code> 才能生效。</li>
-</ul>
-
           
+
+
+今天 Mac App Store 提示软件更新，一看是 InjectionIII 更新了，而且这次更新是针对 Xcode10 的支持，赶紧上车更新一波。
+由于这次更新后，配合 Xcode10 使用方式和之前的版本略有差异，所以在此介绍一下。
+在介绍这款工具之前首先得感谢 John Holdsw
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/17/InjectionIII：iOS开发必备效率神器-所见即所得/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -622,38 +597,24 @@
       
         
           
-            <p>一直觉得 rac_signalForSelector 十分好用，但是并不了解它的内部机制。趁着有空，查看一下原码，探究 ReactiveObjC（RAC） 中 <code>-rac_signalForSelector:</code> 的实现。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (RACSignal *)rac_signalForSelector:(SEL)selector &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(selector != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">NSObjectRACSignalForSelector</span>(<span class="keyword">self</span>, selector, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　</p>
-<p>rac_signalForSelector 方法内部只调用了一个函数，继续跟进来查看 NSObjectRACSignalForSelector 的函数实现：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/framework/ReactiveObjC/001.png" alt="image-20181016175429913"></p>
-<p>　</p>
-<p>函数内首先调用的是一个名为 RACSwizzleClass 的函数，继续跟进可以发现，在 RACSwizzleClass() 这个函数中，做了类似于 KVO 的处理——创建当前对象所属类的子类，并将当前对象的类对象指向子类对象。<strong>而且，如果检测到该对象已经做了 KVO 监听（已经动态创建了子类），RAC 会做兼容处理。</strong></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/framework/ReactiveObjC/002.png" alt="image-20181016172717946"></p>
-<p>　</p>
-<p>RACSwizzleClass() 函数中创建了子类，并且交换了几个关键方法，并在返回值中将创建的子类返回出来（函数中还做了一些缓存相关的操作，这里只研究主流程）。<strong>这里隐藏了一个关键的方法交换：RACSwizzleForwardInvocation() 函数交换了对象的消息转发方法，也就意味着，之后一旦有消息转发，RAC 会进行拦截。</strong></p>
-<p><strong>这里多说一句，动态创建的类对象存储在堆区 而不是数据段</strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 断点调试得到通过 Runtime 动态创建的类对象 内存地址</span></span><br><span class="line">subclass	Class	<span class="number">0x6000037502a0</span>	</span><br><span class="line"><span class="comment">// 断点下通过 lldb 命令新建一个堆对象，查看其内存地址</span></span><br><span class="line">(lldb) po [<span class="built_in">NSObject</span> new]</span><br><span class="line">&lt;<span class="built_in">NSObject</span>: <span class="number">0x600003b171c0</span>&gt;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 可以得出，通过 Runtime 动态创建的类对象信息，是存在于内存的 堆区 而非 数据段</span></span><br></pre></td></tr></table></figure>
-<p>　</p>
-<p>接下来，RAC 交换了 -dealloc 方法，并在 -dealloc 方法中，执行一些销毁操作。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/framework/ReactiveObjC/003.png" alt="image-20181016175557900"></p>
-<p>　</p>
-<p>然后，关键方法来了。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/framework/ReactiveObjC/004.png" alt="image-20181016180158571"></p>
-<p>　</p>
-<p>RAC 将要监听的方法替换成了消息转发，也就是说这个方法被调用后将跳过消息发送和动态方法解析的阶段自动进入消息转发阶段，然后消息转发中 RAC 早已做了拦截处理，发现调用的方法被监听之后先执行原来的方法实现，然后给每个监听者发信号，执行监听的 Block，这样就实现了方法调用时的监听操作。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>其实 RAC 在 <code>-rac_signalForSelector:</code> 的实现中有 3个关键步骤：</p>
-<p>1、RACSwizzleClass() 函数中类似于 KVO 的子类化操作，以及对 KVO、本类中其他的监听进行兼容。</p>
-<p>2、RACSwizzleClass() 中执行 RACSwizzleForwardInvocation() 函数，拦截并处理相关消息转发，发现是经过 <code>-rac_signalForSelector:</code>监听的方法，给所有的监听发出信号。</p>
-<p>3、NSObjectRACSignalForSelector() 函数中使用 class_replaceMethod() 函数将 <code>-rac_signalForSelector:</code>  消息实现转为 消息转发，然后在上一步交换的消息转发方法中进行拦截处理。</p>
-<p>　</p>
-<p>RAC 内部实现了一个完整的流程，在对象 -dealloc 方法中，会释放所有监听的 block，所以我们也不必担心内存问题，只要注意在 Block 中适当的传入 weak 指针，其余放心使用即可。</p>
-
-          
+          一直觉得 rac_signalForSelector 十分好用，但是并不了解它的内部机制。趁着有空，查看一下原码，探究 ReactiveObjC（RAC） 中 -rac_signalForSelector: 的实现。
+12345- (RACSignal *)rac_signalForSelector
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/17/探究-ReactiveObjC（RAC）-中-rac-signalForSelector-的实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -826,33 +787,24 @@
       
         
           
-            <p>如果想用 Swift 练习一下排序算法，就会碰到这么一个需求：创建几个完全一样的数组，来对比不同排序算法间的性能差异。</p>
-<p>在 OC 时代，我们可以使用工具类创建一个可变数组，向数组中填充我们生成的随机数，然后对这个数组做可变拷贝，再定义几个新的变量进行赋值，最终每个算法使用新的数组进行排序，这样能保证每个排序算法分配到的随机数组是完全一致的，并且排序的时候互不干扰。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为数组创建可变拷贝(深拷贝)</span></span><br><span class="line"><span class="built_in">NSMutableArray</span> *arr = [<span class="built_in">NSMutableArray</span> arrayWithObjects:@<span class="number">10</span>, @<span class="number">8</span>, @<span class="number">55</span>, <span class="literal">nil</span>];</span><br><span class="line"><span class="built_in">NSMutableArray</span> *array1 = [arr mutableCopy];</span><br></pre></td></tr></table></figure>
-<p>但是，在 Swift4.2 中，我们发现 Array 这个结构体并没有任何 copy 相关的方法，那我们如何做到生成多个完全一致却又互不干扰的随机数组呢？</p>
-<p>查了资料发现，Swift 中 Struct 有“写时复制（Copy-On-Write）”的特性。</p>
-<h3 id="什么是COW（Copy-On-Write）"><a href="#什么是COW（Copy-On-Write）" class="headerlink" title="什么是COW（Copy-On-Write）"></a>什么是COW（Copy-On-Write）</h3><p>我们都知道 Swift 有值类型和引用类型，而值类型在被赋值或被传递给函数时是会被拷贝的。在Swift中，所有的基本类型，包括整数、浮点数、字符串、数组和字典等都是值类型，并且都以结构体的形式实现。那么，我们在写代码时，这些值类型每次赋值传递都是会重新在内存里拷贝一份吗？</p>
-<p>答案是否定的，想象一下，假如有个包含上千个元素的数组，然后你把它 copy 一份给另一个变量，那么 Swift 就要拷贝所有的元素，即使这两个变量的数组内容完全一样，这对它性能来说是多么糟糕。</p>
-<p>在 <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-ID82" target="_blank" rel="noopener">The Swift Programming Language (Swift 4.1) Classes and Structures</a> 章节中有如下一段话，也明确地提到了Swift对其实现做了优化，可避免不必要的复制：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The description above refers to the “copying” of strings, arrays, and dictionaries. The behavior you see in your code will always be as if a copy took place. However, Swift only performs an actual copy behind the scenes when it is absolutely necessary to do so. Swift manages all value copying to ensure optimal performance, and you should not avoid assignment to try to preempt this optimization.</span><br></pre></td></tr></table></figure>
-<p>而这个优化方式就是 Copy-On-Write（写时复制），即只有当这个值需要改变时才进行复制行为。</p>
-<p><strong>例子：</strong><br>首先，让我们看下面的例子我们更容易理解，我们创建了数组 array1，然后将 array1 赋值给 array2，再给 array2 数组添加多一个元素，我们通过查看其地址变化来确定是否进行了拷贝行为。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">var</span> array2 = array1</span><br><span class="line"><span class="comment">// 断点1</span></span><br><span class="line">array2.append(<span class="number">2</span>) </span><br><span class="line"><span class="comment">// 断点2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"hello world"</span>)</span><br></pre></td></tr></table></figure>
-<p>断点1位置，使用 lldb 命令 <code>fr v -R [object]</code> 来查看对象内存结构。打印出 array1，array2 内存结构如下，我们可以看到 array1 和 array2 内存地址都是 0x0000000101a1a590，说明 array1 和 array2 此时是共享同一个实例</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -<span class="type">R</span> array1</span><br><span class="line">(<span class="type">Swift</span>.<span class="type">Array</span>&lt;<span class="type">Swift</span>.<span class="type">Int</span>&gt;) array1 = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = <span class="number">0x0000000101a1a590</span> &#123;</span><br><span class="line">        <span class="type">Swift</span>._ContiguousArrayStorageBase = &#123;</span><br><span class="line">          <span class="type">Swift</span>._SwiftNativeNSArrayWithContiguousStorage = &#123;</span><br><span class="line">            <span class="type">Swift</span>._SwiftNativeNSArray = &#123;&#125;</span><br><span class="line">          &#125;</span><br><span class="line">          countAndCapacity = &#123;</span><br><span class="line">            _storage = &#123;</span><br><span class="line">              <span class="built_in">count</span> = &#123;</span><br><span class="line">                _value = <span class="number">4</span></span><br><span class="line">              &#125;</span><br><span class="line">              _capacityAndFlags = &#123;</span><br><span class="line">                _value = <span class="number">8</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">(lldb) fr v -<span class="type">R</span> array2</span><br><span class="line">(<span class="type">Swift</span>.<span class="type">Array</span>&lt;<span class="type">Swift</span>.<span class="type">Int</span>&gt;) array2 = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = <span class="number">0x0000000101a1a590</span> &#123;</span><br><span class="line">        <span class="type">Swift</span>._ContiguousArrayStorageBase = &#123;</span><br><span class="line">          <span class="type">Swift</span>._SwiftNativeNSArrayWithContiguousStorage = &#123;</span><br><span class="line">            <span class="type">Swift</span>._SwiftNativeNSArray = &#123;&#125;</span><br><span class="line">          &#125;</span><br><span class="line">          countAndCapacity = &#123;</span><br><span class="line">            _storage = &#123;</span><br><span class="line">              <span class="built_in">count</span> = &#123;</span><br><span class="line">                _value = <span class="number">4</span></span><br><span class="line">              &#125;</span><br><span class="line">              _capacityAndFlags = &#123;</span><br><span class="line">                _value = <span class="number">8</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>断点2位置，此时 array2 添加了新元素，打印 array2，内存结构如下，我们可以看到 array2 内存地址已经变成了0x0000000101a1a5d0，说明此时它们不再共享同一个实例，array2 对应的值进行了拷贝行为</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(lldb) fr v -<span class="type">R</span> array2</span><br><span class="line">(<span class="type">Swift</span>.<span class="type">Array</span>&lt;<span class="type">Swift</span>.<span class="type">Int</span>&gt;) array2 = &#123;</span><br><span class="line">  _buffer = &#123;</span><br><span class="line">    _storage = &#123;</span><br><span class="line">      rawValue = <span class="number">0x0000000101a1a5d0</span> &#123;</span><br><span class="line">        <span class="type">Swift</span>._ContiguousArrayStorageBase = &#123;</span><br><span class="line">          <span class="type">Swift</span>._SwiftNativeNSArrayWithContiguousStorage = &#123;</span><br><span class="line">            <span class="type">Swift</span>._SwiftNativeNSArray = &#123;&#125;</span><br><span class="line">          &#125;</span><br><span class="line">          countAndCapacity = &#123;</span><br><span class="line">            _storage = &#123;</span><br><span class="line">              <span class="built_in">count</span> = &#123;</span><br><span class="line">                _value = <span class="number">5</span></span><br><span class="line">              &#125;</span><br><span class="line">              _capacityAndFlags = &#123;</span><br><span class="line">                _value = <span class="number">16</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由此可见，array2 未做修改时，array1 和 array2 是共享同一个实例。</p>
-<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>在结构体内部存储了一个指向实际数据的引用 reference，在不进行修改操作的普通传递过程中，都是将内部的reference 的应用计数 +1，在进行修改时，对内部的 reference 做一次 copy 操作，再在这个复制出来的数据进行真正的修改，防止和之前的 reference 产生意外的数据共享。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>至此，我们已经能够轻松的解决刚开始的时候提出的问题：Swift 中 Array 是结构体，那么我们可以利用”写时复制“的特性，<strong>直接按照一定规则生成一个数组，然后定义新的变量，并用初始数组赋值，每个排序算法中使用一个数组变量，示例代码如下：</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Swift 中 Struct 具有“写时复制”的特性</span></span><br><span class="line"><span class="keyword">let</span> arr = <span class="type">SortHelper</span>.generateRandomArray(<span class="built_in">count</span>: <span class="number">100000</span>, maxValue: <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr1 = arr</span><br><span class="line"><span class="keyword">var</span> arr2 = arr</span><br><span class="line"><span class="keyword">var</span> arr3 = arr</span><br><span class="line"></span><br><span class="line"><span class="type">SortHelper</span>.testSort(sortName: <span class="string">"快速排序"</span>) &#123;</span><br><span class="line">    arr1.<span class="built_in">quickSort</span>()</span><br><span class="line">    <span class="built_in">assert</span>(arr1.isSorted)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">SortHelper</span>.testSort(sortName: <span class="string">"双路快排"</span>) &#123;</span><br><span class="line">    arr2.quickSort2Way()</span><br><span class="line">    <span class="built_in">assert</span>(arr2.isSorted)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">SortHelper</span>.testSort(sortName: <span class="string">"三路快排"</span>) &#123;</span><br><span class="line">    arr3.quickSort3Way()</span><br><span class="line">    <span class="built_in">assert</span>(arr3.isSorted)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>得到元素一致且互不干扰的数组之后，就可以安心的练习排序算法啦 :-D。</p>
-
-          
+          如果想用 Swift 练习一下排序算法，就会碰到这么一个需求：创建几个完全一样的数组，来对比不同排序算法间的性能差异。
+在 OC 时代，我们可以使用工具类创建一个可变数组，向数组中填充我们生成的随机数，然后对这个数组做可变拷贝，再定义几个新的变量进行赋值，最终每个算法使用新的数组进行排序，这样能保证
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/16/Swift4-中的-Struct写时复制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1037,64 +989,24 @@
       
         
           
-            <h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快速排序由 C. A. R. Hoare 在 1962 年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
-<p>下面我们来了解一下快排的子过程的思路：</p>
-<p>快速排序是把数组中的一个元素挪到它排好序时应该所处的位置，如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/001.png" alt=""></p>
-<p>首先选择数组中的一个元素，比如用 l 索引指向最左边的元素 v，逐渐遍历数组所有位于 l 左边的元素，在遍历的过程中，我们将逐渐整理出小于 v 的元素和大于 v 的元素，当然我们继续用一个索引 j 来记录小于 v 和大于 v 的分界点，然后我们当前访问的元素索引为 i。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/002.png" alt=""></p>
-<p>那么 i 怎么处理呢？很简单当 i 指向的元素 e 大于 v 的时候，直接包含进大于 v 的部分中，像这样：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/003.png" alt=""></p>
-<p>然后我们继续讨论下一个元素，此时 i++，如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/004.png" alt=""></p>
-<p>如果元素 e 小于 v 的时候怎么做呢？只需要把元素 e 和橙色部分之后的一个元素交换，就可以了，此时索引 j++。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/005.png" alt=""></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/006.png" alt=""></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/007.png" alt=""></p>
-<p>最后i继续往后走，到最后的时候就直接将数组分成了等于 v，小于 v，大于 v 的三部分。</p>
-<p>最后将 l 位置和 j 位置交换，就实现了快速排序的子过程，如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/008.png" alt=""></p>
-<p>下面是快速排序代码（为 Array 添加扩展，只要数组中的元素支持 Comparable 协议，就可以用排序）：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// MARK: - 快速排序</span></span><br><span class="line">    @discardableResult <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">quickSort</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">        </span><br><span class="line">        __quickSort(l: <span class="number">0</span>, r: <span class="keyword">self</span>.<span class="built_in">count</span> - <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quickSort</span><span class="params">(l: Int, r: Int)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> l &gt;= r &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> q = __quick(l: l, r: r)</span><br><span class="line">        </span><br><span class="line">        __quickSort(l: l, r: q - <span class="number">1</span>)</span><br><span class="line">        __quickSort(l: q + <span class="number">1</span>, r: r)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quick</span><span class="params">(l: Int, r: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> e = <span class="keyword">self</span>[l]</span><br><span class="line">        <span class="keyword">var</span> j = l</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> l...r &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">self</span>[i] &lt; e) &#123;</span><br><span class="line">                swapAt(i, j + <span class="number">1</span>)</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swapAt(l, j)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> j</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>大家知道，快速排序虽然高效，但并不稳定，当数组中存在大量重复元素时，比如举个例子，我用模板测试归并排序和快速排序的时间，设置一个 100000 的数组，数组元素在 0-10 之间随机取值，那么用归并需要花费 1.33s 而快排需要花费 40.58s。当快速排序最优的时候是 O(n log n)，而此时显然退化到了 O(n^2) 的级别。这是为什么？</p>
-<p>还记得上面写的快排的子过程么，考虑到了 e&gt;v, e&lt;v，而 e=v 的情况没有考虑。看了代码理解了的同学应该清楚，其实我是把等于 v 这种情况包含进了大于 v 的情况里面了，那么会出现什么问题？不管是当条件是大于等于还是小于等于 v，当数组中重复元素非常多的时候，等于 v 的元素太多，那么就将数组分成了极度不平衡的两个部分，因为等于 v 的部分总是集中在数组的某一边。</p>
-<p>那么一种优化的方式便是进行 <strong>双路快排</strong>。</p>
-<h3 id="双路快排"><a href="#双路快排" class="headerlink" title="双路快排"></a>双路快排</h3><p>和快排不同的是此时我们将小于 v 和大于 v 的元素放在数组的两端，那么我们将引用新的索引 j 的记录大于 v 的边界位置。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/009.png" alt=""></p>
-<p>i 索引不断向后扫描，当 i 的元素小于 v 的时候继续向后扫描，直到碰到了某个元素大于等于 v。j 同理，直到碰到某个元素小于等于 v。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/010.png" alt=""></p>
-<p>然后绿色的部分便归并到了一起，而此时只要交换 i 和 j 的位置就可以了，然后 i++，j– 就行了。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/011.png" alt=""></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/012.png" alt=""></p>
-<p>直到 i 和 j 遍历完毕，整个数组排序完成。</p>
-<p>这种优化当它遇到重复元素的时候，也能近乎将他们平分开来。</p>
-<p>双路快排代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// MARK: - 快速排序，双路快排</span></span><br><span class="line">    @discardableResult <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">quickSort2Way</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">        </span><br><span class="line">        __quickSort2Way(l: <span class="number">0</span>, r: <span class="keyword">self</span>.<span class="built_in">count</span> - <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quickSort2Way</span><span class="params">(l: Int, r: Int)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> l &gt;= r &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> q = __quick2Way(l: l, r: r)</span><br><span class="line">        </span><br><span class="line">        __quickSort2Way(l: l, r: q - <span class="number">1</span>)</span><br><span class="line">        __quickSort2Way(l: q + <span class="number">1</span>, r: r)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quick2Way</span><span class="params">(l: Int, r: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> e = <span class="keyword">self</span>[l]</span><br><span class="line">        <span class="keyword">var</span> j = l+<span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> k = r</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="literal">true</span> &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> j &lt;= r &amp;&amp; <span class="keyword">self</span>[j] &lt;= e &#123;</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> k &gt; l &amp;&amp; <span class="keyword">self</span>[k] &gt; e &#123;</span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> j &gt;= k &#123;</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            swapAt(j, k)</span><br><span class="line">            </span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">            k -= <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        swapAt(l, k)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> k</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然除了快排和双路快排，还有一个更加经典的优化，我们叫它 <strong>三路快排</strong>。</p>
-<h3 id="三路快排"><a href="#三路快排" class="headerlink" title="三路快排"></a>三路快排</h3><p>双路快排将整个数组分成了小于 v，大于 v 的两部分，而三路快排则是将数组分成了小于 v，等于 v，大于 v 的三个部分，当递归处理的时候，遇到等于 v 的元素直接不用管，只需要处理小于 v，大于 v 的元素就好了。某一时刻的中间过程如下图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/013.png" alt=""></p>
-<p>当元素 e 等于 v 的时候直接纳入绿色区域之内，然后 i++ 处理下一个元素。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/014.png" alt=""></p>
-<p>当元素 e 小于 v 的时候，只需要将元素 e 与等于 e 的第一个元素交换就行了，这和刚开始讲的快速排序方法类似。同理，当大于 v 的时候执行相似的操作。如图：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/015.png" alt=""></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/016.png" alt=""></p>
-<p>当全部元素处理完之后，数组便成了这个样子：</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/sort/quickSort/017.png" alt=""></p>
-<p>三路快排的代码如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Comparable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// MARK: - 快速排序，三路快排</span></span><br><span class="line">    @discardableResult <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">quickSort3Way</span><span class="params">()</span></span> -&gt; [<span class="type">Element</span>] &#123;</span><br><span class="line">        </span><br><span class="line">        __quickSort3Way(l: <span class="number">0</span>, r: <span class="keyword">self</span>.<span class="built_in">count</span> - <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quickSort3Way</span><span class="params">(l: Int, r: Int)</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> l &gt;= r &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> (lt, gt) = __quick3Way(l: l, r: r)</span><br><span class="line">        </span><br><span class="line">        __quickSort3Way(l: l, r: lt - <span class="number">1</span>)</span><br><span class="line">        __quickSort3Way(l: gt + <span class="number">1</span>, r: r)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">__quick3Way</span><span class="params">(l: Int, r: Int)</span></span> -&gt; (<span class="type">Int</span>, <span class="type">Int</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> e = <span class="keyword">self</span>[l]</span><br><span class="line">        <span class="keyword">var</span> lt = l</span><br><span class="line">        <span class="keyword">var</span> i = l + <span class="number">1</span></span><br><span class="line">        <span class="keyword">var</span> gt = r</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> i &lt;= gt &#123;</span><br><span class="line">            <span class="keyword">while</span> gt &gt; l &amp;&amp; <span class="keyword">self</span>[gt] &gt; e &#123;</span><br><span class="line">                gt -= <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> i &gt; gt &#123;</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">self</span>[i] &lt; e &#123;</span><br><span class="line">                swapAt(i, lt + <span class="number">1</span>)</span><br><span class="line">                lt += <span class="number">1</span></span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">self</span>[i] &gt; e &#123;</span><br><span class="line">                swapAt(i, gt)</span><br><span class="line">                gt -= <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swapAt(l, lt)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (lt, gt)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>对比了一下这三个算法，在普通情况下，双路快排的速度已改算是最快的。（不同的环境下略有差异，数组内相等元素特别多的时候，三路快排性能更好）</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组中10万个元素，元素取值范围：0~10000</span></span><br><span class="line">快速排序 排序完毕，耗时：<span class="number">0.8741459846496582</span></span><br><span class="line">双路快排 排序完毕，耗时：<span class="number">0.4336860179901123</span></span><br><span class="line">三路快排 排序完毕，耗时：<span class="number">0.7008020877838135</span></span><br></pre></td></tr></table></figure>
-<p>下面是随机产生 100万个 0~10000 的整数存放在数组中，来查看不同排序算法间的性能差异。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">归并算法 排序完毕，耗时：<span class="number">12.888783931732178</span></span><br><span class="line">快速排序 排序完毕，耗时：<span class="number">10.126990795135498</span></span><br><span class="line">双路快排 排序完毕，耗时：<span class="number">7.646800994873047</span></span><br><span class="line">三路快排 排序完毕，耗时：<span class="number">7.585190773010254</span></span><br><span class="line"><span class="type">Swift</span> 自带排序 排序完毕，耗时：<span class="number">1.39898681640625</span></span><br></pre></td></tr></table></figure>
-<p>相对于归并算法来说，双路快排已经很快了，但是对比 Swift 自带的 sort() 方法，发现它比我自己写的快排还要快好多，心里顿时很受打击，看来算法优化确实值得深钻研究啊。</p>
-<p>The End ！</p>
-
-          
+          快速排序快速排序由 C. A. R. Hoare 在 1962 年提出。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。
+下面我们来
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/15/Swift-快速排序、双路快排和三路快排/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1267,93 +1179,26 @@
       
         
           
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想要理解 RunLoop 其实并不难，但是由于 RunLoop 非常抽象化，很容易忘记，所以需要把它记下来，常回顾一下。</p>
-<h3 id="何为-RunLoop-？"><a href="#何为-RunLoop-？" class="headerlink" title="何为 RunLoop ？"></a>何为 RunLoop ？</h3><ol>
-<li><p>什么是 RunLoop？</p>
-<p>​        顾名思义，RunLoop 就是在程序运行过程中循环做一些事情。准确是说，RunLoop 就是为了让线程处于激活状态。其作用如下：</p>
-<ol>
-<li>保持程序的持续运行</li>
-<li>处理App中的各种事件（触摸、滑动、定时器等等）</li>
-<li>节省CPU资源，提高程序性能：该做事的时候做事，该休息的时候休息</li>
-</ol>
-</li>
-<li><p>项目中哪些地方会用到 RunLoop ？</p>
-<ol>
-<li>控制线程的生命周期（线程保活 - 经常使用一个子线程）</li>
-<li>解决 NSTimer 在 ScrollView 滑动时停止工作的问题</li>
-<li>监控 App 卡顿</li>
-<li>性能优化</li>
-</ol>
-</li>
-</ol>
-<h3 id="RunLoop与线程"><a href="#RunLoop与线程" class="headerlink" title="RunLoop与线程"></a>RunLoop与线程</h3><ol>
-<li>每一个线程都有一个唯一的RunLoop对象与之对应。</li>
-<li>这些 RunLoop 对象保存在一个全局的 CFMutableDictionary 里，以线程为 key，以 RunLoop 对象为 Value。</li>
-<li>线程刚创建的时候并没有 RunLoop 对象，RunLoop 会在第一次获取它的时候创建，main 线程的 RunLoop 刚开始会有人获取。 子线程默认是没有的，所以子线程默认情况下会在代码执行完毕后自动退出。</li>
-<li>RunLoop 会在线程结束时销毁。</li>
-<li>主线程的 RunLoop 已经自动获取（创建），子线程默认没有开启 RunLoop。</li>
-</ol>
-<p><strong>个人理解：</strong>RunLoop其实就是用来线程保活的，频繁的创建销毁线程会消耗资源。</p>
-<h3 id="RunLoop-的-Mode（CFRunLoopModeRef）"><a href="#RunLoop-的-Mode（CFRunLoopModeRef）" class="headerlink" title="RunLoop 的 Mode（CFRunLoopModeRef）"></a>RunLoop 的 Mode（CFRunLoopModeRef）</h3><ol>
-<li><p>CFRunLoopModeRef 代表 RunLoop 的运行模式。</p>
-</li>
-<li><p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source0、Source1、Timers、Observers</p>
-</li>
-<li><p>RunLoop 启动的时候只能选择其中一个 Mode，作为 CurrentMode。多个 Mode 相互独立 互不干扰。</p>
-</li>
-<li><p>RunLoop 同时可以有多个Mode，但当前只能有一个 Mode。要切换 Mode，需要退出 Loop， 重新选择 Mode 再进来执行。</p>
-</li>
-<li><p>如果 Mode 里没有任何 Source0、Source1、Timers、Observers， RunLoop会立即退出。</p>
-</li>
-</ol>
-<p><strong>细节</strong>：通过 Foundation API 和 C语言 API 获取到的 RunLoop 对象的内存地址是不一样的，因为 NSRunLoop 是对 CFRunLoopRef 的一层封装。</p>
-<p><strong>常见的两种 Mode</strong></p>
-<ol>
-<li><strong>KCFRunLoopDefaultMode</strong>（NSDefaultRunLoopMode）：App 的默认 Mode，通常主线程是在这个 Mode 下运行。</li>
-<li><strong>UITrackingRunLoopMode</strong>：界面跟踪 Mode ，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。</li>
-<li>还有一个假的模式：<strong>NSRunLoopCommonModes</strong>，注意它后面带了个 s ，它只是一个标记，意为着在设置了 common 标记的模式下都能运行。KCFRunLoopDefaultMode，UITrackingRunLoopMode 正好都在 _commonModes 数组中（有 common 标记）。</li>
-</ol>
-<p><strong>Mode 内包含的 字段的含义</strong></p>
-<ol>
-<li>Source0，处理 UI点击事件，performSelector:onThread。</li>
-<li>Source1，基于 Port 的线程间通信，系统事件的捕捉（然后分发到 Source0进行处理）。</li>
-<li>Timers，NSTimer，performSelector:withObject:afterDelay: 。</li>
-<li>Observers，用于监听 RunLoop 的状态，UI 刷新（beforeWaiting），Autorelease Pool。</li>
-</ol>
-<h3 id="RunLoop-的执行流程"><a href="#RunLoop-的执行流程" class="headerlink" title="RunLoop 的执行流程"></a>RunLoop 的执行流程</h3><ol>
-<li>通知Observers：进入 RunLoop</li>
-<li>通知Observers：即将处理 Timers</li>
-<li>通知Observers：即将处理 Sources</li>
-<li>处理 Blocks</li>
-<li>处理 Source0（可能会再次处理 Blocks）</li>
-<li>如果存在 Source1，直接跳转到第8步里的第3步</li>
-<li>通知 Observers：开始休眠（等待消息唤醒）</li>
-<li>通知 Observers：结束休眠（被某个消息唤醒）<ol>
-<li>处理 Timers</li>
-<li>处理 GCD Async To Main Queue</li>
-<li>处理 Source1</li>
-</ol>
-</li>
-<li>处理 Blocks</li>
-<li>根据前面的执行结果，决定接下来如何操作<ol>
-<li>回到第2步</li>
-<li>退出当前 Loop</li>
-</ol>
-</li>
-<li>通知 Observers：退出 Loop</li>
-</ol>
-<h3 id="RunLoop-休眠的实现原理"><a href="#RunLoop-休眠的实现原理" class="headerlink" title="RunLoop 休眠的实现原理"></a>RunLoop 休眠的实现原理</h3><p>RunLoop 中调用了由操作系统提供的 mach_msg() 函数，让线程由用户态转变为内核态，从而实现既不占用 CPU 资源也不退出的休眠状态。</p>
-<h3 id="一些零碎的注意点"><a href="#一些零碎的注意点" class="headerlink" title="一些零碎的注意点"></a>一些零碎的注意点</h3><p>注意：<strong>控制器</strong>的 -dealloc 默认是在<strong>主线程</strong>执行的。</p>
-<p>注意：performSelector:withObject:afterDelay: 的本质是往Runloop中添加定时器，子线程默认没有启动RunLoop。</p>
-<p>注意：一个线程一旦执行完任务就会销毁，再也无法执行其他任务。例如下面的 NSThread 对象，一旦 block 里的代码执行完，这个 thread 将不再执行任何代码。如果需要线程保活，就要用到 RunLoop。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithBlock:^&#123;</span><br><span class="line">    <span class="comment">// 默认情况下，执行完这个打印，该线程就会销毁</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"abc"</span>);</span><br><span class="line">&#125;];</span><br><span class="line">[thread start];</span><br></pre></td></tr></table></figure>
-<p>注意：主线程几乎所有的事情都交给了 RunLoop 去做，比如 UI 刷新，点击事件的处理，performSelector 等。</p>
-
-          
+          前言想要理解 RunLoop 其实并不难，但是由于 RunLoop 非常抽象化，很容易忘记，所以需要把它记下来，常回顾一下。
+何为 RunLoop ？
+什么是 RunLoop？
+​        顾名思义，RunLoop 就是在程序运行过程中循环做一些事情。准确是说，RunLoop 就是为了让线程处
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/12/iOS开发——RunLoop/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1526,36 +1371,26 @@
       
         
           
-            <p>本文不完全翻译自<a href="https://medium.com/@nathantannar4/supporting-push-notifications-with-vapor-3-3f6cc959c789" target="_blank" rel="noopener">Medium</a>（由于完全按照原文教程并不能正常使用，本人采坑后总结了不少经验，希望能帮助大家少走弯路，一次性成功）。</p>
-<p><img src="https://cdn-images-1.medium.com/max/800/1*AnprRRx9EpqSEo72f23H5g.png" alt="img"></p>
-<p><strong>从Swift内部执行cURL命令</strong></p>
-<p>几周前，我决定学习 Vapor3 框架。我希望能够为未来的项目开发一个后端API，而不需要依赖我的goto, Parse Server。这是一个快速操作指南，告诉你 Vapor 完全可以胜任！本文涉及到的所有代码都可以在我的 GitHub 里找到。</p>
-<p>为了获得对框架的一些经验，并查看一些用例示例，我从 Ray Wenderlich 的网站上购买了 “Server Side Swift with Vapor” 电子书。我把书从头到尾读了一遍以了解基本知识。下一步准备尝试将我常用的解析服务器的功能移植到一个 Vapor3 应用程序上。不过当我要实现推送通知时，我遇到了一个障碍。</p>
-<p>苹果的APNs需要使用HTTP/2进行连接，但是SwiftNIO （Vapor3的核心网络依赖）还不支持HTTP/2协议。我想我可能需要使用一些第三方的解决方案，但我不想要那种依赖。我决定浏览一下<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiy9f3btYzdAhVDHTQIHZl4B2cQFjAAegQICRAB&amp;url=https%3A%2F%2Fdeveloper.apple.com%2Fgo%2F%3Fid%3Dpush-notifications&amp;usg=AOvVaw0e_Cv59CoeHYuKK70RqK38" target="_blank" rel="noopener">苹果的开发文档</a>，看看使用cURL连接APNs需要做些什么。</p>
-<p>首先，您需要一个付费的Apple Developer帐户和一个您已经配置了推送通知的演示应用程序。您将需要运行演示应用程序并获得设备令牌，该令牌将稍后发送到测试APNs。</p>
-<p>HTTP/2 cURL请求需要一个证书。第一步是从Apple developer帐户生成所需的证书。我不会详细介绍如何做到这一点，因为已经有几个教程了。需要合并.cer文件和.p12文件。要做到这一点，请遵循以下bash脚本:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the .cer file into a .pem file:</span></span><br><span class="line">openssl x509 -<span class="keyword">in</span> aps_development.cer -inform der -out cert.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the private key’s .p12 file into a .pem file:</span></span><br><span class="line">openssl pkcs12 -nocerts -<span class="keyword">in</span> aps_development.p12 -out key.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># Finally, combine the certificate and key into a single .pem file</span></span><br><span class="line">cat cert.pem key.pem &gt; aps_development.pem</span><br></pre></td></tr></table></figure>
-<p>　</p>
-<p>有了新的公共/私有组合证书，我们现在可以尝试使用cURL与APNs通信。</p>
-<p><strong>（译者注）这里有个注意点，一般情况下我们使用的curl工具是系统自带的，版本可能较低</strong></p>
-<p>如果出现了<code>curl: (1) Unsupported protocol http2</code>错误，则需要更新curl或者安装带有nghttp2的版本，这里墙裂推荐使用Homebrew进行安装，一条命令搞定：<code>brew install curl --with-nghttp2</code>，如果已经安装过了，就重装一下：<code>brew reinstall curl --with-nghttp2</code>，安装好了之后不要忘记 <strong>根据提示</strong> 添加并刷新环境变量。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d &lt;apns_payload&gt; -H <span class="string">"apns-topic:&lt;bundleId&gt;"</span> -H <span class="string">"apns-expiration:1"</span> -H <span class="string">"apns-priority:10"</span> --http2-prior-knowledge --cert /Users/bruce/Desktop/Demo/Hello/private/aps_development.pem:&lt;password&gt; https://api.development.push.apple.com/3/device/&lt;device_token&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>请求成功了（没有报错即代表成功）！现在我们能够在App上收到通知。最后一步是把代码封装一下，便于将其接入到 Vapor3 应用程序中，在后台启动cURL请求。你可以在这里找到注册 Shell 服务的代码：</p>
-<p><a href="https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift" target="_blank" rel="noopener">https://github.com/nathantannar4/the.phoenix.project/blob/master/Sources/App/Services/Shell.swift</a></p>
-<p>该服务可以加入我们所需的参数并执行 bash 命令。下面是 Vapor3 的简单示例：</p>
-<p><strong>（译者注）为了避免大家采坑，这里给出一个完整的示例，请一定要按照格式来填充内容，否则Shell很可能执行出错。</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> shell = <span class="keyword">try</span> req.make(<span class="type">Shell</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="keyword">let</span> jsonAPNSPayloadString = <span class="string">"&#123;\"aps\":&#123;\"alert\":&#123;\"body\":\"您有一条新消息\"&#125;,\"badge\":1,\"sound\":\"default\"&#125;,\"f\":\"6001\",\"t\":\"6006\",\"m\":\"373360335316321408\"&#125;"</span></span><br><span class="line"><span class="keyword">let</span> bundleId = <span class="string">"com.qianbao.merchantApp"</span></span><br><span class="line"><span class="keyword">let</span> certPath = <span class="string">"/Users/bruce/Desktop/Demo/Hello/private/aps_development.pem"</span></span><br><span class="line"><span class="keyword">let</span> password = <span class="string">"123456"</span></span><br><span class="line"><span class="keyword">let</span> apnsURL = <span class="string">"https://api.development.push.apple.com/3/device/"</span></span><br><span class="line"><span class="keyword">let</span> token = <span class="string">"a452171d01a3df308449a63a730d616190a1cd587bda4cd8086c2651a32ba383"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arguments = [<span class="string">"-d"</span>, jsonAPNSPayloadString, <span class="string">"-H"</span>, <span class="string">"\"apns-topic:\(bundleId)\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-expiration:1\""</span>, <span class="string">"-H"</span>, <span class="string">"\"apns-priority:10\""</span>, <span class="string">"--http2-prior-knowledge"</span>, <span class="string">"-E"</span>, <span class="string">"\(certPath):\(password)"</span>, apnsURL + token]</span><br><span class="line"><span class="built_in">print</span>(arguments.joined(separator: <span class="string">" "</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res = <span class="keyword">try</span> shell.execute(commandName: <span class="string">"/usr/local/opt/curl/bin/curl"</span>, arguments: arguments)</span><br><span class="line"><span class="keyword">let</span> <span class="number">_</span> = res.<span class="built_in">map</span> &#123; (data: <span class="type">Data</span>) <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">let</span> s = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8) ?? <span class="string">"null"</span>;</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>（译者注）不要忘记在configure.swift中添加服务</strong></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.register(<span class="type">Shell</span>.<span class="keyword">self</span>)</span><br></pre></td></tr></table></figure>
-<p>这只是一个简单的临时方案。很快，SwiftNIO将支持HTTP/2，届时，Vapor3 也会支持HTTP/2。在社区中已经存在一个很好的repo (<a href="https://github.com/vapor-community/apns" target="_blank" rel="noopener">https://github.com/vapor-community/apns</a>)。到时候在 Vapor3应用中进行 APNs 请求的编码/解码将变得更加简单。</p>
-<p>iOS端只需要创建个壳工程，把推送的代码集成进去，启动一次，允许发送通知，然后拿到 APNS 的 DeviceToken 就可以愉快的进行推送测试啦，have a enjoy day 😄。</p>
+          本文不完全翻译自Medium（由于完全按照原文教程并不能正常使用，本人采坑后总结了不少经验，希望能帮助大家少走弯路，一次性成功）。
 
-          
+从Swift内部执行cURL命令
+几周前，我决定学习 Vapor3 框架。我希望能够为未来的项目开发一个后端API，而不需要依赖我的goto, Parse Serve
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/06/使用Vapor3进行APNS推送/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1728,39 +1563,23 @@
       
         
           
-            <p><strong>1.关于获取行外样式 currentStyle 和 getComputedStyle 出现的兼容性问题</strong><br>  我们都知道js通过style不可以获取行外样式，当我们需要获取行外样式时:<br>  我们一般通过这两个方法获取行外样式：<br>  IE下: <code>currentStyle</code><br>  Chrome、FF下: <code>getComputedStyle(oDiv, false)</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 兼容两个浏览器的写法:</span></span><br><span class="line"><span class="keyword">if</span> (oDiv.currentStyle) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(oDiv.currentStyle.width);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(getComputedStyle(oDiv, <span class="literal">false</span>).width);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><em>注:在解决很多兼容性写法时，都是用if..else..</em></p>
-<p>封装一个获取行外样式的函数:(兼容所有浏览器，包括低版本IE6、7)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">funtion getStyle(obj, name) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.currentStyle) &#123;</span><br><span class="line">        <span class="comment">// IE</span></span><br><span class="line">        <span class="keyword">return</span> obj.currentStyle[name];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Chrome、FF</span></span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(obj, <span class="literal">false</span>)[name];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>调用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getStyle(oDiv, <span class="string">"width"</span>);</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>2.关于用“索引”获取字符串每一项出现的兼容性问题:</strong><br>  对于字符串也有类似于 数组 这样的通过 下标索引 获取每一项的值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"abcde"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
-<p>但是低版本的浏览器IE6，7不兼容<br>兼容方法:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.charAt(i)    <span class="comment">//全部浏览器都兼容</span></span><br></pre></td></tr></table></figure>
-<p>　<br>​案例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"abcde"</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(str.charAt(i));   <span class="comment">// 字符串中的每一项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>3.关于DOM中 childNodes 获取子节点出现的兼容性问题</strong><br>  childNodes:获取子节点，<br>    –IE6-8:获取的是元素节点，正常<br>    –高版本浏览器:但是会包含文本节点和元素节点(不正常)<br>  解决方法: 使用nodeType:节点的类型，并作出判断<br>      –nodeType=3–&gt;文本节点<br>      –nodeTyPE=1–&gt;元素节点<br>  例: 获取ul里所有的子节点，让所有的子节点背景色变成红色<br>  获取元素子节点兼容的方法:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oUl = <span class="built_in">document</span>.getElementById(<span class="string">"ul"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; oUl.childNodes.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (oUl.childNodes[i].nodeType == <span class="number">1</span>) &#123;</span><br><span class="line">        oUl.childNodes[i].style.background = <span class="string">"red"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  注：上面childNodes为我们带来的困扰完全可以有children属性来代替。<br>      children属性:只获取元素节点，不获取文本节点，兼容所有的浏览器，<br>      比上面的好用所以我们一般获取子节点时，最好用children属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oUl = <span class="built_in">document</span>.getElementById(<span class="string">"ul"</span>);</span><br><span class="line">oUl.children.style.background = <span class="string">"red"</span>;</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>4.关于使用 firstChild, lastChild 等，获取第一个/最后一个元素节点时产生的问题</strong><br>  –IE6-8下: <code>firstChild, lastChild, nextSibling, previousSibling</code>，获取第一个元素节点<br>        (高版本浏览器IE9+、FF、Chrome不兼容，其获取的空白文本节点)<br>  –高版本浏览器下: <code>firstElementChild, lastElementChild, nextElementSibling, previousElementSibling</code><br>      (低版本浏览器IE6-8不兼容)<br>  –兼容写法: 找到ul的第一个元素节点，并将其背景色变成红色</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oUl = <span class="built_in">document</span>.getElementById(<span class="string">'ul'</span>);</span><br><span class="line"><span class="keyword">if</span> (oUl.firstElementChild) &#123;</span><br><span class="line">    <span class="comment">// 高版本浏览器</span></span><br><span class="line">    oUl.firstElementChild.style.background = <span class="string">'red'</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// IE6-8</span></span><br><span class="line">    oUl.firstChild.style.background = <span class="string">'red'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>5.关于使用 event对象，出现的兼容性问题</strong><br>    如: 获取鼠标位置<br>            IE、Chrome: <code>event.clientX;event.clientY</code><br>            FF、IE9以上、Chrome: <code>传参ev--&gt; ev.clientX;ev.clientY</code><br>    获取event对象兼容性写法: </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> oEvent == ev || event;</span><br></pre></td></tr></table></figure>
-<p>案例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.oncilck = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oEvent == ev || event;</span><br><span class="line">    <span class="keyword">if</span> (oEvent) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(oEvent.clientX);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>6.关于为一个元素绑定两个相同事件：attachEvent/addEventListener 出现的兼容问题</strong><br>    事件绑定:(不兼容需要两个结合做兼容if..else..)<br>    IE8以下用: <code>attachEvent(&#39;事件名&#39;, fn);</code><br>    FF、 Chrome、 IE9以后用: <code>addEventListener(&#39;事件名&#39;, fn, false);</code><br>    多事件绑定封装成一个兼容函数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myAddEvent</span>(<span class="params">obj, ev, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.attachEvent) &#123;</span><br><span class="line">        <span class="comment">// IE8以下</span></span><br><span class="line">        obj.attachEvent(<span class="string">'on'</span>+ev, fn);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (obj.addEventListener) &#123;</span><br><span class="line">        <span class="comment">// FF、Chrome、IE9以后</span></span><br><span class="line">        obj.addEventListener(ev, fn, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 其他</span></span><br><span class="line">        obj[<span class="string">'on'</span>+ev] = fn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">myAddEvent(oBtn, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;);</span><br><span class="line">myAddEvent(oBtn, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(b);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>　<br><strong>7.关于获取滚动条距离而出现的问题</strong><br>  当我们获取滚动条滚动距离时:<br>        IE、Chrome: <code>document.body.scrollTop</code><br>        FF: <code>document.documentElement.scrollTop</code><br>兼容处理:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop</span><br></pre></td></tr></table></figure>
-
-          
+          1.关于获取行外样式 currentStyle 和 getComputedStyle 出现的兼容性问题  我们都知道js通过style不可以获取行外样式，当我们需要获取行外样式时:  我们一般通过这两个方法获取行外样式：  IE下: currentStyle  Chrome、FF下: getComp
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/05/JS中出现的兼容性问题的总结-（持续更新）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1933,46 +1752,24 @@
       
         
           
-            <p><strong>方法一：使用带clear属性的空元素</strong></p>
-<p>在浮动元素后使用一个空元素如 <code>&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;</code> ，并在 CSS 中赋予 <code>.clear{clear:both;}</code> 属性即可清理浮动。亦可使用 <code>&lt;br class=&quot;clear&quot; /&gt;</code> 或 <code>&lt;hr class=&quot;clear&quot; /&gt;</code> 来进行清理。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.news &#123;</span><br><span class="line">	background-color: gray;</span><br><span class="line">	border: solid <span class="number">1</span>px black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news img &#123;</span><br><span class="line">	float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news p &#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clear &#123;</span><br><span class="line">	clear: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"news"</span>&gt;</span><br><span class="line">    &lt;img src=<span class="string">"news-pic.jpg"</span> /&gt;</span><br><span class="line">    &lt;p&gt;some text&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="clear"&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-<p>优点：简单，代码少，浏览器兼容性好。</p>
-<p>缺点：需要添加大量无语义的 html 元素，代码不够优雅，后期不容易维护。</p>
-<p> 　</p>
-<p><strong>方法二：使用CSS的overflow属性</strong></p>
-<p>给浮动元素的容器添加 <code>overflow:hidden;</code> 或 <code>overflow:auto;</code> 可以清除浮动，另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 <code>zoom:1</code>。</p>
-<p>在添加overflow属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清理浮动的效果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.news &#123;</span><br><span class="line">    background-color: gray;</span><br><span class="line">    border: solid <span class="number">1</span>px black;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    *zoom: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news img &#123;</span><br><span class="line">	float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news p &#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"news"</span>&gt;</span><br><span class="line">    &lt;img src=<span class="string">"news-pic.jpg"</span> /&gt;</span><br><span class="line">    &lt;p&gt;some text&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
-<p> 　</p>
-<p><strong>方法三：给浮动的元素的容器添加浮动</strong></p>
-<p>给浮动元素的容器也添加上浮动属性即可清除内部浮动，但是这样会使其整体浮动，影响布局，不推荐使用。</p>
-<p> 　</p>
-<p><strong>方法四：使用邻接元素处理</strong></p>
-<p>什么都不做，给浮动元素后面的元素添加 clear 属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.news &#123;</span><br><span class="line">    background-color: gray;</span><br><span class="line">    border: solid <span class="number">1</span>px black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news img &#123;</span><br><span class="line">	float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news p &#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.content &#123;</span><br><span class="line">	clear:both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"news"</span>&gt;</span><br><span class="line">    &lt;img src=<span class="string">"news-pic.jpg"</span> /&gt;</span><br><span class="line">    &lt;p&gt;some text&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;div class="content"&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-<p> 　</p>
-<p><strong>方法五：使用CSS的 :after伪元素</strong></p>
-<p>结合 :after 伪元素（注意这不是伪类，而是伪元素，代表一个元素之后最近的元素）和 IEhack ，可以完美兼容当前主流的各大浏览器，这里的 IEhack 指的是触发 hasLayout。</p>
-<p>给浮动元素的容器添加一个 clearfix 的 class，然后给这个 class 添加一个 :after伪元素 实现元素末尾添加一个看不见的块元素（Block element）清理浮动。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">.news &#123;</span><br><span class="line">    background-color: gray;</span><br><span class="line">    border: solid <span class="number">1</span>px black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news img &#123;</span><br><span class="line">	float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news p &#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    content: <span class="string">"020"</span>; </span><br><span class="line">    display: block; </span><br><span class="line">    height: <span class="number">0</span>; </span><br><span class="line">    clear: both; </span><br><span class="line">    visibility: hidden;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix &#123;</span><br><span class="line">    <span class="comment">/* 触发 hasLayout */</span> </span><br><span class="line">    *zoom: <span class="number">1</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"news clearfix"</span>&gt;</span><br><span class="line">    &lt;img src=<span class="string">"news-pic.jpg"</span> /&gt;</span><br><span class="line">    &lt;p&gt;some text&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
-<p>通过CSS伪元素在容器的内部元素最后添加了一个看不见的空格”020”或点”.”，并且赋予 clear 属性来清除浮动。需要注意的是为了 IE6 和 IE7浏览器，要给 clearfix 这个 class 添加一条 <code>zoom:1;</code>  触发 haslayout。</p>
-<p>或者下面这种写法（见于小米官网 mi.com）： </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">.news &#123;</span><br><span class="line">    background-color: gray;</span><br><span class="line">    border: solid <span class="number">1</span>px black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news img &#123;</span><br><span class="line">	float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.news p &#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix:before,</span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    content: <span class="string">" "</span>;</span><br><span class="line">    display: table</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    clear: both</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.clearfix &#123;</span><br><span class="line">    *zoom: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"news clearfix"</span>&gt;</span><br><span class="line">    &lt;img src=<span class="string">"news-pic.jpg"</span> /&gt;</span><br><span class="line">    &lt;p&gt;some text&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
-<p>　</p>
-<p><strong>总结</strong></p>
-<p>通过上面的例子，我们不难发现清除浮动的方法可以分成两类：</p>
-<p>一是利用 clear 属性，包括在浮动元素末尾添加一个带有 <code>clear: both</code> 属性的空 div 来闭合元素，其实利用 :after  伪元素的方法也是在元素末尾添加一个内容为一个点并带有 <code>clear: both</code> 属性的元素实现的。</p>
-<p>二是触发浮动元素父元素的 BFC (Block Formatting Contexts, 块级格式化上下文)，使到该父元素可以包含浮动元素，关于这一点。</p>
-<p> 　</p>
-<p><strong>推荐</strong></p>
-<p>在网页主要布局时使用 :after 伪元素方法并作为主要清理浮动方式；在小模块如 ul 里使用 <code>overflow:hidden;</code>（留意可能产生的隐藏溢出元素问题）；如果本身就是浮动元素则可自动清除内部浮动，无需格外处理；正文中使用邻接元素清理之前的浮动。</p>
-<p>最后可以使用相对完美的 :after 伪元素方法清理浮动，文档结构更加清晰。</p>
-
-          
+          方法一：使用带clear属性的空元素
+在浮动元素后使用一个空元素如 &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt; ，并在 CSS 中赋予 .clear{clear:both;} 属性即可清理浮动。亦可使用 &lt;br class=&quot;cle
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/05/清除浮动/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -2145,16 +1942,24 @@
       
         
           
-            <p>调试时偶尔需要用到引用计数器，查看对象的引用次数来推断是否存在内存泄漏，使用 <code>Objective-C</code> 的话可以用下列方式获取引用计数。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// OC方法如下</span></span><br><span class="line"><span class="comment">// 第一种方式，KVC</span></span><br><span class="line">[obj valueForKey:<span class="string">@"retainCount"</span>]  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种方式，RunTime</span></span><br><span class="line">OBJC_EXTERN <span class="keyword">int</span> _objc_rootRetainCount(<span class="keyword">id</span>);  </span><br><span class="line">_objc_rootRetainCount(obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三种方式</span></span><br><span class="line"><span class="built_in">CFGetRetainCount</span>((__bridge <span class="built_in">CFTypeRef</span>)(obj))</span><br></pre></td></tr></table></figure>
-<p>　<br>使用 <code>Swift</code> 的话可以用下列方式获取引用计数。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Swift中方法</span></span><br><span class="line"><span class="keyword">let</span> <span class="built_in">count</span> = <span class="type">CFGetRetainCount</span>(<span class="keyword">self</span>)</span><br></pre></td></tr></table></figure>
-
-          
+          调试时偶尔需要用到引用计数器，查看对象的引用次数来推断是否存在内存泄漏，使用 Objective-C 的话可以用下列方式获取引用计数。
+12345678910// OC方法如下// 第一种方式，KVC[obj valueForKey:@"retainCount"]  // 第二种方式，RunTime
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/07/OC-Swift-获取引用计数-ReatinCount/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -2327,29 +2132,24 @@
       
         
           
-            <p>由于项目中需要将数字转为货币格式：￥123,456,789.00，幸好iOS中有专门处理数字转字符串时格式化的函数。</p>
-<p>在iOS中我们可以通过NSDateFormatter来设置输出NSDate的格式。相比NSDateFormatter的大名鼎鼎，NSNumberFormatter好像知道的人就不多了。其实通过NSNumberFormatter，同样可以设置NSNumber输出的格式。例如如下代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSNumberFormatter</span> *formatter = [[<span class="built_in">NSNumberFormatter</span> alloc] init];  </span><br><span class="line">formatter.numberStyle = <span class="built_in">NSNumberFormatterDecimalStyle</span>;  </span><br><span class="line"><span class="built_in">NSString</span> *string = [formatter stringFromNumber:[<span class="built_in">NSNumber</span> numberWithInt:<span class="number">123456789</span>]];  </span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Formatted number string:%@"</span>, string);</span><br></pre></td></tr></table></figure>
-<p><strong>输出结果为：[1223:403] Formatted number string:123,456,789</strong></p>
-<p>其中NSNumberFormatter类有个属性numberStyle，它是一个枚举型，设置不同的值可以输出不同的数字格式。该枚举包括：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">NSNumberFormatterStyle</span>) &#123;</span><br><span class="line">    <span class="built_in">NSNumberFormatterNoStyle</span> = kCFNumberFormatterNoStyle,</span><br><span class="line">    <span class="built_in">NSNumberFormatterDecimalStyle</span> = kCFNumberFormatterDecimalStyle,</span><br><span class="line">    <span class="built_in">NSNumberFormatterCurrencyStyle</span> = kCFNumberFormatterCurrencyStyle,</span><br><span class="line">    <span class="built_in">NSNumberFormatterPercentStyle</span> = kCFNumberFormatterPercentStyle,</span><br><span class="line">    <span class="built_in">NSNumberFormatterScientificStyle</span> = kCFNumberFormatterScientificStyle,</span><br><span class="line">    <span class="built_in">NSNumberFormatterSpellOutStyle</span> = kCFNumberFormatterSpellOutStyle,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>各个枚举对应输出数字格式的效果如下：</p>
-<p>[1243:403] Formatted number string:123456789<br>[1243:403] Formatted number string:123,456,789<br>[1243:403] Formatted number string:￥123,456,789.00<br>[1243:403] Formatted number string:-539,222,988%<br>[1243:403] Formatted number string:1.23456789E8<br>[1243:403] Formatted number string:一亿二千三百四十五万六千七百八十九</p>
-<p>其中第三项和最后一项的输出会根据系统设置的语言区域的不同而不同。</p>
-<p><strong>另外介绍一些不常见的数字转字符串的用法：</strong></p>
-<p>1，下面是一个浮点类型的数字转成String字符串的例子<br>Swift:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="number">123.32342342</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">"\(f)"</span>            <span class="comment">// 123.32342342</span></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="type">String</span>(f)        <span class="comment">// 123.32342342</span></span><br></pre></td></tr></table></figure></p>
-<p>Objective-C:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = <span class="number">123.32342342</span>;</span><br><span class="line"><span class="built_in">NSString</span> *s = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%f"</span>, f];    <span class="comment">// 123.32342342</span></span><br></pre></td></tr></table></figure></p>
-<p>2，如果要保留两位小数<br>Swift:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="number">123.32342342</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="type">String</span>(format: <span class="string">"%.2f"</span>, f)   <span class="comment">// 123.32</span></span><br></pre></td></tr></table></figure></p>
-<p>Objective-C:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = <span class="number">123.32342342</span>;</span><br><span class="line"><span class="built_in">NSString</span> *s = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.2f"</span>, f];   <span class="comment">// 123.32</span></span><br></pre></td></tr></table></figure></p>
-<p>3，转成十六进制格式字符串<br>Swift:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">255</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="type">String</span>(format: <span class="string">"%x"</span>, i)  <span class="comment">// ff</span></span><br></pre></td></tr></table></figure></p>
-<p>Objective-C:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">255</span>;</span><br><span class="line"><span class="built_in">NSString</span> *s = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%x"</span>, f];   <span class="comment">// ff</span></span><br></pre></td></tr></table></figure></p>
-<p>4，不足六位前面补0<br>Swift:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">255</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="type">String</span>(format: <span class="string">"%06d"</span>, i)   <span class="comment">// 000255</span></span><br></pre></td></tr></table></figure></p>
-<p>Objective-C:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">255</span>;</span><br><span class="line"><span class="built_in">NSString</span> *s = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%06d"</span>, i];   <span class="comment">// 000255</span></span><br></pre></td></tr></table></figure></p>
-
-          
+          由于项目中需要将数字转为货币格式：￥123,456,789.00，幸好iOS中有专门处理数字转字符串时格式化的函数。
+在iOS中我们可以通过NSDateFormatter来设置输出NSDate的格式。相比NSDateFormatter的大名鼎鼎，NSNumberFormatter好像知道的人就不多了
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/03/iOS中的数字字符串格式化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     

@@ -178,7 +178,7 @@
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
-
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -415,18 +415,24 @@
       
         
           
-            <p>之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。</p>
-<h5 id="这时候需要修改AFNetworking的requestSerializer"><a href="#这时候需要修改AFNetworking的requestSerializer" class="headerlink" title="这时候需要修改AFNetworking的requestSerializer"></a>这时候需要修改AFNetworking的requestSerializer</h5><p>先检查是否改动过requestSerializer，如果之前设置成了AFJSONRequestSerializer，把AFJSONRequestSerializer改成了AFHTTPRequestSerializer就OK了</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果之前有设置AFJSONRequestSerializer，下面这段也需要，一定要看清楚，很容易混淆</span></span><br><span class="line">AFHTTPRequestSerializer *request = [AFHTTPRequestSerializer serializer];</span><br><span class="line">manager.requestSerializer = request;</span><br></pre></td></tr></table></figure>
-<p>然后设置HTTPHeaderField，告知后台使用form表单格式提交参数</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[manager.requestSerializer setValue:<span class="string">@"application/x-www-form-urlencoded"</span> forHTTPHeaderField:<span class="string">@"Content-Type"</span>];</span><br></pre></td></tr></table></figure>
-<p>再次请求，服务端就不会返回参数找不到的错误啦。</p>
-
-          
+          之前传的参数有JSON格式，也有可能是form-data格式，不过PHP后台都可以接收。现在用的Java后台不能接收form-data这种格式，所以请求失败了。
+这时候需要修改AFNetworking的requestSerializer先检查是否改动过requestSerializer，如果之前设置
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -611,22 +617,23 @@
       
         
           
-            <p>最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。</p>
-<p>要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。</p>
-<p>如两个工程A和B,a依赖b工程生成的静态库，但如果想在a中调试b的代码，就需要将b工程引入，以下为操作步骤：</p>
-<ol>
-<li>将b工程拷贝到a工程目录下，（当然也可以不拷贝，不过为了后面方便填写路径）；</li>
-<li>ctrl+右键点击a工程的工程文件名，然后add files to “xx”, 将b工程的.xcodeprj文件添加进来（注意只需要添加.xcodeprj文件，其他文件不需要添加）；</li>
-<li>选择a工程target，点击build setting选项，右上角搜索Header Search找到Header Search Paths双击，在弹出框里点有下角的+号，添加导入工程的路径，右侧选项选recursive(递归查找文件)；</li>
-<li>因为a工程要包含b工程的静态库/动态库，假如b工程生成的静态库为bb.a, 在a工程的General选项中，拉到link frameworks and libraries项，点击+号，将b工程下的bb.a静态库添加上（.Framework同理）。</li>
-</ol>
-<p>当然，这一切都是要有源代码为前提，否则只能另想办法了。</p>
-
-          
+          最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -811,18 +818,24 @@
       
         
           
-            <p>我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。</p>
-<p>网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。</p>
-<p>点击工程文件 -&gt; build Phuases -&gt; add Run Script, 并将下面代码拷贝进去</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</span><br><span class="line">buildNumber=$(($buildNumber + <span class="number">1</span>))</span><br><span class="line">git_version=$(/usr/bin/git log --oneline --no-notes <span class="number">-1</span> | /usr/bin/cut -d<span class="string">" "</span> -f1)</span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :ScmVersion $git_version"</span> <span class="string">"$INFOPLIST_FILE"</span></span><br></pre></td></tr></table></figure>
-<p>其中有两行（第3、4行）是将当前代码的git版本号后六位写进info.plist文件，方便日后查bug，不需要的话可以直接移除。<br>最后最好不要不要忘记勾选 run script only when installing, 否则每次运行都增加build版本，之后这个号码可能会很大，而且容易冲突。</p>
-<p>如果再配上自动化持续集成，那就完美了。</p>
-
-          
+          我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。
+网上
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/09/iOS开发-Archive时自动增加build版本/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1007,18 +1020,25 @@
       
         
           
-            <p>在AppDelegate文件中，由于锁屏和Home键两种操作，我们接到的事件是一样的，</p>
-<p>但有时候业务需要我们区分这两个事件，这里我们就介绍一个方法，锁屏事件和Home键事件在App接到的回调方法是一样的，我们无法区分。不过有一个很明显的特征我们还是可以利用的：锁屏时设备屏幕亮度为0。</p>
-<p>具体检测代码如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> screenBrightness = [[<span class="built_in">UIScreen</span> mainScreen] brightness];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (screenBrightness &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Home事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Home事件"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 锁屏事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"锁屏事件"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是App进入前台的时候无论是按锁屏键还是按home键，检测到屏幕亮度都不为0，就不能再通过屏幕亮度来判断状态了。<br>好在我们进后台的时候记录了是锁屏还是Home键的事件，回来的时候肯定是成对的（也有特殊情况，用户在锁屏界面进入其他App，然后按home键，这时候我们的应用就是处于后台运行，下次进入是点击图标或者双击Home键从多任务管理进入）。</p>
-<p>一个小功能坑也不少，所以还是做好立项前的评估吧^_^</p>
-
-          
+          在AppDelegate文件中，由于锁屏和Home键两种操作，我们接到的事件是一样的，
+但有时候业务需要我们区分这两个事件，这里我们就介绍一个方法，锁屏事件和Home键事件在App接到的回调方法是一样的，我们无法区分。不过有一个很明显的特征我们还是可以利用的：锁屏时设备屏幕亮度为0。
+具体检测代码如
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/06/iOS开发-区分Home键和锁屏键事件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1203,15 +1223,24 @@
       
         
           
-            <h4 id="运行程序后，xcode不显示当前使用的内存情况"><a href="#运行程序后，xcode不显示当前使用的内存情况" class="headerlink" title="运行程序后，xcode不显示当前使用的内存情况"></a>运行程序后，xcode不显示当前使用的内存情况</h4><p>问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可</p>
-<p>打开 product -&gt; SCheme -&gt; EditSCheme -&gt; Diagnostics -&gt; enable zoombie Objects  取消选中</p>
-<p>就可以继续显示了</p>
-
-          
+          运行程序后，xcode不显示当前使用的内存情况问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可
+打开 product -&gt; SCheme -&gt; EditSCheme -&gt; Diagnostics -&gt; enable zoombie Obj
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/05/Xcode运行程序时左侧memory不显示内存/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1396,16 +1425,26 @@
       
         
           
-            <p>最近发现项目里设备型号没有匹配最近新发布的几款设备，于是去官网查看了下。</p>
-<h4 id="所有设备型号对应的官网地址："><a href="#所有设备型号对应的官网地址：" class="headerlink" title="所有设备型号对应的官网地址："></a>所有设备型号对应的官网地址：</h4><p>官网地址： <a href="https://www.theiphonewiki.com/wiki/Models" target="_blank" rel="noopener">https://www.theiphonewiki.com/wiki/Models</a></p>
-<p>来点更加暴力的，直接上代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记得导入头文件</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取具体的设备型号（不包含Watch和TV）</span></span><br><span class="line">+ (<span class="built_in">NSString</span> *)deviceModel &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mib[<span class="number">2</span>];</span><br><span class="line">    size_t len;</span><br><span class="line">    <span class="keyword">char</span> *machine;</span><br><span class="line"></span><br><span class="line">    mib[<span class="number">0</span>] = <span class="built_in">CTL_HW</span>;</span><br><span class="line">    mib[<span class="number">1</span>] = HW_MACHINE;</span><br><span class="line">    sysctl(mib, <span class="number">2</span>, <span class="literal">NULL</span>, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    machine = malloc(len);</span><br><span class="line">    sysctl(mib, <span class="number">2</span>, machine, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSString</span> *platform = [<span class="built_in">NSString</span> stringWithCString:machine encoding:<span class="built_in">NSASCIIStringEncoding</span>];</span><br><span class="line">    free(machine);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// MARK: - Simulator</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"i386"</span>] || [platform isEqualToString:<span class="string">@"x86_64"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSimulator"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPhone</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone2G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone2,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3GS"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone3,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone4,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4S"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5c"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone6,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone6,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5s"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6s"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6sPlus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone8,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSE"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone7"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone7Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,5"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,6"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhoneX"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPod Touch</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod2,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch2G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod3,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch3G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod4,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch4G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod5,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch5G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod7,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch6G"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,1"</span>] || [platform isEqualToString:<span class="string">@"iPad2,2"</span>] || [platform isEqualToString:<span class="string">@"iPad2,3"</span>] || [platform isEqualToString:<span class="string">@"iPad2,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,1"</span>] || [platform isEqualToString:<span class="string">@"iPad3,2"</span>] || [platform isEqualToString:<span class="string">@"iPad3,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad3"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,4"</span>] || [platform isEqualToString:<span class="string">@"iPad3,5"</span>] || [platform isEqualToString:<span class="string">@"iPad3,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad4"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad Air</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,1"</span>] || [platform isEqualToString:<span class="string">@"iPad4,2"</span>] || [platform isEqualToString:<span class="string">@"iPad4,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,3"</span>] || [platform isEqualToString:<span class="string">@"iPad5,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,11"</span>] || [platform isEqualToString:<span class="string">@"iPad6,12"</span>])    <span class="keyword">return</span> <span class="string">@"iPadAir3"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad Pro</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,7"</span>] || [platform isEqualToString:<span class="string">@"iPad6,8"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,3"</span>] || [platform isEqualToString:<span class="string">@"iPad6,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro iPad 9.7-inch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,1"</span>] || [platform isEqualToString:<span class="string">@"iPad7,2"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch 2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,3"</span>] || [platform isEqualToString:<span class="string">@"iPad7,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 10.5-inch"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad mini</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,5"</span>] || [platform isEqualToString:<span class="string">@"iPad2,6"</span>] || [platform isEqualToString:<span class="string">@"iPad2,7"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini1G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,4"</span>] || [platform isEqualToString:<span class="string">@"iPad4,5"</span>] || [platform isEqualToString:<span class="string">@"iPad4,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,7"</span>] || [platform isEqualToString:<span class="string">@"iPad4,8"</span>] || [platform isEqualToString:<span class="string">@"iPad4,9"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini3"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,1"</span>] || [platform isEqualToString:<span class="string">@"iPad5,2"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini4"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> platform;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          最近发现项目里设备型号没有匹配最近新发布的几款设备，于是去官网查看了下。
+所有设备型号对应的官网地址：官网地址： https://www.theiphonewiki.com/wiki/Models
+来点更加暴力的，直接上代码：
+123456789101112131415161718192021222
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/05/iOS设备型号-2018最新统计/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1590,20 +1629,23 @@
       
         
           
-            <p>最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个textView展示日志，但是发现用的次数多了之后，日志量猛增，在手机这种小屏幕上查看效率堪忧，还是放在电脑上，字体大小随便调，更有搜索这种神器级别的功能，查找bug不是梦。</p>
-<p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
-<p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
-<p>服务端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create uploads dir to store files</span></span><br><span class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> fileDir.create()</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> code = <span class="number">400</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></span><br><span class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></span><br><span class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</span><br><span class="line">            ary.append([</span><br><span class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</span><br><span class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</span><br><span class="line">                ])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// move file</span></span><br><span class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</span><br><span class="line">                code = <span class="number">200</span></span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">                <span class="built_in">print</span>(error)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</span><br><span class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</span><br><span class="line"></span><br><span class="line">            <span class="type">Log</span>.info(message: strJson!)</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> response.setBody(json: dict)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response.completed(status: .ok)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>客户端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</span><br><span class="line"></span><br><span class="line">    kWeakSelf(<span class="keyword">self</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</span><br><span class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fileName) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</span><br><span class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</span><br><span class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</span><br><span class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</span><br><span class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</span><br><span class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</span><br><span class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</span><br><span class="line"></span><br><span class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</span><br><span class="line"></span><br><span class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</span><br><span class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</span><br><span class="line"></span><br><span class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</span><br><span class="line"></span><br><span class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</span><br><span class="line"></span><br><span class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (completeBlock) &#123;</span><br><span class="line">                completeBlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后有空了，还可以研究以下使用Perfect后端进行APNS消息推送。这样有日志上传好之后，就可以收到消息推送，再也不用去翻看文件夹或者盯着控制台日志啦。</p>
-
-          
+          最近App总有些奇奇怪怪的偶现bug，测试同学不堪其扰，需要我们尽快排查，iOS查看日志没有安卓那么方便，又不想被满屏的NSLog（有些第三方库打印超多日志）遮挡视线，好在我们集成了CocoaLumberjack，可以用它将记录下来存入文件，然后查看或导出，最初的想法是直接做个日志管理的界面，用个t
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/04/使用Swift后端框架Perfect做一个文件上传服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1788,32 +1830,28 @@
       
         
           
-            <h4 id="安装程序无法创建新的系统分区，也无法定位现有系统分区"><a href="#安装程序无法创建新的系统分区，也无法定位现有系统分区" class="headerlink" title="安装程序无法创建新的系统分区，也无法定位现有系统分区"></a>安装程序无法创建新的系统分区，也无法定位现有系统分区</h4><p>最近同事在闲鱼淘了个笔记本来玩，安装系统的时候发现主硬盘无法引导启动，用原版镜像安装的时候报错无法继续执行。</p>
-<p>报错问题：安装程序无法创建新的系统分区，也无法定位现有系统分区</p>
-<p>最终只能做个PE U盘来帮忙，顺便记录下这个烦人的问题。</p>
-<p>解决步骤：</p>
-<ol>
-<li><p>第一步：把win7或win8、win10镜像发在你电脑的非系统盘的其他硬盘上，或者放在U盘也可以。</p>
-</li>
-<li><p>第二步：重启机器，通过U 盘启动．进入win pe系统，关于这点我说一下，有些朋友也许不知道什么叫win pe系统，这个win pe 究竟有什么用途，其实你可以把win pe 理解为一个微缩版本win xp，他和win xp 使用差不多。只是大部分的功能被禁用了，所以他的体积也非常小，虽然大部分的功能被禁用，可是他不影响第三方软件使用，比如Ghost , PQ 等一些软件依旧在win pe运行自如。</p>
-</li>
-<li><p>第三步：如果PE里带虚拟光驱，此步骤可以忽略。（把windows 7的ISO镜像解压到电脑的非系统盘的其他硬盘上。如D:\windows.…。当然你也可以不用建立 win7 文件夹。在这里再说明一点就是，一定要把你想分的分区分好．尽量不要频繁调整硬盘各个分区的大小，尤其是主分区，一定要考虑周全。）</p>
-</li>
-<li><p>第四步：进入win pe系统，格式化C盘为NTFS。C盘最好有15 G以上的空间，安装完 win7 大概要用 8G 。我在这里建议大家分 50G 。</p>
-</li>
-<li><p>第五步（最关键一步）：从你解压的安装程序的文件夹中找到boot, bootmgr 和 sources 这三个文件或文件夹，并且复制到C盘根目录下。</p>
-</li>
-<li><p>第六步：在win pe系统中运行cmd ，输入“ c:\boot\bootsect.exe /nt60 c: ”（注意exe和/nt60、/nt60和c:之间有空格），然后回车，看到提示successful 字样（画面会很快闪过，以至于来不及看。）的语句即成功了！然后重起电脑。</p>
-</li>
-<li><p>第七步：可以把U盘从电脑中拔出，然后等待系统从硬盘启动。或者加载U盘启动项后选择从本地引导启动。</p>
-</li>
-</ol>
+          安装程序无法创建新的系统分区，也无法定位现有系统分区最近同事在闲鱼淘了个笔记本来玩，安装系统的时候发现主硬盘无法引导启动，用原版镜像安装的时候报错无法继续执行。
+报错问题：安装程序无法创建新的系统分区，也无法定位现有系统分区
+最终只能做个PE U盘来帮忙，顺便记录下这个烦人的问题。
+解决步骤：
 
-          
+第
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/03/Windows-安装原版镜ISO像/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1986,15 +2024,23 @@
       
         
           
-            <h4 id="macOS-High-Sierra-10-13-文件损坏-软件损坏"><a href="#macOS-High-Sierra-10-13-文件损坏-软件损坏" class="headerlink" title="macOS High Sierra 10.13 文件损坏  软件损坏"></a>macOS High Sierra 10.13 文件损坏  软件损坏</h4><p>日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，<br>不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了：</p>
-<p>需要在终端输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure></p>
-<p>就可以打开这些软件了。</p>
-
-          
+          macOS High Sierra 10.13 文件损坏  软件损坏日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，不过为了提高安全性，masOS Sierra 10.12之后的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/02/文件损坏-软件损坏/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -2179,20 +2225,24 @@
       
         
           
-            <p>之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。</p>
-<h4 id="改变slider的高度不能靠约束"><a href="#改变slider的高度不能靠约束" class="headerlink" title="改变slider的高度不能靠约束"></a>改变slider的高度不能靠约束</h4><p>在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因为既稳定又快捷。</p>
-<p>下面就是我们所要修改的地方，只需要创建一个继承UISlider的类，在里面重写一个方法，即可搞定。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="noopener">自定义UISlider Demo</a></p>
-<p>当然还有几个其他的方法，改变slider其他属性的。大家可以去查阅相应的API。</p>
-<p>最终我在初始化Slider的代码中将对控件高度的约束那行代码注释掉，bug修复。</p>
-<p>时间长了，啥都容易忘，好记性不如烂笔头，还是把他们记下来比较靠谱。</p>
-
-          
+          之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。
+改变slider的高度不能靠约束在我们iOS开发中，很
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/29/UISlider-使用采坑记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     

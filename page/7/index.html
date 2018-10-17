@@ -178,7 +178,7 @@
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
-
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -415,18 +415,26 @@
       
         
           
-            <p>由于自己喜欢瞎捣鼓，电脑上安装了不少软件，也存了不少资料，最近硬盘越来越吃紧了，今天电脑居然提示磁盘剩余空间不足的警告，赶紧看看有哪些东西可以删除。</p>
-<h4 id="大文件"><a href="#大文件" class="headerlink" title="大文件"></a>大文件</h4><p>用CleanMyMac等工具扫描可以查看硬盘上有哪些文件比较占用空间，暂时又用不到，删除之。</p>
-<h4 id="开发工具清理"><a href="#开发工具清理" class="headerlink" title="开发工具清理"></a>开发工具清理</h4><p><a href="http://www.cocoachina.com/ios/20170711/19814.html" target="_blank" rel="noopener">Xcode 清理存储空间</a></p>
-<p>不过开发工具没事还是尽量少折腾，出了问题，影响开发进度。</p>
-<h4 id="不常用的文件"><a href="#不常用的文件" class="headerlink" title="不常用的文件"></a>不常用的文件</h4><p>Finder里一般都记录了文件的创建和修改时间，并且支持按照时间排序，可以把不常用的文件清理掉。</p>
-<h4 id="做备份"><a href="#做备份" class="headerlink" title="做备份"></a>做备份</h4><p>Mac上的固态硬盘一般体积都不大，有条件的还是备一个移动硬盘，网盘也是不错的选择，或者土豪可以直接换个高配大硬盘的电脑也是极好的^_^</p>
-
-          
+          由于自己喜欢瞎捣鼓，电脑上安装了不少软件，也存了不少资料，最近硬盘越来越吃紧了，今天电脑居然提示磁盘剩余空间不足的警告，赶紧看看有哪些东西可以删除。
+大文件用CleanMyMac等工具扫描可以查看硬盘上有哪些文件比较占用空间，暂时又用不到，删除之。
+开发工具清理Xcode 清理存储空间
+不过开发工具
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/28/Mac磁盘空间清理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -611,27 +619,24 @@
       
         
           
-            <p>因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">试看还剩：&lt;font color=<span class="meta">#d7bf48&gt;47<span class="meta-string">&lt;/font&gt;</span>秒，请返回竖屏购买观看券观看完整版<span class="meta-string">&lt;font color=#ff0000&gt;</span>(￥6)<span class="meta-string">&lt;/font&gt;</span>, #ffffff</span></span><br></pre></td></tr></table></figure>
-<p>无奈安卓一端已经调通，再让做出修改貌似不太人性化，只好硬着头皮一通百度Google，尝试各种方案，终于得到一些比较有用的信息。</p>
-<h4 id="大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><a href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType" class="headerlink" title="大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType"></a>大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</h4><p>字符串中很明显能看出，有通过HTML标签包装的痕迹，那么我们可以通过加载HTML标签文本的方式，将这个字符串转化为带属性的字符串。API如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)initWithData:(<span class="built_in">NSData</span> *)data options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentReadingOptionKey</span>, <span class="keyword">id</span>&gt; *)options documentAttributes:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentAttributeKey</span>, <span class="keyword">id</span>&gt; * __<span class="keyword">nullable</span> * __<span class="keyword">nullable</span>)dict error:(<span class="built_in">NSError</span> **)error <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_0, <span class="number">7</span>_0);</span><br></pre></td></tr></table></figure></p>
-<p>然后再对其属性做出调整，这就是设想的方案。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *toast = [<span class="built_in">NSString</span> stringWithUTF8String:tip];</span><br><span class="line"></span><br><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"><span class="built_in">NSString</span> *colorStr = [<span class="built_in">NSString</span> stringWithUTF8String:toastColor];</span><br><span class="line"><span class="keyword">if</span> (colorStr &amp;&amp; [colorStr hasPrefix:<span class="string">@"#"</span>]) &#123;</span><br><span class="line">    colorStr = [colorStr stringByReplacingOccurrencesOfString:<span class="string">@"#"</span> withString:<span class="string">@"0x"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSInteger</span> value = [IOSTools numberWithHexString:colorStr];</span><br><span class="line">    color = [<span class="built_in">UIColor</span> colorWithHex:value];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!color) &#123;</span><br><span class="line">    color = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableParagraphStyle</span> *style = [[<span class="built_in">NSMutableParagraphStyle</span> alloc] init];</span><br><span class="line">style.alignment = <span class="built_in">NSTextAlignmentCenter</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableAttributedString</span> * attrStr = [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithData:[toast dataUsingEncoding:<span class="built_in">NSUnicodeStringEncoding</span>] options:@&#123; <span class="built_in">NSDocumentTypeDocumentAttribute</span>: <span class="built_in">NSHTMLTextDocumentType</span> &#125; documentAttributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br><span class="line">[attrStr addAttributes:@&#123; <span class="built_in">NSFontAttributeName</span>: Unity_toast_font, <span class="built_in">NSParagraphStyleAttributeName</span>: style &#125; range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length)];</span><br></pre></td></tr></table></figure>
-<p>将参数第二部分转化为UIColor</p>
-<h4 id="大招2-将一个代表16数的字符串-转成10进制数字"><a href="#大招2-将一个代表16数的字符串-转成10进制数字" class="headerlink" title="大招2 将一个代表16数的字符串 转成10进制数字"></a>大招2 将一个代表16数的字符串 转成10进制数字</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSInteger</span>)numberWithHexString:(<span class="built_in">NSString</span> *)hexString &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *hexChar = [hexString cStringUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> hexNumber;</span><br><span class="line"></span><br><span class="line">    sscanf(hexChar, <span class="string">"%x"</span>, &amp;hexNumber);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">NSInteger</span>)hexNumber;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一步其实是为了将字符串转化为颜色，方法有很多，能达到目的即可。</p>
-<p>弄好之后跑起来，看到最终效果后傻眼了：背景是黑色的，没有格式的字也会显示成黑色，这就导致大部分内容直接看不到。给无格式的部分加颜色属性又没有头绪，不知如何区分Rang，无奈搞成这样，倒不如不显示格式，全展示成白色算了。</p>
-<p>于是打开SourceTree，开始回退代码，回退过程中想着自己忙活了半天，就这么放弃了，总觉得不甘心，不自觉的去看代码，无意中进入NSAttributedString的类头文件，发现有这么一个API: <strong>enumerateAttribute:inRange:</strong>，出于职业的敏感，心里瞬间有点小兴奋，赶紧查找关于这个方法的说明，发现这个API可以枚举出AttributedString的Attributed并且能够判断条件，如果初始化的时候选择了NSAttributedString的子类NSMutableAttributedString，那么就可以实现对Attribute的修改，这下可好了，赶紧动手实验一番，run起来一看，成了！</p>
-<p>可能大家对block里面的代码有些疑问，问什么判断条件要那么写，其实也是有些无奈，经过调试，我发现没有被颜色标签包裹的文字，经过转换后默认的颜色是黑色（打印出来颜色描述为 0 0 0 1），但是[UIColor blackColor]的颜色描述为0 1，两者不能用==来判断，无奈只能取其白色色值来做匹配，也算是曲线救国吧。</p>
-<h4 id="大招3-enumerateAttribute-inRange-偷天换日"><a href="#大招3-enumerateAttribute-inRange-偷天换日" class="headerlink" title="大招3 enumerateAttribute:inRange: 偷天换日"></a>大招3 enumerateAttribute:inRange: 偷天换日</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSAttributedStringEnumerationOptions</span> opts = <span class="built_in">NSAttributedStringEnumerationLongestEffectiveRangeNotRequired</span>;</span><br><span class="line">[attrStr enumerateAttribute:<span class="built_in">NSForegroundColorAttributeName</span> inRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length) options:opts usingBlock:^(<span class="keyword">id</span>  _Nullable value, <span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIColor</span> *tmpColor = value;</span><br><span class="line">    <span class="built_in">CGFloat</span> white = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> alpha = <span class="number">0</span>;</span><br><span class="line">    [tmpColor getWhite:&amp;white alpha:&amp;alpha];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (white == <span class="number">0</span> &amp;&amp; alpha == <span class="number">1</span>) &#123;</span><br><span class="line">        [attrStr addAttributes:@&#123; <span class="built_in">NSForegroundColorAttributeName</span>: color &#125; range:range];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<p>欣喜之余颇有感慨，做人做事确实不能轻易放弃，说不定哪个不经意的瞬间，就会有惊喜(<em>^__^</em>)</p>
-<p>如果你有更好的方案，欢迎沟通交流！</p>
-
-          
+          因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。
+1试看还剩：&lt;font color=#d7bf48&g
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/27/记一次特殊需求实现/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -816,27 +821,26 @@
       
         
           
-            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>看到各路大神都有blog，心中仰慕不已。本菜鸟混迹于开发行业数年，也一直想有个自己的博客，偶然发现可以用github搭建博客，又不需要买云主机，此等好事，怎能不凑一下热闹。</p>
-<h4 id="hexo搭建"><a href="#hexo搭建" class="headerlink" title="hexo搭建"></a>hexo搭建</h4><p>网上相关的教程很多，这里不再详细说明，只做引路。</p>
-<p><a href="https://www.jianshu.com/p/e99ed60390a8" target="_blank" rel="noopener">20分钟用hexo搭建github博客</a></p>
-<p><a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">学习Markdown语法</a></p>
-<h4 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"xxx"</span></span><br></pre></td></tr></table></figure>
-<h4 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h4><p>因为Markdown里面只能写文字，所以添加图片是采用链接的方式，我们就需要先将图片传到网上，然后获取链接才能进行展示。<br>上传图片的方式有很多，这里我们用github上传的方式，正好blog也在github上面，方便管理。</p>
-<p>在github新建一个仓库，通过git将图片上传至仓库。在github页面打开该仓库，找到图片对应的元素，点击预览，然后右键复制链接即可拿到图像地址。如下图：</p>
-<p><img src="https://github.com/a1049145827/Resources/blob/master/github_img_link.jpg?raw=true" alt="获取github图片链接"></p>
-<p>在Markdown文章中引用图片：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述](https://github.com/xxx.jpg)</span><br></pre></td></tr></table></figure>
-<h4 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p>执行上面命令就能起一个本地服务，然后在浏览器就能打开并预览博客内容啦。</p>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-<h4 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h4><p>如果我们留意一下创建新文章（hexo new “”）时结尾的日志，类似下面的文字<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/xxx/<span class="built_in">source</span>/_posts/xxx.md</span><br></pre></td></tr></table></figure></p>
-<p>就不难发现创建文章的操作为我们生成了一个md文件，在source/_posts/路径下。如果想要删除一篇文章，只需要将对应的md文件删除，然后重新部署，即可看到博客列表中已经将其移除。</p>
-
-          
+          前言看到各路大神都有blog，心中仰慕不已。本菜鸟混迹于开发行业数年，也一直想有个自己的博客，偶然发现可以用github搭建博客，又不需要买云主机，此等好事，怎能不凑一下热闹。
+hexo搭建网上相关的教程很多，这里不再详细说明，只做引路。
+20分钟用hexo搭建github博客
+学习Markdown
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/25/使用github愉快的写blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1009,16 +1013,25 @@
       
         
           
-            <h5 id="AE报错-名为Checkbox的种类effect没有属性或方法。"><a href="#AE报错-名为Checkbox的种类effect没有属性或方法。" class="headerlink" title="AE报错 名为Checkbox的种类effect没有属性或方法。"></a>AE报错 名为Checkbox的种类effect没有属性或方法。</h5><p><img src="https://github.com/a1049145827/Resources/raw/master/AE_Error_Checkbox.jpg" alt="AE Error"></p>
-<p>这种状况是中文版AE软件打开开英文版工程文件造成的结果。<br>找到对应图层，点住Ctrl加鼠标，出来的表达式，把Checkbox改成中文，复选框就可以了。如果出现的这类错误较多，修改起来会很麻烦，那么我们也可以直接把软件改成英文版。</p>
-<h5 id="Win10系统AE-CC2018中文版怎么切换到英文版。"><a href="#Win10系统AE-CC2018中文版怎么切换到英文版。" class="headerlink" title="Win10系统AE CC2018中文版怎么切换到英文版。"></a>Win10系统AE CC2018中文版怎么切换到英文版。</h5><p>找到AE的根目录，找到AMT文件，打开进入。<br>在AMT文件夹用笔记本里面打开application.xml，查找zh_CN,然后把zh_CN替换为en_US保存就可以了，和17版本的不一样。</p>
-<p>如果AE是用AMT Emulator破解后的，那么使用下面方法修改：<br>Support Files找到painter.ini，用记事本打开，在PersonGUID=xxxxxxxxx@AdobeID那一行，下面加上<br>ForceLanguage=1<br>Language=en_US，重启就是英文。en_US换成zh_CN就是中文。</p>
-
-          
+          AE报错 名为Checkbox的种类effect没有属性或方法。
+这种状况是中文版AE软件打开开英文版工程文件造成的结果。找到对应图层，点住Ctrl加鼠标，出来的表达式，把Checkbox改成中文，复选框就可以了。如果出现的这类错误较多，修改起来会很麻烦，那么我们也可以直接把软件改成英文版。
+Win
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/25/Adobe-After-Effects名为Checkbox的种类effect没有属性或方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1191,30 +1204,26 @@
       
         
           
-            <p>最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。</p>
-<p>诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。</p>
-<p>需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。</p>
-<p>如果使用Linux搭建git服务的话，推荐使用更加强大的gitlab搭建服务。<br><a href="https://about.gitlab.com/installation/" target="_blank" rel="noopener">使用gitlab搭建git服务</a></p>
-<p>其实Mac下也可以使用docker安装gitlab，只不过懒得折腾，能用就行。<br><a href="http://blog.csdn.net/u011904605/article/details/54664835" target="_blank" rel="noopener">使用docker安装gitlab搭建git服务</a></p>
-<p>还是说说我们在Mac下用gitblit搭建git服务</p>
-<ol>
-<li>首先安装运行环境: <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">jdk8</a></li>
-<li>然后下载 <a href="http://gitblit.com/" target="_blank" rel="noopener">gitblit</a></li>
-<li>配置gitblit</li>
-</ol>
-<p>其实最主要的步骤还是第三步</p>
-<p>把gitblit上下载的文件解压，然后进入data子目录，找到defaults.properties打开。这里的很多配置项都可以使用缺省，不过如果想要修改文件存放的路径，可以把git.repositoriesFolder配置下，路径可以自己指定（但要有写权限）。</p>
-<p>然后找到server.httpPort，设定http协议的端口号，这个端口号理论上来说可以随便指定（保证和其他应用不冲突就行），这里我设置成1234。保存，关闭。</p>
-<p>配置完成后启动gitblit服务，安装包里做好了可执行的脚本，我们只要在终端运行就可以了。</p>
-<p>打开浏览器，输入localhost:1234(localhost也可以换成你本机的ip地址)，进入gitblit web管理页面。选择右上角登录。</p>
-<p>默认的用户名和密码是admin，强烈建议登录后修改密码。登录后最好再创建一个用户，然后在该用户下创建项目目录。</p>
-<p>创建完成后就会自动跳转到项目页面，然后我们就可以拿到git链接，接下来就可以愉快的使用git啦。(～￣▽￣)～</p>
-
-          
+          最近有个项目代码比较多，更改频繁，后端给提供的git服务又限制了大文件上传。
+诸多限制，无奈自己准备搭建一个git服务，能在公司内网访问即可。
+需求已确定，开始搞起，网上查阅一番，发现Mac平台搭建git服务，并且没有太多需求的话，用gitblit是不错的选择（虽然它已经一年多没有更新了）。
+如果使
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/22/Mac平台使用gitblit搭建git服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1381,20 +1390,26 @@
       
         
           
-            <p>使用hexo搭建博客的文章网上已经非常多，这里不再赘述，只是记录一些基础常用的命令，以作备忘学习。</p>
-<h4 id="使用hexo生成文件"><a href="#使用hexo生成文件" class="headerlink" title="使用hexo生成文件"></a>使用hexo生成文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"文件名"</span></span><br></pre></td></tr></table></figure>
-<p>之后终端会执行命令并提示已创建md文件，我们就可以在Atom、VS Code等常用Markdown编辑器中对文章进行完善。</p>
-<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><p>写作完成后先在本地进行调试</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p>默认是<a href="http://localhost:4000/" target="_blank" rel="noopener">localhost</a>即可查看效果。</p>
-<h4 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h4><p>本地调试完毕后使用下面命令同步到github</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-          
+          使用hexo搭建博客的文章网上已经非常多，这里不再赘述，只是记录一些基础常用的命令，以作备忘学习。
+使用hexo生成文件1hexo new "文件名"
+之后终端会执行命令并提示已创建md文件，我们就可以在Atom、VS Code等常用Markdown编辑器中对文章进行完善。
+调试写作完成后先在本地进
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/21/hexo使用小记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1545,13 +1560,24 @@
       
         
           
-            <p>O(∩_∩)O哈！</p>
+          O(∩_∩)O哈！
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/21/blog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1702,21 +1728,23 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/21/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1901,35 +1929,24 @@
       
         
           
-            <p>现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。</p>
-<p>以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务端），然后执行命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.build/debug/PerfectTemplate</span><br></pre></td></tr></table></figure>
-<p>即可开启服务。</p>
-<p>当我们需要服务在后台执行的时候可以在命令后加上&amp;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.build/debug/PerfectTemplate &amp;</span><br></pre></td></tr></table></figure>
-<p><strong>如果需要在退出远程终端后，进程继续运行，可能要再加上nohup命令</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup .build/debug/PerfectTemplate &amp;</span><br></pre></td></tr></table></figure>
-<p>这里有说明: <a href="https://www.cnblogs.com/baby123/p/6477429.html" target="_blank" rel="noopener">nohup和&amp;后台运行，进程查看及终止</a></p>
-<p>执行后控制台会有类似于下面的日志👇</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1] 94640</span><br></pre></td></tr></table></figure>
-<p>这个表示当前服务运行的进程id。</p>
-<p>当我们修改完项目需要重新运行的时候，后天服务会占用端口导致新服务无法正常启动，这时我们就要杀掉旧服务的进程。之前控制台打印出来的id号去终止进程，命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">kill</span> -9 94640</span><br></pre></td></tr></table></figure>
-<p>不过有时候我们会关闭掉命令行窗口，并没有记录进程id，那么就需要手动去查找进程id，这里有两种方案：</p>
-<ol>
-<li>使用top命令查找</li>
-<li>通过端口号查找</li>
-</ol>
-<p>第一种方法是通过top命令查看服务名对应的pid即可</p>
-<p>第二种通过命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i tcp:8181</span><br></pre></td></tr></table></figure>
-<p>即可查找到占用8181端口的服务。</p>
-
-          
+          现在我们可以很方便的利用Perfect的框架去创建一个使用Swift语言开发的后端服务。
+以Perfect提供的官方示例PerfectTemplate为例，我们在对项目进行更改并调试后，可以使用vapor build命令（使用了vapor框架的工具，可以更加方便的使用命令行工具调试开发Swift服务
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/21/Create-A-Backend-Use-Perfect-Power-By-Swift/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     

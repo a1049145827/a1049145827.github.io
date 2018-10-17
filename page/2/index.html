@@ -178,7 +178,7 @@
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
-
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -403,17 +403,25 @@
       
         
           
-            <p>最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。</p>
-<p>百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。</p>
-<p>我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。</p>
-<p>具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径为 /etc/hosts 。Windows 的是 C:\Windows\System32\Drivers\etc\hosts 。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GitHub Start</span></span><br><span class="line">192.30.253.112 github.com</span><br><span class="line">192.30.253.119 gist.github.com</span><br><span class="line">151.101.100.133 assets-cdn.github.com</span><br><span class="line">151.101.100.133 raw.githubusercontent.com</span><br><span class="line">151.101.100.133 gist.githubusercontent.com</span><br><span class="line">151.101.100.133 cloud.githubusercontent.com</span><br><span class="line">151.101.100.133 camo.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars0.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars1.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars2.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars3.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars4.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars5.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars6.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars7.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars8.githubusercontent.com</span><br><span class="line"><span class="comment"># GitHub End</span></span><br></pre></td></tr></table></figure>
-
-          
+          最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。
+百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。
+我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/访问GitHub很慢的问题解决/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -586,17 +594,24 @@
       
         
           
-            <p>最近开发的页面中有一个输入订单号的功能，由于产品设计时将输入框放在页面靠下的位置，所以一般情况下，用户需要输入时，弹出的键盘会将其遮挡。但是项目中已经引入了 IQKeyboardManager 第三方库来解决这个问题，为什么它没有起作用？</p>
-<h4 id="修复bug的第一步："><a href="#修复bug的第一步：" class="headerlink" title="修复bug的第一步："></a>修复bug的第一步：</h4><p>怀疑是配置不对，经过查阅资料发现，在默认配置下 IQKeyboardManager 就会起作用，无需特殊配置。</p>
-<h4 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h4><p>发现点击筛选时，弹出的视图直接加在了 keyWindow 上，经过修改，将其放在当前控制器的导航控制器的 View 上，发现偶尔可以不遮挡键盘。为什么会出现这种状况？持续跟进，在 IQKeyboardManager 核心代码中进行断点调试，发现 IQKeyboardManager 会查找文本输入框控件所在的 Controller ，而且还会查找文本输入框控件是否存在于 ScrollView 及其子类中。如果有 ScrollView ，会改变 ScrollView 的 ContentOffset 来避免输入框被键盘遮挡。</p>
-<h4 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h4><p>查看 ScrollView 配置是否异常，项目代码中并未发现 ScrollView 有配置异常的情况，无奈只好继续断点调试，发现一个规律：当输入框被遮挡时，IQKeyboardManager 中获取到 ScrollView 的 ContentSize 总是 {0, 0}，回到项目代码里发现在大屏幕手机上确实没有设置 ContentSize 属性，小屏幕手机上才会配置这个属性。在代码中设置，默认情况下，ScrollView 的 ContentSize 等于其 Size，问题解决。</p>
-<h4 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h4><p>开发环境：Xcode 9.4.1，iOS 12 Public beta 3，iPhone 6s Plus （不知此bug出现是否和开发环境有关）</p>
-
-          
+          最近开发的页面中有一个输入订单号的功能，由于产品设计时将输入框放在页面靠下的位置，所以一般情况下，用户需要输入时，弹出的键盘会将其遮挡。但是项目中已经引入了 IQKeyboardManager 第三方库来解决这个问题，为什么它没有起作用？
+修复bug的第一步：怀疑是配置不对，经过查阅资料发现，在默认
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/27/记一次-IQKeyboardManager-失效导致输入框被键盘遮挡的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -781,27 +796,23 @@
       
         
           
-            <p><strong>（2018.7.30更新）</strong><br>最近在看 Swift 的一篇 <a href="https://juejin.im/post/5ab4b2a66fb9a028e33b60d6" target="_blank" rel="noopener">博客</a> 的时候，发现了一个神级 API：reverse()，这个函数用来反转一个序列，Swift4 中 String 做了一些调整。我们可以直接将 String 作为一个序列进行反转，然后使用 String 的便利初始化方法将反转后的序列转为 String 类型，整个过程只需要一行代码，而且性能比我们自行封装方法要高不少，如果你正在查找 Swift 中反转字符串的方法，请看下面示例代码。然后就不必再往下看了。。。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> abc: <span class="type">String</span> = <span class="string">"abc"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="type">String</span>(abc.reversed()))</span><br><span class="line"><span class="comment">// cba</span></span><br></pre></td></tr></table></figure>
-<p>　<br>最近在工作的时候，遇到一个需求，希望能将字符串倒序排列并输出。</p>
-<p>先来看一下OC的实现方式：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串倒序 输入"1234" 输出"4321"</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)invertString:(<span class="built_in">NSString</span> *)str &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSMutableString</span> *newString = [<span class="built_in">NSMutableString</span> string];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length; i ++) &#123;</span><br><span class="line"></span><br><span class="line">        [newString appendString:[str substringWithRange:<span class="built_in">NSMakeRange</span>(str.length-i<span class="number">-1</span>, <span class="number">1</span>)]];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newString;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单词逆序 输入"hello world" 输出"world hello"</span></span><br><span class="line">- (<span class="built_in">NSString</span> *)invertWord:(<span class="built_in">NSString</span> *)str &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSArray</span> *stringArr = [str componentsSeparatedByString:<span class="string">@" "</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSMutableArray</span> *newStringArr = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stringArr.count; i ++) &#123;</span><br><span class="line"></span><br><span class="line">        [newStringArr addObject:stringArr[stringArr.count - i - <span class="number">1</span>]];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSString</span> *string = [newStringArr componentsJoinedByString:<span class="string">@" "</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>搞定之后，我灵机一动，又有好些天没有碰 Swift 了，这样下去岂不是要荒废？赶紧打开 Playground，用 Swift 实现一波。</p>
-<p>好吧，我承认我懒癌发作了，打开 <a href="https://objectivec2swift.com/#/converter/" target="_blank" rel="noopener">objectivec2swift.com</a> ，先来个自动转换，看看都发生了哪些变化，结果很快就出来了：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串倒序 输入"1234" 输出"4321"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">invertString</span><span class="params">(<span class="number">_</span> str: String?)</span></span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">var</span> newString = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(str?.<span class="built_in">count</span> ?? <span class="number">0</span>) &#123;</span><br><span class="line">        newString += (str <span class="keyword">as</span> <span class="type">NSString</span>?)?.substring(with: <span class="type">NSRange</span>(location: (str?.<span class="built_in">count</span> ?? <span class="number">0</span>) - i - <span class="number">1</span>, length: <span class="number">1</span>)) ?? <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newString</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单词逆序 输入"hello world" 输出"world hello"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">invertWord</span><span class="params">(<span class="number">_</span> str: String?)</span></span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">let</span> stringArr = str?.components(separatedBy: <span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">var</span> newStringArr: [<span class="type">AnyHashable</span>] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(stringArr?.<span class="built_in">count</span> ?? <span class="number">0</span>) &#123;</span><br><span class="line">        newStringArr.append(stringArr?[(stringArr?.<span class="built_in">count</span> ?? <span class="number">0</span>) - i - <span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> string = newStringArr.joined(separator: <span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>不过将代码拷贝到 Playground（Xcode10 beta4）里面，代码是无法编译通过的。而且翻译的代码里，有很多桥接 OC 的地方，这简直是要逼死 Swifter 强迫症啊！</p>
-<p>面对这种状况，肯定是不能轻易认输滴，来吧，手动模式走起。一段看似简单的代码，上手写的时候才发现，Swift 里对 String 相关的 API 改动确实是太大了，连写个完整的语句都困难了。这也怪我平时太眼高手低，哎！<br>眼看饭点已经过去，硬着头皮也要往下搞了。既然 API 改动大，不妨把 API <a href="Strings and Characters">文档</a>先过一遍。</p>
-<p>一份外卖送到的时间，一套 Swifty 的代码就出炉了：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 完全逆序 输入 "1234" 输出 "4321"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">invertString</span><span class="params">(<span class="number">_</span> s: String?)</span></span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> str = s <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> string = <span class="string">""</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">count</span> = str.<span class="built_in">count</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">count</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> idx = <span class="type">String</span>.<span class="type">Index</span>(encodedOffset: <span class="built_in">count</span> - i - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">let</span> char = str[idx]</span><br><span class="line">        string.append(char)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单词逆序 输入"hello world" 输出"world hello"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">invertWord</span><span class="params">(<span class="number">_</span> s: String?)</span></span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> str = s <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> stringArr = str.components(separatedBy: <span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">var</span> newStringArr: [<span class="type">String</span>] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;(stringArr.<span class="built_in">count</span>) &#123;</span><br><span class="line">        newStringArr.append(stringArr[(stringArr.<span class="built_in">count</span>) - i - <span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> string = newStringArr.joined(separator: <span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>其实 Swift 的代码风格是趋于简单化了，而且易读性也很好，增强了类型推断和可选类型，日后维护起来也会得心应手。</p>
-<p>目前 Swift 的 API 基本已经完全脱离了OC的语法风格，使用工具简单的将OC代码转换成Swift代码的方式已经慢慢的行不通了。刚从OC转过来的同学估计会一脸懵逼，目前Swift发展已经趋于成熟，ABI估计一年内也可以稳定下来，平时多关注，用时不懵逼 🤣 。</p>
-<p>传送门：<a href="https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html" target="_blank" rel="noopener">Swift官方文档</a></p>
-
-          
+          （2018.7.30更新）最近在看 Swift 的一篇 博客 的时候，发现了一个神级 API：reverse()，这个函数用来反转一个序列，Swift4 中 String 做了一些调整。我们可以直接将 String 作为一个序列进行反转，然后使用 String 的便利初始化方法将反转后的序列转为 S
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/25/Swift实现字符串倒序排列/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -956,18 +967,28 @@
       
         
           
-            <p>今天浏览Vapor源代码的时候发现了一个之前没有见过的关键字：<code>@_exported</code></p>
-<p>查了一下资料发现：</p>
-<p><code>@_exported</code> 用于在自己模块中导出其他模块。</p>
-<p>比如，自己定义了一个 <code>A</code> 模块。<br>在 <code>A</code> 模块中定义：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@_exported <span class="keyword">import</span> UIKit</span><br></pre></td></tr></table></figure>
-<p>当我们引入 <code>A</code> 模块（<code>import A</code>）时，可以直接使用 <code>UIKit</code> 中的符号。</p>
-
-          
+          今天浏览Vapor源代码的时候发现了一个之前没有见过的关键字：@_exported
+查了一下资料发现：
+@_exported 用于在自己模块中导出其他模块。
+比如，自己定义了一个 A 模块。在 A 模块中定义：
+1@_exported import UIKit
+当我们引入 A 模块（import A
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/10/Swift中import的区别是什么/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1140,56 +1161,24 @@
       
         
           
-            <h2 id="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"><a href="#一、Swift文件间相互调用时，Swift中的几个权限描述关键字" class="headerlink" title="一、Swift文件间相互调用时，Swift中的几个权限描述关键字"></a>一、Swift文件间相互调用时，Swift中的几个权限描述关键字</h2><h4 id="1-gt-internal-内部的"><a href="#1-gt-internal-内部的" class="headerlink" title="1&gt;  internal : 内部的"></a>1&gt;  internal : 内部的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 默认情况下所有的类&amp;属性&amp;方法的访问权限都是internal</span><br><span class="line">2. 在本模块(项目/包/target)中可以访问</span><br></pre></td></tr></table></figure>
-<h4 id="2-gt-private-私有的"><a href="#2-gt-private-私有的" class="headerlink" title="2&gt;  private : 私有的"></a>2&gt;  private : 私有的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 只有在本类中可以访问</span><br></pre></td></tr></table></figure>
-<h4 id="3-gt-open-公开的"><a href="#3-gt-open-公开的" class="headerlink" title="3&gt;  open : 公开的"></a>3&gt;  open : 公开的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 可以跨模块(项目/包/target)都是可以访问</span><br></pre></td></tr></table></figure>
-<h4 id="4-gt-fileprivate-Swift3-0"><a href="#4-gt-fileprivate-Swift3-0" class="headerlink" title="4&gt;  fileprivate : Swift3.0"></a>4&gt;  fileprivate : Swift3.0</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 只要是在本文件中都是可以进行访问</span><br></pre></td></tr></table></figure>
-<h2 id="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"><a href="#二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法" class="headerlink" title="二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法"></a>二、Objc和Swift间相互调用时，Objc中如何调用Swift类及方法</h2><p>Objc和Swift混编时，需要建立桥接头文件（此文件供Swift调用OC类时使用）。另外，Xcode还会在 <strong>编译时</strong> 默认生成一个Swift桥接文件 ProjectName-Swift.h。</p>
-<p>Swift4.0 之前，OC类中直接导入桥接头文件，就能访问到 Swift 类及方法，但是 Swift4.0 之后，为了降低不必要的编译性能损耗，Xcode中默认不再将所有的Swift类及方法暴露给OC。</p>
-<p>我们需要在要暴露的类和文件前加上 <strong>@objc</strong> 关键字，如下所示：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果此类要暴露给OC使用，则必须继承于OC类（例如NSObject），此时前面写不写 @objc 都可以</span></span><br><span class="line"><span class="meta">@objc</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@objc</span></span><br><span class="line">    <span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">foo</span>() -&gt; <span class="title">Void</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Swift"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="三、扩展：Objc和Swift混编时如何互相调用"><a href="#三、扩展：Objc和Swift混编时如何互相调用" class="headerlink" title="三、扩展：Objc和Swift混编时如何互相调用"></a>三、扩展：Objc和Swift混编时如何互相调用</h2><h4 id="将-Objective-C-代码导入到-Swift-中"><a href="#将-Objective-C-代码导入到-Swift-中" class="headerlink" title="将 Objective-C 代码导入到 Swift 中"></a>将 Objective-C 代码导入到 Swift 中</h4><p>为了在同一个 App Target 下 导入 Objc 文件到 Swift 代码中，你以来 Objc 桥接 header 来将这些文件暴露给 Swift。Xcode 在你将 Swift 文件添加进 Objc App 或者将 Objc 文件添加到 Swift App 时会提供创建这样一个头文件。  </p>
-<p>如果你接受了，Xcode 就会创建这个头文件并且以 Product Module 名字 ＋ “-Bridging-Header.h” 的形式来新建。  </p>
-<p>你也可以自己通过 File &gt; New &gt; File &gt; (iOS, watchOS, tvOS, _or_ macOS) &gt; Source &gt; Header File. 的方式来添加  </p>
-<p>你需要编辑这个桥接头文件来把 Objc 代码暴露给 Swift 代码。</p>
-<p><strong>同一个 Target 下把 Objective-C 代码 import 到 Swift 中</strong></p>
-<ol>
-<li><p>在 Objc 桥接头文件中，import 每一个你想要暴露给 Swift 的头文件，例如：</p>
-</li>
-<li><ol>
-<li><code>#import &quot;XYZCustomCell.h&quot;</code></li>
-<li><code>#import &quot;XYZCustomView.h&quot;</code></li>
-<li><code>#import &quot;XYZCustomViewController.h&quot;</code></li>
-</ol>
-</li>
-<li><p>在 Swift Compiler － Code Generation 中，确保 Objc Bridging Header 设置下有一个指向 Bridging Header File 的路径。  </p>
-<p>这个路径需要是相对的，类似于在 info.plist 文件中指定的形式。多数情况下你不需要修改这个设置。</p>
-</li>
-</ol>
-<p>任何公共的 Objc 头文件都需要罗列在这个桥接文件中。Objc 功能会自动在 Target 中在任何的 Swift 文件中可用。而且不需要再 import 声明。  </p>
-<ol>
-<li><code>let myCell = XYZCustomCell()</code></li>
-<li><code>myCell.subtitle = &quot;A custom cell&quot;</code></li>
-</ol>
-<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. Xcode 会在你试图做混合开发的时候，自动创建一个 Product Module 名字 ＋ “-Bridging-Header.h”的文件</strong></em></p>
-<p><em><strong>2. 在这个文件中导入你想要访问的 Objc 头文件</strong></em></p>
-<p><em><strong>3.在 Swift 文件中就可以访问到 Objc 文件中的方法</strong></em></p>
-<h4 id="将-Swift-代码导入到-Objective-C-中"><a href="#将-Swift-代码导入到-Objective-C-中" class="headerlink" title="将 Swift 代码导入到 Objective-C 中"></a>将 Swift 代码导入到 Objective-C 中</h4><p>当你把 Swift 代码 import 到 Objective-C 中时，你依赖的是 Xcode 产生的 Header File 来把这些文件暴露给 Objective-C。这个自动生成的文件是一个 Objective-C 头文件声明了你 Target 中的 Swift 接口。这个头文件的名称就是产品模块名称加上 - Swift.h 后缀。</p>
-<p>注意：不论你初始创建的是 Swift 还是 Objective-C 的工程，其实 Xcode 都已经为你自动创建好了这个头文件。不过有的时候需要反复 Clean 几次后再 Build 才能编译上。否则会运行时出错。  </p>
-<p><strong>同一个 Target 下把 Swift 代码 import 到 Objective-C 中</strong></p>
-<p>要在同一个 Target 下的 Swift 代码导入到任何 Objective-C 类中。使用下面语法修改其 .m文件:</p>
-<p><code>#import &quot;ProductModuleName-Swift.h&quot; 在你想要访问Swift的某个 Objc 文件中首先 import 这个自动生成的头文件。然后就可以访问对应的 Swift 中的方法了。</code></p>
-<p>在 .m文件中导入桥接头文件后，Target 中的 Swift 文件将在 Objective-C 中可见，并且能在 OC文件中调用Swift代码（Swift4.0 及之后版本对此作了改动，只能在OC文件中显示和调用被 @objc 修饰的Swift类和方法）。</p>
-<h5 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h5><p><em><strong>1. 不论初始创建的什么类型的工程，Xcode 已经自动创建好了<code>&quot;ProductModuleName-Swift.h&quot;</code>的头文件</strong></em></p>
-<p><em><strong>2. 只要在需要使用 Swift 的 Objc 文件中 import 这个自动生成的头文件就可以访问 Swift 中的方法了</strong></em></p>
-<p><em><strong>3. Swift 中的类最终必须集成于 NSObject, 否则调用时运行出错</strong></em></p>
-<p><em><strong>4. 自动生成的这个头文件可能需要一定时间生成，因此会出现访问不到的情况，需要多次 clean 后编译</strong></em></p>
-
-          
+          一、Swift文件间相互调用时，Swift中的几个权限描述关键字1&gt;  internal : 内部的121. 默认情况下所有的类&amp;属性&amp;方法的访问权限都是internal2. 在本模块(项目/包/target)中可以访问
+2&gt;  private : 私有的11. 只有在本
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/05/Swift访问权限/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1374,41 +1363,28 @@
       
         
           
-            <p>　　用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。</p>
-<p>　　<strong>得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整</strong></p>
-<h3 id="关于字体和颜色，"><a href="#关于字体和颜色，" class="headerlink" title="关于字体和颜色，"></a>关于字体和颜色，</h3><h3 id="关于代码展示，有三种方式："><a href="#关于代码展示，有三种方式：" class="headerlink" title="关于代码展示，有三种方式："></a>关于代码展示，有三种方式：</h3><ol>
-<li><p>使用HTML标签：</p>
-<pre><code>class aaa {
-   func add(_ a: Int, _ b: Int) -> Int {
-       return a + b
-   }
-}</code></pre>
-
-<p>他的写法是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre&gt;&lt;code&gt;class aaa &#123;</span><br><span class="line">    func add(_ a: Int, _ b: Int) -&gt; Int &#123;</span><br><span class="line">        return a + b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用table键缩进，这种方式的优势是方便，直接把代码所在的行都选中，然后一个table键就可以了。缺点就是不会显示关键字高亮，所有代码都是一个颜色。就像下面这段代码👇（代码上面横线是hexo转HTML的时候的问题）：
-　</p>
-<pre><code>class aaa {
-    func add(_ a: Int, _ b: Int) -&gt; Int {
-        return a + b
-    }
-}
-</code></pre></li>
-<li>使用反引号（数字键1左边的那个符号），我一般会选择使用这种方式这种方式，因为它可以在后面拼上开发语言，进而对关键字高亮显示。就像这里👇<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">aaa</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(<span class="number">_</span> a: Int, <span class="number">_</span> b: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>它的写法是这样的：<br><img src="https://github.com/a1049145827/Resources/raw/master/md_code.png" alt="Swift Code"></p>
-<h3 id="关于空行和缩进"><a href="#关于空行和缩进" class="headerlink" title="关于空行和缩进"></a>关于空行和缩进</h3><p>　　<strong>缩进</strong>：直接在段落前敲空格，Markdown会默认把整个段落都执行缩进，如果只想首行缩进，可以把输入法切换到全角输入状态，在第一行前输入两个空格即可。<br>　　<strong>空行</strong>：Markdown会默认忽略空白行，想要在展示的时候出现空行，最简单的做法就是全角状态下在空行输入一个空格，展示的时候，这个空格就会占位一行。</p>
-<h3 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;![图片描述](图片链接)&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="文字居中"><a href="#文字居中" class="headerlink" title="文字居中"></a>文字居中</h3><p>文字居中我用的是HTML标签，写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;center&gt;这里是要居中的文字&lt;/center&gt;&quot;</span><br></pre></td></tr></table></figure></p>
-<h3 id="高亮显示"><a href="#高亮显示" class="headerlink" title="高亮显示"></a>高亮显示</h3><p>我们在编辑段落的时候，有时候想要突出显示某个词汇，可以使用<code>反引号</code>将词汇包裹起来，效果就像这里显示的一样。它的写法是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以使用`反引号`将词汇包裹起来</span><br></pre></td></tr></table></figure></p>
-
-          
+          　　用Markdown写博客已经有一段时间了，也算积累了一些小小的经验，在这里和大家分享一下。
+　　得益于Markdown的设计，很多时候我们可以直接使用HTML标签进行样式调整
+关于字体和颜色，关于代码展示，有三种方式：
+使用HTML标签：
+class aaa {
+   func add(_ a:
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/25/Markdown语法的一些小技巧（持续更新）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1581,36 +1557,24 @@
       
         
           
-            <p><strong><a href="https://juejin.im/post/5b2ddfa7e51d4553156be305" target="_blank" rel="noopener">原文链接</a></strong></p>
-<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>　　我们的对比主要关注内存的占用情况。对比的格式是jpg和png这两种最广泛使用的格式，分别代表了有损压缩和无损压缩；关于它们的特点和介绍，可以参考郭耀源的这篇文章：<a href="https://link.juejin.im?target=https%3A%2F%2Fblog.ibireme.com%2F2015%2F11%2F02%2Fmobile_image_benchmark%2F" target="_blank" rel="noopener">移动端图片格式调研</a>。我们可以看到，在iOS设备上它们的解码消耗在一个量级，速度较快。<br>　　WWDC2018苹果重点关注了图片的内存占用情况（因为此前大家的通用做法实际上是相对低效的），并且给了大家一些指导。这里我们会用demo实验的方式（并且通过工具来进行benchmark），为大家揭示一些事实和现象，供大家去理解和分析，从而去形成我们代码的最佳实践。</p>
-<h3 id="Demo-DownSampleDemo"><a href="#Demo-DownSampleDemo" class="headerlink" title="Demo: DownSampleDemo"></a>Demo: <a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fdustturtle%2FDownSampleDemo" target="_blank" rel="noopener">DownSampleDemo</a></h3><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>　　首先，苹果告诉我们，图片在应用中主要的内存占用（这通常发生在图片要被载入并显示时）和图片本身的大小实际是无关的；重要的是图片的尺寸。decode buffer的计算方式是width*height*N,这里的N通常是4(最常见的ARGB888格式)，N取决于你显示所使用的格式。但很多时候，我们会直接把一个UIImage传递给UIImageView， 实际上该View的尺寸可能远远的小于UIImage本身。</p>
-<h3 id="使用图片的三种方式"><a href="#使用图片的三种方式" class="headerlink" title="使用图片的三种方式:"></a>使用图片的三种方式:</h3><h4 id="方式A"><a href="#方式A" class="headerlink" title="方式A"></a>方式A</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">image1.image = <span class="built_in">UIImage</span>(named: <span class="string">"000.jpg"</span>)</span><br></pre></td></tr></table></figure>
-<p>　<br>　　这是我们最通常使用图片的方式，可能有人会想到imagewithcontentsoffile,实际上它和上面的方法只有一个不同之处： 正常情况下imageNamed会缓存这个图片在整个App存续期间，这样就无需重复的decode；而imagewithcontentsoffile则没有这个缓存，图片不使用了就会释放内存。但这对我们的case并无帮助，因为我们是在使用这些图片，并且观察它们的内存占用.</p>
-<h4 id="方式B"><a href="#方式B" class="headerlink" title="方式B"></a>方式B</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">UIImage</span> *)OriginImage:(<span class="built_in">UIImage</span> *)image scaleToSize:(<span class="built_in">CGSize</span>)size &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个bitmap的context</span></span><br><span class="line">    <span class="comment">// 并把它设置成为当前正在使用的context</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContext</span>(size);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制改变大小的图片</span></span><br><span class="line">    [image drawInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, size.width, size.height)];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从当前context中创建一个改变大小后的图片</span></span><br><span class="line">    <span class="built_in">UIImage</span>* scaledImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使当前的context出堆栈</span></span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回新的改变大小后的图片</span></span><br><span class="line">    <span class="keyword">return</span> scaledImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>　　这是一种被广泛使用的缩放图片的办法。</p>
-<h4 id="方式C"><a href="#方式C" class="headerlink" title="方式C"></a>方式C</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">downsample</span><span class="params">(imageAt imageURL: URL, to pointSize: CGSize, scale: CGFloat)</span></span> -&gt; <span class="type">UIImage</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> sourceOpt = [kCGImageSourceShouldCache : <span class="literal">false</span>] <span class="keyword">as</span> <span class="type">CFDictionary</span></span><br><span class="line">    <span class="comment">// 其他场景可以用createwithdata (data并未decode,所占内存没那么大),</span></span><br><span class="line">    <span class="keyword">let</span> source = <span class="type">CGImageSourceCreateWithURL</span>(imageURL <span class="keyword">as</span> <span class="type">CFURL</span>, sourceOpt)!</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> maxDimension = <span class="built_in">max</span>(pointSize.width, pointSize.height) * scale</span><br><span class="line">    <span class="keyword">let</span> downsampleOpt = [kCGImageSourceCreateThumbnailFromImageAlways : <span class="literal">true</span>,</span><br><span class="line">                         kCGImageSourceShouldCacheImmediately : <span class="literal">true</span> ,</span><br><span class="line">                         kCGImageSourceCreateThumbnailWithTransform : <span class="literal">true</span>,</span><br><span class="line">                         kCGImageSourceThumbnailMaxPixelSize : maxDimension] <span class="keyword">as</span> <span class="type">CFDictionary</span></span><br><span class="line">    <span class="keyword">let</span> downsampleImage = <span class="type">CGImageSourceCreateThumbnailAtIndex</span>(source, <span class="number">0</span>, downsampleOpt)!</span><br><span class="line">    <span class="keyword">return</span> <span class="type">UIImage</span>(cgImage: downsampleImage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　<br>　　这是苹果介绍给我们的新方法。</p>
-<h4 id="关于测试"><a href="#关于测试" class="headerlink" title="关于测试"></a>关于测试</h4><p>　　<font color="#FF0000">测试设备</font> ： 1.iPhone8 11.4， 2.iPhone6 12beta2<br>　　<font color="#FF0000">测试图片格式</font> ： png/jpg<br>　　<font color="#FF0000">测试的图片使用方式</font> ：3种<br>　　我们将2560*1440大小的图片放到282*138的View中，对于缩放我们使用2x的格式来显示以保证其效果。</p>
-<p>　　实验数据的细节在DownSampleDemo的ViewController.swift的注释中，这里直接告诉大家结论：</p>
-<ol>
-<li>xcode面板上所显示的内存占用并不可靠，在很多case下应用占用的内存要比其上显示的多的多（特别是对于iOS11.4的设备）。但可以用来粗略的查看内存占用，如果这里超了很多，那肯定是超了</li>
-<li>可以使用instruments的allocation和memory debugging的memgraph+命令行分析这两种方式来观测内存的占用</li>
-<li>第一种方式下jpg载入后的内存分为imageIO和IOkit两部分，png载入只有imageIO部分，jpg内存占用比png要少不少</li>
-<li>第二种方式的数据在xcode面板上失真，通过另外两种方式可以看到它非常不靠谱。内存消耗甚至可能超过第一种。</li>
-<li>第三种方式的内存占用非常完美，严格的遵守了公式计算出来的大小（跟downsample后的尺寸有关），内存占用在CG raster data中。</li>
-<li><strong>memgraph命令： vmmap –summary xxx.memgraph</strong></li>
-<li><strong>allocation我们只需要看VM allocation栏目下的dirty size和swapped size，这里需要手动的打开snapshot才能看到该栏目的数据,并且需要适当的重复多次运行才能保证结果的正确性</strong></li>
-</ol>
-<p><strong>VMTracker运行截图：</strong></p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/6/23/1642b31a1e330470?imageView2/0/w/1280/h/960/ignore-error/1" alt=""></p>
-<p><strong>memgraph命令结果截图：</strong></p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/6/23/1642b31a1ca8fc80?imageView2/0/w/1280/h/960/ignore-error/1" alt=""></p>
-<h3 id="最后，来自苹果的最佳实践-强烈推荐大家使用downsample来处理大图！"><a href="#最后，来自苹果的最佳实践-强烈推荐大家使用downsample来处理大图！" class="headerlink" title="最后，来自苹果的最佳实践:强烈推荐大家使用downsample来处理大图！"></a>最后，来自苹果的最佳实践:强烈推荐大家使用downsample来处理大图！</h3>
-          
+          原文链接
+预备知识　　我们的对比主要关注内存的占用情况。对比的格式是jpg和png这两种最广泛使用的格式，分别代表了有损压缩和无损压缩；关于它们的特点和介绍，可以参考郭耀源的这篇文章：移动端图片格式调研。我们可以看到，在iOS设备上它们的解码消耗在一个量级，速度较快。　　WWDC2018苹果重点关注
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/25/iOS中的图片使用方式、内存对比和最佳实践-转/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -1795,99 +1759,28 @@
       
         
           
-            <p><strong>原文链接：<a href="https://blog.indoorway.com/swift-vs-kotlin-the-differences-in-memory-management-860828edf8" target="_blank" rel="noopener">blog.indoorway.com</a></strong></p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Swift_VS_Kotlin.png" alt="Illustration by [Wojciech Tymicki](https://dribbble.com/Panweb)"></p>
-<p><center> 由 <a href="https://dribbble.com/Panweb" target="_blank" rel="noopener">Wojciech Tymicki</a> 设计 </center></p>
-<p>在我的上一篇文章中，我提到了 Swift 和 Kotlin 的内存管理，这是你可以在<a href="https://blog.indoorway.com/swift-v-kotlin-the-differences-that-matter-50b2d393f526" target="_blank" rel="noopener">这里</a>找到它。我曾把这个问题留给你一个人，现在我想要补偿你为你描述他们之间的不同。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/very_sorry.gif" alt=""></p>
-<h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a><em>垃圾收集</em></h1><p>　　　　　<br>垃圾收集过程，也称为自动内存管理，是动态分配的内存的自动回收，<a href="http://www.memorymanagement.org/glossary/g.html#term-garbage-collection" target="_blank" rel="noopener">这里有解释</a>。也许你还不太明白？好的，那我用一些图片和一个简化的例子来解释一下。</p>
-<p>这是你的内存堆（不要把它与分配给你应用的<a href="http://net informations.com/faq/net/stack-heap.htm" target="_blank" rel="noopener">stack</a>）混淆。它现在是空的。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Empty_memory_heap.png" alt="1) 空内存堆"></p>
-<p><center> 1) 空内存堆 </center></p>
-<p>当App启动的时候，它在运行时将内存分配给对象(引用类型)。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/Memory_heap_with_allocated.png" alt="2) 具有分配内存块的内存堆(蓝色矩形)"></p>
-<p><center> 2) 具有分配内存块的内存堆(蓝色矩形) </center></p>
-<p>过了一段时间，一些对象可以进行垃圾收集，然后从内存堆中删除。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/removed_from_the_memory_heap.png" alt="3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象"></p>
-<p><center> 3) 深蓝色矩形表示有资格进行垃圾收集的对象，然后从内存堆中删除这些对象 </center></p>
-<p>当一个对象没有被引用时，就会成为垃圾收集的最佳候选者。例如，你有一个 TODO 应用程序，有一个任务列表屏幕和一个任务细节屏幕。首先，应用程序分配内存，以便在启动时显示任务列表。当用户点击列表上的一个条目时，将显示详情页面。对于这个操作，你的应用程序动态地分配额外的内存到堆。当用户关闭任务细节页面时，应该删除与之相关的所有对象。原因很简单。你没有无限的记忆，你必须重新获得它。这就是为什么系统删除不可访问的对象。好处是显而易见的，毫无疑问。这意味着程序员不负责删除未使用的对象。与 C、C++ 不同，Kotlin 和 Swift 都实现了这一过程的自动化。所以，如果我们有这个免费的功能，一切都神奇地发生了，你应该关心它吗？是的，你应该这样做，因为这并不意味着你不能犯错。此外，这些知识还可以让你编写更好的应用程序，使其运行更加顺畅。如果你想成为一名优秀的 Android 或 iOS 开发人员，你应该精通内存管理。</p>
-<p>尽管 Swift 和 Kotlin 让程序员从为应用程序释放内存的任务中解脱出来，但它们的方式不同。我将尽可能简单地描述这个高级主题，我不会过于关注细节，因为我想让大家都能理解这篇文章。对于那些想了解更多的人，我留下了一些参考资料。让我们先从 Kotlin 开始。</p>
-<h1 id="Kotlin-的内存管理-Android"><a href="#Kotlin-的内存管理-Android" class="headerlink" title="Kotlin 的内存管理 (Android)"></a><em>Kotlin 的内存管理 (Android)</em></h1><p>　　　<br>Android 使用最常见的垃圾收集类型，即使用 CMS算法 跟踪垃圾收集。CMS 表示并发的标记清除。对于我们的需求，你可以忽略“C”字母。更重要的是理解基本的标记和清除算法是如何工作的。</p>
-<p>第一步是定义垃圾收集根。它们可以是静态变量、活动线程（例如 Android 中的 UI 线程），或者其他在<a href="https://developer.android.com/studio/profile/am-memory#treeroot" target="_blank" rel="noopener">这里列出的</a>。完成此操作后，GC将开始 <strong>标记阶段</strong> 。为此，GC 遍历整个对象树。每个创建的对象都有一个标记位，默认设置为0。当一个对象在标记阶段被访问时，它的标记位被设置为1 —— 这意味着它是可用的。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/reachable.png" alt=""></p>
-<p>在上面的图片中，这个阶段后保持灰色的对象是不可访问的，因此我们的App不再需要它们了。但是，在你进一步讨论之前，请再看一看这幅画。你注意到那些互相指向的对象了吗？iOS 开发者称它们为引用周期。这个问题在 Android 世界中并不存在。当没有到 GC根 的路径时，将删除“循环”。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/self_five.gif" alt=""></p>
-<p>另一个值得一提的标志阶段是它的隐性成本。你应该熟悉 <strong>全局停顿</strong> 这个词。在每个收集周期之前，GC 暂停我们的应用程序，以防止在遍历对象树时分配新对象。暂停持续时间取决于可访问对象的数量。对象的总数或堆大小并不重要。这就是为什么创建许多“活着的”不必要的对象是痛苦的 —— 例如，在循环中自动装箱。GC 在内存堆几乎满时启动进程。因此，当你创建许多不必要的对象时，你会更快地填充内存堆，这反过来又会生成更多的 GC循环 和更多的帧丢失，因为每次暂停都会占用应用程序的时间。</p>
-<p>现在，我们来谈谈移除。为了不造成任何浪费，GC 将运行下一阶段 —— <strong>清理</strong> 。在这种情况下，GC 将搜索内存堆，以查找所有带有标记位的对象，设置为0。在最后一步中，删除它们，并将所有可访问对象的标记位重置为0，就这么简单。然而，这种解决方案有一个缺点，它可能导致内存堆碎片化。这意味着你的堆可能有相当多的空间(空闲内存)，但是这个空间被划分为小块。因此，当尝试将一个 2MB 的对象分配到4MB的空闲内存时，可能会遇到麻烦。为什么？因为，最大的一个块可能不足以容纳 2MB。这就是为什么 Android 使用一个名为 <em>Compact</em> 的改进版本。<em>Compact</em> 变体还有一个附加步骤。在扫描阶段幸存的对象将被移动到内存堆的开始 —— 检查图片。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/check_the_picture.png" alt=""></p>
-<p>天下没有免费的午餐。这加剧了 GC暂停。</p>
-<p>这就是 Android 的内存管理。当然，我没有涵盖所有方面。例如，我跳过了堆生成主题。如果你想了解这个问题，请点击<a href="http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html" target="_blank" rel="noopener">这里</a>，并查看 <em>The Generational Garbage Collection Process</em> 章节。</p>
-<p>好了，现在是 Swift 的出场时间了。</p>
-<h1 id="Swift-的内存管理-iOS"><a href="#Swift-的内存管理-iOS" class="headerlink" title="Swift 的内存管理 (iOS)"></a><em>Swift 的内存管理 (iOS)</em></h1><p>　　　<br>Swift 使用一种简单的垃圾收集机制。它叫做 ARC（<strong>自动引用计数</strong>）。这种方法基于跟踪其他对象持有的对象的强引用计数。类的每个新创建实例都存储额外的信息 —— 引用计数器。无论何时将对象分配给属性、变量或常量(对其进行强引用)，都要增加引用计数器的值。在该值不等于0之前，你的对象是安全的，不能被释放。但是当引用计数器变为0时，对象将立即被回收*，没有任何暂停，也不会启动GC收集周期。与跟踪垃圾收集类型相比，这是一个很大的优势。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/tracing_garbage_collection_type.gif" alt=""></p>
-<p>好吧，我应该把星号（上一段话中出现的*）放在“立即”旁边。我这样做是因为你可以在<a href="https://www.quora.com/Why-doesnt-Apple-Swift-adopt-the-memory-management-method-of-garbage-collection-like-Java-uses" target="_blank" rel="noopener">互联网上找到一些信息</a>，这是内存管理的神话之一。我鼓励你去看看这个有趣的讨论 :)</p>
-<p>当然，还有另一方面 —— 之前提到的引用周期。首先，让我们看看如何创建一个 <strong>引用循环</strong> ，以及 iOS开发人员 需要做些什么来避免内存泄漏。让我们考虑两个类似的类：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> dog: <span class="type">Dog</span>?</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> owner: <span class="type">Person</span>?</span><br><span class="line"></span><br><span class="line">    <span class="keyword">init</span>(name: <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这两个类都有一个名字和一个可选的财产 —— 狗、狗主人，因为一个人可能并不总是有一只狗，狗也不一定属于某个人 —— 因为狗可能并不总是有主人的，这实在令人伤感 :(</p>
-<p>下一个代码片段创建每个类的实例，同时将引用计数设置为1:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> joe: <span class="type">Person</span>? = <span class="type">Person</span>(name: <span class="string">"Joe"</span>)</span><br><span class="line"><span class="keyword">var</span> lassie: <span class="type">Dog</span>? = <span class="type">Dog</span>(name: <span class="string">"Lassie"</span>)</span><br></pre></td></tr></table></figure>
-<p><em>Joe</em> 和 <em>Lassie</em> 分别强引用了 Person 和 Dog 实例。到目前为止还好。如果将 <em>nil</em> 赋给 <em>joe</em> 变量，则回收内存，因为对 Person 实例不再有强引用。</p>
-<p>要创建一个强引用循环，只需将两个实例链接在一起。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">joe!.dog = lassie</span><br><span class="line">lassie!.owner = joe</span><br></pre></td></tr></table></figure>
-<p>请注意引用计数。它们的值都是2。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/notice_the_references_counters.png" alt=""></p>
-<p>现在，如果你破坏了 <em>joe</em> 和 <em>lassie</em> 持有的强引用，则引用计数器不会重置为0。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">joe = <span class="literal">nil</span></span><br><span class="line">lassie = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/retain_cycle.png" alt=""></p>
-<p>由于引用循环，ARC 无法释放实例。</p>
-<p>当然，这是有解决办法的。要解决强引用循环，应该使用 <em>weak</em> 或 <em>unowned</em> 进行修饰。你只需在变量之前添加一个特殊的关键字，然后当你将一个对象赋给该变量时，对象的引用计数器就不会被提升。</p>
-<h1 id="内存管理如何影响我们的编码方式"><a href="#内存管理如何影响我们的编码方式" class="headerlink" title="内存管理如何影响我们的编码方式"></a><em>内存管理如何影响我们的编码方式</em></h1><p>　　　<br>坦白地说，当我开始学习 iOS 的时候，我认为 iOS 和 Android 中的 <em>weak</em>、<em>reference</em> 功能也是一样的。当然，这不是真的。</p>
-<p>在iOS中使用 <em>weak</em> 关键字是正常的，当你广泛使用 <em>代理模式</em> 时，甚至可以认为是良好的实践。谈到 Android，这并不是一种常见的实践，除非你仍然使用异步任务（我希望不是）。</p>
-<p>由于循环引用，iOS开发人员 有时需要编写比 Android开发人员 更复杂的代码。最好的例子是使用 <em>closure</em> (Swift)和 <em>lambda</em> (Android)。</p>
-<p>Android:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</span><br><span class="line">    var actionAfterUpdate: (() -&gt; Unit) = &#123;&#125; <span class="comment">// Lambda</span></span><br><span class="line"></span><br><span class="line"><span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do work</span></span><br><span class="line">        actionAfterUpdate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>iOS:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> actionAfterUpdate: () -&gt; <span class="type">Void</span> = &#123;&#125; <span class="comment">// Closure</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// do work</span></span><br><span class="line">        actionAfterUpdate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当 <em>update()</em> 方法完成时，<em>actionAfterUpdate</em> 将执行。现在，让我们检查如何使用 <em>UpdateHandler.</em></p>
-<p>Android:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</span><br><span class="line">    val updateHandler = UpdateHandler()</span><br><span class="line"></span><br><span class="line">    <span class="function">fun <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do important thing</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">fun <span class="title">timeToUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        updateHandler.actionAfterUpdate = &#123; doSomething() &#125;</span><br><span class="line">        updateHandler.update()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>iOS:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> updateHandler = <span class="type">UpdateHandler</span>()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// do important thing</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">timeToUpdate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        updateHandler.actionAfterUpdate = &#123; <span class="keyword">self</span>.doSomething() &#125;</span><br><span class="line">        updateHandler.update()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如你所见，使用 <em>UpdateHandler</em> 很简单。在调用 <em>update()</em> 方法之前，你要声明更新之后应该发生什么。一切似乎都很好，但是… iOS 版本的代码有一个严重的错误… 它很糟糕，因为它会导致内存泄漏。是什么问题?它是 <em>actionAfterUpdate</em> 闭包，它保存对 <em>self</em> 的强引用。 <em>Self</em> 是一个 <em>MyObject</em> 实例，它还包含对 <em>UpdateHandler</em> 的引用 —— 一个retain的循环!为了防止内存泄漏，我们必须在闭包中使用 <em>weak</em> (或 <em>unowned</em> 在本例中这就足够了)关键字:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">updateHandler.actionAfterUpdate = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span> <span class="keyword">self</span>?.doSomething()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另一个问题是 <em>已失效的侦听器问题</em> 。简而言之，当你注册一个侦听器并忘记取消注册时，会导致应用程序中的内存泄漏。</p>
-<p>我修改了以前使用的示例，以更详细地讨论这个尚未解决的复杂问题。</p>
-<p>现在，<em>UpdateHandler</em> 是一个单例，它的寿命和我们的应用程序的寿命一样长。</p>
-<p>Android:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">object UpdateHandler &#123;</span><br><span class="line">    <span class="keyword">private</span> var listener: OnUpdateListener? = <span class="keyword">null</span></span><br><span class="line"></span><br><span class="line">    <span class="function">fun <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.listener = listener</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">fun <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do work</span></span><br><span class="line">        listener?.onUpdateComplete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OnUpdateListener</span> </span>&#123;</span><br><span class="line">    <span class="function">fun <span class="title">onUpdateComplete</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>iOS:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = <span class="type">UpdateHandler</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">registerUpdateListener</span><span class="params">(listener: OnUpdateListener)</span></span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.listener = listener</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">update</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// do work</span></span><br><span class="line">        listener?.onUpdateComplete()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">OnUpdateListener</span>: <span class="title">class</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以及 <em>MyObject</em> 类中的一些修改。</p>
-<p>Android:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class MyObject: OnUpdateListener &#123;</span><br><span class="line">    <span class="function">override fun <span class="title">onUpdateComplete</span><span class="params">()</span> </span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>iOS:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObject</span>: <span class="title">OnUpdateListener</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">onUpdateComplete</span><span class="params">()</span></span> &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如你所见，<em>MyObject</em> 是一个更新侦听器，当更新完成时它会执行一定的操作。</p>
-<p>为了强调这个问题，我将代码放在一个地方，每当你退出并重新启动应用程序时，它都会被调用。但是，请注意，这个示例在产品代码中没有意义。这只是一个简单的例子 :)</p>
-<p>Android ( <em>MainActivity.kt</em> ):<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">override fun <span class="title">onStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onStart()</span><br><span class="line">    val myObject = MyObject()</span><br><span class="line">    UpdateHandler.registerUpdateListener(myObject)</span><br><span class="line">    UpdateHandler.update()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>iOS ( <em>AppDelegate.swift</em> ):<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">applicationWillEnterForeground</span><span class="params">(<span class="number">_</span> application: UIApplication)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> myObject = <span class="type">MyObject</span>()</span><br><span class="line">    <span class="type">UpdateHandler</span>.sharedInstance.registerUpdateListener(listener: myObject)</span><br><span class="line">    <span class="type">UpdateHandler</span>.sharedInstance.update()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>因此，我创建了一个 <em>myObject</em> ，并将其作为更新侦听器传递给 <em>UpdateHandler</em> ，并调用 <em>update()</em> 方法。<em>update()</em> 方法通知侦听器完成的工作，调用 <em>onUpdateComplete()</em> 方法（ <em>onUpdateComplete()</em> 方法在 <em>MyObject</em> 中执行）。</p>
-<p><em>MyObject</em> 类的实例应该在 <em>onStart()</em> 或 <em>applicationWillEnterForegorund(…)</em> 完成时删除，因为在方法中创建的对象只要方法时间执行，并且在该时间之后成为垃圾收集的条件，就可以存活。但是在本例中，<em>UpdateHandler</em> 将永远保存对 <em>MyObject</em> 实例的引用。如何管理潜在的内存泄漏？可能所有iOS开发人员都会说：“使用弱引用!””，他们是对的。在 <em>UpdateHandler</em> 类中使用带有 <em>listener</em> 变量的 <em>weak</em> 关键字可以达到这个目的:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> listener: <span class="type">OnUpdateListener</span>? = <span class="literal">nil</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>正因为如此，ARC 才能为我们移除监听器。</p>
-<p>但是Android呢？一些 Android 开发人员也会说同样的话 —— “把监听器当作弱引用!” 好吧，这可能会有帮助…… 有时…… 但我确信这是你问题的开始 :) 你应该知道，每当你拿回叫作为弱引用时，小猫就会死去。</p>
-<p><img src="https://github.com/a1049145827/Resources/raw/master/kitten.gif" alt=""></p>
-<p><em>WeakReference</em> 使对象适合进行垃圾收集。所以它可能比你想象的要早。唯一的解决方案是添加 <em>unregisterUpdateListener</em> 方法并手动清除 <em>listener</em> 。</p>
-<h1 id="相似但不相同"><a href="#相似但不相同" class="headerlink" title="相似但不相同"></a><em>相似但不相同</em></h1><p>　　　<br>祝贺每一个坚持到底的人！</p>
-<p>如果这篇文章能帮助人们理解这个复杂的话题，我会很高兴。我试着像你五岁一样，一步一步地解释。貌似两种类似的编程语言隐藏了引擎盖下的许多不同之处，我希望你们能意识到这一点。有时Android的常见做法在iOS上不起作用，反之亦然。从一个平台移动到另一个平台并不像看上去的那么简单。</p>
-<h1 id="再次编辑-19-06-2018"><a href="#再次编辑-19-06-2018" class="headerlink" title="再次编辑 (19.06.2018)"></a>再次编辑 (19.06.2018)</h1><p>　　　<br>请注意，我说的是：</p>
-<p>“Swift 使用一个简单的 GC 收集机制”</p>
-<p>是我不好，这可能是误导。我不是说 ARC 是一个垃圾收集器，我的意思是垃圾收集是一个处理垃圾（未使用的对象）的过程。ARC 是处理废物的另一种机制或技术。我也没有提到 Android 上的垃圾收集过程在你的应用运行时是有效的，而 ARC 是在编译时提供的。</p>
-<p>谢谢你们的反馈，也感谢你们关注这里的内容。</p>
+          原文链接：blog.indoorway.com
 
-          
+ 由 Wojciech Tymicki 设计 
+在我的上一篇文章中，我提到了 Swift 和 Kotlin 的内存管理，这是你可以在这里找到它。我曾把这个问题留给你一个人，现在我想要补偿你为你描述他们之间的不同。
+
+垃圾收集　　　　　垃圾收集过程，也
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/21/Swift-VS-Kotlin之内存管理（译）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -2072,32 +1965,24 @@
       
         
           
-            <p>cocoapods中使用了 use_frameworks! 选项后， 就需要我们的组件或第三方库支持dynamic Framework，否则就无法集成。我们自己的组件尚且好处理，将Xcode项目配置文件修改一下，或者建一个新的dynamic Framework工程，将代码拉进来，重新编译导出一下。</p>
-<p>但是第三方库我们应该如何处理呢？很多时候我们拿到的只是编译过后的 .a 或者是 .framework 文件，</p>
-<p>静态库打包成Framework</p>
-<p>注意：仅作为把第三方库打包成Framework，不做额外封装工作。</p>
-<p>步骤1</p>
-<p>创建Framework工程</p>
-<p>Git：<a href="https://gitlab.qianbaocard.org/iOS-modules/function/lib" target="_blank" rel="noopener">https://gitlab.qianbaocard.org/iOS-modules/function/lib</a><br>命名：WL+第三方库名<br>步骤2</p>
-<p>部署代码</p>
-<p> 把第三方代码拖进工程Lib文件夹<br> 把所有头文件拖进工程Headers文件夹<br>步骤3</p>
-<p>工程配置</p>
-<p>General-&gt;DeploymentTarget-&gt;8.0<br>BuildSettings-&gt;OtherLinkerFlags-&gt;-ObjC<br>添加三方库所需要的配置<br>BuildPhases-&gt;Headers-&gt;把所有头文件拖进Public<br>步骤4</p>
-<p>添加脚本（用于合并Release，iphonesimulator）<br>BuildPhases-&gt;RunScript</p>
-<p>if [ “${ACTION}” = “build” ]<br>then<br>INSTALL_DIR=${SRCROOT}/Products/${PROJECT_NAME}.framework<br>DEVICE_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework<br>SIMULATOR_DIR=${BUILD_ROOT}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework<br>if [ -d “${INSTALL_DIR}” ]<br>then<br>rm -rf “${INSTALL_DIR}”<br>fi<br>mkdir -p “${INSTALL_DIR}”<br>cp -R “${DEVICE_DIR}/“ “${INSTALL_DIR}/“</p>
-<p>#ditto “${DEVICE_DIR}/Headers” “${INSTALL_DIR}/Headers”<br>lipo -create “${DEVICE_DIR}/${PROJECT_NAME}” “${SIMULATOR_DIR}/${PROJECT_NAME}” -output “${INSTALL_DIR}/${PROJECT_NAME}”</p>
-<p>#open “${DEVICE_DIR}”</p>
-<p>#open “${SRCROOT}/Products”<br>fi<br>步骤5</p>
-<p>编译</p>
-<p>选择模拟器运行一遍<br>选择设备运行一遍<br>步骤6</p>
-<p>编写Pod</p>
-<p>s.vendored_frameworks=’Products/*.framework’<br>完成</p>
+          cocoapods中使用了 use_frameworks! 选项后， 就需要我们的组件或第三方库支持dynamic Framework，否则就无法集成。我们自己的组件尚且好处理，将Xcode项目配置文件修改一下，或者建一个新的dynamic Framework工程，将代码拉进来，重新编译导出一下。
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/02/Xcode-将静态库转为动态库、多个库合并/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
@@ -2270,18 +2155,24 @@
       
         
           
-            <p>苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。</p>
-<p>二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在使用过程中一直饱受占用性能和频繁闪退的困扰，究其原因，很大程度上是其自动执行导致频繁编译、执行，导致设备CPU占用率过高。而且写代码的时候，即使代码没有完成，Xcode也会自动编译，弹出各种报错提示，体验非常不好。</p>
-<p>所以我决定关掉自动执行，在写好代码之后才手动去触发，设置完成后就会发现，整个世界都变得美好了 ^_^ 。</p>
-<h3 id="如何关闭Playground的自动执行"><a href="#如何关闭Playground的自动执行" class="headerlink" title="如何关闭Playground的自动执行"></a>如何关闭Playground的自动执行</h3><p>第一步：打开底部状态栏<br><img src="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_statusbar.jpg" alt="Xcode_playground_statusbar"></p>
-<p>第二步：长按底部状态栏的执行按钮，在弹出的菜单中选择手动执行<br><img src="https://github.com/a1049145827/Resources/raw/master/Xcode_playground_manuallyRun.jpg" alt="Xcode_playground_manuallyRun"></p>
-<p>简单两步，告别烦恼（手动滑稽）。</p>
-
-          
+          苹果在发布了Swift开发语言之后，加入了终端执行这种类似于Python的特性，并且在Xcode中添加了Playground这个工具。
+二者都为开发者提供便利，我更加偏爱Playground（代码提示、支持UI展示，侧边栏执行结果提示），诸多特性确实很强大。但是由于不足够成熟，Playground在
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/02/Xcode-Swift-Playground-关闭自动执行/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
 
+    <div>
+    
+    </div>
+    
     
 
     
