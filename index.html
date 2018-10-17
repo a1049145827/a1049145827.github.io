@@ -277,6 +277,197 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/InjectionIII：iOS开发必备效率神器-所见即所得/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/17/InjectionIII：iOS开发必备效率神器-所见即所得/" itemprop="url">InjectionIII：iOS开发必备效率神器-所见即所得</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-17T12:58:15+08:00">
+                2018-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-App.png" alt="img"></p>
+<hr>
+
+<p>今天 Mac App Store 提示软件更新，一看是 InjectionIII 更新了，而且这次更新是针对 Xcode10 的支持，赶紧上车更新一波。</p>
+<p>由于这次更新后，配合 Xcode10 使用方式和之前的版本略有差异，所以在此介绍一下。</p>
+<p>在介绍这款工具之前首先得感谢 John Holdsworth 开发者给我们iOS开发提供了帮助。假如你的项目每次 build 时间在半分钟以上，或者你电脑的配置不高，导致每次运行项目都很慢，那么你完全可以尝试一下这个神一样的工具！（提示：目前好像只支持在模拟器上使用，而且支持 OC 和 Swift）</p>
+<p><strong>废话不多说，先来欣赏一下功能演示：</strong></p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/injection-demo.gif" alt="img"></p>
+<p>真正的所见即所得！</p>
+<p>另外，在使用 Injection 的时候需要先打开 Injection App，然后通过 Open Project 菜单按钮打开 Xcode工程所在的目录让 Injection 监控其文件变化，然后就可以打开 Xcode，将 Injection 启动代码加入 AppDelegate，把项目跑在模拟器上，接下来就可以愉快的编码啦（<strong>具体的流程，下面也会提到</strong>）。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-menu.png" alt="img"></p>
+<h3 id="提高开发效率"><a href="#提高开发效率" class="headerlink" title="提高开发效率"></a>提高开发效率</h3><p>每当我写页面或者改 bug 的时候难免需要即时查看运行效果，有时候改了一个 label 的字体，或者背景颜色，或者 frame，都需要重新运行，但是现在不需要了，只要按下 command + S，保存当前文件。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-normal.png" alt="img"></p>
+<p>文件保存的时候可以看到 Injection 的图标会变成绿色，这个时候表示正在执行热更新，过一会儿颜色又变成红色（这个过程可能很快，仔细观察可以看到）。</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-worked.png" alt="img"></p>
+<p>变成红色以后热修复就执行完了，可以查看效果了，官方表示保存以后可以立马看到效果，实际上是在修改的代码执行的时候会看到变化，所以往往都是退出这个页面，重新进入，如果是列表需要上下滑动才能看到效果。</p>
+<h3 id="使用十分便捷"><a href="#使用十分便捷" class="headerlink" title="使用十分便捷"></a>使用十分便捷</h3><p>这个是 Mac 上的一款 App，可以在 Mac App Store 中搜索 Injection，那款免费的 App 就是，现在已经更新到第三个版本，点击安装</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII.png" alt="img"></p>
+<p>找到你的 AppDelegate 实现文件，上代码：</p>
+<p>OC 版</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="meta">#if DEBUG</span></span><br><span class="line">    [[<span class="built_in">NSBundle</span> bundleWithPath:<span class="string">@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle"</span>] load];</span><br><span class="line">    <span class="comment">// [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/macOSInjection10.bundle"] load];</span></span><br><span class="line">    <span class="comment">// [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/tvOSInjection10.bundle"] load];</span></span><br><span class="line">    <span class="meta">#endif</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Swift 版</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    #<span class="keyword">if</span> <span class="type">DEBUG</span></span><br><span class="line">    <span class="type">Bundle</span>(path: <span class="string">"/Applications/InjectionIII.app/Contents/Resources/iOSInjection10.bundle"</span>)?.load()</span><br><span class="line">    <span class="comment">// Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/macOSInjection10.bundle")?.load()</span></span><br><span class="line">    <span class="comment">// Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/tvOSInjection10.bundle")?.load()</span></span><br><span class="line">    #endif</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意这里路径不要写错，建议复制粘贴</strong>。</p>
+<p>打开你的项目，command + R，运行项目，（如果你之前没有通过 Injection 添加项目路径，这个时候会弹出来一个选择框，让你选择项目的根路径。）</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/tools/injection/InjectionIII-dir.png" alt="img"></p>
+<p>选择好当前项目的根目录，然后点击 <code>Select Project Directory</code> 按钮。</p>
+<p>这个时候程序会继续运行，注意看 Xcode 控制台的 log日志。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Injection connected, watching /Users/bruce/Desktop/Demo/Timer<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
+<p>看到这句话的时候说明已经OK了，可以开始你的表演了！</p>
+<p>在每次修改保存文件以后都会看到下面这句话 👇，如果没有看到效果，请排查下面列举的原因。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*** Compiling /Users/bruce/Desktop/Demo/Timer/Timer/ViewController.m ***</span><br><span class="line">Loading .dylib - Ignore any duplicate <span class="keyword">class</span> warning...</span><br><span class="line">objc[<span class="number">63140</span>]: Class ViewController is implemented <span class="keyword">in</span> both /Users/bruce/Library/Developer/CoreSimulator/Devices/<span class="number">0461</span>F832<span class="number">-5260</span><span class="number">-420</span>C<span class="number">-982</span>D-ACD9AB847B36/data/Containers/Bundle/Application/<span class="number">36</span>D73A95-DAD4<span class="number">-4</span>CD6<span class="number">-8</span>C12-EADFF552C83C/Timer.app/Timer (<span class="number">0x107e986a0</span>) and /Users/bruce/Library/Containers/com.johnholdsworth.InjectionIII/Data/eval101.dylib (<span class="number">0x125d356f8</span>). One of the two will be used. Which one is undefined.</span><br></pre></td></tr></table></figure>
+<p>下面说一下有时候没有看到效果的原因。</p>
+<h3 id="没有看到效果的问题的总结"><a href="#没有看到效果的问题的总结" class="headerlink" title="没有看到效果的问题的总结"></a>没有看到效果的问题的总结</h3><ul>
+<li>确认 Injection 监听的目录和 Xcode 项目目录是否一致。</li>
+<li>再看下有没有保存成功，也就是针筒的颜色由绿色变成红色。</li>
+<li>确认上面那句话有没有打印，也就是说有没有真的运行这个工具。</li>
+<li>如果修改的是 cell / item 上面的内容，需要上下滚动才能看到效果。</li>
+<li>如果修改的是一个普通页面的内容，最好是退出这个页面，再进入这个页面。</li>
+<li>确认 Xcode 的版本和启动时添加的代码是否匹配，Xcode10 需要 <code>iOSInjection10.bundle</code> 才能生效。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/探究-ReactiveObjC（RAC）-中-rac-signalForSelector-的实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1900,161 +2091,6 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/访问GitHub很慢的问题解决/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/31/访问GitHub很慢的问题解决/" itemprop="url">访问GitHub很慢的问题解决</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T15:35:00+08:00">
-                2018-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近办公网络从 GitHub 上拉取代码速度巨慢，很多时候都是直接连接错误。</p>
-<p>百度了一下，说是 Github 的某些域名的 DNS 解析被污染了。解决方案就是挂代理（VPN），或者直接修改 hosts，绕过 DNS 解析。</p>
-<p>我用了 VPN 之后，还是会出现访问很慢的问题，于是试了第二种方案，目前是可以正常访问的。</p>
-<p>具体方法就是将下面代码直接写入 hosts 文件里。Mac 的 hosts 文件路径为 /etc/hosts 。Windows 的是 C:\Windows\System32\Drivers\etc\hosts 。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GitHub Start</span></span><br><span class="line">192.30.253.112 github.com</span><br><span class="line">192.30.253.119 gist.github.com</span><br><span class="line">151.101.100.133 assets-cdn.github.com</span><br><span class="line">151.101.100.133 raw.githubusercontent.com</span><br><span class="line">151.101.100.133 gist.githubusercontent.com</span><br><span class="line">151.101.100.133 cloud.githubusercontent.com</span><br><span class="line">151.101.100.133 camo.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars0.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars1.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars2.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars3.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars4.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars5.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars6.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars7.githubusercontent.com</span><br><span class="line">151.101.100.133 avatars8.githubusercontent.com</span><br><span class="line"><span class="comment"># GitHub End</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2104,7 +2140,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2217,7 +2253,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共61.6k字</span>
+  <span class="post-count">博客全站共62.7k字</span>
 </div>
 
 
