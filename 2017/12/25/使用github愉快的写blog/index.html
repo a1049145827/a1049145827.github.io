@@ -370,18 +370,18 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>看到各路大神都有blog，心中仰慕不已。本菜鸟混迹于开发行业数年，也一直想有个自己的博客，偶然发现可以用github搭建博客，又不需要买云主机，此等好事，怎能不凑一下热闹。</p>
 <h4 id="hexo搭建"><a href="#hexo搭建" class="headerlink" title="hexo搭建"></a>hexo搭建</h4><p>网上相关的教程很多，这里不再详细说明，只做引路。</p>
-<p><a href="https://www.jianshu.com/p/e99ed60390a8" target="_blank" rel="external">20分钟用hexo搭建github博客</a></p>
-<p><a href="https://www.appinn.com/markdown/" target="_blank" rel="external">学习Markdown语法</a></p>
-<h4 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new <span class="string">"xxx"</span></div></pre></td></tr></table></figure>
+<p><a href="https://www.jianshu.com/p/e99ed60390a8" target="_blank" rel="noopener">20分钟用hexo搭建github博客</a></p>
+<p><a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">学习Markdown语法</a></p>
+<h4 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"xxx"</span></span><br></pre></td></tr></table></figure>
 <h4 id="添加图片"><a href="#添加图片" class="headerlink" title="添加图片"></a>添加图片</h4><p>因为Markdown里面只能写文字，所以添加图片是采用链接的方式，我们就需要先将图片传到网上，然后获取链接才能进行展示。<br>上传图片的方式有很多，这里我们用github上传的方式，正好blog也在github上面，方便管理。</p>
 <p>在github新建一个仓库，通过git将图片上传至仓库。在github页面打开该仓库，找到图片对应的元素，点击预览，然后右键复制链接即可拿到图像地址。如下图：</p>
 <p><img src="https://github.com/a1049145827/Resources/blob/master/github_img_link.jpg?raw=true" alt="获取github图片链接"></p>
 <p>在Markdown文章中引用图片：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![图片描述](https://github.com/xxx.jpg)</div></pre></td></tr></table></figure>
-<h4 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述](https://github.com/xxx.jpg)</span><br></pre></td></tr></table></figure>
+<h4 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 <p>执行上面命令就能起一个本地服务，然后在浏览器就能打开并预览博客内容啦。</p>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d -g</div></pre></td></tr></table></figure>
-<h4 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h4><p>如果我们留意一下创建新文章（hexo new “”）时结尾的日志，类似下面的文字<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO  Created: ~/xxx/<span class="built_in">source</span>/_posts/xxx.md</div></pre></td></tr></table></figure></p>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<h4 id="删除文章"><a href="#删除文章" class="headerlink" title="删除文章"></a>删除文章</h4><p>如果我们留意一下创建新文章（hexo new “”）时结尾的日志，类似下面的文字<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/xxx/<span class="built_in">source</span>/_posts/xxx.md</span><br></pre></td></tr></table></figure></p>
 <p>就不难发现创建文章的操作为我们生成了一个md文件，在source/_posts/路径下。如果想要删除一篇文章，只需要将对应的md文件删除，然后重新部署，即可看到博客列表中已经将其移除。</p>
 
       
@@ -521,7 +521,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -650,7 +650,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

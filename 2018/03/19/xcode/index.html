@@ -345,13 +345,13 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>有这样的需求：<br>类似于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GLOBAL_STR(@&quot;请继续添加&quot;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLOBAL_STR(@&quot;请继续添加&quot;);</span><br></pre></td></tr></table></figure>
 <p>这样的代码，需要批量修改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GLOBAL_STR(@&quot;请继续添加&quot;, nil);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLOBAL_STR(@&quot;请继续添加&quot;, nil);</span><br></pre></td></tr></table></figure>
 <p>这里使用普通的查找替换不能够达到目的，需要用到正则表达式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GLOBAL_STR(.*);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLOBAL_STR(.*);</span><br></pre></td></tr></table></figure>
 <p>替换文本的正则：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GLOBAL_STR(.$1,nil);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GLOBAL_STR(.$1,nil);</span><br></pre></td></tr></table></figure>
 <p><strong>xcode的查找替换选项里面选择regular expression，使用上面的正则即可解决问题。</strong></p>
 
       
@@ -482,7 +482,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -595,7 +595,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

@@ -445,7 +445,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <h3 id="一些零碎的注意点"><a href="#一些零碎的注意点" class="headerlink" title="一些零碎的注意点"></a>一些零碎的注意点</h3><p>注意：<strong>控制器</strong>的 -dealloc 默认是在<strong>主线程</strong>执行的。</p>
 <p>注意：performSelector:withObject:afterDelay: 的本质是往Runloop中添加定时器，子线程默认没有启动RunLoop。</p>
 <p>注意：一个线程一旦执行完任务就会销毁，再也无法执行其他任务。例如下面的 NSThread 对象，一旦 block 里的代码执行完，这个 thread 将不再执行任何代码。如果需要线程保活，就要用到 RunLoop。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithBlock:^&#123;</div><div class="line">    <span class="comment">// 默认情况下，执行完这个打印，该线程就会销毁</span></div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"abc"</span>);</div><div class="line">&#125;];</div><div class="line">[thread start];</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc] initWithBlock:^&#123;</span><br><span class="line">    <span class="comment">// 默认情况下，执行完这个打印，该线程就会销毁</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"abc"</span>);</span><br><span class="line">&#125;];</span><br><span class="line">[thread start];</span><br></pre></td></tr></table></figure>
 <p>注意：主线程几乎所有的事情都交给了 RunLoop 去做，比如 UI 刷新，点击事件的处理，performSelector 等。</p>
 
       
@@ -585,7 +585,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -714,7 +714,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

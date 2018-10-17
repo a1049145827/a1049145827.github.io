@@ -366,25 +366,25 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
       
 
       
-        <p>在用逆向神器<a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="external">MonkeyDev</a>的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。</p>
+        <p>在用逆向神器<a href="https://github.com/AloneMonkey/MonkeyDev/wiki" target="_blank" rel="noopener">MonkeyDev</a>的时候，需要先安装theos，我的电脑之前是安装了的，不过今天想要更新，手残把原来装的环境破坏了，这无奈只好再重新安装一遍了。</p>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>Xcode，相信大家已经都安装了，这里我的Xcode的版本是Xcode9.3</p>
 <p>安装theos需要先装上ldid</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ldid</div></pre></td></tr></table></figure>
-<p>如果还没安装brew，这里有传送门<a href="https://brew.sh/" target="_blank" rel="external">Homebrew</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ldid</span><br></pre></td></tr></table></figure>
+<p>如果还没安装brew，这里有传送门<a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a></p>
 <p>然后安装Perl模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew install xz</div><div class="line">sudo cpan IO::Compress::Lzma</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install xz</span><br><span class="line">sudo cpan IO::Compress::Lzma</span><br></pre></td></tr></table></figure>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>我是直接安装在根目录下，因为我的MonkeyDev是直接安装在根目录下的 /opt</p>
 <p>先切换到root权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo su</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
 <p>从git上clone下来theos</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> THEOS=/opt/theos</div><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/theos/theos.git <span class="variable">$THEOS</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> THEOS=/opt/theos</span><br><span class="line">git <span class="built_in">clone</span> --recursive https://github.com/theos/theos.git <span class="variable">$THEOS</span></span><br></pre></td></tr></table></figure>
 <p>日后要跟新的话，直接切换到root用户，然后执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$THEOS</span>/bin/update-theos</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$THEOS</span>/bin/update-theos</span><br></pre></td></tr></table></figure>
 <p>更改所有权为自己</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R $(id -u):$(id -g) <span class="variable">$THEOS</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R $(id -u):$(id -g) <span class="variable">$THEOS</span></span><br></pre></td></tr></table></figure>
 <p>为了可以使用make故障诊断，还需要安装Ghostbin的ghost sh脚本。（不安装应该也可以）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl https://ghostbin.com/ghost.sh -o <span class="variable">$THEOS</span>/bin/ghost</div><div class="line">chmod +x <span class="variable">$THEOS</span>/bin/ghost</div></pre></td></tr></table></figure>
-<p>由于机器环境不一致可能导致安装失败，大家还可以参照<a href="https://github.com/theos/theos/wiki/Installation" target="_blank" rel="external">theos官方文档</a>尝试一下。PS，我是参照官方文档安装无效，改用文中的方法安装的（MonkeyDev的推荐安装到根目录下的）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://ghostbin.com/ghost.sh -o <span class="variable">$THEOS</span>/bin/ghost</span><br><span class="line">chmod +x <span class="variable">$THEOS</span>/bin/ghost</span><br></pre></td></tr></table></figure>
+<p>由于机器环境不一致可能导致安装失败，大家还可以参照<a href="https://github.com/theos/theos/wiki/Installation" target="_blank" rel="noopener">theos官方文档</a>尝试一下。PS，我是参照官方文档安装无效，改用文中的方法安装的（MonkeyDev的推荐安装到根目录下的）。</p>
 
       
     </div>
@@ -523,7 +523,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -652,7 +652,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

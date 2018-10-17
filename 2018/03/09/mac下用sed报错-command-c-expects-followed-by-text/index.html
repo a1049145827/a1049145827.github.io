@@ -367,11 +367,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>一条很简单的替换文本的命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div><div class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></div><div class="line"><span class="comment"># 也有可能报错 invalid command code W</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</span><br><span class="line"><span class="comment"># 执行时报错command c expects \ followed by text</span></span><br><span class="line"><span class="comment"># 也有可能报错 invalid command code W</span></span><br></pre></td></tr></table></figure>
 <p>但是同样的命令在服务器上是可以正确执行的，看了mac下的man sed，里面-i选项中的解释：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Edit files <span class="keyword">in</span>-place, saving backups with the specified extension.</div><div class="line"></div><div class="line">If a zero-length extension is given, no backup will be saved.  It</div><div class="line"></div><div class="line">is not recommended to give a zero-length extension when <span class="keyword">in</span>-place</div><div class="line"></div><div class="line">editing files, as you risk corruption or partial content <span class="keyword">in</span> situ-</div><div class="line"></div><div class="line">ations <span class="built_in">where</span> disk space is exhausted, etc.</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Edit files <span class="keyword">in</span>-place, saving backups with the specified extension.</span><br><span class="line"></span><br><span class="line">If a zero-length extension is given, no backup will be saved.  It</span><br><span class="line"></span><br><span class="line">is not recommended to give a zero-length extension when <span class="keyword">in</span>-place</span><br><span class="line"></span><br><span class="line">editing files, as you risk corruption or partial content <span class="keyword">in</span> situ-</span><br><span class="line"></span><br><span class="line">ations <span class="built_in">where</span> disk space is exhausted, etc.</span><br></pre></td></tr></table></figure>
 <p>大概的意思就是说用-i的选项时mac会进行强制备份，所以你必须给出一个后缀名进行备份，如果你不想进行备份，直接用空字符即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sed -i <span class="string">''</span> <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">''</span> <span class="string">'s/www.a.cn/www.b.com/g'</span> common.sh</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -501,7 +501,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -614,7 +614,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

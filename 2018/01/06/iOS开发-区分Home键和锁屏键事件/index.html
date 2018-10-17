@@ -369,7 +369,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         <p>在AppDelegate文件中，由于锁屏和Home键两种操作，我们接到的事件是一样的，</p>
 <p>但有时候业务需要我们区分这两个事件，这里我们就介绍一个方法，锁屏事件和Home键事件在App接到的回调方法是一样的，我们无法区分。不过有一个很明显的特征我们还是可以利用的：锁屏时设备屏幕亮度为0。</p>
 <p>具体检测代码如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</div><div class="line"></div><div class="line">    <span class="built_in">CGFloat</span> screenBrightness = [[<span class="built_in">UIScreen</span> mainScreen] brightness];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (screenBrightness &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="comment">// Home事件</span></div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Home事件"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 锁屏事件</span></div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"锁屏事件"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> screenBrightness = [[<span class="built_in">UIScreen</span> mainScreen] brightness];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (screenBrightness &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Home事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Home事件"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 锁屏事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"锁屏事件"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是App进入前台的时候无论是按锁屏键还是按home键，检测到屏幕亮度都不为0，就不能再通过屏幕亮度来判断状态了。<br>好在我们进后台的时候记录了是锁屏还是Home键的事件，回来的时候肯定是成对的（也有特殊情况，用户在锁屏界面进入其他App，然后按home键，这时候我们的应用就是处于后台运行，下次进入是点击图标或者双击Home键从多任务管理进入）。</p>
 <p>一个小功能坑也不少，所以还是做好立项前的评估吧^_^</p>
 
@@ -501,7 +501,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -614,7 +614,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

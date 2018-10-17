@@ -367,11 +367,11 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>如果我们需要在项目中需要使用NSClassFromString()方法来获取一个Swift语言写的类。那么直接按照原来OC的方式来写：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</span><br></pre></td></tr></table></figure>
 <p>编译器是不会报错的，不过运行的时候就懵逼了，cls是空的。</p>
 <p><strong>Swift跟OC的差别还是蛮大的，由字符串转为类型的时候 如果类型是自定义的 需要在类型字符串前边加上你的项目的名字！（个人认为应该是Target名）</strong></p>
 <p>正确写法:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 拼接类名字</span></div><div class="line"><span class="keyword">let</span> className = <span class="string">"xxx."</span> + <span class="string">"your className"</span> <span class="comment">// xxx替换为你的Xcode工程里对应Target的名字，而且中间还要加一点 "."</span></div><div class="line"></div><div class="line"><span class="comment">// 然后使用NSClassFromString()获取Class</span></div><div class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拼接类名字</span></span><br><span class="line"><span class="keyword">let</span> className = <span class="string">"xxx."</span> + <span class="string">"your className"</span> <span class="comment">// xxx替换为你的Xcode工程里对应Target的名字，而且中间还要加一点 "."</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后使用NSClassFromString()获取Class</span></span><br><span class="line"><span class="keyword">let</span> cls = <span class="type">NSClassFromString</span>(className)!</span><br></pre></td></tr></table></figure>
 <p><strong>同理，在OC中调用NSClassFromString()方法获取Swift语言写的类，也需要用在类名前加上工程名（个人认为应该是Target名）和路径连接符 “.” 。</strong></p>
 
       
@@ -502,7 +502,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -615,7 +615,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

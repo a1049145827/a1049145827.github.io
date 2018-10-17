@@ -367,9 +367,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
       
         <p>iOS开发过程中，我们常常会遇到URL编解码的问题，一般的情况下，我们是这么处理的</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> str = <span class="string">"!*'();:@&amp;=+$,/?%#[]MD5"</span></div><div class="line"><span class="keyword">let</span> encodeStr = str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)</div><div class="line"></div><div class="line"><span class="built_in">print</span>(encodeStr ?? <span class="string">""</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"!*'();:@&amp;=+$,/?%#[]MD5"</span></span><br><span class="line"><span class="keyword">let</span> encodeStr = str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(encodeStr ?? <span class="string">""</span>)</span><br></pre></td></tr></table></figure>
 <p>但是有些情况下，我们需要对某些特定的字符做编码处理，例如 “!*’();:” 等，我们就需要做如下处理：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> str = <span class="string">"!*'();:@&amp;=+$,/?%#[]MD5"</span></div><div class="line"><span class="keyword">let</span> encodeStr = <span class="type">CFURLCreateStringByAddingPercentEscapes</span>(<span class="literal">nil</span>, str <span class="keyword">as</span> <span class="type">CFString</span>, <span class="literal">nil</span>, <span class="string">"!*'();:@&amp;=+$,/?%#[]"</span> <span class="keyword">as</span> <span class="type">CFString</span>, <span class="type">CFStringBuiltInEncodings</span>.<span class="type">UTF8</span>.rawValue)</div><div class="line"></div><div class="line"><span class="built_in">print</span>(encodeStr ?? <span class="string">""</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"!*'();:@&amp;=+$,/?%#[]MD5"</span></span><br><span class="line"><span class="keyword">let</span> encodeStr = <span class="type">CFURLCreateStringByAddingPercentEscapes</span>(<span class="literal">nil</span>, str <span class="keyword">as</span> <span class="type">CFString</span>, <span class="literal">nil</span>, <span class="string">"!*'();:@&amp;=+$,/?%#[]"</span> <span class="keyword">as</span> <span class="type">CFString</span>, <span class="type">CFStringBuiltInEncodings</span>.<span class="type">UTF8</span>.rawValue)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(encodeStr ?? <span class="string">""</span>)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -499,7 +499,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -612,7 +612,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 

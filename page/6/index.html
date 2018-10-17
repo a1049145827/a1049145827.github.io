@@ -277,6 +277,166 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/09/iOS开发-Xcode一个工程引入另一个工程/" itemprop="url">iOS开发 Xcode一个工程引入另一个工程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T10:37:38+08:00">
+                2018-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近总被测试同学提一些闪退的bug，问题是很难复现，初步统计概率不到5%，但是有闪退问题，作为一个开发寝食难安啊。怎么办，先试着复现看看情况吧，于是疯狂各种点，终于复现一次，然后看看堆栈信息，是在一个Framework里面结构体内调用到了野指针，由于之前打印的Log都没有针对性，所以也没获取到什么有用的信息。</p>
+<p>要想精确定位问题所在，还是要改一下代码，增加一些Log，并且可以查看调用栈信息。</p>
+<p>如两个工程A和B,a依赖b工程生成的静态库，但如果想在a中调试b的代码，就需要将b工程引入，以下为操作步骤：</p>
+<ol>
+<li>将b工程拷贝到a工程目录下，（当然也可以不拷贝，不过为了后面方便填写路径）；</li>
+<li>ctrl+右键点击a工程的工程文件名，然后add files to “xx”, 将b工程的.xcodeprj文件添加进来（注意只需要添加.xcodeprj文件，其他文件不需要添加）；</li>
+<li>选择a工程target，点击build setting选项，右上角搜索Header Search找到Header Search Paths双击，在弹出框里点有下角的+号，添加导入工程的路径，右侧选项选recursive(递归查找文件)；</li>
+<li>因为a工程要包含b工程的静态库/动态库，假如b工程生成的静态库为bb.a, 在a工程的General选项中，拉到link frameworks and libraries项，点击+号，将b工程下的bb.a静态库添加上（.Framework同理）。</li>
+</ol>
+<p>当然，这一切都是要有源代码为前提，否则只能另想办法了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+    
+    <div>
+    
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/09/iOS开发-Archive时自动增加build版本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -373,7 +533,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             <p>我们做开发时，每次打包App最好是把build的版本号调一下，这样测试测出bug，方便确认软件具体版本，防止装了个老版本，然后提出一堆的bug，那对开发人员简直就是噩梦。但是每次都手动去改好麻烦，而且还很容易忘记，如果能有个脚本替我们完成这件事，每次打包的时候自动更新build版本，那该多好。</p>
 <p>网上搜索一下，还确实有这种功能的脚本，拿来改一改，就可以放在工程里用了。</p>
 <p>点击工程文件 -&gt; build Phuases -&gt; add Run Script, 并将下面代码拷贝进去</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</div><div class="line">buildNumber=$(($buildNumber + <span class="number">1</span>))</div><div class="line">git_version=$(/usr/bin/git log --oneline --no-notes <span class="number">-1</span> | /usr/bin/cut -d<span class="string">" "</span> -f1)</div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></div><div class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :ScmVersion $git_version"</span> <span class="string">"$INFOPLIST_FILE"</span></div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">buildNumber=$(/usr/libexec/PlistBuddy -c <span class="string">"Print CFBundleVersion"</span> <span class="string">"$INFOPLIST_FILE"</span>)</span><br><span class="line">buildNumber=$(($buildNumber + <span class="number">1</span>))</span><br><span class="line">git_version=$(/usr/bin/git log --oneline --no-notes <span class="number">-1</span> | /usr/bin/cut -d<span class="string">" "</span> -f1)</span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion $buildNumber"</span> <span class="string">"$INFOPLIST_FILE"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :ScmVersion $git_version"</span> <span class="string">"$INFOPLIST_FILE"</span></span><br></pre></td></tr></table></figure>
 <p>其中有两行（第3、4行）是将当前代码的git版本号后六位写进info.plist文件，方便日后查bug，不需要的话可以直接移除。<br>最后最好不要不要忘记勾选 run script only when installing, 否则每次运行都增加build版本，之后这个号码可能会很大，而且容易冲突。</p>
 <p>如果再配上自动化持续集成，那就完美了。</p>
 
@@ -529,7 +689,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             <p>在AppDelegate文件中，由于锁屏和Home键两种操作，我们接到的事件是一样的，</p>
 <p>但有时候业务需要我们区分这两个事件，这里我们就介绍一个方法，锁屏事件和Home键事件在App接到的回调方法是一样的，我们无法区分。不过有一个很明显的特征我们还是可以利用的：锁屏时设备屏幕亮度为0。</p>
 <p>具体检测代码如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</div><div class="line"></div><div class="line">    <span class="built_in">CGFloat</span> screenBrightness = [[<span class="built_in">UIScreen</span> mainScreen] brightness];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (screenBrightness &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="comment">// Home事件</span></div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Home事件"</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 锁屏事件</span></div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"锁屏事件"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)applicationWillResignActive:(<span class="built_in">UIApplication</span> *)application &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CGFloat</span> screenBrightness = [[<span class="built_in">UIScreen</span> mainScreen] brightness];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (screenBrightness &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Home事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Home事件"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 锁屏事件</span></span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"锁屏事件"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是App进入前台的时候无论是按锁屏键还是按home键，检测到屏幕亮度都不为0，就不能再通过屏幕亮度来判断状态了。<br>好在我们进后台的时候记录了是锁屏还是Home键的事件，回来的时候肯定是成对的（也有特殊情况，用户在锁屏界面进入其他App，然后按home键，这时候我们的应用就是处于后台运行，下次进入是点击图标或者双击Home键从多任务管理进入）。</p>
 <p>一个小功能坑也不少，所以还是做好立项前的评估吧^_^</p>
 
@@ -836,9 +996,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         
           
             <p>最近发现项目里设备型号没有匹配最近新发布的几款设备，于是去官网查看了下。</p>
-<h4 id="所有设备型号对应的官网地址："><a href="#所有设备型号对应的官网地址：" class="headerlink" title="所有设备型号对应的官网地址："></a>所有设备型号对应的官网地址：</h4><p>官网地址： <a href="https://www.theiphonewiki.com/wiki/Models" target="_blank" rel="external">https://www.theiphonewiki.com/wiki/Models</a></p>
+<h4 id="所有设备型号对应的官网地址："><a href="#所有设备型号对应的官网地址：" class="headerlink" title="所有设备型号对应的官网地址："></a>所有设备型号对应的官网地址：</h4><p>官网地址： <a href="https://www.theiphonewiki.com/wiki/Models" target="_blank" rel="noopener">https://www.theiphonewiki.com/wiki/Models</a></p>
 <p>来点更加暴力的，直接上代码：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 记得导入头文件</span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 获取具体的设备型号（不包含Watch和TV）</span></div><div class="line">+ (<span class="built_in">NSString</span> *)deviceModel &#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> mib[<span class="number">2</span>];</div><div class="line">    size_t len;</div><div class="line">    <span class="keyword">char</span> *machine;</div><div class="line"></div><div class="line">    mib[<span class="number">0</span>] = <span class="built_in">CTL_HW</span>;</div><div class="line">    mib[<span class="number">1</span>] = HW_MACHINE;</div><div class="line">    sysctl(mib, <span class="number">2</span>, <span class="literal">NULL</span>, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line">    machine = malloc(len);</div><div class="line">    sysctl(mib, <span class="number">2</span>, machine, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="built_in">NSString</span> *platform = [<span class="built_in">NSString</span> stringWithCString:machine encoding:<span class="built_in">NSASCIIStringEncoding</span>];</div><div class="line">    free(machine);</div><div class="line">    </div><div class="line">    <span class="comment">// MARK: - Simulator</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"i386"</span>] || [platform isEqualToString:<span class="string">@"x86_64"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSimulator"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPhone</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone2G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone2,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3GS"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone3,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone4,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4S"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5c"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone6,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone6,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5s"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6s"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6sPlus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone8,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSE"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone7"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone7Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,5"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8Plus"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,6"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhoneX"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPod Touch</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod2,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch2G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod3,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch3G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod4,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch4G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod5,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch5G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod7,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch6G"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,1"</span>] || [platform isEqualToString:<span class="string">@"iPad2,2"</span>] || [platform isEqualToString:<span class="string">@"iPad2,3"</span>] || [platform isEqualToString:<span class="string">@"iPad2,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,1"</span>] || [platform isEqualToString:<span class="string">@"iPad3,2"</span>] || [platform isEqualToString:<span class="string">@"iPad3,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad3"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,4"</span>] || [platform isEqualToString:<span class="string">@"iPad3,5"</span>] || [platform isEqualToString:<span class="string">@"iPad3,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad4"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad Air</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,1"</span>] || [platform isEqualToString:<span class="string">@"iPad4,2"</span>] || [platform isEqualToString:<span class="string">@"iPad4,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,3"</span>] || [platform isEqualToString:<span class="string">@"iPad5,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,11"</span>] || [platform isEqualToString:<span class="string">@"iPad6,12"</span>])    <span class="keyword">return</span> <span class="string">@"iPadAir3"</span>;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad Pro</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,7"</span>] || [platform isEqualToString:<span class="string">@"iPad6,8"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,3"</span>] || [platform isEqualToString:<span class="string">@"iPad6,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro iPad 9.7-inch"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,1"</span>] || [platform isEqualToString:<span class="string">@"iPad7,2"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch 2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,3"</span>] || [platform isEqualToString:<span class="string">@"iPad7,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 10.5-inch"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="comment">// MARK: - iPad mini</span></div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,5"</span>] || [platform isEqualToString:<span class="string">@"iPad2,6"</span>] || [platform isEqualToString:<span class="string">@"iPad2,7"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini1G"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,4"</span>] || [platform isEqualToString:<span class="string">@"iPad4,5"</span>] || [platform isEqualToString:<span class="string">@"iPad4,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini2"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,7"</span>] || [platform isEqualToString:<span class="string">@"iPad4,8"</span>] || [platform isEqualToString:<span class="string">@"iPad4,9"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini3"</span>; &#125;</div><div class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,1"</span>] || [platform isEqualToString:<span class="string">@"iPad5,2"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini4"</span>; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> platform;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记得导入头文件</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;sys/sysctl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取具体的设备型号（不包含Watch和TV）</span></span><br><span class="line">+ (<span class="built_in">NSString</span> *)deviceModel &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mib[<span class="number">2</span>];</span><br><span class="line">    size_t len;</span><br><span class="line">    <span class="keyword">char</span> *machine;</span><br><span class="line"></span><br><span class="line">    mib[<span class="number">0</span>] = <span class="built_in">CTL_HW</span>;</span><br><span class="line">    mib[<span class="number">1</span>] = HW_MACHINE;</span><br><span class="line">    sysctl(mib, <span class="number">2</span>, <span class="literal">NULL</span>, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    machine = malloc(len);</span><br><span class="line">    sysctl(mib, <span class="number">2</span>, machine, &amp;len, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSString</span> *platform = [<span class="built_in">NSString</span> stringWithCString:machine encoding:<span class="built_in">NSASCIIStringEncoding</span>];</span><br><span class="line">    free(machine);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// MARK: - Simulator</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"i386"</span>] || [platform isEqualToString:<span class="string">@"x86_64"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSimulator"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPhone</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone2G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone1,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone2,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone3GS"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone3,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone3,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone4,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone4S"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone5,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone5,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5c"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone6,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone6,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone5s"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone7,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,1"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6s"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,2"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone6sPlus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone8,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone8,4"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhoneSE"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,3"</span>]) &#123; <span class="keyword">return</span> <span class="string">@"iPhone7"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone9,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone9,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone7Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,1"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,2"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,5"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhone8Plus"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPhone10,3"</span>] || [platform isEqualToString:<span class="string">@"iPhone10,6"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPhoneX"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPod Touch</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod2,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch2G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod3,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch3G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod4,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch4G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod5,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch5G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPod7,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPodTouch6G"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad1,1"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,1"</span>] || [platform isEqualToString:<span class="string">@"iPad2,2"</span>] || [platform isEqualToString:<span class="string">@"iPad2,3"</span>] || [platform isEqualToString:<span class="string">@"iPad2,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,1"</span>] || [platform isEqualToString:<span class="string">@"iPad3,2"</span>] || [platform isEqualToString:<span class="string">@"iPad3,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad3"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad3,4"</span>] || [platform isEqualToString:<span class="string">@"iPad3,5"</span>] || [platform isEqualToString:<span class="string">@"iPad3,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPad4"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad Air</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,1"</span>] || [platform isEqualToString:<span class="string">@"iPad4,2"</span>] || [platform isEqualToString:<span class="string">@"iPad4,3"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,3"</span>] || [platform isEqualToString:<span class="string">@"iPad5,4"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadAir2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,11"</span>] || [platform isEqualToString:<span class="string">@"iPad6,12"</span>])    <span class="keyword">return</span> <span class="string">@"iPadAir3"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad Pro</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,7"</span>] || [platform isEqualToString:<span class="string">@"iPad6,8"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad6,3"</span>] || [platform isEqualToString:<span class="string">@"iPad6,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro iPad 9.7-inch"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,1"</span>] || [platform isEqualToString:<span class="string">@"iPad7,2"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 12.9-inch 2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad7,3"</span>] || [platform isEqualToString:<span class="string">@"iPad7,4"</span>])   &#123; <span class="keyword">return</span> <span class="string">@"iPad Pro 10.5-inch"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// MARK: - iPad mini</span></span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad2,5"</span>] || [platform isEqualToString:<span class="string">@"iPad2,6"</span>] || [platform isEqualToString:<span class="string">@"iPad2,7"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini1G"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,4"</span>] || [platform isEqualToString:<span class="string">@"iPad4,5"</span>] || [platform isEqualToString:<span class="string">@"iPad4,6"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini2"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad4,7"</span>] || [platform isEqualToString:<span class="string">@"iPad4,8"</span>] || [platform isEqualToString:<span class="string">@"iPad4,9"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini3"</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> ([platform isEqualToString:<span class="string">@"iPad5,1"</span>] || [platform isEqualToString:<span class="string">@"iPad5,2"</span>])  &#123; <span class="keyword">return</span> <span class="string">@"iPadmini4"</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> platform;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -993,9 +1153,9 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 <p>但是每次导出文件还要连接电脑，好麻烦，于是幻想能无线传输该多好，测试同学发现问题，直接点击一键上传日志，然后。</p>
 <p>正好一直想用Swift做后端练练手，说干就干，加班走起。</p>
 <p>服务端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// create uploads dir to store files</span></div><div class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> fileDir.create()</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(error)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> code = <span class="number">400</span></div><div class="line"></div><div class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></div><div class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</div><div class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></div><div class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</div><div class="line">            ary.append([</div><div class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</div><div class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</div><div class="line">                ])</div><div class="line"></div><div class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// move file</span></div><div class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</div><div class="line">            <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</div><div class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</div><div class="line">                code = <span class="number">200</span></div><div class="line"></div><div class="line">            &#125; <span class="keyword">catch</span> &#123;</div><div class="line">                <span class="built_in">print</span>(error)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line"></div><div class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</div><div class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</div><div class="line"></div><div class="line">            <span class="type">Log</span>.info(message: strJson!)</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        <span class="keyword">try</span> response.setBody(json: dict)</div><div class="line">    &#125; <span class="keyword">catch</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    response.completed(status: .ok)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">uploadHandler</span><span class="params">(request: HTTPRequest, response: HTTPResponse)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create uploads dir to store files</span></span><br><span class="line">    <span class="keyword">let</span> fileDir = <span class="type">Dir</span>(<span class="type">Dir</span>.workingDir.path + <span class="string">"files"</span>)</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> fileDir.create()</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> code = <span class="number">400</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Grab the fileUploads array and see what's there</span></span><br><span class="line">    <span class="comment">// If this POST was not multi-part, then this array will be empty</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> uploads = request.postFileUploads, uploads.<span class="built_in">count</span> &gt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="comment">// Create an array of dictionaries which will show what was uploaded</span></span><br><span class="line">        <span class="keyword">var</span> ary = [[<span class="type">String</span>:<span class="type">Any</span>]]()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> upload <span class="keyword">in</span> uploads &#123;</span><br><span class="line">            ary.append([</span><br><span class="line">                <span class="string">"fieldName"</span>: upload.fieldName,</span><br><span class="line">                <span class="string">"fieldValue"</span>: upload.fieldValue</span><br><span class="line">                ])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> upload.tmpFileName.<span class="built_in">count</span> == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// move file</span></span><br><span class="line">            <span class="keyword">let</span> thisFile = <span class="type">File</span>(upload.tmpFileName)</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> <span class="number">_</span> = <span class="keyword">try</span> thisFile.moveTo(path: fileDir.path + upload.fieldName, overWrite: <span class="literal">true</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"upload file success: \(upload.fieldName)"</span>)</span><br><span class="line">                code = <span class="number">200</span></span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">                <span class="built_in">print</span>(error)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">JSONSerialization</span>.data(withJSONObject: ary, options: <span class="type">JSONSerialization</span>.<span class="type">WritingOptions</span>.prettyPrinted)</span><br><span class="line">            <span class="keyword">let</span> strJson = <span class="type">String</span>.<span class="keyword">init</span>(data: data, encoding: .utf8)</span><br><span class="line"></span><br><span class="line">            <span class="type">Log</span>.info(message: strJson!)</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            <span class="type">Log</span>.info(message: <span class="string">"\(error)"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> dict = [ <span class="string">"code"</span>: <span class="string">"\(code)"</span>, <span class="string">"msg"</span>: <span class="string">"success"</span> ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> response.setBody(json: dict)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"response error: \(error)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response.completed(status: .ok)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>客户端代码：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</div><div class="line"></div><div class="line">    kWeakSelf(<span class="keyword">self</span>);</div><div class="line"></div><div class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</div><div class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (fileName) &#123;</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</div><div class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</div><div class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</div><div class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</div><div class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</div><div class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</div><div class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</div><div class="line"></div><div class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</div><div class="line"></div><div class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</div><div class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</div><div class="line"></div><div class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</div><div class="line"></div><div class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</div><div class="line"></div><div class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (completeBlock) &#123;</div><div class="line">                completeBlock();</div><div class="line">            &#125;</div><div class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</div><div class="line"></div><div class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">- (void)uploadLogFilesToUrl:(<span class="type">NSString</span> *)url completeBlock:(void (^)(void))completeBlock &#123;</span><br><span class="line"></span><br><span class="line">    kWeakSelf(<span class="keyword">self</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">NSString</span> *path = <span class="keyword">self</span>.logPath;</span><br><span class="line">    <span class="type">NSString</span> *fileName = <span class="keyword">self</span>.logName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fileName) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">NSString</span> *filePath = [path stringByAppendingPathComponent:fileName];</span><br><span class="line">        <span class="type">NSDictionary</span> *tmpDic = [<span class="type">WVRAppModel</span> sharedInstance].commenParams;</span><br><span class="line">        <span class="type">NSMutableDictionary</span> *muDict = [<span class="type">NSMutableDictionary</span> dictionaryWithDictionary:tmpDic];</span><br><span class="line">        muDict[@<span class="string">"deviceId"</span>] = [<span class="type">WVRUserModel</span> sharedInstance].deviceId;</span><br><span class="line">        muDict[@<span class="string">"fileList"</span>] = <span class="keyword">self</span>.logList;</span><br><span class="line">        muDict[@<span class="string">"buildVer"</span>] = kBuildVersion;</span><br><span class="line">        muDict[@<span class="string">"deviceModel"</span>] = [<span class="type">WVRDeviceModel</span> deviceModel];</span><br><span class="line"></span><br><span class="line">        <span class="type">NSString</span> *logName = [<span class="type">NSString</span> stringWithFormat:@<span class="string">"%@_%@_%@"</span>, muDict[@<span class="string">"deviceModel"</span>], muDict[@<span class="string">"deviceId"</span>], [<span class="type">NSDate</span> chinaDate]];</span><br><span class="line"></span><br><span class="line">        <span class="type">AFHTTPSessionManager</span> *manager = [<span class="type">AFHTTPSessionManager</span> manager];</span><br><span class="line">        [manager <span class="type">POST</span>:url parameters:muDict constructingBodyWithBlock:^(id&lt;<span class="type">AFMultipartFormData</span>&gt;  _Nonnull formData) &#123;</span><br><span class="line"></span><br><span class="line">            [formData appendPartWithFileData:[<span class="type">NSData</span> dataWithContentsOfFile:filePath] name:logName fileName:fileName mimeType:@<span class="string">"text/plain"</span>];</span><br><span class="line"></span><br><span class="line">        &#125; progress:^(<span class="type">NSProgress</span> * _Nonnull uploadProgress) &#123;</span><br><span class="line"></span><br><span class="line">        &#125; success:^(<span class="type">NSURLSessionDataTask</span> * _Nonnull task, id  _Nullable responseObject) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (completeBlock) &#123;</span><br><span class="line">                completeBlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; failure:^(<span class="type">NSURLSessionDataTask</span> * _Nullable task, <span class="type">NSError</span> * _Nonnull error) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">NSLog</span>(@<span class="string">"%@"</span>, error);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>之后有空了，还可以研究以下使用Perfect后端进行APNS消息推送。这样有日志上传好之后，就可以收到消息推送，再也不用去翻看文件夹或者盯着控制台日志啦。</p>
 
           
@@ -1318,7 +1478,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
         
           
             <h4 id="macOS-High-Sierra-10-13-文件损坏-软件损坏"><a href="#macOS-High-Sierra-10-13-文件损坏-软件损坏" class="headerlink" title="macOS High Sierra 10.13 文件损坏  软件损坏"></a>macOS High Sierra 10.13 文件损坏  软件损坏</h4><p>日常使用Mac时，有时候会用到一些开源软件，或者经过二次封装的dmg文件，系统就会提示文件或软件损坏，无法打开。这就需要我们在设置中的安全性和隐私选项，选择“未知来源”，<br>不过为了提高安全性，masOS Sierra 10.12之后的版本没有未知来源选项了：</p>
-<p>需要在终端输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo spctl --master-disable</div></pre></td></tr></table></figure></p>
+<p>需要在终端输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo spctl --master-disable</span><br></pre></td></tr></table></figure></p>
 <p>就可以打开这些软件了。</p>
 
           
@@ -1473,8 +1633,8 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
             <p>之前被测试同学提了一个bug，说是我们的播放器进度条，缓冲进度和播放进度显示的图层不能完美重叠，看起来很奇怪，我查看了代码，两者都是Y轴居中显示的，而且之前使用一直没有出现问题（使用xib创建的）。于是我就对比这两者有什么区别，最后定位到问题。</p>
 <h4 id="改变slider的高度不能靠约束"><a href="#改变slider的高度不能靠约束" class="headerlink" title="改变slider的高度不能靠约束"></a>改变slider的高度不能靠约束</h4><p>在我们iOS开发中，很多时候都会用到很多控件自定义，但是个人觉得，能够在最短的时间里实现UI的方法还是尽量用系统的控件，因为既稳定又快捷。</p>
 <p>下面就是我们所要修改的地方，只需要创建一个继承UISlider的类，在里面重写一个方法，即可搞定。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></div><div class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="external">自定义UISlider Demo</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的</span></span><br><span class="line">- (<span class="built_in">CGRect</span>)trackRectForBounds:(<span class="built_in">CGRect</span>)bounds &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">21</span>, <span class="built_in">CGRectGetWidth</span>(<span class="keyword">self</span>.frame), <span class="number">8</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>附上Demo链接：<a href="https://github.com/a1049145827/WVRSlider.git" target="_blank" rel="noopener">自定义UISlider Demo</a></p>
 <p>当然还有几个其他的方法，改变slider其他属性的。大家可以去查阅相应的API。</p>
 <p>最终我在初始化Slider的代码中将对控件高度的约束那行代码注释掉，bug修复。</p>
 <p>时间长了，啥都容易忘，好记性不如烂笔头，还是把他们记下来比较靠谱。</p>
@@ -1630,175 +1790,10 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <p>由于自己喜欢瞎捣鼓，电脑上安装了不少软件，也存了不少资料，最近硬盘越来越吃紧了，今天电脑居然提示磁盘剩余空间不足的警告，赶紧看看有哪些东西可以删除。</p>
 <h4 id="大文件"><a href="#大文件" class="headerlink" title="大文件"></a>大文件</h4><p>用CleanMyMac等工具扫描可以查看硬盘上有哪些文件比较占用空间，暂时又用不到，删除之。</p>
-<h4 id="开发工具清理"><a href="#开发工具清理" class="headerlink" title="开发工具清理"></a>开发工具清理</h4><p><a href="http://www.cocoachina.com/ios/20170711/19814.html" target="_blank" rel="external">Xcode 清理存储空间</a></p>
+<h4 id="开发工具清理"><a href="#开发工具清理" class="headerlink" title="开发工具清理"></a>开发工具清理</h4><p><a href="http://www.cocoachina.com/ios/20170711/19814.html" target="_blank" rel="noopener">Xcode 清理存储空间</a></p>
 <p>不过开发工具没事还是尽量少折腾，出了问题，影响开发进度。</p>
 <h4 id="不常用的文件"><a href="#不常用的文件" class="headerlink" title="不常用的文件"></a>不常用的文件</h4><p>Finder里一般都记录了文件的创建和修改时间，并且支持按照时间排序，可以把不常用的文件清理掉。</p>
 <h4 id="做备份"><a href="#做备份" class="headerlink" title="做备份"></a>做备份</h4><p>Mac上的固态硬盘一般体积都不大，有条件的还是备一个移动硬盘，网盘也是不错的选择，或者土豪可以直接换个高配大硬盘的电脑也是极好的^_^</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-    
-    <div>
-    
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coder bruce">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bruce's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/27/记一次特殊需求实现/" itemprop="url">记一次特殊需求实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T20:48:19+08:00">
-                2017-12-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS开发/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">试看还剩：&lt;font color=<span class="meta">#d7bf48&gt;47<span class="meta-string">&lt;/font&gt;</span>秒，请返回竖屏购买观看券观看完整版<span class="meta-string">&lt;font color=#ff0000&gt;</span>(￥6)<span class="meta-string">&lt;/font&gt;</span>, #ffffff</span></div></pre></td></tr></table></figure>
-<p>无奈安卓一端已经调通，再让做出修改貌似不太人性化，只好硬着头皮一通百度Google，尝试各种方案，终于得到一些比较有用的信息。</p>
-<h4 id="大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><a href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType" class="headerlink" title="大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType"></a>大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</h4><p>字符串中很明显能看出，有通过HTML标签包装的痕迹，那么我们可以通过加载HTML标签文本的方式，将这个字符串转化为带属性的字符串。API如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)initWithData:(<span class="built_in">NSData</span> *)data options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentReadingOptionKey</span>, <span class="keyword">id</span>&gt; *)options documentAttributes:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentAttributeKey</span>, <span class="keyword">id</span>&gt; * __<span class="keyword">nullable</span> * __<span class="keyword">nullable</span>)dict error:(<span class="built_in">NSError</span> **)error <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_0, <span class="number">7</span>_0);</div></pre></td></tr></table></figure></p>
-<p>然后再对其属性做出调整，这就是设想的方案。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *toast = [<span class="built_in">NSString</span> stringWithUTF8String:tip];</div><div class="line"></div><div class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line"><span class="built_in">NSString</span> *colorStr = [<span class="built_in">NSString</span> stringWithUTF8String:toastColor];</div><div class="line"><span class="keyword">if</span> (colorStr &amp;&amp; [colorStr hasPrefix:<span class="string">@"#"</span>]) &#123;</div><div class="line">    colorStr = [colorStr stringByReplacingOccurrencesOfString:<span class="string">@"#"</span> withString:<span class="string">@"0x"</span>];</div><div class="line"></div><div class="line">    <span class="built_in">NSInteger</span> value = [IOSTools numberWithHexString:colorStr];</div><div class="line">    color = [<span class="built_in">UIColor</span> colorWithHex:value];</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (!color) &#123;</div><div class="line">    color = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableParagraphStyle</span> *style = [[<span class="built_in">NSMutableParagraphStyle</span> alloc] init];</div><div class="line">style.alignment = <span class="built_in">NSTextAlignmentCenter</span>;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableAttributedString</span> * attrStr = [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithData:[toast dataUsingEncoding:<span class="built_in">NSUnicodeStringEncoding</span>] options:@&#123; <span class="built_in">NSDocumentTypeDocumentAttribute</span>: <span class="built_in">NSHTMLTextDocumentType</span> &#125; documentAttributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">[attrStr addAttributes:@&#123; <span class="built_in">NSFontAttributeName</span>: Unity_toast_font, <span class="built_in">NSParagraphStyleAttributeName</span>: style &#125; range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length)];</div></pre></td></tr></table></figure>
-<p>将参数第二部分转化为UIColor</p>
-<h4 id="大招2-将一个代表16数的字符串-转成10进制数字"><a href="#大招2-将一个代表16数的字符串-转成10进制数字" class="headerlink" title="大招2 将一个代表16数的字符串 转成10进制数字"></a>大招2 将一个代表16数的字符串 转成10进制数字</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">NSInteger</span>)numberWithHexString:(<span class="built_in">NSString</span> *)hexString &#123;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *hexChar = [hexString cStringUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line"></div><div class="line">    <span class="keyword">int</span> hexNumber;</div><div class="line"></div><div class="line">    sscanf(hexChar, <span class="string">"%x"</span>, &amp;hexNumber);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (<span class="built_in">NSInteger</span>)hexNumber;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这一步其实是为了将字符串转化为颜色，方法有很多，能达到目的即可。</p>
-<p>弄好之后跑起来，看到最终效果后傻眼了：背景是黑色的，没有格式的字也会显示成黑色，这就导致大部分内容直接看不到。给无格式的部分加颜色属性又没有头绪，不知如何区分Rang，无奈搞成这样，倒不如不显示格式，全展示成白色算了。</p>
-<p>于是打开SourceTree，开始回退代码，回退过程中想着自己忙活了半天，就这么放弃了，总觉得不甘心，不自觉的去看代码，无意中进入NSAttributedString的类头文件，发现有这么一个API: <strong>enumerateAttribute:inRange:</strong>，出于职业的敏感，心里瞬间有点小兴奋，赶紧查找关于这个方法的说明，发现这个API可以枚举出AttributedString的Attributed并且能够判断条件，如果初始化的时候选择了NSAttributedString的子类NSMutableAttributedString，那么就可以实现对Attribute的修改，这下可好了，赶紧动手实验一番，run起来一看，成了！</p>
-<p>可能大家对block里面的代码有些疑问，问什么判断条件要那么写，其实也是有些无奈，经过调试，我发现没有被颜色标签包裹的文字，经过转换后默认的颜色是黑色（打印出来颜色描述为 0 0 0 1），但是[UIColor blackColor]的颜色描述为0 1，两者不能用==来判断，无奈只能取其白色色值来做匹配，也算是曲线救国吧。</p>
-<h4 id="大招3-enumerateAttribute-inRange-偷天换日"><a href="#大招3-enumerateAttribute-inRange-偷天换日" class="headerlink" title="大招3 enumerateAttribute:inRange: 偷天换日"></a>大招3 enumerateAttribute:inRange: 偷天换日</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSAttributedStringEnumerationOptions</span> opts = <span class="built_in">NSAttributedStringEnumerationLongestEffectiveRangeNotRequired</span>;</div><div class="line">[attrStr enumerateAttribute:<span class="built_in">NSForegroundColorAttributeName</span> inRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length) options:opts usingBlock:^(<span class="keyword">id</span>  _Nullable value, <span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line"></div><div class="line">    <span class="built_in">UIColor</span> *tmpColor = value;</div><div class="line">    <span class="built_in">CGFloat</span> white = <span class="number">1</span>;</div><div class="line">    <span class="built_in">CGFloat</span> alpha = <span class="number">0</span>;</div><div class="line">    [tmpColor getWhite:&amp;white alpha:&amp;alpha];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (white == <span class="number">0</span> &amp;&amp; alpha == <span class="number">1</span>) &#123;</div><div class="line">        [attrStr addAttributes:@&#123; <span class="built_in">NSForegroundColorAttributeName</span>: color &#125; range:range];</div><div class="line">    &#125;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>欣喜之余颇有感慨，做人做事确实不能轻易放弃，说不定哪个不经意的瞬间，就会有惊喜(<em>^__^</em>)</p>
-<p>如果你有更好的方案，欢迎沟通交流！</p>
 
           
         
@@ -1892,7 +1887,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2005,7 +2000,7 @@ color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canv
 
 <div class="theme-info">
   <!-- <div class="powered-by"></div> -->
-  <span class="post-count">博客全站共57.7k字</span>
+  <span class="post-count">博客全站共61.6k字</span>
 </div>
 
 
