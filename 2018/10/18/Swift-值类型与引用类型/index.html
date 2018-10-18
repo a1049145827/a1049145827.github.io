@@ -102,23 +102,25 @@
 
 
 
-  <meta name="description" content="hello world">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bruce&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/AE/index.html">
+  <meta name="description" content="作为 Swift 和 OC 区别较为明显的一个 case，这个话题往往容易被人提及，不过随着大家对它了解的深入，得到的结论也变得更加丰富，为了方便记忆，这里还是罗列一下 Swift 中值类型和引用类型之间的差异性。 　　二者之间存在差异，在 Swift 中，值类型，存放在栈区；引用类型，存放在堆区。 　　其实我之前的文章也有提到，Swift 中的基本类型都是 值类型 的，这也可以表现出官方的态">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 值类型与引用类型">
+<meta property="og:url" content="http://yoursite.com/2018/10/18/Swift-值类型与引用类型/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="hello world">
+<meta property="og:description" content="作为 Swift 和 OC 区别较为明显的一个 case，这个话题往往容易被人提及，不过随着大家对它了解的深入，得到的结论也变得更加丰富，为了方便记忆，这里还是罗列一下 Swift 中值类型和引用类型之间的差异性。 　　二者之间存在差异，在 Swift 中，值类型，存放在栈区；引用类型，存放在堆区。 　　其实我之前的文章也有提到，Swift 中的基本类型都是 值类型 的，这也可以表现出官方的态">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-18T04:24:45.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bruce&#39;s Blog">
-<meta name="twitter:description" content="hello world">
+<meta name="twitter:title" content="Swift 值类型与引用类型">
+<meta name="twitter:description" content="作为 Swift 和 OC 区别较为明显的一个 case，这个话题往往容易被人提及，不过随着大家对它了解的深入，得到的结论也变得更加丰富，为了方便记忆，这里还是罗列一下 Swift 中值类型和引用类型之间的差异性。 　　二者之间存在差异，在 Swift 中，值类型，存放在栈区；引用类型，存放在堆区。 　　其实我之前的文章也有提到，Swift 中的基本类型都是 值类型 的，这也可以表现出官方的态">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/AE/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/18/Swift-值类型与引用类型/"/>
 
 
 
@@ -128,7 +130,7 @@
   };
 </script>
 
-  <title>分类: AE | Bruce's Blog</title>
+  <title>Swift 值类型与引用类型 | Bruce's Blog</title>
   
 
 
@@ -175,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,76 +259,240 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>AE<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/18/Swift-值类型与引用类型/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="hello world">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/12/25/Adobe-After-Effects名为Checkbox的种类effect没有属性或方法/" itemprop="url">
-              
-                <span itemprop="name">Adobe After Effects名为Checkbox的种类effect没有属性或方法</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Swift 值类型与引用类型
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-25T12:22:57+08:00"
-              content="2017-12-25" >
-          12-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-18 10:20:10 / 修改时间：12:24:45" itemprop="dateCreated datePublished" datetime="2018-10-18T10:20:10+08:00">2018-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS开发/" itemprop="url" rel="index"><span itemprop="name">iOS开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/18/Swift-值类型与引用类型/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/18/Swift-值类型与引用类型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/18/Swift-值类型与引用类型/" class="leancloud_visitors" data-flag-title="Swift 值类型与引用类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　作为 Swift 和 OC 区别较为明显的一个 case，这个话题往往容易被人提及，不过随着大家对它了解的深入，得到的结论也变得更加丰富，为了方便记忆，这里还是罗列一下 Swift 中值类型和引用类型之间的差异性。</p>
+<p>　　二者之间存在差异，<strong>在 Swift 中，值类型，存放在栈区；引用类型，存放在堆区。</strong></p>
+<p>　　其实我之前的文章也有提到，Swift 中的基本类型都是 值类型 的，这也可以表现出官方的态度。<strong>所以，在 Swift 中，能用 struct 实现的功能，就不需要使用 class。</strong></p>
+<p>class 的如下功能是 struct 没有的：</p>
+<ul>
+<li>可以继承，子类可以使用父类的熟悉和方法。</li>
+<li>类型转换时可以在运行时检查和解释一个示例的类型。</li>
+<li>可以用 deinit 来释放资源。</li>
+<li>一个类对象可以被多次引用。</li>
+</ul>
+<p>struct 也有如下优势：</p>
+<ul>
+<li>结构较小，适用于复制操作，相比一个 class 的实例被多次引用，struct 更加安全。</li>
+<li>无需担心内存泄漏或者多线程冲突的问题。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>　　二者各有优劣，不过 Swift 中的 struct、enum 相对于 OC 已经有了极大的提升，个人还是推荐<strong>优先考虑</strong> struct，当遇到瓶颈时再选择用 class 来完成需求。</p>
 
       
     </div>
 
+    <div>
+    
+    <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 -------------</div>
+
+</div>
+    
+    </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/17/InjectionIII：iOS开发必备效率神器-所见即所得/" rel="next" title="InjectionIII：iOS开发必备效率神器-所见即所得">
+                <i class="fa fa-chevron-left"></i> InjectionIII：iOS开发必备效率神器-所见即所得
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -347,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -467,6 +642,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -604,6 +795,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
 
   
 
@@ -663,43 +858,35 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -719,9 +906,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });

@@ -4,6 +4,106 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2018/10/18/Swift-%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2018-10-18T04:24:45.896Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 值类型与引用类型</title>
+        <pubTime>2018-10-18T02:20:10.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/06/25/iOS%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%E3%80%81%E5%86%85%E5%AD%98%E5%AF%B9%E6%AF%94%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E8%BD%AC/</loc>
+    <lastmod>2018-10-18T02:13:59.772Z</lastmod>
+    <data>
+        <display>
+        <title>iOS中的图片使用方式、内存对比和最佳实践(转)</title>
+        <pubTime>2018-06-25T05:08:13.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/07/25/Swift%E5%AE%9E%E7%8E%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%92%E5%BA%8F%E6%8E%92%E5%88%97/</loc>
+    <lastmod>2018-10-18T02:06:31.707Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 实现字符串倒序排列，String 字符串反转</title>
+        <pubTime>2018-07-25T01:11:24.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/09/06/%E4%BD%BF%E7%94%A8Vapor3%E8%BF%9B%E8%A1%8CAPNS%E6%8E%A8%E9%80%81/</loc>
+    <lastmod>2018-10-18T02:02:16.509Z</lastmod>
+    <data>
+        <display>
+        <title>使用 Vapor3 进行 APNS 推送</title>
+        <pubTime>2018-09-06T07:46:37.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/10/16/Swift4-%E4%B8%AD%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6/</loc>
+    <lastmod>2018-10-18T02:00:35.439Z</lastmod>
+    <data>
+        <display>
+        <title>Swift 中的 值类型 写时复制</title>
+        <pubTime>2018-10-16T03:12:54.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2018/10/12/iOS%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94RunLoop/</loc>
     <lastmod>2018-10-17T09:16:57.672Z</lastmod>
     <data>
@@ -67,52 +167,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/10/16/Swift4-%E4%B8%AD%E7%9A%84-Struct%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6/</loc>
-    <lastmod>2018-10-16T07:50:49.045Z</lastmod>
-    <data>
-        <display>
-        <title>Swift4 中的 Struct 写时复制</title>
-        <pubTime>2018-10-16T03:12:54.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://a1049145827.github.io/2018/10/15/Swift-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E3%80%81%E5%8F%8C%E8%B7%AF%E5%BF%AB%E6%8E%92%E5%92%8C%E4%B8%89%E8%B7%AF%E5%BF%AB%E6%8E%92/</loc>
     <lastmod>2018-10-16T07:33:46.463Z</lastmod>
     <data>
         <display>
         <title>Swift-快速排序、双路快排和三路快排</title>
         <pubTime>2018-10-15T07:06:22.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/09/06/%E4%BD%BF%E7%94%A8Vapor3%E8%BF%9B%E8%A1%8CAPNS%E6%8E%A8%E9%80%81/</loc>
-    <lastmod>2018-09-06T08:31:43.979Z</lastmod>
-    <data>
-        <display>
-        <title>使用Vapor3进行APNS推送</title>
-        <pubTime>2018-09-06T07:46:37.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -227,26 +287,6 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/07/25/Swift%E5%AE%9E%E7%8E%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%92%E5%BA%8F%E6%8E%92%E5%88%97/</loc>
-    <lastmod>2018-07-30T03:56:06.272Z</lastmod>
-    <data>
-        <display>
-        <title>Swift实现字符串倒序排列，String字符串反转</title>
-        <pubTime>2018-07-25T01:11:24.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://a1049145827.github.io/2018/07/27/%E8%AE%B0%E4%B8%80%E6%AC%A1-IQKeyboardManager-%E5%A4%B1%E6%95%88%E5%AF%BC%E8%87%B4%E8%BE%93%E5%85%A5%E6%A1%86%E8%A2%AB%E9%94%AE%E7%9B%98%E9%81%AE%E6%8C%A1%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-07-27T01:38:48.284Z</lastmod>
     <data>
@@ -308,26 +348,6 @@
         <display>
         <title>Swift访问权限</title>
         <pubTime>2018-07-05T02:41:49.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://a1049145827.github.io/2018/06/25/iOS%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%E3%80%81%E5%86%85%E5%AD%98%E5%AF%B9%E6%AF%94%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E8%BD%AC/</loc>
-    <lastmod>2018-06-25T05:38:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS中的图片使用方式、内存对比和最佳实践(转)</title>
-        <pubTime>2018-06-25T05:08:13.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -1036,14 +1056,14 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
-        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
-        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
+        <title>iOS开发 区分Home键和锁屏键事件</title>
+        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
         
-        <tag>iOS, AFNetworking</tag>
+        <tag>iOS</tag>
          
          
            
@@ -1056,14 +1076,14 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/06/iOS%E5%BC%80%E5%8F%91-%E5%8C%BA%E5%88%86Home%E9%94%AE%E5%92%8C%E9%94%81%E5%B1%8F%E9%94%AE%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>https://a1049145827.github.io/2018/01/11/AFNetworking%E7%94%A8POST%E5%8F%91%E9%80%81%E7%9A%84parameters%E5%9C%A8Java%E5%90%8E%E5%8F%B0%E6%8E%A5%E6%94%B6%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-03-19T09:20:26.000Z</lastmod>
     <data>
         <display>
-        <title>iOS开发 区分Home键和锁屏键事件</title>
-        <pubTime>2018-01-06T10:45:13.000Z</pubTime>
+        <title>AFNetworking用POST发送的parameters在Java后台接收失败的问题</title>
+        <pubTime>2018-01-11T02:43:24.000Z</pubTime>
         
-        <tag>iOS</tag>
+        <tag>iOS, AFNetworking</tag>
          
          
            
