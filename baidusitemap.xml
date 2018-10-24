@@ -4,14 +4,14 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/03/13/Xcode%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%9E%E7%8E%B0Swift%E5%92%8COC%E6%B7%B7%E7%BC%96-%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-10-22T06:40:12.530Z</lastmod>
+    <loc>https://a1049145827.github.io/2018/10/24/%E5%9C%A8-Swift-%E9%87%8C%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2018-10-24T06:34:40.299Z</lastmod>
     <data>
         <display>
-        <title>Xcode工程项目中实现Swift和OC混编 相互引用</title>
-        <pubTime>2018-03-13T03:45:25.000Z</pubTime>
+        <title>在 Swift 里使用指针(转)</title>
+        <pubTime>2018-10-24T06:18:06.000Z</pubTime>
         
-        <tag>iOS, Swift</tag>
+        <tag>iOS</tag>
          
          
            
@@ -25,13 +25,33 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/18/Swift-%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2018-10-18T04:24:45.896Z</lastmod>
+    <lastmod>2018-10-24T06:30:50.929Z</lastmod>
     <data>
         <display>
         <title>Swift 值类型与引用类型</title>
         <pubTime>2018-10-18T02:20:10.000Z</pubTime>
         
         <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/03/13/Xcode%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%9E%E7%8E%B0Swift%E5%92%8COC%E6%B7%B7%E7%BC%96-%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/</loc>
+    <lastmod>2018-10-22T06:40:12.530Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode工程项目中实现Swift和OC混编 相互引用</title>
+        <pubTime>2018-03-13T03:45:25.000Z</pubTime>
+        
+        <tag>iOS, Swift</tag>
          
          
            
@@ -996,12 +1016,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
+    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS开发 Archive时自动增加build版本</title>
-        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
+        <title>iOS设备型号 2018最新统计</title>
+        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -1016,12 +1036,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
+    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS设备型号 2018最新统计</title>
-        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
+        <title>iOS开发 Archive时自动增加build版本</title>
+        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
         
         <tag>iOS</tag>
          

@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.2">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近在用 Swift 实现一个功能的时候，遇到有一些 API 中需要传递的参数是 UnsafePointer，也就是 C 语言指针在 Swift 中的转译。其用法颇具特色，这里有一篇博文讲的不错，特地转过来记一下，方便以后复习查看。 原文链接 传送门 　  最近做的事情需要在 Swift 里调用 C 函数，要学的东西很多，经历颇为曲折，遂作此笔记以备忘。 1. 什么是指针？参考这里： The 5-">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Swift 里使用指针(转)">
+<meta property="og:url" content="http://yoursite.com/2018/10/24/在-Swift-里使用指针/index.html">
+<meta property="og:site_name" content="Bruce&#39;s Blog">
+<meta property="og:description" content="最近在用 Swift 实现一个功能的时候，遇到有一些 API 中需要传递的参数是 UnsafePointer，也就是 C 语言指针在 Swift 中的转译。其用法颇具特色，这里有一篇博文讲的不错，特地转过来记一下，方便以后复习查看。 原文链接 传送门 　  最近做的事情需要在 Swift 里调用 C 函数，要学的东西很多，经历颇为曲折，遂作此笔记以备忘。 1. 什么是指针？参考这里： The 5-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/framework/swift/swift-memeryLayout.png">
+<meta property="og:updated_time" content="2018-10-24T06:34:40.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Swift 里使用指针(转)">
+<meta name="twitter:description" content="最近在用 Swift 实现一个功能的时候，遇到有一些 API 中需要传递的参数是 UnsafePointer，也就是 C 语言指针在 Swift 中的转译。其用法颇具特色，这里有一篇博文讲的不错，特地转过来记一下，方便以后复习查看。 原文链接 传送门 　  最近做的事情需要在 Swift 里调用 C 函数，要学的东西很多，经历颇为曲折，遂作此笔记以备忘。 1. 什么是指针？参考这里： The 5-">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/framework/swift/swift-memeryLayout.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/24/在-Swift-里使用指针/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>在 Swift 里使用指针(转) | Bruce's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bruce's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Hi~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/在-Swift-里使用指针/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="hello world">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在 Swift 里使用指针(转)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-24 14:18:06 / 修改时间：14:34:40" itemprop="dateCreated datePublished" datetime="2018-10-24T14:18:06+08:00">2018-10-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS开发/" itemprop="url" rel="index"><span itemprop="name">iOS开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/24/在-Swift-里使用指针/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/10/24/在-Swift-里使用指针/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/24/在-Swift-里使用指针/" class="leancloud_visitors" data-flag-title="在 Swift 里使用指针(转)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近在用 Swift 实现一个功能的时候，遇到有一些 API 中需要传递的参数是 UnsafePointer，也就是 C 语言指针在 Swift 中的转译。其用法颇具特色，这里有一篇博文讲的不错，特地转过来记一下，方便以后复习查看。</p>
+<p>原文链接 <a href="https://juejin.im/entry/5b3c630051882519ec07d6f1" target="_blank" rel="noopener">传送门</a></p>
+<p>　</p>
+<p><img src="https://github.com/a1049145827/Resources/raw/master/framework/swift/swift-memeryLayout.png" alt="swift-memeryLayout"></p>
+<p>最近做的事情需要在 Swift 里调用 C 函数，要学的东西很多，经历颇为曲折，遂作此笔记以备忘。</p>
+<h2 id="1-什么是指针？"><a href="#1-什么是指针？" class="headerlink" title="1. 什么是指针？"></a>1. 什么是指针？</h2><p>参考这里： <a href="https://link.juejin.im/?target=https%3A%2F%2Fdenniskubes.com%2F2017%2F01%2F24%2Fthe-5-minute-guide-to-c-pointers%2F" target="_blank" rel="noopener">The 5-Minute Guide to C Pointers</a></p>
+<p>或者中文版： <a href="https://link.juejin.im/?target=http%3A%2F%2Fblog.jobbole.com%2F25409%2F" target="_blank" rel="noopener">C 语言指针 5 分钟教程 – 文章 – 伯乐在线</a></p>
+<h2 id="2-Swift-里的不安全操作"><a href="#2-Swift-里的不安全操作" class="headerlink" title="2. Swift 里的不安全操作"></a>2. Swift 里的不安全操作</h2><p>Swift 大部分操作都是安全的，<code>Optional</code> 的引入也是为了安全。大部分情况下编译器会帮我们做静态校验，一个 <code>Int</code> 类型不能被当做一个 <code>String</code> 传参，一个 <code>Optional</code> 类型必须 <code>Unwrapped</code> 之后才能安全使用。</p>
+<p>但是 Swift 也支持对内存的直接操作，这些操作都是不安全的，所以涉及的 API 都带有 <code>Unsafe</code>前缀，比如指针 <code>UnsafePointer</code> 类型。</p>
+<p>通过下标访问数组内容也属于不安全操作，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">let test = arr[1]</span><br></pre></td></tr></table></figure>
+<p>编译时不会报错，运行时 crash。</p>
+<h2 id="3-MemoryLayout"><a href="#3-MemoryLayout" class="headerlink" title="3. MemoryLayout"></a>3. MemoryLayout</h2><p>C/C++ 里常见的 <code>sizeof()</code> 关键字在 Swift 里面原先也有，以及 <code>sizeofValue</code>, <code>strideof</code>, <code>strideofValue</code>, <code>align</code> 和 <code>alignOf</code>。在 Swift 3 中，这一堆“函数”被包进了 <code>MemoryLayout</code>这个 Struct 里面，这里是<a href="https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2F9cf2685293108ea3efcbebb7ee6a8618b83d4a90%2Fproposals%2F0101-standardizing-sizeof-naming.md" target="_blank" rel="noopener">当时的提案</a>。</p>
+<p>于是和内存对齐内存占用等相关的信息就都可以通过 <code>MemoryLayout</code> 获取，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MemoryLayout&lt;UInt32&gt;.size // 4</span><br><span class="line">MemoryLayout&lt;UInt32&gt;.alignment // 4</span><br><span class="line">MemoryLayout&lt;UInt32&gt;.stride // 4</span><br></pre></td></tr></table></figure>
+<p>UInt32 默认占 4 个字节，内存对齐为 4 字节。</p>
+<p>连续内存里多个实例排列时（比如数组），上一个实例开始地址到下一个实例开始地址的距离为 4 个字节。</p>
+<p>在我的 64-bit 机器上，Int 类型则和 UInt64 类型一样，占 8 个字节。</p>
+<h3 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h3><p>为什么需要做内存对齐可以参考这里：<a href="https://link.juejin.im/?target=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F381244%2Fpurpose-of-memory-alignment" target="_blank" rel="noopener">Purpose of memory alignment – Stack Overflow</a></p>
+<p>理论上物理内存的单位是一个字节(byte)，我们最小能访问的内存就应该是一个字节。但是实际上为了效率考虑，或者硬件限制，我们访问内存总是字长的倍数，字长由设备来决定，比如某机器 64 位机器以 8 字节为字长，这样设备每次访问内存都会以 8 字节为单位。如果内存里的某个值不在 8 字节的边界上，那么处理器想要获取这个值就得访问两次内存，为了性能考虑通常编译器会对这些值做内存对齐，用空间换时间。</p>
+<p>另外 App 能访问的内存地址都不是物理地址，而是通过操作系统访问到的虚拟地址。</p>
+<p>比如下面这个 <code>Struct</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct SampleStruct &#123;</span><br><span class="line"> 	let number: UInt32</span><br><span class="line"> 	let flag: Bool</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">MemoryLayout&lt;SampleStruct&gt;.size       // returns 5</span><br><span class="line">MemoryLayout&lt;SampleStruct&gt;.alignment  // returns 4</span><br><span class="line">MemoryLayout&lt;SampleStruct&gt;.stride     // returns 8</span><br></pre></td></tr></table></figure>
+<p><code>UInt32</code> 长度 4，<code>Bool</code> 长度 1,总长其实是 5。但是因为内存对齐的存在，所以整个 <code>Struct</code> 塞进内存里会以 4 字节对齐，结果占用 8 个字节(64位机器)。</p>
+<p><code>Struct</code> 和 <code>Int</code> 一样是值类型 (Value Type)，但如果是引用类型(Reference Type) 比如类 class，就不太一样。</p>
+<p>Swift class 在底层实现事实上是一个 Objectivce C Class(根据 mikeash 的<a href="https://link.juejin.im/?target=https%3A%2F%2Facademy.realm.io%2Fposts%2Fgoto-mike-ash-exploring-swift-memory-layout%2F" target="_blank" rel="noopener">这个视频</a> Xode 8, Swift 3)，我们创建一个新的 Swift class 实例的时候，会在堆上 (heap) 分配一块比较大的内存，用来保存诸如 <code>type</code>, <code>reference count</code>之类的信息，在栈上 (stack) 只分配一个指针，指向堆上的这块内存。所以对一个 <code>class</code> 执行 <code>MemoryLayout</code> 效果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class SampleClass &#123;</span><br><span class="line"> 	let number: UInt32</span><br><span class="line"> 	let flag: Bool</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">MemoryLayout&lt;SampleClass&gt;.size       // returns 8</span><br><span class="line">MemoryLayout&lt;SampleClass&gt;.alignment  // returns 8</span><br><span class="line">MemoryLayout&lt;SampleClass&gt;.stride     // returns 8</span><br></pre></td></tr></table></figure>
+<h2 id="4-Swift-Pointer"><a href="#4-Swift-Pointer" class="headerlink" title="4. Swift Pointer"></a>4. Swift Pointer</h2><p>Swift 一共有 8 种指针类型。基础是不可变指针 <code>UnsafePointer</code>，对应的会有可变指针 <code>UnsafeMutablePointer</code>。另外还有可以塞数组的 <code>Buffer</code> 指针和完全不知道是什么内容的 <code>Raw</code>指针，也即没有指定泛型。</p>
+<p>四种带类型指针：</p>
+<ul>
+<li>UnsafeMutablePointer</li>
+<li>UnsafePointer</li>
+<li>UnsafeMutableBufferPointer</li>
+<li>UnsafeBufferPointer</li>
+</ul>
+<p>四种不带类型的 <code>RawPointer</code>:</p>
+<ul>
+<li>UnsafeMutableRawPointer</li>
+<li>UnsafeRawPointer</li>
+<li>UnsafeMutableRawBufferPointer</li>
+<li>UnsafeRawBufferPointer</li>
+</ul>
+<p>Apple Developer 文档里有 C 指针和 Swift 指针的对应表：</p>
+<table>
+<thead>
+<tr>
+<th>C Syntax</th>
+<th>Swift Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>const Type *</td>
+<td>UnsafePointer</td>
+</tr>
+<tr>
+<td>Type *</td>
+<td>UnsafeMutablePointer</td>
+</tr>
+<tr>
+<td>Type <em> const </em></td>
+<td>UnsafePointer</td>
+</tr>
+<tr>
+<td>Type <em> __strong </em></td>
+<td>UnsafeMutablePointer</td>
+</tr>
+<tr>
+<td>Type **</td>
+<td>AutoreleasingUnsafeMutablePointer</td>
+</tr>
+<tr>
+<td>const void *</td>
+<td>UnsafeRawPointer</td>
+</tr>
+<tr>
+<td>void *</td>
+<td>UnsafeMutableRawPointer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-特殊指针"><a href="#5-特殊指针" class="headerlink" title="5. 特殊指针"></a>5. 特殊指针</h2><p>上面提到的八种指针都比较常见，比如 <code>const int *</code> 对应 Swift <code>UnsafePointer&lt;Int32&gt;</code>。那如果有些比较复杂的需求上述指针无法满足的怎么办呢？</p>
+<h3 id="OpaquePointer"><a href="#OpaquePointer" class="headerlink" title="OpaquePointer"></a>OpaquePointer</h3><p>如果一个 C 指针类型无法在 Swift 中找到对应的类型，则可以用这个指针来表达，比如一个类型为 C Struct 的指针。</p>
+<p>该指针的初始化方法里有一个比较特别的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init?(bitPattern: Int)</span><br><span class="line">    // Creates an OpaquePointer from a given address in memory.</span><br></pre></td></tr></table></figure>
+<p>可以用一个内存地址来初始化这个指针。举个例子，现在 Swift 要调用 C 函数，传入一个 <code>context</code> 指针，回调的时候 C 函数会把这个指针通过参数带回给 Swift，相当于 ObjC 常见的 <code>userinfo</code>。我们可以这样做：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 把 self 用 OpaquePointer 指针表达</span><br><span class="line">let pointer = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())</span><br><span class="line"> </span><br><span class="line">// 传给 C 函数... </span><br><span class="line">// 在 C 函数的回调里面取会这个指针</span><br><span class="line">let someObj = Unmanaged&lt;ObjectClass&gt;.fromOpaque(context!).takeUnretainedValue()</span><br></pre></td></tr></table></figure>
+<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6. 小结"></a>6. 小结</h2><p>指针非常强大，在 C/C++/ObjC 语言中也是使用非常广泛的工具。但是同时直接操作内存也给程序带来非常高的风险。项目简单的时候问题不大，一旦复杂起来问题就很容易被淹没在茫茫代码里。</p>
+<p>Swift 的设计是倾向安全的，我们平时会用到的大部分特性都不需要和裸的内存数据打交道，所有的指针，内存绑定等事情都由已经封装好的高级类型帮我们搞定了。</p>
+<p>但是 Swift 也提供了不安全的内存操作 API，尽管相比起 C 接口，Swift 已经尽量做了相对安全的封装，但我们在使用这些 API 的过程中仍然需要小心谨慎。</p>
+<p>想要在使用过程中不犯错就必须先理解这些不安全的操作都做了什么，必须理解指针，理解内存，理解这些操作在 C/C++/Swift 里的差别。@mikeash 的演讲 <a href="https://link.juejin.im/?target=https%3A%2F%2Facademy.realm.io%2Fposts%2Fgoto-mike-ash-exploring-swift-memory-layout%2F" target="_blank" rel="noopener">Exploring Swift Memory Layout</a> 讲得非常好，值得一看。</p>
+<h2 id="7-参考资料"><a href="#7-参考资料" class="headerlink" title="7. 参考资料"></a>7. 参考资料</h2><ul>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fonevcat.com%2F2015%2F01%2Fswift-pointer%2F" target="_blank" rel="noopener">Swift 中的指针使用</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Facademy.realm.io%2Fcn%2Fposts%2Fnate-cook-tryswift-tokyo-unsafe-swift-and-pointer-types%2F" target="_blank" rel="noopener">Swift 皇冠上的明珠：不安全的 Swift 和指针类型</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fdenniskubes.com%2F2017%2F01%2F24%2Fthe-5-minute-guide-to-c-pointers%2F" target="_blank" rel="noopener">The 5-Minute Guide to C Pointers</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fwww.raywenderlich.com%2F148569%2Funsafe-swift" target="_blank" rel="noopener">Unsafe Swift: Using Pointers And Interacting With C</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Facademy.realm.io%2Fposts%2Fgoto-mike-ash-exploring-swift-memory-layout%2F" target="_blank" rel="noopener">Exploring Swift Memory Layout</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fjuejin.im%2Fentry%2F59156846a22b9d0058007283" target="_blank" rel="noopener">Swift 对象内存模型探究（一） – iOS – 掘金</a></li>
+<li><a href="https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fimported_c_and_objective_c_apis%2Fusing_imported_c_functions_in_swift" target="_blank" rel="noopener">Using Imported C Functions in Swift | Apple Developer Documentation</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 -------------</div>
+
+</div>
+    
+    </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/Swift-值类型与引用类型/" rel="next" title="Swift 值类型与引用类型">
+                <i class="fa fa-chevron-left"></i> Swift 值类型与引用类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Coder bruce" />
+            
+              <p class="site-author-name" itemprop="name">Coder bruce</p>
+              <p class="site-description motion-element" itemprop="description">hello world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是指针？"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是指针？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Swift-里的不安全操作"><span class="nav-number">2.</span> <span class="nav-text">2. Swift 里的不安全操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-MemoryLayout"><span class="nav-number">3.</span> <span class="nav-text">3. MemoryLayout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存对齐"><span class="nav-number">3.1.</span> <span class="nav-text">内存对齐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Swift-Pointer"><span class="nav-number">4.</span> <span class="nav-text">4. Swift Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-特殊指针"><span class="nav-number">5.</span> <span class="nav-text">5. 特殊指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpaquePointer"><span class="nav-number">5.1.</span> <span class="nav-text">OpaquePointer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-小结"><span class="nav-number">6.</span> <span class="nav-text">6. 小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-参考资料"><span class="nav-number">7.</span> <span class="nav-text">7. 参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder bruce</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'AxIriir0LGqw2iVxags6bRKn-gzGzoHsz',
+        appKey: 'ABbwAnnUk22JYvYjVq5YIL8F',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz",
+                'X-LC-Key': "ABbwAnnUk22JYvYjVq5YIL8F",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 --> 
+<script type="text/javascript" src="/js/src/love.js"></script>
