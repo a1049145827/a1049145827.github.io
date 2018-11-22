@@ -5,11 +5,51 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/11/12/Ubuntu-16-04%E4%B8%8B%E5%AE%89%E8%A3%85zsh%E5%92%8Coh-my-zsh/</loc>
-    <lastmod>2018-11-13T01:40:19.843Z</lastmod>
+    <lastmod>2018-11-22T06:13:19.798Z</lastmod>
     <data>
         <display>
         <title>Ubuntu 16.04 下安装 zsh 和 oh-my-zsh</title>
         <pubTime>2018-11-12T05:58:30.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/11/13/Ubuntu-18-04-1-LTS-%E4%B8%8B%E8%BF%90%E8%A1%8C-Vapor-%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2018-11-22T06:11:28.589Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu 18.04.1 LTS 下运行 Vapor 项目</title>
+        <pubTime>2018-11-13T01:43:22.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://a1049145827.github.io/2018/11/22/%E8%BE%85%E5%8A%A9-Homebrew-%E7%9A%84%E4%B8%A4%E5%A4%A7%E5%88%A9%E5%99%A8-Cakebrew-LaunchRocket/</loc>
+    <lastmod>2018-11-22T06:07:11.447Z</lastmod>
+    <data>
+        <display>
+        <title>辅助 Homebrew 的两大利器 Cakebrew & LaunchRocket</title>
+        <pubTime>2018-11-22T02:49:21.000Z</pubTime>
         
         <tag>iOS</tag>
          
