@@ -421,15 +421,15 @@
 <hr>
 
 <h2 id="指定主机和端口"><a href="#指定主机和端口" class="headerlink" title="指定主机和端口"></a>指定主机和端口</h2><p><strong>方式一：</strong>如果想要直接指定端口执行的话，可以修改 NIOServerConfig，将下面代码加入到 configure.swift 中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 可以修改 hostname、port 为你期望的值</span><br><span class="line">let serverConfiure = NIOServerConfig.default(hostname: "0.0.0.0", port: 8081)</span><br><span class="line">services.register(serverConfiure)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 可以修改 hostname、port 为你期望的值</span></span><br><span class="line">let serverConfiure = NIOServerConfig.default(hostname: "0.0.0.0", port: 8081)</span><br><span class="line">services.register(serverConfiure)</span><br></pre></td></tr></table></figure>
 <hr>
 
 <p><strong>方式二：</strong>或者使用在命令行后拼接参数的方式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vapor run serve --port=8080 --hostname=127.0.0.1</span><br><span class="line"><span class="meta">#</span> You can also do:</span><br><span class="line"><span class="meta">#</span> vapor run serve --bind=127.0.0.1:8080</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vapor run serve --port=8080 --hostname=127.0.0.1</span><br><span class="line"><span class="meta">#</span><span class="bash"> You can also <span class="keyword">do</span>:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vapor run serve --<span class="built_in">bind</span>=127.0.0.1:8080</span></span><br></pre></td></tr></table></figure>
 <p>如果需要直接运行在 80 端口，则需要 sudo 权限：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vapor run serve --port=80 --hostname=127.0.0.1</span><br><span class="line"><span class="meta">#</span> 这条命令与上面等价：sudo vapor run serve --bind=127.0.0.1:80</span><br><span class="line"><span class="meta">#</span> 若要开放给其他设备访问则要运行在 0.0.0.0 上</span><br><span class="line"><span class="meta">#</span> sudo vapor run serve --port=80 --hostname=0.0.0.0</span><br><span class="line"><span class="meta">#</span> 这条命令与上面等价：sudo vapor run serve --bind=0.0.0.0:80</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vapor run serve --port=80 --hostname=127.0.0.1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这条命令与上面等价：sudo vapor run serve --<span class="built_in">bind</span>=127.0.0.1:80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 若要开放给其他设备访问则要运行在 0.0.0.0 上</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo vapor run serve --port=80 --hostname=0.0.0.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这条命令与上面等价：sudo vapor run serve --<span class="built_in">bind</span>=0.0.0.0:80</span></span><br></pre></td></tr></table></figure>
 <p>执行完上面命令，如果项目正常运行的话，就可以看到控制台中输出：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> Vapor 项目已启动</span><br><span class="line">Server starting on http://127.0.0.1:80</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Vapor 项目已启动</span></span><br><span class="line">Server starting on http://127.0.0.1:80</span><br></pre></td></tr></table></figure>
 <p>直接修改配置文件，指定主机及端口，这两种方式效果相同，喜欢用哪种随便挑吧，不用客气 :-D</p>
 <p>　</p>
 <p>如果想要直接让 Vapor 以 release 模式运行 （部署），执行下面代码。</p>
@@ -566,7 +566,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
