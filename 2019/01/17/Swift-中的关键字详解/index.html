@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.2">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文传送门 要学习 Swift 这门语言，就必须先了解 Swift 的关键字及对应的解释。这里就列一下在 Swift 中常用到的关键字。 关键字是类似于标识符的保留字符序列，除非用重音符号（`）将其括起来，否则不能用作标识符。关键字是对编译器具有特殊意义的预定义保留标识符。常见的关键字有以下4种。  与声明有关的关键字：class、deinit、enum、extension、func、import">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 中的关键字详解（转）">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/Swift-中的关键字详解/index.html">
+<meta property="og:site_name" content="Bruce&#39;s Blog">
+<meta property="og:description" content="原文传送门 要学习 Swift 这门语言，就必须先了解 Swift 的关键字及对应的解释。这里就列一下在 Swift 中常用到的关键字。 关键字是类似于标识符的保留字符序列，除非用重音符号（`）将其括起来，否则不能用作标识符。关键字是对编译器具有特殊意义的预定义保留标识符。常见的关键字有以下4种。  与声明有关的关键字：class、deinit、enum、extension、func、import">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-17T06:18:09.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 中的关键字详解（转）">
+<meta name="twitter:description" content="原文传送门 要学习 Swift 这门语言，就必须先了解 Swift 的关键字及对应的解释。这里就列一下在 Swift 中常用到的关键字。 关键字是类似于标识符的保留字符序列，除非用重音符号（`）将其括起来，否则不能用作标识符。关键字是对编译器具有特殊意义的预定义保留标识符。常见的关键字有以下4种。  与声明有关的关键字：class、deinit、enum、extension、func、import">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/Swift-中的关键字详解/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Swift 中的关键字详解（转） | Bruce's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bruce's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Hi~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/Swift-中的关键字详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="hello world">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 中的关键字详解（转）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-17 10:34:27 / 修改时间：14:18:09" itemprop="dateCreated datePublished" datetime="2019-01-17T10:34:27+08:00">2019-01-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS开发/" itemprop="url" rel="index"><span itemprop="name">iOS开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/17/Swift-中的关键字详解/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/17/Swift-中的关键字详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/17/Swift-中的关键字详解/" class="leancloud_visitors" data-flag-title="Swift 中的关键字详解（转）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.cnblogs.com/liYongJun0526/p/7522130.html" target="_blank" rel="noopener">原文传送门</a></p>
+<p>要学习 Swift 这门语言，就必须先了解 Swift 的关键字及对应的解释。这里就列一下在 Swift 中常用到的关键字。</p>
+<p>关键字是类似于标识符的保留字符序列，除非用重音符号（`）将其括起来，否则不能用作标识符。关键字是对编译器具有特殊意义的预定义保留标识符。常见的关键字有以下4种。</p>
+<p> 与声明有关的关键字：<code>class</code>、<code>deinit</code>、<code>enum</code>、<code>extension</code>、<code>func</code>、<code>import</code>、<code>init</code>、<code>let</code>、<code>protocol</code>、<code>static</code>、<code>struct</code>、<code>subscript</code>、<code>typealias</code> 和 <code>var</code>。</p>
+<p>与语句有关的关键字：<code>break</code>、<code>case</code>、<code>continue</code>、<code>default</code>、<code>do</code>、<code>else</code>、<code>fallthrough</code>、<code>if</code>、<code>in</code>、<code>for</code>、<code>return</code>、<code>switch</code>、<code>where</code> 和 <code>while</code>。</p>
+<p>表达式和类型关键字：<code>as</code>、<code>dynamicType</code>、<code>is</code>、<code>new</code>、<code>super</code>、<code>self</code>、<code>Self</code>、<code>Type</code>、<code>__COLUMN__</code>、<code>__FILE__</code>、<code>__FUNCTION__</code>和 <code>__LINE__</code>。</p>
+<p>在特定上下文中使用的关键字：<code>associativity</code>、<code>didSet</code>、<code>get</code>、<code>infix</code>、<code>inout</code>、<code>left</code>、<code>mutating</code>、<code>none</code>、<code>nonmutating</code>、<code>operator</code>、<code>override</code>、<code>postfix</code>、<code>precedence</code>、<code>prefix</code>、<code>rightset</code>、<code>unowned</code>、<code>unowned(safe)</code>、<code>unowned(unsafe)</code>、<code>weak</code> 和 <code>willSet</code>。</p>
+<p>　</p>
+<p><strong>常见关键字的介绍：</strong></p>
+<h2 id="1、class"><a href="#1、class" class="headerlink" title="1、class"></a><strong>1、</strong>class</h2><p>在 Swift 当中，我们使用 Class 关键字去声明一个类和声明类方法，比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 给方法添加class关键字表示类方法</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">work</span>() </span>&#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Type Method: Person: 学生."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样我们就声明了一个 Student 类。</p>
+<h2 id="2、let"><a href="#2、let" class="headerlink" title="2、let"></a><strong>2、let</strong></h2><p>Swift里用let修饰的变量会是一个不可变的常量，即我们不可以对它进行修改。（注意：我们用let修饰的常量是一个类，我们可以对其所在的属性进行修改）比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">"xiaoMing"</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">16</span></span><br><span class="line">    <span class="keyword">var</span> height = <span class="number">160</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> student = <span class="type">Student</span>()</span><br><span class="line">student.age += <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"student age is <span class="subst">\(studen.age)</span>"</span>)</span><br><span class="line"><span class="comment">// 输出结果为student age is 18</span></span><br></pre></td></tr></table></figure>
+<p>在 Student 类里 name 是不可变的，如果要对它进行修改就要将 <code>let</code> 改为 <code>var</code>。注意：如果这个时候，再声明一个 Student 常量去引用 student，那么 studen1 所指向的内存块是和 student 相同的.</p>
+<h2 id="3、var"><a href="#3、var" class="headerlink" title="3、var"></a>3、var</h2><p>Swift 中用 <code>var</code> 修饰的变量是一个可变的变量，即可以对它进行修改。注意：我们不会用 <code>var</code> 去引用一个类，也没有必要。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">"xiaoMing"</span></span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">16</span></span><br><span class="line">    <span class="keyword">var</span> height = <span class="number">160</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> student = <span class="type">Student</span>()</span><br><span class="line">student.age += <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> student2 = studen;</span><br><span class="line">student2.age -=  <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"student age is <span class="subst">\(studen.age)</span>"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"student2 age is <span class="subst">\(student2.age)</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 输出结果为</span></span><br><span class="line"><span class="comment"> student age is 15</span></span><br><span class="line"><span class="comment"> student2 age is 15</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>由输出结果可以看出他们所指向的内存块都是同一个。</p>
+<h2 id="4、struct"><a href="#4、struct" class="headerlink" title="4、struct"></a>4、struct</h2><p>在 Swift 中，我们使用 struct 关键字去声明结构体，Swift 中的结构体并不复杂，与 C语言 的结构体相比，除了成员变量，还多了成员方法。使得它更加接近于一个类。个人认为可以理解为是类的一个轻量化实现。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">introduce</span><span class="params">()</span></span> &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"我叫：<span class="subst">\(name)</span>, 今年<span class="subst">\(age)</span>岁"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="type">Person</span>(name: <span class="string">"xiaoMing"</span>, age: <span class="number">20</span>)</span><br><span class="line">person.name = <span class="string">"xiaoMing"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"person.name = <span class="subst">\(person.name)</span>"</span>)</span><br><span class="line">person.introduce()</span><br><span class="line">        </span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  输出结果为：</span></span><br><span class="line"><span class="comment">  person.name = xiaoMing</span></span><br><span class="line"><span class="comment">  我叫：xiaoMing, 今年20岁</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>语法与 C语言 或者 OC 类似，Swift 中的结构体，在定义成员变量时一定要注明类型。另外要注意一下的是，结构体属于值类型，而 Swift 中的类属于引用类型。他们在内存管理方面会有不同。</p>
+<h2 id="5、enum"><a href="#5、enum" class="headerlink" title="5、enum"></a>5、enum</h2><p>在 Swift 中，我们使用 enum 关键字去声明枚举。枚举是一种常见的数据类型，他的主要功能就是将某一种有固定数量可能性的变量的值，以一组命名过的常数来指代。比如正常情况下方向有四种可能，东，南，西，北。我们就可以声明一组常量来指代方向的四种可能。使用枚举可以防止用户使用无效值，同时该变量可以使代码更加清晰。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Orientation</span>: <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">East</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">South</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">West</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">North</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 或者</span></span><br><span class="line"><span class="comment"> enum Orientation: Int &#123;</span></span><br><span class="line"><span class="comment">     case East, South, West, North</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="type">Orientation</span>.<span class="type">East</span>.rawValue)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 输出结果 0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>注意：我们在定义枚举时，一定要指定类型，否则在使用时就会报错。枚举类型的值如果没有赋值，他就按照默认的走，可以赋予我们自己想要的值。</p>
+<h2 id="6、final"><a href="#6、final" class="headerlink" title="6、final"></a>6、final</h2><p>Swift 中，final 关键字可以在 class、func 和 var 前修饰。表示 不可重写 可以将类或者类中的部分实现保护起来,从而避免子类破坏。详细了解可以去看看（<a href="http://www.cnblogs.com/Free-Thinker/p/4843839.html" target="_blank" rel="noopener">Swift - final关键字的介绍，以及使用场景</a></p>
+<p>）。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 修饰词 final 表示 不可重写 可以将类或者类中的部分实现保护起来，从而避免子类破坏</span></span><br><span class="line">    <span class="keyword">final</span> <span class="function"><span class="keyword">func</span> <span class="title">price</span><span class="params">()</span></span> &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"price"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> : <span class="title">Fruit</span> </span>&#123;	<span class="comment">// 类继承</span></span><br><span class="line">    <span class="comment">// 重写父类方法，编译器会报错</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">price</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"重写父类的price 方法"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里重写 price() 这个函数就会报错。</p>
+<h2 id="7、override"><a href="#7、override" class="headerlink" title="7、override"></a>7、override</h2><p>在 Swift 中，如果我们要重写某个方法，或者某个属性的话，我们需要在重写的变量前增加一个 override 关键字，比如:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sellPrice : <span class="type">Double</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">info</span><span class="params">()</span></span> -&gt; () &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"fruit"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 修饰词 final 表示 不可重写 可以将类或者类中的部分实现保护起来,从而避免子类破坏</span></span><br><span class="line">    <span class="keyword">final</span> <span class="function"><span class="keyword">func</span> <span class="title">price</span><span class="params">()</span></span> &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"price"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> : <span class="title">Fruit</span> </span>&#123;	<span class="comment">// 类继承</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">eat</span> <span class="params">()</span></span> -&gt; () &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"apple22222"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 重写父类方法</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">info</span><span class="params">()</span></span> &#123;</span><br><span class="line">    	<span class="built_in">print</span>(<span class="string">"重写父类的info 方法00000"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 重写父类的属性或者方法要使用关键字 override 进行修饰</span></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">var</span> sellPrice: <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"kkkkkkk<span class="subst">\(<span class="keyword">super</span>.sellPrice)</span>"</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.sellPrice + <span class="number">3</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"qqqqq"</span>)</span><br><span class="line">            <span class="keyword">super</span>.sellPrice = newValue * newValue</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = <span class="type">Apple</span>()</span><br><span class="line">app.info()</span><br><span class="line">app.sellPrice = <span class="number">20.0</span></span><br><span class="line"><span class="keyword">let</span>  adb = app.sellPrice</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"adb == <span class="subst">\(adb)</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 输出结果为：</span></span><br><span class="line"><span class="comment"> 重写父类的info 方法00000</span></span><br><span class="line"><span class="comment"> qqqqq</span></span><br><span class="line"><span class="comment"> kkkkkkk400.0</span></span><br><span class="line"><span class="comment"> adb == 403.0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="8、subscript"><a href="#8、subscript" class="headerlink" title="8、subscript"></a>8、subscript</h2><p>在 Swft 中，subscript 关键字表示下标，可以让 class、struct 以及 enum 使用下标访问内部的值。其实就可以快捷方式的设置或者获取对应的属性，而不需要调用对应的方法去获取或者存储，比如官网的一个实例:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rows: <span class="type">Int</span>, columns: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> grid: [<span class="type">Double</span>]</span><br><span class="line">    <span class="keyword">init</span>(rows: <span class="type">Int</span>, columns: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.rows = rows</span><br><span class="line">        <span class="keyword">self</span>.columns = columns</span><br><span class="line">        grid = <span class="type">Array</span>(repeating: <span class="number">0.0</span>, <span class="built_in">count</span>: rows * columns)</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">indexIsValid</span><span class="params">(row: Int, column: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    	<span class="keyword">return</span> row &gt;= <span class="number">0</span> &amp;&amp; row &lt; rows &amp;&amp; column &gt;= <span class="number">0</span> &amp;&amp; column &lt; columns</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">subscript</span>(row: <span class="type">Int</span>, column: <span class="type">Int</span>) -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="built_in">assert</span>(indexIsValid(row: row, column: column), <span class="string">"Index out of range"</span>)</span><br><span class="line">            <span class="keyword">return</span> grid[(row * columns) + column]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            <span class="built_in">assert</span>(indexIsValid(row: row, column: column), <span class="string">"Index out of range"</span>)</span><br><span class="line">            grid[(row * columns) + column] = newValue</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> matrix = <span class="type">Matrix</span>(rows: <span class="number">2</span>, columns: <span class="number">2</span>)</span><br><span class="line">matrix[<span class="number">0</span>, <span class="number">1</span>] = <span class="number">1.5</span></span><br><span class="line">matrix[<span class="number">1</span>, <span class="number">0</span>] = <span class="number">3.2</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"matrix == <span class="subst">\(matrix)</span>"</span>)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">打印结果：</span></span><br><span class="line"><span class="comment">matrix == Matrix(rows: 2, columns: 2, grid: [0.0, 1.5, 3.2000000000000002, 0.0])</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="9、static"><a href="#9、static" class="headerlink" title="9、static"></a>9、static</h2><p>Swift中，用 static 关键字声明静态变量或者函数，它保证在对应的作用域当中只有一份，同时也不需要依赖实例化。注意：（用static关键字指定的方法是类方法，他是不能被子类重写的），比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 给方法添加class关键字表示创建类方法</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">work</span>() </span>&#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Type Method: Person: 学生."</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用static关键字创建类方法</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">ageOfPerson</span><span class="params">(name: String)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Type Method: Person name: <span class="subst">\(name)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以和类方法重名, 以及一样的参数.</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">nameOfPerson</span><span class="params">(name: String)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Instance Method: person name <span class="subst">\(name)</span>"</span>)</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>: <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意 子类Student的实例方法work(), 和父类的类方法work()没有关系, 二者不在同一个级别上, 不存在同名问题.</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">work</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Instance Method: Student: University Student"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10、mutating"><a href="#10、mutating" class="headerlink" title="10、mutating"></a>10、mutating</h2><p>Swift中，mutating关键字指的是可变即可修改。用在structure和enumeration中,虽然结构体和枚举可以定义自己的方法，但是默认情况下，实例方法中是不可以修改值类型的属性。为了能够在实例方法中修改属性值，可以在方法定义前添加关键字mutating。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rect</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> width = <span class="number">0</span>,height = <span class="number">0</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">changeRect</span><span class="params">(x:Int, y:Int)</span></span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.width += x</span><br><span class="line">        <span class="keyword">self</span>.height += y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Direction</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Top</span>, <span class="type">Left</span>, <span class="type">Right</span>, <span class="type">Bottom</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">lookDirection</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">            <span class="keyword">case</span> .<span class="type">Top</span>:</span><br><span class="line">            <span class="keyword">self</span> = .<span class="type">Top</span></span><br><span class="line">            <span class="keyword">case</span> .<span class="type">Left</span>:</span><br><span class="line">            <span class="keyword">self</span> = .<span class="type">Left</span></span><br><span class="line">            <span class="keyword">case</span> .<span class="type">Right</span>:</span><br><span class="line">            <span class="keyword">self</span> = .<span class="type">Right</span></span><br><span class="line">            <span class="keyword">case</span> .<span class="type">Bottom</span>:</span><br><span class="line">            <span class="keyword">self</span> = .<span class="type">Bottom</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"self === <span class="subst">\(<span class="keyword">self</span>)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> re = rect(width: <span class="number">5</span>, height: <span class="number">5</span>)</span><br><span class="line">re.changeRect(x: <span class="number">32</span>, y: <span class="number">15</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"re = <span class="subst">\(re)</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">打印结果为：re = rect(width: 37, height: 20)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dir = <span class="type">Direction</span>.<span class="type">Left</span></span><br><span class="line">dir.lookDirection()</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">打印结果为：self === Left</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="11、typealias"><a href="#11、typealias" class="headerlink" title="11、typealias"></a>11、typealias</h2><p>在 Swift 中，使用关键字 typealias 定义类型别名（typealias 就相当于 Objective-C 中的 typedef），就是将类型重命名，看起来更加语义化。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typealias</span> <span class="type">Width</span> = <span class="type">CGFloat</span></span><br><span class="line"><span class="keyword">typealias</span> <span class="type">Height</span> = <span class="type">CGFloat</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rectangularArea</span><span class="params">(width: Width, height: Height)</span></span> -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">Double</span>(width * height)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> area: <span class="type">Double</span> = rectangularArea(width: <span class="number">10</span>, height: <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(area)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">结果为：200.0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="12、lazy"><a href="#12、lazy" class="headerlink" title="12、lazy"></a>12、<strong>lazy</strong></h2><p>在 Swift 中，lazy 关键修饰的变量，只有在第一次被调用的时候才会去初始化值（即懒加载）。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> first = <span class="type">NSArray</span>(objects: <span class="string">"1"</span>, <span class="string">"2"</span>)</span><br></pre></td></tr></table></figure>
+<p>注意：用 lazy 修饰的变量必须是用 var 声明的，因为属性的初始值可能在实例构造完成之后才会得到。而常量属性在构造过程完成之前必须要有初始值，因此无法声明成延迟属性。如果被 lazy 修饰的变量没有在初始化时就被多个线程调用，那就没有办法保证它只被初始化一次了。</p>
+<h2 id="13、init"><a href="#13、init" class="headerlink" title="13、init"></a>13、init</h2><p>在 Swift 中，init 关键字也表示构造器。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerSon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">init</span>?(name : <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> name.isEmpty &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="type">PerSon</span>.<span class="keyword">init</span>(name: <span class="string">"xiaoQiang"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"person is name <span class="subst">\(String(describing: person?.name)</span>)"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">打印结果为：person is name Optional("xiaoQiang")</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在例子里在 init 后面加个 <code>?</code> 号，表明该构造器可以允许失败，失败后返回 <code>nil</code>。</p>
+<h2 id="14、required"><a href="#14、required" class="headerlink" title="14、required"></a>14、required</h2><p>在 Swift 里，required 是用来修饰 init 方法的，说明该构造方法是必须实现的。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerSon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>(name : <span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>: <span class="title">PerSon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(name: name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的代码示例中不难看出，如果子类需要添加异于父类的初始化方法时，必须先要实现父类中使用 <code>required</code> 修饰符修饰过的初始化方法，并且也要使用 <code>required</code> 修饰符而不是 <code>override</code>。</p>
+<p>注意：</p>
+<p>　1. <code>required</code> 修饰符只能用于修饰类初始化方法。</p>
+<p>　2. 当子类含有异于父类的初始化方法时（初始化方法参数类型和数量异于父类），子类必须要实现父类的<code>required</code> 初始化方法，并且也要使用<code>required</code> 修饰符而不是 <code>override</code>。</p>
+<p>　3. 当子类没有初始化方法时，可以不用实现父类的 <code>required</code> 初始化方法。</p>
+<h2 id="15、extension"><a href="#15、extension" class="headerlink" title="15、extension"></a>15、extension</h2><p>在 Swift 中，extension 与 Objective-C 的 category 有点类似，但是 extension 比起 category 来说更加强大和灵活，它不仅可以扩展某种类型或结构体的方法，同时它还可以与 protocol 等结合使用，编写出更加灵活和强大的代码。它可以为特定的 class、strut、enum 或者 protocol 添加新的特性。当你没有权限对源代码进行改造的时候，此时可以通过 extension 来对类型进行扩展。extension 有点类似于 OC 的类别 – category，但稍微不同的是 category 有名字，而 extension 没有名字。在 Swift 中的可以扩展以下几个：</p>
+<p>　　（1）定义实例方法和类型方法</p>
+<p>　　（2）添加计算型属性和计算静态属性</p>
+<p>　　（3）定义下标</p>
+<p>　　（4）提供新的构造器</p>
+<p>　　（5）定义和使用新的嵌套类型</p>
+<p>　　（6）使一个已有类型符合某个接口</p>
+<p>比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    添加计算属性</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Double</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> km: <span class="type">Double</span> &#123; <span class="keyword">return</span> <span class="keyword">self</span> * <span class="number">1_000.0</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> m: <span class="type">Double</span> &#123; <span class="keyword">return</span> <span class="keyword">self</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> cm: <span class="type">Double</span> &#123; <span class="keyword">return</span> <span class="keyword">self</span> / <span class="number">100.0</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> age:<span class="type">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">init</span>?(name:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> name.isEmpty &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">self</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//添加方法</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"走了50公里"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> oneInch = <span class="number">25.4</span>.km</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"One inch is <span class="subst">\(oneInch)</span> meters"</span>)</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出结果：One inch is 25400.0 meters</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="type">Person</span>.<span class="keyword">init</span>(name: <span class="string">"xiaom"</span>)</span><br><span class="line">person?.run()</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出结果：走了50公里</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>想要了解详情可以去看看这篇文章（<a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html" target="_blank" rel="noopener">apple documents - extensions</a>）</p>
+<h2 id="16、convenient"><a href="#16、convenient" class="headerlink" title="16、convenient"></a>16、convenient</h2><p>Swift 中，使用 convenience 修饰的构造函数叫做便利构造函数 。便利构造函数通常用在对系统的类进行构造函数的扩充时使用。便利构造函数有如下几个特点：  </p>
+<p>　　（1）便利构造函数通常都是写在 extension 里面  </p>
+<p>　　（2）便利函数init前面需要加载 convenience   </p>
+<p>　　（3）在便利构造函数中需要明确的调用 self.init()  </p>
+<p>比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIButton</span> </span>&#123;</span><br><span class="line">    <span class="comment">//swit中类方法是以class开头的方法，类似于oc中+开头的方法</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">createButton</span>(<span class="title">imageName</span>:<span class="title">String</span>)-&gt;<span class="title">UIButton</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> btn=<span class="type">UIButton</span>()</span><br><span class="line">        btn.setImage(<span class="type">UIImage</span>(named:imageName), <span class="keyword">for</span>: .normal)</span><br><span class="line">        btn.sizeToFit()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> btn</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     convenience:便利，使用convenience修饰的构造函数叫做便利构造函数</span></span><br><span class="line"><span class="comment">     便利构造函数通常用在对系统的类进行构造函数的扩充时使用。</span></span><br><span class="line"><span class="comment">     </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(imageName:<span class="type">String</span>,bgImageName:<span class="type">String</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>()</span><br><span class="line">        <span class="keyword">if</span> !imageName.isEmpty &#123;</span><br><span class="line">            setImage(<span class="type">UIImage</span>(named:imageName), <span class="keyword">for</span>: .normal)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> !imageName.isEmpty &#123;</span><br><span class="line">            setBackgroundImage(<span class="type">UIImage</span>(named:bgImageName), <span class="keyword">for</span>: .normal)</span><br><span class="line">        &#125;</span><br><span class="line">        sizeToFit()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> btn = <span class="type">UIButton</span>.<span class="keyword">init</span>(imageName: <span class="string">"huanying"</span>, bgImageName: <span class="string">""</span>)</span><br><span class="line">btn.frame = <span class="type">CGRect</span>.<span class="keyword">init</span>(x: <span class="number">10</span>, y: <span class="number">120</span>, width: <span class="number">100</span>, height: <span class="number">30</span>)</span><br><span class="line">btn.backgroundColor = <span class="type">UIColor</span>.red</span><br><span class="line"><span class="keyword">self</span>.view.addSubview(btn)</span><br></pre></td></tr></table></figure>
+<h2 id="17、deinit"><a href="#17、deinit" class="headerlink" title="17、deinit"></a>17、deinit</h2><p>在 Swift 中，deinit 属于析构函数，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。和 OC 中的 dealloc 一样的，通常在 deinit 和 dealloc 中需要执行的操作有：　　</p>
+<p>　　（1）对象销毁</p>
+<p>　　（2）KVO移除</p>
+<p>　　（3）移除通知</p>
+<p>　　（4）NSTimer销毁</p>
+<h2 id="18、fallthrough"><a href="#18、fallthrough" class="headerlink" title="18、fallthrough"></a>18、fallthrough</h2><p>Swift 语言特性 switch 语句的 break 可以忽略不写，满足条件时直接跳出循环。fallthrough 的作用就是执行完当前 case，继续执行下面的 case。类似于其它语言中省去 break 里，会继续往后一个 case 跑，直到碰到 break 或 default 才完成的效果。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myClass = <span class="type">MyClass</span>(parm: <span class="number">9</span>)</span><br><span class="line"><span class="keyword">let</span> index = <span class="number">15</span></span><br><span class="line"><span class="keyword">switch</span> index &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>  :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"index is 100"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="number">10</span>, <span class="number">15</span>  :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"index is either 10 or 15"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="number">5</span>  :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"index is 5"</span>)</span><br><span class="line"><span class="keyword">default</span> :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"default case"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">输出结果：index is either 10 or 15</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> index = <span class="number">15</span></span><br><span class="line"><span class="keyword">switch</span> index &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">100</span>  :</span><br><span class="line">    <span class="built_in">print</span>( <span class="string">"index is 100"</span>)</span><br><span class="line">    <span class="keyword">fallthrough</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">10</span>, <span class="number">15</span>  :</span><br><span class="line">    <span class="built_in">print</span>( <span class="string">"index is either 10 or 15"</span>)</span><br><span class="line">    <span class="keyword">fallthrough</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">5</span>  :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"index is 5"</span>)</span><br><span class="line"><span class="keyword">default</span> :</span><br><span class="line">	<span class="built_in">print</span>( <span class="string">"default case"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">打印结果：</span></span><br><span class="line"><span class="comment">index is either 10 or 15</span></span><br><span class="line"><span class="comment">index is 5</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="19、protocol"><a href="#19、protocol" class="headerlink" title="19、protocol"></a>19、protocol</h2><p>在 Swift 中，protocol 关键字也是属于协议。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">PersonProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> height: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> weight: <span class="type">Int</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getName</span><span class="params">()</span></span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getSex</span><span class="params">()</span></span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getAge</span><span class="params">(age: Int)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span>: <span class="title">PersonProtocol</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> height = <span class="number">178</span></span><br><span class="line">    <span class="keyword">var</span> weight = <span class="number">120</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getName</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"MelodyZhy"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getSex</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"boy"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getAge</span><span class="params">(age: Int)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"age = <span class="subst">\(age)</span>"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> stu = <span class="type">Student</span>()</span><br><span class="line"><span class="keyword">let</span> height1 = stu.height</span><br><span class="line">stu.height = <span class="number">180</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"height1 = <span class="subst">\(height1)</span> height2 = <span class="subst">\(stu.height)</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">输出结果：</span></span><br><span class="line"><span class="comment">height1 = 178 height2 = 180</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="20、open"><a href="#20、open" class="headerlink" title="20、open"></a>20、open</h2><p>在 Swift 中，open 修饰的对象表示可以被任何人使用，包括 override 和继承。例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在本类外的范围外可以被继承</span></span><br><span class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentClass1</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个方法在任何地方都可以被override</span></span><br><span class="line">    <span class="keyword">open</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"abc"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">//这里可以调用module1的方法</span></span><br><span class="line">        <span class="keyword">let</span> child = <span class="type">ChildrenClass1</span>.<span class="keyword">init</span>()</span><br><span class="line">        child.abc()</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         打印结果：abc</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ChildrenClass1</span>: <span class="title">ParentClass1</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="21、public"><a href="#21、public" class="headerlink" title="21、public"></a>21、public</h2><p>在 Swift 中，public 表示公有访问权限，类或者类的公有属性或者公有方法可以从文件或者模块的任何地方进行访问。但在其他模块（一个 App 就是一个模块，一个第三方 API，第三等方框架等都是一个完整的模块）不可以被 override 和继承，而在本模块内可以被 override 和继承。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在module1外的范围外可以被继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentClass1</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个方法在任何地方都可以被override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"abc"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">//这里可以调用module1的方法</span></span><br><span class="line">        <span class="keyword">let</span> child = <span class="type">ChildrenClass1</span>.<span class="keyword">init</span>()</span><br><span class="line">        child.abc()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         打印结果：abc11</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ChildrenClass1</span>: <span class="title">ParentClass1</span> </span>&#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"abc11"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"run"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="22、internal"><a href="#22、internal" class="headerlink" title="22、internal"></a>22、internal</h2><p>在 Swift 中，public 表示内部的访问权限。即有着 internal 访问权限的属性和方法说明在模块内部可以访问，超出模块内部就不可被访问了。在 Swift 中默认就是 internal 的访问权限。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在module1外的范围外可以被继承</span></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentClass1</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个方法在任何地方都可以被override</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"abc"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// 这里可以调用module1的方法</span></span><br><span class="line">        <span class="keyword">let</span> child = <span class="type">ChildrenClass1</span>.<span class="keyword">init</span>()</span><br><span class="line">        child.abc()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         打印结果：abc11</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ChildrenClass1</span>: <span class="title">ParentClass1</span> </span>&#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"abc11"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> -&gt; <span class="type">Void</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"run"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="23、private"><a href="#23、private" class="headerlink" title="23、private"></a>23、private</h2><p>在 Swift 中，private 私有访问权限。被 private 修饰的类或者类的属性或方法可以在同一个物理文件中访问。如果超出该物理文件，那么有着 private 访问权限的属性和方法就不能被访问。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在module1外的范围外可以被继承</span></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentClass1</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个方法在任何地方都不能被 override</span></span><br><span class="line"> 	<span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"abc"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 这里可以调用module1的方法</span></span><br><span class="line">        <span class="keyword">let</span> child = <span class="type">ChildrenClass1</span>.<span class="keyword">init</span>()</span><br><span class="line">        child.abc()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         打印结果：abc11</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ChildrenClass1</span>: <span class="title">ParentClass1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         这里就会报错</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"abc11"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="24、fileprivate"><a href="#24、fileprivate" class="headerlink" title="24、fileprivate"></a>24、fileprivate</h2><p>在 Swift 中，fileprivate 访问级别所修饰的属性或者方法在当前的 Swift 源文件里可以访问。比如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 module1 外的范围外可以被继承</span></span><br><span class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentClass1</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个方法在本 Swift 文件中可以被 override</span></span><br><span class="line"> 	<span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"abc"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//这里可以调用module1的方法</span></span><br><span class="line">        <span class="keyword">let</span> child = <span class="type">ChildrenClass1</span>.<span class="keyword">init</span>()</span><br><span class="line">        child.abc()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         打印结果：abc11</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ChildrenClass1</span>: <span class="title">ParentClass1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">abc</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"abc11"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：<strong>5种修饰符访问权限排序 open &gt; public &gt; interal &gt; fileprivate &gt; private</strong>。</p>
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 -------------</div>
+
+</div>
+    
+    </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/16/Ubuntu-中的-apt-update-和-upgrade/" rel="next" title="Ubuntu 中的 apt update 和 upgrade">
+                <i class="fa fa-chevron-left"></i> Ubuntu 中的 apt update 和 upgrade
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Coder bruce" />
+            
+              <p class="site-author-name" itemprop="name">Coder bruce</p>
+              <p class="site-description motion-element" itemprop="description">hello world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、class"><span class="nav-number">1.</span> <span class="nav-text">1、class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、let"><span class="nav-number">2.</span> <span class="nav-text">2、let</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、var"><span class="nav-number">3.</span> <span class="nav-text">3、var</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、struct"><span class="nav-number">4.</span> <span class="nav-text">4、struct</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、enum"><span class="nav-number">5.</span> <span class="nav-text">5、enum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、final"><span class="nav-number">6.</span> <span class="nav-text">6、final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、override"><span class="nav-number">7.</span> <span class="nav-text">7、override</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、subscript"><span class="nav-number">8.</span> <span class="nav-text">8、subscript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、static"><span class="nav-number">9.</span> <span class="nav-text">9、static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、mutating"><span class="nav-number">10.</span> <span class="nav-text">10、mutating</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、typealias"><span class="nav-number">11.</span> <span class="nav-text">11、typealias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、lazy"><span class="nav-number">12.</span> <span class="nav-text">12、lazy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、init"><span class="nav-number">13.</span> <span class="nav-text">13、init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14、required"><span class="nav-number">14.</span> <span class="nav-text">14、required</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15、extension"><span class="nav-number">15.</span> <span class="nav-text">15、extension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16、convenient"><span class="nav-number">16.</span> <span class="nav-text">16、convenient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17、deinit"><span class="nav-number">17.</span> <span class="nav-text">17、deinit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18、fallthrough"><span class="nav-number">18.</span> <span class="nav-text">18、fallthrough</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19、protocol"><span class="nav-number">19.</span> <span class="nav-text">19、protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20、open"><span class="nav-number">20.</span> <span class="nav-text">20、open</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21、public"><span class="nav-number">21.</span> <span class="nav-text">21、public</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22、internal"><span class="nav-number">22.</span> <span class="nav-text">22、internal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23、private"><span class="nav-number">23.</span> <span class="nav-text">23、private</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24、fileprivate"><span class="nav-number">24.</span> <span class="nav-text">24、fileprivate</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder bruce</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'AxIriir0LGqw2iVxags6bRKn-gzGzoHsz',
+        appKey: 'ABbwAnnUk22JYvYjVq5YIL8F',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz",
+                'X-LC-Key': "ABbwAnnUk22JYvYjVq5YIL8F",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 --> 
+<script type="text/javascript" src="/js/src/love.js"></script>
