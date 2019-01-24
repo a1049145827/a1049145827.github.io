@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2019/01/24/cocoaPods-%E5%A5%87%E6%80%AA%E7%9A%84-%E2%80%9Cduplicate-interface-definition-for-class-%E2%80%98xxxx%E2%80%99%E2%80%9D/</loc>
+    <lastmod>2019-01-24T07:55:22.329Z</lastmod>
+    <data>
+        <display>
+        <title>cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”</title>
+        <pubTime>2019-01-24T07:41:58.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2019/01/17/Swift-%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2019-01-17T06:18:09.848Z</lastmod>
     <data>
@@ -1296,12 +1316,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
+    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS开发 Archive时自动增加build版本</title>
-        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
+        <title>iOS设备型号 2018最新统计</title>
+        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
         
         <tag>iOS</tag>
          
@@ -1316,12 +1336,12 @@
 
     
   <url>
-    <loc>https://a1049145827.github.io/2018/01/05/iOS%E8%AE%BE%E5%A4%87%E5%9E%8B%E5%8F%B7-2018%E6%9C%80%E6%96%B0%E7%BB%9F%E8%AE%A1/</loc>
+    <loc>https://a1049145827.github.io/2018/01/09/iOS%E5%BC%80%E5%8F%91-Archive%E6%97%B6%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0build%E7%89%88%E6%9C%AC/</loc>
     <lastmod>2018-03-19T09:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>iOS设备型号 2018最新统计</title>
-        <pubTime>2018-01-05T03:00:09.000Z</pubTime>
+        <title>iOS开发 Archive时自动增加build版本</title>
+        <pubTime>2018-01-09T01:55:36.000Z</pubTime>
         
         <tag>iOS</tag>
          

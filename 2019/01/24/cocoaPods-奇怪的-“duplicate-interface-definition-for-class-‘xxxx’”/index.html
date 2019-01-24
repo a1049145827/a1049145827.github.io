@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+  <meta name="description" content="软件环境：Cocoapods: 1.5.2，Xcode: 10.1 编译错误：duplicate interface definition for class YYImage 　　今天在做一个 Demo，一开始是直接将 YYImage 的项目直接引入到 Demo 项目中，编译是完全没有问题的，运行也无任何故障，但是由于需要将某个模块拆分出来，做成 Cocoapods 组件，就把 YYImage 用">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次特殊需求实现">
-<meta property="og:url" content="http://yoursite.com/2017/12/27/记一次特殊需求实现/index.html">
+<meta property="og:title" content="cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+<meta property="og:description" content="软件环境：Cocoapods: 1.5.2，Xcode: 10.1 编译错误：duplicate interface definition for class YYImage 　　今天在做一个 Demo，一开始是直接将 YYImage 的项目直接引入到 Demo 项目中，编译是完全没有问题的，运行也无任何故障，但是由于需要将某个模块拆分出来，做成 Cocoapods 组件，就把 YYImage 用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-19T09:20:25.000Z">
+<meta property="og:updated_time" content="2019-01-24T07:55:22.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次特殊需求实现">
-<meta name="twitter:description" content="因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。 1试看还剩：&amp;lt;font color=#d7bf48&amp;gt;47&amp;lt;/font&amp;gt;秒，请返回竖屏购买观看券观看完整版&amp;lt;font color=#">
+<meta name="twitter:title" content="cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”">
+<meta name="twitter:description" content="软件环境：Cocoapods: 1.5.2，Xcode: 10.1 编译错误：duplicate interface definition for class YYImage 　　今天在做一个 Demo，一开始是直接将 YYImage 的项目直接引入到 Demo 项目中，编译是完全没有问题的，运行也无任何故障，但是由于需要将某个模块拆分出来，做成 Cocoapods 组件，就把 YYImage 用">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>记一次特殊需求实现 | Bruce's Blog</title>
+  <title>cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’” | Bruce's Blog</title>
   
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/27/记一次特殊需求实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -296,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记一次特殊需求实现
+          <h1 class="post-title" itemprop="name headline">cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”
               
             
           </h1>
@@ -321,24 +321,12 @@
                 
               
 
-              <time title="创建时间：2017-12-27 20:48:19" itemprop="dateCreated datePublished" datetime="2017-12-27T20:48:19+08:00">2017-12-27</time>
+              <time title="创建时间：2019-01-24 15:41:58 / 修改时间：15:55:22" itemprop="dateCreated datePublished" datetime="2019-01-24T15:41:58+08:00">2019-01-24</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-03-19 17:20:25" itemprop="dateModified" datetime="2018-03-19T17:20:25+08:00">2018-03-19</time>
               
             
           </span>
@@ -370,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/12/27/记一次特殊需求实现/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/12/27/记一次特殊需求实现/" itemprop="commentCount"></span>
+                <a href="/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,7 +367,7 @@
 
           
           
-             <span id="/2017/12/27/记一次特殊需求实现/" class="leancloud_visitors" data-flag-title="记一次特殊需求实现">
+             <span id="/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/" class="leancloud_visitors" data-flag-title="cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,21 +398,15 @@
       
 
       
-        <p>因为最近一个版本是移动端原生+Unity混合开发，所以有些功能需要U3D部门联调数据交互。由于先前休假几天，导致进度一直比安卓慢半拍，所以对接的事情就先由安卓同事和U3D沟通，有一个需求，不看不知道，一看吓一跳，这数据格式，似乎不科学啊。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">试看还剩：&lt;font color=<span class="meta">#d7bf48&gt;47<span class="meta-string">&lt;/font&gt;</span>秒，请返回竖屏购买观看券观看完整版<span class="meta-string">&lt;font color=#ff0000&gt;</span>(￥6)<span class="meta-string">&lt;/font&gt;</span>, #ffffff</span></span><br></pre></td></tr></table></figure>
-<p>无奈安卓一端已经调通，再让做出修改貌似不太人性化，只好硬着头皮一通百度Google，尝试各种方案，终于得到一些比较有用的信息。</p>
-<h4 id="大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><a href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType" class="headerlink" title="大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType"></a>大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</h4><p>字符串中很明显能看出，有通过HTML标签包装的痕迹，那么我们可以通过加载HTML标签文本的方式，将这个字符串转化为带属性的字符串。API如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)initWithData:(<span class="built_in">NSData</span> *)data options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentReadingOptionKey</span>, <span class="keyword">id</span>&gt; *)options documentAttributes:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSAttributedStringDocumentAttributeKey</span>, <span class="keyword">id</span>&gt; * __<span class="keyword">nullable</span> * __<span class="keyword">nullable</span>)dict error:(<span class="built_in">NSError</span> **)error <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_0, <span class="number">7</span>_0);</span><br></pre></td></tr></table></figure></p>
-<p>然后再对其属性做出调整，这就是设想的方案。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *toast = [<span class="built_in">NSString</span> stringWithUTF8String:tip];</span><br><span class="line"></span><br><span class="line"><span class="built_in">UIColor</span> *color = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"><span class="built_in">NSString</span> *colorStr = [<span class="built_in">NSString</span> stringWithUTF8String:toastColor];</span><br><span class="line"><span class="keyword">if</span> (colorStr &amp;&amp; [colorStr hasPrefix:<span class="string">@"#"</span>]) &#123;</span><br><span class="line">    colorStr = [colorStr stringByReplacingOccurrencesOfString:<span class="string">@"#"</span> withString:<span class="string">@"0x"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSInteger</span> value = [IOSTools numberWithHexString:colorStr];</span><br><span class="line">    color = [<span class="built_in">UIColor</span> colorWithHex:value];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!color) &#123;</span><br><span class="line">    color = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableParagraphStyle</span> *style = [[<span class="built_in">NSMutableParagraphStyle</span> alloc] init];</span><br><span class="line">style.alignment = <span class="built_in">NSTextAlignmentCenter</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSMutableAttributedString</span> * attrStr = [[<span class="built_in">NSMutableAttributedString</span> alloc] initWithData:[toast dataUsingEncoding:<span class="built_in">NSUnicodeStringEncoding</span>] options:@&#123; <span class="built_in">NSDocumentTypeDocumentAttribute</span>: <span class="built_in">NSHTMLTextDocumentType</span> &#125; documentAttributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</span><br><span class="line">[attrStr addAttributes:@&#123; <span class="built_in">NSFontAttributeName</span>: Unity_toast_font, <span class="built_in">NSParagraphStyleAttributeName</span>: style &#125; range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length)];</span><br></pre></td></tr></table></figure>
-<p>将参数第二部分转化为UIColor</p>
-<h4 id="大招2-将一个代表16数的字符串-转成10进制数字"><a href="#大招2-将一个代表16数的字符串-转成10进制数字" class="headerlink" title="大招2 将一个代表16数的字符串 转成10进制数字"></a>大招2 将一个代表16数的字符串 转成10进制数字</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">NSInteger</span>)numberWithHexString:(<span class="built_in">NSString</span> *)hexString &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *hexChar = [hexString cStringUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> hexNumber;</span><br><span class="line"></span><br><span class="line">    sscanf(hexChar, <span class="string">"%x"</span>, &amp;hexNumber);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">NSInteger</span>)hexNumber;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一步其实是为了将字符串转化为颜色，方法有很多，能达到目的即可。</p>
-<p>弄好之后跑起来，看到最终效果后傻眼了：背景是黑色的，没有格式的字也会显示成黑色，这就导致大部分内容直接看不到。给无格式的部分加颜色属性又没有头绪，不知如何区分Rang，无奈搞成这样，倒不如不显示格式，全展示成白色算了。</p>
-<p>于是打开SourceTree，开始回退代码，回退过程中想着自己忙活了半天，就这么放弃了，总觉得不甘心，不自觉的去看代码，无意中进入NSAttributedString的类头文件，发现有这么一个API: <strong>enumerateAttribute:inRange:</strong>，出于职业的敏感，心里瞬间有点小兴奋，赶紧查找关于这个方法的说明，发现这个API可以枚举出AttributedString的Attributed并且能够判断条件，如果初始化的时候选择了NSAttributedString的子类NSMutableAttributedString，那么就可以实现对Attribute的修改，这下可好了，赶紧动手实验一番，run起来一看，成了！</p>
-<p>可能大家对block里面的代码有些疑问，问什么判断条件要那么写，其实也是有些无奈，经过调试，我发现没有被颜色标签包裹的文字，经过转换后默认的颜色是黑色（打印出来颜色描述为 0 0 0 1），但是[UIColor blackColor]的颜色描述为0 1，两者不能用==来判断，无奈只能取其白色色值来做匹配，也算是曲线救国吧。</p>
-<h4 id="大招3-enumerateAttribute-inRange-偷天换日"><a href="#大招3-enumerateAttribute-inRange-偷天换日" class="headerlink" title="大招3 enumerateAttribute:inRange: 偷天换日"></a>大招3 enumerateAttribute:inRange: 偷天换日</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSAttributedStringEnumerationOptions</span> opts = <span class="built_in">NSAttributedStringEnumerationLongestEffectiveRangeNotRequired</span>;</span><br><span class="line">[attrStr enumerateAttribute:<span class="built_in">NSForegroundColorAttributeName</span> inRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, attrStr.length) options:opts usingBlock:^(<span class="keyword">id</span>  _Nullable value, <span class="built_in">NSRange</span> range, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIColor</span> *tmpColor = value;</span><br><span class="line">    <span class="built_in">CGFloat</span> white = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">CGFloat</span> alpha = <span class="number">0</span>;</span><br><span class="line">    [tmpColor getWhite:&amp;white alpha:&amp;alpha];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (white == <span class="number">0</span> &amp;&amp; alpha == <span class="number">1</span>) &#123;</span><br><span class="line">        [attrStr addAttributes:@&#123; <span class="built_in">NSForegroundColorAttributeName</span>: color &#125; range:range];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<p>欣喜之余颇有感慨，做人做事确实不能轻易放弃，说不定哪个不经意的瞬间，就会有惊喜(<em>^__^</em>)</p>
-<p>如果你有更好的方案，欢迎沟通交流！</p>
+        <p>软件环境：<code>Cocoapods: 1.5.2</code>，<code>Xcode: 10.1</code></p>
+<p>编译错误：<code>duplicate interface definition for class YYImage</code></p>
+<p>　　今天在做一个 Demo，一开始是直接将 YYImage 的项目直接引入到 Demo 项目中，编译是完全没有问题的，运行也无任何故障，但是由于需要将某个模块拆分出来，做成 Cocoapods 组件，就把 YYImage 用 pod 引用，<code>pod install</code>之后，回来发现无法正常编译。</p>
+<p>　　看到这个错误，真是一脸懵逼，仅仅是从项目引用变成 pod 引用而已呀。我第一反应是项目引用没有清理干净，检查了一遍，发现已经清除 确实没有引用了。思来想去不知道哪里出了问题，于是 Google 走起，发现有人遇到了类似的问题 ：<a href="https://www.jianshu.com/p/351cd5417ef1" target="_blank" rel="noopener">奇怪的 “duplicate interface definition for class ‘xxxx’”</a></p>
+<p>　　赶紧也看一下项目里的引用方式：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#if __has_include(<span class="meta-string">"YYImage.h"</span>)</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"YYImage.h"</span></span></span><br><span class="line"><span class="meta">#elif __has_include(<span class="meta-string">&lt;YYImage/YYImage.h&gt;</span>)</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;YYImage/YYImage.h&gt;</span></span></span><br><span class="line"><span class="meta">#endif</span></span><br></pre></td></tr></table></figure>
+<p>先尝试用文中的方案改一下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#if __has_include(<span class="meta-string">&lt;YYImage/YYImage.h&gt;</span>)</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;YYImage/YYImage.h&gt;</span></span></span><br><span class="line"><span class="meta">#elif __has_include(<span class="meta-string">"YYImage.h"</span>)</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"YYImage.h"</span></span></span><br><span class="line"><span class="meta">#endif</span></span><br></pre></td></tr></table></figure>
+<p>Xcode 中执行 <code>Command + B</code>，编译成功！如果你也遇到类似的问题，希望能帮助到你。</p>
 
       
     </div>
@@ -468,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/25/使用github愉快的写blog/" rel="next" title="使用github愉快的写blog">
-                <i class="fa fa-chevron-left"></i> 使用github愉快的写blog
+              <a href="/2019/01/17/Swift-中的关键字详解/" rel="next" title="Swift 中的关键字详解（转）">
+                <i class="fa fa-chevron-left"></i> Swift 中的关键字详解（转）
               </a>
             
           </div>
@@ -477,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/28/Mac磁盘空间清理/" rel="prev" title="Mac磁盘空间清理">
-                Mac磁盘空间清理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,17 +506,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -657,22 +626,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#大招1-NSDocumentTypeDocumentAttribute-NSHTMLTextDocumentType"><span class="nav-number">1.</span> <span class="nav-text">大招1 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大招2-将一个代表16数的字符串-转成10进制数字"><span class="nav-number">2.</span> <span class="nav-text">大招2 将一个代表16数的字符串 转成10进制数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大招3-enumerateAttribute-inRange-偷天换日"><span class="nav-number">3.</span> <span class="nav-text">大招3 enumerateAttribute:inRange: 偷天换日</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
