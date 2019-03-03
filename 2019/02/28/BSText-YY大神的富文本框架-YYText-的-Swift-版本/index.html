@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.2">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言　　度过春节期间的安逸期，需要从慵懒的状态尽快恢复过来，节前有几个月时间，趁着公司业务线不怎么繁忙，抱着学习的态度，尝试将 YY 大神的 YYText 用 Swift 重新实现一下（之前用 Swift 最多写写 Demo，没有用来做项目）。但是由于年前还有个 bug 没有修复，怕大家的 issue 雪花般飞过来，果断没敢开源出来。新年新气象，改完 bug 赶紧和大家分享一下啦 😁 　　目前">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BSText - YY大神的富文本框架 YYText 的 Swift 版本">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/index.html">
+<meta property="og:site_name" content="Bruce&#39;s Blog">
+<meta property="og:description" content="前言　　度过春节期间的安逸期，需要从慵懒的状态尽快恢复过来，节前有几个月时间，趁着公司业务线不怎么繁忙，抱着学习的态度，尝试将 YY 大神的 YYText 用 Swift 重新实现一下（之前用 Swift 最多写写 Demo，没有用来做项目）。但是由于年前还有个 bug 没有修复，怕大家的 issue 雪花般飞过来，果断没敢开源出来。新年新气象，改完 bug 赶紧和大家分享一下啦 😁 　　目前">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/framework/BSText/squirrel.jpg">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextAttachment.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextHighlight.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBinding.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextShadow.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBorder.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBackgroundBorder.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBlockBorder.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Obliqueness.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Underline.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Strikethrough.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBackedString.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Font.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Kern.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Stroke.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/StrokeColor.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Shadow.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Ligature.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/VerticalForms.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/WriteDirection.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/RunDelegate.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/Alignment.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineBreakMode.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineSpacing.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/ParagraphSpacing.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/FirstLineHeadIndent.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/HeadIndent.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/TailIndent.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/MinimumLineHeight.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/MaximumLineHeight.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineHeightMultiple.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/BaseWritingDirection.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/Tab.png">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_path.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_markdown.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_vertical.gif">
+<meta property="og:image" content="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_paste.gif">
+<meta property="og:updated_time" content="2019-03-03T10:58:42.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BSText - YY大神的富文本框架 YYText 的 Swift 版本">
+<meta name="twitter:description" content="前言　　度过春节期间的安逸期，需要从慵懒的状态尽快恢复过来，节前有几个月时间，趁着公司业务线不怎么繁忙，抱着学习的态度，尝试将 YY 大神的 YYText 用 Swift 重新实现一下（之前用 Swift 最多写写 Demo，没有用来做项目）。但是由于年前还有个 bug 没有修复，怕大家的 issue 雪花般飞过来，果断没敢开源出来。新年新气象，改完 bug 赶紧和大家分享一下啦 😁 　　目前">
+<meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/framework/BSText/squirrel.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>BSText - YY大神的富文本框架 YYText 的 Swift 版本 | Bruce's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/a1049145827"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bruce's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Hi~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coder bruce">
+      <meta itemprop="description" content="hello world">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bruce's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BSText - YY大神的富文本框架 YYText 的 Swift 版本
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-28 16:10:36" itemprop="dateCreated datePublished" datetime="2019-02-28T16:10:36+08:00">2019-02-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-03 18:58:42" itemprop="dateModified" datetime="2019-03-03T18:58:42+08:00">2019-03-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS开发/" itemprop="url" rel="index"><span itemprop="name">iOS开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/28/BSText-YY大神的富文本框架-YYText-的-Swift-版本/" class="leancloud_visitors" data-flag-title="BSText - YY大神的富文本框架 YYText 的 Swift 版本">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://github.com/a1049145827/Resources/raw/master/framework/BSText/squirrel.jpg" alt="鼠奎特"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>　　度过春节期间的安逸期，需要从慵懒的状态尽快恢复过来，节前有几个月时间，趁着公司业务线不怎么繁忙，抱着学习的态度，尝试将 YY 大神的 YYText 用 Swift 重新实现一下（之前用 Swift 最多写写 Demo，没有用来做项目）。但是由于年前还有个 bug 没有修复，怕大家的 issue 雪花般飞过来，果断没敢开源出来。新年新气象，改完 bug 赶紧和大家分享一下啦 😁</p>
+<p>　　目前项目已经实现了 YYText 中的所有功能，如果大家遇到什么问题，欢迎提 issue，或者邮箱联系 <a href="mailto:a1049145827@hotmail.com" target="_blank" rel="noopener">a1049145827@hotmail.com</a> ，如果觉得有用，请不要吝惜您的 star ✨。</p>
+<p>　　用过 YYText 的同学应该已经相当熟悉了，<a href="https://github.com/a1049145827/BSText" target="_blank" rel="noopener">传送门</a>。</p>
+<h1 id="一些挑战"><a href="#一些挑战" class="headerlink" title="一些挑战"></a>一些挑战</h1><p>　　由于近年来 Swift 发展迅速，ABI 一直不能稳定下来，导致开发者们都在吐槽：“每年学习一门新语言”，这样就直接导致在网上查资料非常困难，好不容易查到的资料，demo 代码甚至都不能通过编译，这样推进的效率大打折扣，确实非常痛苦，眼看 Swift 就要发布 Swift5，心里似乎又有了希望。于是决心要用 Swift 把 <a href="https://github.com/ibireme/YYText/blob/master/README.md" target="_blank" rel="noopener">YYText</a> 的功能实现一遍，一来练习 Swift 语法，二来以后也可以持续维护，希望好的轮子可以被更多的开发者认可和采用。</p>
+<h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>功能强大的 iOS 富文本编辑与显示框架。<br><br>(该项目是 <a href="https://github.com/ibireme/YYText" target="_blank" rel="noopener">YYText</a> 的 Swift 版本，项目的前缀 ‘BS’ 来自于 BlueSky，就是创作了《冰河世纪》系列电影的 BlueSky 工作室)</p>
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
+<li>API 兼容 UILabel 和 UITextView</li>
+<li>支持高性能的异步排版和渲染</li>
+<li>扩展了 CoreText 的属性以支持更多文字效果</li>
+<li>支持 UIImage、UIView、CALayer 作为图文混排元素</li>
+<li>支持添加自定义样式的、可点击的文本高亮范围</li>
+<li>支持自定义文本解析 (内置简单的 Markdown/表情解析)</li>
+<li>支持文本容器路径、内部留空路径的控制</li>
+<li>支持文字竖排版，可用于编辑和显示中日韩文本</li>
+<li>支持图片和富文本的复制粘贴</li>
+<li>文本编辑时，支持富文本占位符</li>
+<li>支持自定义键盘视图</li>
+<li>撤销和重做次数的控制</li>
+<li>富文本的序列化与反序列化支持</li>
+<li>支持多语言，支持 VoiceOver</li>
+<li>全部代码都有文档注释</li>
+</ul>
+<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p>本项目架构与 <a href="https://github.com/ibireme/YYText" target="_blank" rel="noopener">YYText </a> 保持一致</p>
+<h1 id="文本属性"><a href="#文本属性" class="headerlink" title="文本属性"></a>文本属性</h1><h2 id="BSText-原生支持的属性"><a href="#BSText-原生支持的属性" class="headerlink" title="BSText 原生支持的属性"></a>BSText 原生支持的属性</h2><table><thead><tr><th>Demo</th><th>Attribute Name</th><th>Class</th></tr></thead><tbody><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextAttachment.gif" width="200"></td><td>TextAttachment</td><td>TextAttachment</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextHighlight.gif" width="200"></td><td>TextHighlight</td><td>TextHighlight</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBinding.gif" width="200"></td><td>TextBinding</td><td>TextBinding</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextShadow.png" width="200"></td><td>TextShadow<br>TextInnerShadow</td><td>TextShadow</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBorder.png" width="200"></td><td>TextBorder</td><td>TextBorder</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBackgroundBorder.png" width="200"></td><td>TextBackgroundBorder</td><td>TextBorder</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBlockBorder.png" width="200"></td><td>TextBlockBorder</td><td>TextBorder</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Obliqueness.png" width="200"></td><td>TextGlyphTransform</td><td> NSValue(CGAffineTransform)</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Underline.png" width="200"></td><td>TextUnderline</td><td>TextDecoration</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Strikethrough.png" width="200"></td><td>TextStrickthrough</td><td>TextDecoration</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/YYText Extended/TextBackedString.png" width="200"></td><td>TextBackedString</td><td>TextBackedString</td></tr></tbody></table>
+
+
+
+<h2 id="BSText-支持的-CoreText-属性"><a href="#BSText-支持的-CoreText-属性" class="headerlink" title="BSText 支持的 CoreText 属性"></a>BSText 支持的 CoreText 属性</h2><table><thead><tr><th>Demo</th><th>Attribute Name</th><th>Class</th></tr></thead><tbody><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Font.png" width="200"></td><td> Font </td><td>UIFont(CTFontRef)</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Kern.png" width="200"></td><td> Kern </td><td>NSNumber</td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Stroke.png" width="200"></td><td> StrokeWidth </td><td> NSNumber </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/StrokeColor.png" width="200"></td><td> StrokeColor </td><td> CGColorRef </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Shadow.png" width="200"></td><td> Shadow </td><td> NSShadow </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Ligature.png" width="200"></td><td> Ligature </td><td> NSNumber </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/VerticalForms.png" width="200"></td><td> VerticalGlyphForm </td><td> NSNumber(BOOL) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/WriteDirection.png" width="200"></td><td> WritingDirection </td><td> NSArray(NSNumber) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/RunDelegate.png" width="200"></td><td> RunDelegate </td><td> CTRunDelegateRef </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/Alignment.png" width="200"></td><td> TextAlignment </td><td> NSParagraphStyle <br>(NSTextAlignment) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineBreakMode.png" width="200"></td><td> LineBreakMode </td><td> NSParagraphStyle <br>(NSLineBreakMode) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineSpacing.png" width="200"></td><td> LineSpacing </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/ParagraphSpacing.png" width="200"></td><td> ParagraphSpacing <br> ParagraphSpacingBefore </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/FirstLineHeadIndent.png" width="200"></td><td> FirstLineHeadIndent </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/HeadIndent.png" width="200"></td><td> HeadIndent </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/TailIndent.png" width="200"></td><td> TailIndent </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/MinimumLineHeight.png" width="200"></td><td> MinimumLineHeight </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/MaximumLineHeight.png" width="200"></td><td> MaximumLineHeight </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/LineHeightMultiple.png" width="200"></td><td> LineHeightMultiple </td><td> NSParagraphStyle <br>(CGFloat) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/BaseWritingDirection.png" width="200"></td><td> BaseWritingDirection </td><td> NSParagraphStyle <br>(NSWritingDirection) </td></tr><tr><td><img src="https://raw.github.com/a1049145827/BSText/master/Attributes/CoreText and TextKit/Paragraph/Tab.png" width="200"></td><td> DefaultTabInterval <br> TabStops </td><td> NSParagraphStyle <br>CGFloat/NSArray(NSTextTab)</td></tr></tbody></table>
+
+<hr>
+
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BSLabel (和 UILabel 用法一致)</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.frame = ...</span><br><span class="line">label.font = ...</span><br><span class="line">label.textColor = ...</span><br><span class="line">label.textAlignment = ...</span><br><span class="line">label.lineBreakMode = ...</span><br><span class="line">label.numberOfLines = ...</span><br><span class="line">label.text = ...</span><br><span class="line">    </span><br><span class="line"><span class="comment">// BSTextView (和 UITextView 用法一致)</span></span><br><span class="line"><span class="keyword">let</span> textView = <span class="type">BSTextView</span>()</span><br><span class="line">textView.frame = ...</span><br><span class="line">textView.font = ...</span><br><span class="line">textView.textColor = ...</span><br><span class="line">textView.dataDetectorTypes = ...</span><br><span class="line">textView.placeHolderText = ...</span><br><span class="line">textView.placeHolderTextColor = ...</span><br><span class="line">textView.delegate = ...</span><br></pre></td></tr></table></figure>
+<h2 id="属性文本"><a href="#属性文本" class="headerlink" title="属性文本"></a>属性文本</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建一个属性文本</span></span><br><span class="line"><span class="keyword">let</span> text = <span class="type">NSMutableAttributedString</span>(string: <span class="string">"Some Text, blabla..."</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2. 为文本设置属性</span></span><br><span class="line">text.bs_font = <span class="type">UIFont</span>.boldSystemFont(ofSize:<span class="number">30</span>)</span><br><span class="line">text.bs_color = <span class="type">UIColor</span>.blue</span><br><span class="line">text.bs_set(color: <span class="type">UIColor</span>.red, range: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: <span class="number">4</span>))</span><br><span class="line">text.bs_lineSpacing = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 3. 赋值到 BSLabel 或 BSTextView</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.frame = <span class="type">CGRect</span>(x: <span class="number">15</span>, y: <span class="number">100</span>, width: <span class="number">200</span>, height: <span class="number">80</span>)</span><br><span class="line">label.attributedText = text</span><br><span class="line">    </span><br><span class="line"><span class="keyword">let</span> textView = <span class="type">BSTextView</span>()</span><br><span class="line">textView.frame = <span class="type">CGRect</span>(x: <span class="number">15</span>, y: <span class="number">200</span>, width: <span class="number">200</span>, height: <span class="number">80</span>)</span><br><span class="line">textView.attributedText = text</span><br></pre></td></tr></table></figure>
+<h2 id="文本高亮"><a href="#文本高亮" class="headerlink" title="文本高亮"></a>文本高亮</h2><p>你可以用一些已经封装好的简便方法来设置文本高亮：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">text.bs_set(textHighlightRange: range,</span><br><span class="line">            color: <span class="type">UIColor</span>.blue,</span><br><span class="line">            backgroundColor: <span class="type">UIColor</span>.gray) &#123; (view, text, range, rect) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者用更复杂的办法来调节文本高亮的细节：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建一个"高亮"属性，当用户点击了高亮区域的文本时，"高亮"属性会替换掉原本的属性</span></span><br><span class="line"><span class="keyword">let</span> border = <span class="type">TextBorder</span>.border(with: <span class="type">UIColor</span>.gray, cornerRadius: <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> highlight = <span class="type">TextHighlight</span>()</span><br><span class="line">highlight.color = .white</span><br><span class="line">highlight.backgroundBorder = highlightBorder</span><br><span class="line">highlight.tapAction = &#123; (containerView, text, range, rect) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">    <span class="comment">// 你也可以把事件回调放到 BSLabel 和 BSTextView 来处理。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 把"高亮"属性设置到某个文本范围</span></span><br><span class="line"><span class="keyword">let</span> attributedText = <span class="type">NSMutableAttributedString</span>(string: <span class="string">" "</span>)</span><br><span class="line">attributedText.bs_set(textHighlight: highlight, range: highlightRange)</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 3. 把属性文本设置到 BSLabel 或 BSTextView</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.attributedText = attributedText</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> textView = <span class="type">BSTextView</span>()</span><br><span class="line">textView.delegate = <span class="keyword">self</span></span><br><span class="line">textView.attributedText = ...</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 4. 接受事件回调</span></span><br><span class="line">label.highlightTapAction = &#123; (containerView, text, range, rect) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">&#125;;</span><br><span class="line">label.highlightLongPressAction = &#123; (containerView, text, range, rect) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - TextViewDelegate</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">textView</span><span class="params">(<span class="number">_</span> textView: BSTextView, didTap highlight: TextHighlight, <span class="keyword">in</span> characterRange: NSRange, rect: CGRect)</span></span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">textView</span><span class="params">(<span class="number">_</span> textView: BSTextView, didLongPress highlight: TextHighlight, <span class="keyword">in</span> characterRange: NSRange, rect: CGRect)</span></span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"tap text range:..."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="图文混排"><a href="#图文混排" class="headerlink" title="图文混排"></a>图文混排</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="type">NSMutableAttributedString</span>()</span><br><span class="line"><span class="keyword">let</span> font = <span class="type">UIFont</span>.systemFont(ofSize: <span class="number">16</span>)</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 嵌入 UIImage</span></span><br><span class="line"><span class="keyword">let</span> image = <span class="type">UIImage</span>.<span class="keyword">init</span>(named: <span class="string">"dribbble64_imageio"</span>)</span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> attachment = <span class="type">NSMutableAttributedString</span>.bs_attachmentString(with: image, contentMode: .center, attachmentSize: image?.size ?? .zero, alignTo: font, alignment: .center) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">text.append(attachment)</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 嵌入 UIView</span></span><br><span class="line"><span class="keyword">let</span> switcher = <span class="type">UISwitch</span>()</span><br><span class="line">switcher.sizeToFit()</span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> attachment1 = <span class="type">NSMutableAttributedString</span>.bs_attachmentString(with: switcher, contentMode: .center, attachmentSize: switcher.frame.size, alignTo: font, alignment: .center) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">text.append(attachment1)</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 嵌入 CALayer</span></span><br><span class="line"><span class="keyword">let</span> layer = <span class="type">CAShapeLayer</span>()</span><br><span class="line">layer.path = ...</span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> attachment2 = <span class="type">NSMutableAttributedString</span>.bs_attachmentString(with: layer, contentMode: .center, attachmentSize: layer.frame.size, alignTo: font, alignment: .center) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">text.append(attachment2)</span><br></pre></td></tr></table></figure>
+<h2 id="文本布局计算"><a href="#文本布局计算" class="headerlink" title="文本布局计算"></a>文本布局计算</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="type">NSAttributedString</span>()</span><br><span class="line"><span class="keyword">let</span> size = <span class="type">CGSize</span>(width: <span class="number">100</span>, height: <span class="type">CGFloat</span>.greatestFiniteMagnitude)</span><br><span class="line"><span class="keyword">let</span> container = <span class="type">TextContainer</span>()</span><br><span class="line">container.size = size</span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> layout = <span class="type">TextLayout</span>(container: container, text: text) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 获取文本显示位置和大小</span></span><br><span class="line">layout.textBoundingRect <span class="comment">// get bounding rect</span></span><br><span class="line">layout.textBoundingSize <span class="comment">// get bounding size</span></span><br><span class="line">	</span><br><span class="line"> <span class="comment">// 查询文本排版结果</span></span><br><span class="line">layout.lineIndex(<span class="keyword">for</span>: <span class="type">CGPoint</span>(x: <span class="number">10</span>, y: <span class="number">10</span>))</span><br><span class="line">layout.closestLineIndex(<span class="keyword">for</span>: <span class="type">CGPoint</span>(x: <span class="number">10</span>, y: <span class="number">10</span>))</span><br><span class="line">layout.closestPosition(to: <span class="type">CGPoint</span>(x: <span class="number">10</span>, y: <span class="number">10</span>))</span><br><span class="line">layout.textRange(at: <span class="type">CGPoint</span>(x: <span class="number">10</span>, y: <span class="number">10</span>))</span><br><span class="line">layout.rect(<span class="keyword">for</span>: <span class="type">TextRange</span>(range: <span class="type">NSRange</span>(location: <span class="number">10</span>, length: <span class="number">2</span>)))</span><br><span class="line">layout.selectionRects(<span class="keyword">for</span>: <span class="type">TextRange</span>(range: <span class="type">NSRange</span>(location: <span class="number">10</span>, length: <span class="number">2</span>)))</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 显示文本排版结果</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: layout.textBoundingSize.width, height: layout.textBoundingSize.height)</span><br><span class="line">label.textLayout = layout;</span><br></pre></td></tr></table></figure>
+<h2 id="文本行位置调整"><a href="#文本行位置调整" class="headerlink" title="文本行位置调整"></a>文本行位置调整</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 由于中文、英文、Emoji 等字体高度不一致，或者富文本中出现了不同字号的字体，</span></span><br><span class="line"><span class="comment">// 可能会造成每行文字的高度不一致。这里可以添加一个修改器来实现固定行高，或者自定义文本行位置。</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// 简单的方法:</span></span><br><span class="line"><span class="comment">// 1. 创建一个文本行位置修改类，实现 `TextLinePositionModifier` 协议。</span></span><br><span class="line"><span class="comment">// 2. 设置到 Label 或 TextView。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> modifier = <span class="type">TextLinePositionSimpleModifier</span>()</span><br><span class="line">modifier.fixedLineHeight = <span class="number">24</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.linePositionModifier = modifier</span><br><span class="line"></span><br><span class="line"><span class="comment">// 完全控制:</span></span><br><span class="line"><span class="keyword">let</span> modifier = <span class="type">TextLinePositionSimpleModifier</span>()</span><br><span class="line">modifier.fixedLineHeight = <span class="number">24</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">let</span> container = <span class="type">TextContainer</span>()</span><br><span class="line">container.size = <span class="type">CGSize</span>(width: <span class="number">100</span>, height: <span class="type">CGFloat</span>.greatestFiniteMagnitude)</span><br><span class="line">container.linePositionModifier = modifier</span><br><span class="line">  </span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> layout = <span class="type">TextLayout</span>(container: container, text: text) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.size = layout.textBoundingSize</span><br><span class="line">label.textLayout = layout</span><br></pre></td></tr></table></figure>
+<h2 id="异步排版和渲染"><a href="#异步排版和渲染" class="headerlink" title="异步排版和渲染"></a>异步排版和渲染</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果你在显示字符串时有性能问题，可以这样开启异步模式：</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.displaysAsynchronously = <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 如果需要获得最高的性能，你可以在后台线程用 `TextLayout` 进行预排版： </span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.displaysAsynchronously = <span class="literal">true</span> <span class="comment">// 开启异步绘制</span></span><br><span class="line">label.ignoreCommonProperties = <span class="literal">true</span> <span class="comment">// 忽略除了 textLayout 之外的其他属性</span></span><br><span class="line"></span><br><span class="line"><span class="type">DispatchQueue</span>.global().async &#123;</span><br><span class="line">    <span class="comment">// 创建属性字符串</span></span><br><span class="line">    <span class="keyword">let</span> text = <span class="type">NSMutableAttributedString</span>(string: <span class="string">"Some Text"</span>)</span><br><span class="line">    text.bs_font = <span class="type">UIFont</span>.systemFont(ofSize: <span class="number">16</span>)</span><br><span class="line">    text.bs_color = <span class="type">UIColor</span>.gray</span><br><span class="line">    text.bs_set(color: .red, range: <span class="type">NSRange</span>(location: <span class="number">0</span>, length: <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建文本容器</span></span><br><span class="line">    <span class="keyword">let</span> container = <span class="type">TextContainer</span>()</span><br><span class="line">    container.size = <span class="type">CGSize</span>(width: <span class="number">100</span>, height: <span class="type">CGFloat</span>.greatestFiniteMagnitude);</span><br><span class="line">    container.maximumNumberOfRows = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 生成排版结果</span></span><br><span class="line">    <span class="keyword">let</span> layout = <span class="type">TextLayout</span>(container: container, text: text)</span><br><span class="line"></span><br><span class="line">    <span class="type">DispatchQueue</span>.main.async &#123;</span><br><span class="line">        label.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: layout.textBoundingSize.width, height: layout.textBoundingSize.height)</span><br><span class="line">        label.textLayout = layout;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文本容器控制"><a href="#文本容器控制" class="headerlink" title="文本容器控制"></a>文本容器控制</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.textContainerPath = <span class="type">UIBezierPath</span>(...)</span><br><span class="line">label.exclusionPaths = [<span class="type">UIBezierPath</span>(), ...]</span><br><span class="line">label.textContainerInset = <span class="type">UIEdgeInsets</span>(...)</span><br><span class="line">label.verticalForm = <span class="literal">true</span>/<span class="literal">false</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">let</span> textView = <span class="type">BSTextView</span>()</span><br><span class="line">textView.exclusionPaths = [<span class="type">UIBezierPath</span>(), ...]</span><br><span class="line">textView.textContainerInset = <span class="type">UIEdgeInsets</span>(...)</span><br><span class="line">textView.verticalForm = <span class="literal">true</span>/<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h2 id="文本解析"><a href="#文本解析" class="headerlink" title="文本解析"></a>文本解析</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 创建一个解析器</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">// 内置简单的表情解析</span></span><br><span class="line"><span class="keyword">let</span> simpleEmoticonParser = <span class="type">TextSimpleEmoticonParser</span>()</span><br><span class="line"><span class="keyword">var</span> mapper = [<span class="type">String</span>: <span class="type">UIImage</span>]()</span><br><span class="line">mapper[<span class="string">":smile:"</span>] = <span class="type">UIImage</span>.<span class="keyword">init</span>(named: <span class="string">"smile.png"</span>)</span><br><span class="line">mapper[<span class="string">":cool:"</span>] = <span class="type">UIImage</span>.<span class="keyword">init</span>(named: <span class="string">"cool.png"</span>)</span><br><span class="line">mapper[<span class="string">":cry:"</span>] = <span class="type">UIImage</span>.<span class="keyword">init</span>(named: <span class="string">"cry.png"</span>)</span><br><span class="line">mapper[<span class="string">":wink:"</span>] = <span class="type">UIImage</span>.<span class="keyword">init</span>(named: <span class="string">"wink.png"</span>)</span><br><span class="line">simpleEmoticonParser.emoticonMapper = mapper;</span><br><span class="line">	</span><br><span class="line"><span class="comment">// 内置简单的 markdown 解析</span></span><br><span class="line"><span class="keyword">let</span> markdownParser = <span class="type">TextSimpleMarkdownParser</span>()</span><br><span class="line">markdownParser.setColorWithDarkTheme()</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 实现 `TextParser` 协议的自定义解析器</span></span><br><span class="line"><span class="keyword">let</span> parser = <span class="type">MyCustomParser</span>()</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2. 把解析器添加到 BSLabel 或 BSTextView</span></span><br><span class="line"><span class="keyword">let</span> label = <span class="type">BSLabel</span>()</span><br><span class="line">label.textParser = parser</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> textView = <span class="type">BSTextView</span>()</span><br><span class="line">textView.textParser = parser</span><br></pre></td></tr></table></figure>
+<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置一个全局的 debug option 来显示排版结果。</span></span><br><span class="line"><span class="keyword">let</span> debugOption = <span class="type">TextDebugOption</span>()</span><br><span class="line">debugOption.baselineColor = .red</span><br><span class="line">debugOption.ctFrameBorderColor = .red</span><br><span class="line">debugOption.ctLineFillColor = <span class="type">UIColor</span>(red: <span class="number">0</span>, green: <span class="number">0.463</span>, blue: <span class="number">1</span>, alpha: <span class="number">0.18</span>)</span><br><span class="line">debugOption.cgGlyphBorderColor = <span class="type">UIColor</span>(red: <span class="number">1</span>, green: <span class="number">0.524</span>, blue: <span class="number">0</span>, alpha: <span class="number">0.2</span>)</span><br><span class="line"><span class="type">TextDebugOption</span>.setSharedDebugOption(debugOption)</span><br></pre></td></tr></table></figure>
+<h2 id="更多示例"><a href="#更多示例" class="headerlink" title="更多示例"></a>更多示例</h2><p>查看演示工程 <code>Demo/BSTextDemo.xcodeproj</code>:</p>
+<p><img src="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_path.gif" width="320"><br><img src="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_markdown.gif" width="320"><br><br> <br><br><img src="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_vertical.gif" width="320"><br><img src="https://raw.github.com/a1049145827/BSText/master/Demo/DemoSnapshot/text_paste.gif" width="320"></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h2><ol>
+<li><p>在 Podfile 中添加 <code>pod &#39;BSText&#39;</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</span><br><span class="line">platform :ios, &apos;8.0&apos;</span><br><span class="line">use_frameworks!</span><br><span class="line"></span><br><span class="line">target &apos;MyApp&apos; do</span><br><span class="line">  # your other pod</span><br><span class="line">  # ...</span><br><span class="line">  pod &apos;BSText&apos;, &apos;~&gt; 1.0&apos;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行 <code>pod install</code> 或 <code>pod update</code>。</p>
+</li>
+<li><p>导入模块 <code>import BSText</code>，OC 项目中使用 <code>@import BSText;</code>。</p>
+</li>
+</ol>
+<h2 id="Carthage"><a href="#Carthage" class="headerlink" title="Carthage"></a>Carthage</h2><ol>
+<li>在 Cartfile 中添加 <code>github &quot;a1049145827/BSText&quot;</code>。</li>
+<li>执行 <code>carthage update --platform ios</code> 并将生成的 framework 添加到你的工程。</li>
+<li>导入模块 <code>import BSText</code>，OC 项目中使用 <code>@import BSText;</code>。</li>
+</ol>
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><ol>
+<li>下载 BSText 文件夹内的所有内容。</li>
+<li>将 BSText 内的源文件添加(拖放)到你的工程。</li>
+<li>链接以下 frameworks:<ul>
+<li>UIKit</li>
+<li>CoreFoundation</li>
+<li>CoreText</li>
+<li>QuartzCore</li>
+<li>Accelerate</li>
+<li>MobileCoreServices</li>
+</ul>
+</li>
+<li>导入模块 <code>import BSText</code>，OC 项目中使用 <code>@import BSText;</code>。</li>
+</ol>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>你可以添加 <a href="https://github.com/ibireme/YYImage" target="_blank" rel="noopener">YYImage</a> 或 <a href="https://github.com/ibireme/YYWebImage" target="_blank" rel="noopener">YYWebImage</a> 到你的工程，以支持动画格式(GIF/APNG/WebP)的图片。</p>
+<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>本项目目前还没有生成在线文档，你可以在 <a href="http://cocoadocs.org/docsets/YYText/" target="_blank" rel="noopener">CocoaDocs</a> 查看 YYText 的在线 API 文档，也可以用 <a href="https://github.com/tomaz/appledoc" target="_blank" rel="noopener">appledoc</a> 本地生成文档。</p>
+<h1 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h1><p>该项目最低支持 <code>iOS 8.0</code> 和 <code>Xcode 10.0</code>。</p>
+<h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><ul>
+<li>与 YYText 一样，BSText 并不能支持所有 CoreText/TextKit 的属性，比如 NSBackgroundColor、NSStrikethrough、NSUnderline、NSAttachment、NSLink 等，但 BSText 中基本都有对应属性作为替代。详情见上方表格。</li>
+<li>BSTextView 未实现局部刷新，所以在输入和编辑大量的文本（比如超过大概五千个汉字、或大概一万个英文字符）时会出现较明显的卡顿现象。</li>
+<li>竖排版时，添加 exclusionPaths 在少数情况下可能会导致文本显示空白。</li>
+<li>当添加了非矩形的 textContainerPath，并且有嵌入大于文本排版方向宽度的 RunDelegate 时，RunDelegate 之后的文字会无法显示。这是 CoreText 的 Bug（或者说是 Feature）。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">------------- 本文结束<i class="fa fa-paw"></i>感谢您的阅读 -------------</div>
+
+</div>
+    
+    </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/cocoaPods-奇怪的-“duplicate-interface-definition-for-class-‘xxxx’”/" rel="next" title="cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”">
+                <i class="fa fa-chevron-left"></i> cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Coder bruce" />
+            
+              <p class="site-author-name" itemprop="name">Coder bruce</p>
+              <p class="site-description motion-element" itemprop="description">hello world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些挑战"><span class="nav-number">2.</span> <span class="nav-text">一些挑战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目介绍"><span class="nav-number">3.</span> <span class="nav-text">项目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特性"><span class="nav-number">4.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#架构"><span class="nav-number">5.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本属性"><span class="nav-number">6.</span> <span class="nav-text">文本属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BSText-原生支持的属性"><span class="nav-number">6.1.</span> <span class="nav-text">BSText 原生支持的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSText-支持的-CoreText-属性"><span class="nav-number">6.2.</span> <span class="nav-text">BSText 支持的 CoreText 属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用法"><span class="nav-number">7.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">7.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性文本"><span class="nav-number">7.2.</span> <span class="nav-text">属性文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本高亮"><span class="nav-number">7.3.</span> <span class="nav-text">文本高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图文混排"><span class="nav-number">7.4.</span> <span class="nav-text">图文混排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本布局计算"><span class="nav-number">7.5.</span> <span class="nav-text">文本布局计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本行位置调整"><span class="nav-number">7.6.</span> <span class="nav-text">文本行位置调整</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步排版和渲染"><span class="nav-number">7.7.</span> <span class="nav-text">异步排版和渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本容器控制"><span class="nav-number">7.8.</span> <span class="nav-text">文本容器控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本解析"><span class="nav-number">7.9.</span> <span class="nav-text">文本解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debug"><span class="nav-number">7.10.</span> <span class="nav-text">Debug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多示例"><span class="nav-number">7.11.</span> <span class="nav-text">更多示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">8.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CocoaPods"><span class="nav-number">8.1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Carthage"><span class="nav-number">8.2.</span> <span class="nav-text">Carthage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动安装"><span class="nav-number">8.3.</span> <span class="nav-text">手动安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">9.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文档"><span class="nav-number">10.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统要求"><span class="nav-number">11.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#已知问题"><span class="nav-number">12.</span> <span class="nav-text">已知问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder bruce</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'AxIriir0LGqw2iVxags6bRKn-gzGzoHsz',
+        appKey: 'ABbwAnnUk22JYvYjVq5YIL8F',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "AxIriir0LGqw2iVxags6bRKn-gzGzoHsz",
+                'X-LC-Key': "ABbwAnnUk22JYvYjVq5YIL8F",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 --> 
+<script type="text/javascript" src="/js/src/love.js"></script>
