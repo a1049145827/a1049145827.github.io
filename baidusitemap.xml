@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>https://a1049145827.github.io/2019/03/10/iOS-%E4%B8%AD%E7%9A%84-block/</loc>
+    <lastmod>2019-03-12T04:08:42.628Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 中的 block</title>
+        <pubTime>2019-03-10T04:06:51.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS开发" url="http://yoursite.com/categories/iOS%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://a1049145827.github.io/2019/02/28/BSText-YY%E5%A4%A7%E7%A5%9E%E7%9A%84%E5%AF%8C%E6%96%87%E6%9C%AC%E6%A1%86%E6%9E%B6-YYText-%E7%9A%84-Swift-%E7%89%88%E6%9C%AC/</loc>
-    <lastmod>2019-03-04T01:55:46.450Z</lastmod>
+    <lastmod>2019-03-04T01:55:46.000Z</lastmod>
     <data>
         <display>
         <title>BSText - YY大神的富文本框架 YYText 的 Swift 版本</title>
@@ -25,7 +45,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/24/cocoaPods-%E5%A5%87%E6%80%AA%E7%9A%84-%E2%80%9Cduplicate-interface-definition-for-class-%E2%80%98xxxx%E2%80%99%E2%80%9D/</loc>
-    <lastmod>2019-01-24T07:55:22.329Z</lastmod>
+    <lastmod>2019-01-24T07:55:22.000Z</lastmod>
     <data>
         <display>
         <title>cocoaPods 奇怪的 “duplicate interface definition for class ‘xxxx’”</title>
@@ -45,7 +65,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/17/Swift-%E4%B8%AD%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2019-01-17T06:18:09.848Z</lastmod>
+    <lastmod>2019-01-17T06:18:09.000Z</lastmod>
     <data>
         <display>
         <title>Swift 中的关键字详解（转）</title>
@@ -65,7 +85,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/16/Ubuntu-%E4%B8%AD%E7%9A%84-apt-update-%E5%92%8C-upgrade/</loc>
-    <lastmod>2019-01-16T02:07:24.474Z</lastmod>
+    <lastmod>2019-01-16T02:07:24.000Z</lastmod>
     <data>
         <display>
         <title>Ubuntu 中的 apt update 和 upgrade</title>
@@ -85,7 +105,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/15/Flutter-%E5%8D%A1%E5%9C%A8-package-get-%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
-    <lastmod>2019-01-15T06:33:06.040Z</lastmod>
+    <lastmod>2019-01-15T06:33:06.000Z</lastmod>
     <data>
         <display>
         <title>Flutter 卡在 package get 的解决办法</title>
@@ -105,7 +125,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/11/iOS%E8%87%AA%E5%AE%9A%E4%B9%89Framework-%E4%BD%BF%E7%94%A8%E6%97%B6%E6%8A%A5%E9%94%99-Could-not-build-module-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2019-01-11T03:55:14.499Z</lastmod>
+    <lastmod>2019-01-11T03:55:14.000Z</lastmod>
     <data>
         <display>
         <title>iOS自定义Framework 使用时报错 Could not build module 解决方法</title>
@@ -125,7 +145,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/30/iOS%E5%BC%80%E5%8F%91-Swift-%E5%AE%8C%E6%88%90%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86/</loc>
-    <lastmod>2019-01-11T01:39:39.860Z</lastmod>
+    <lastmod>2019-01-11T01:39:39.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 Swift 完成矩阵求逆</title>
@@ -145,7 +165,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/12/19/iOS%E5%BC%80%E5%8F%91-NSArray%E5%80%92%E5%BA%8F%E8%BE%93%E5%87%BA-Swift-Array%E5%80%92%E5%BA%8F%E6%8E%92%E5%88%97/</loc>
-    <lastmod>2019-01-11T01:30:11.453Z</lastmod>
+    <lastmod>2019-01-11T01:30:11.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发 - NSArray 倒序输出 & Swift-Array 倒序排列</title>
@@ -165,7 +185,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2019/01/10/Mac-%E7%8E%AF%E5%A2%83-Gradle-project-Sync-Failed-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2019-01-11T01:15:14.667Z</lastmod>
+    <lastmod>2019-01-11T01:15:14.000Z</lastmod>
     <data>
         <display>
         <title>Mac 环境 Gradle project Sync Failed 解决方法</title>
@@ -185,7 +205,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/12/12/H5-%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E8%AF%8D%E6%B1%87/</loc>
-    <lastmod>2019-01-09T09:36:41.470Z</lastmod>
+    <lastmod>2019-01-09T09:36:41.000Z</lastmod>
     <data>
         <display>
         <title>H5 开发常用词汇</title>
@@ -205,7 +225,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/12/18/Swift-%E4%B8%AD%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%BF%E7%94%A8-UnsafePointer/</loc>
-    <lastmod>2018-12-22T07:18:14.548Z</lastmod>
+    <lastmod>2018-12-22T07:18:14.000Z</lastmod>
     <data>
         <display>
         <title>Swift 中指针的使用 Unsafe[Mutable]Pointer</title>
@@ -225,7 +245,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/12/19/Swift-%E8%B6%85%E5%87%BA%E7%88%B6%E8%A7%86%E5%9B%BE%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2018-12-19T06:53:39.814Z</lastmod>
+    <lastmod>2018-12-19T06:53:39.000Z</lastmod>
     <data>
         <display>
         <title>Swift 超出父视图点击事件响应处理</title>
@@ -245,7 +265,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/06/25/Markdown%E8%AF%AD%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-12-12T07:15:07.853Z</lastmod>
+    <lastmod>2018-12-12T07:15:07.000Z</lastmod>
     <data>
         <display>
         <title>Markdown语法的一些小技巧（持续更新）</title>
@@ -265,7 +285,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/12/05/Swift-%E4%B8%AD%E7%9A%84-description/</loc>
-    <lastmod>2018-12-05T03:12:55.599Z</lastmod>
+    <lastmod>2018-12-05T03:12:55.000Z</lastmod>
     <data>
         <display>
         <title>Swift 中的 description</title>
@@ -285,7 +305,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/11/12/Ubuntu-16-04%E4%B8%8B%E5%AE%89%E8%A3%85zsh%E5%92%8Coh-my-zsh/</loc>
-    <lastmod>2018-11-22T06:13:19.798Z</lastmod>
+    <lastmod>2018-11-22T06:13:19.000Z</lastmod>
     <data>
         <display>
         <title>Ubuntu 16.04 下安装 zsh 和 oh-my-zsh</title>
@@ -305,7 +325,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/11/13/Ubuntu-18-04-1-LTS-%E4%B8%8B%E8%BF%90%E8%A1%8C-Vapor-%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2018-11-22T06:11:28.589Z</lastmod>
+    <lastmod>2018-11-22T06:11:28.000Z</lastmod>
     <data>
         <display>
         <title>Ubuntu 18.04.1 LTS 下运行 Vapor 项目</title>
@@ -325,7 +345,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/11/22/%E8%BE%85%E5%8A%A9-Homebrew-%E7%9A%84%E4%B8%A4%E5%A4%A7%E5%88%A9%E5%99%A8-Cakebrew-LaunchRocket/</loc>
-    <lastmod>2018-11-22T06:07:11.447Z</lastmod>
+    <lastmod>2018-11-22T06:07:11.000Z</lastmod>
     <data>
         <display>
         <title>辅助 Homebrew 的两大利器 Cakebrew & LaunchRocket</title>
@@ -345,7 +365,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/24/%E5%9C%A8-Swift-%E9%87%8C%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88/</loc>
-    <lastmod>2018-10-24T06:34:40.299Z</lastmod>
+    <lastmod>2018-10-24T06:34:40.000Z</lastmod>
     <data>
         <display>
         <title>在 Swift 里使用指针(转)</title>
@@ -365,7 +385,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/18/Swift-%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2018-10-24T06:30:50.929Z</lastmod>
+    <lastmod>2018-10-24T06:30:50.000Z</lastmod>
     <data>
         <display>
         <title>Swift 值类型与引用类型</title>
@@ -385,7 +405,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/03/13/Xcode%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%AE%9E%E7%8E%B0Swift%E5%92%8COC%E6%B7%B7%E7%BC%96-%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8/</loc>
-    <lastmod>2018-10-22T06:40:12.530Z</lastmod>
+    <lastmod>2018-10-22T06:40:12.000Z</lastmod>
     <data>
         <display>
         <title>Xcode工程项目中实现Swift和OC混编 相互引用</title>
@@ -405,7 +425,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/06/25/iOS%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%E3%80%81%E5%86%85%E5%AD%98%E5%AF%B9%E6%AF%94%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E8%BD%AC/</loc>
-    <lastmod>2018-10-18T02:13:59.772Z</lastmod>
+    <lastmod>2018-10-18T02:13:59.000Z</lastmod>
     <data>
         <display>
         <title>iOS中的图片使用方式、内存对比和最佳实践(转)</title>
@@ -425,7 +445,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/07/25/Swift%E5%AE%9E%E7%8E%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%80%92%E5%BA%8F%E6%8E%92%E5%88%97/</loc>
-    <lastmod>2018-10-18T02:06:31.707Z</lastmod>
+    <lastmod>2018-10-18T02:06:31.000Z</lastmod>
     <data>
         <display>
         <title>Swift 实现字符串倒序排列，String 字符串反转</title>
@@ -445,7 +465,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/09/06/%E4%BD%BF%E7%94%A8Vapor3%E8%BF%9B%E8%A1%8CAPNS%E6%8E%A8%E9%80%81/</loc>
-    <lastmod>2018-10-18T02:02:16.509Z</lastmod>
+    <lastmod>2018-10-18T02:02:16.000Z</lastmod>
     <data>
         <display>
         <title>使用 Vapor3 进行 APNS 推送</title>
@@ -465,7 +485,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/16/Swift4-%E4%B8%AD%E7%9A%84%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%86%99%E6%97%B6%E5%A4%8D%E5%88%B6/</loc>
-    <lastmod>2018-10-18T02:00:35.439Z</lastmod>
+    <lastmod>2018-10-18T02:00:35.000Z</lastmod>
     <data>
         <display>
         <title>Swift 中的 值类型 写时复制</title>
@@ -485,7 +505,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/12/iOS%E5%BC%80%E5%8F%91%E2%80%94%E2%80%94RunLoop/</loc>
-    <lastmod>2018-10-17T09:16:57.672Z</lastmod>
+    <lastmod>2018-10-17T09:16:57.000Z</lastmod>
     <data>
         <display>
         <title>iOS开发——RunLoop</title>
@@ -508,7 +528,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/17/InjectionIII%EF%BC%9AiOS%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E6%95%88%E7%8E%87%E7%A5%9E%E5%99%A8-%E6%89%80%E8%A7%81%E5%8D%B3%E6%89%80%E5%BE%97/</loc>
-    <lastmod>2018-10-17T05:09:54.765Z</lastmod>
+    <lastmod>2018-10-17T05:09:54.000Z</lastmod>
     <data>
         <display>
         <title>InjectionIII：iOS开发必备效率神器-所见即所得</title>
@@ -528,7 +548,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/17/%E6%8E%A2%E7%A9%B6-ReactiveObjC%EF%BC%88RAC%EF%BC%89-%E4%B8%AD-rac-signalForSelector-%E7%9A%84%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2018-10-17T04:41:19.270Z</lastmod>
+    <lastmod>2018-10-17T04:41:19.000Z</lastmod>
     <data>
         <display>
         <title>探究 ReactiveObjC（RAC） 中 -rac_signalForSelector: 的实现</title>
@@ -548,7 +568,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/10/15/Swift-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E3%80%81%E5%8F%8C%E8%B7%AF%E5%BF%AB%E6%8E%92%E5%92%8C%E4%B8%89%E8%B7%AF%E5%BF%AB%E6%8E%92/</loc>
-    <lastmod>2018-10-16T07:33:46.463Z</lastmod>
+    <lastmod>2018-10-16T07:33:46.000Z</lastmod>
     <data>
         <display>
         <title>Swift-快速排序、双路快排和三路快排</title>
@@ -568,7 +588,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/09/05/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/</loc>
-    <lastmod>2018-09-05T07:05:07.531Z</lastmod>
+    <lastmod>2018-09-05T07:05:07.000Z</lastmod>
     <data>
         <display>
         <title>CSS清除浮动</title>
@@ -588,7 +608,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/09/05/JS%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%BB%E7%BB%93-%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</loc>
-    <lastmod>2018-09-05T06:36:03.640Z</lastmod>
+    <lastmod>2018-09-05T06:36:03.000Z</lastmod>
     <data>
         <display>
         <title>JS中出现的兼容性问题的总结 （持续更新）</title>
@@ -608,7 +628,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/08/07/OC-Swift-%E8%8E%B7%E5%8F%96%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0-ReatinCount/</loc>
-    <lastmod>2018-08-07T01:05:42.043Z</lastmod>
+    <lastmod>2018-08-07T01:05:42.000Z</lastmod>
     <data>
         <display>
         <title>OC, Swift 获取引用计数 ReatinCount</title>
@@ -628,7 +648,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/08/03/iOS%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A0%BC%E5%BC%8F%E5%8C%96/</loc>
-    <lastmod>2018-08-03T05:01:08.642Z</lastmod>
+    <lastmod>2018-08-03T05:01:08.000Z</lastmod>
     <data>
         <display>
         <title>iOS中的数字字符串格式化</title>
@@ -648,7 +668,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/07/31/%E8%AE%BF%E9%97%AEGitHub%E5%BE%88%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
-    <lastmod>2018-07-31T08:02:32.377Z</lastmod>
+    <lastmod>2018-07-31T08:02:32.000Z</lastmod>
     <data>
         <display>
         <title>访问GitHub很慢的问题解决</title>
@@ -668,7 +688,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/07/27/%E8%AE%B0%E4%B8%80%E6%AC%A1-IQKeyboardManager-%E5%A4%B1%E6%95%88%E5%AF%BC%E8%87%B4%E8%BE%93%E5%85%A5%E6%A1%86%E8%A2%AB%E9%94%AE%E7%9B%98%E9%81%AE%E6%8C%A1%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-07-27T01:38:48.284Z</lastmod>
+    <lastmod>2018-07-27T01:38:48.000Z</lastmod>
     <data>
         <display>
         <title>记一次 IQKeyboardManager 失效导致输入框被键盘遮挡的问题</title>
@@ -688,7 +708,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/07/10/Swift%E4%B8%ADimport%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/</loc>
-    <lastmod>2018-07-10T08:49:26.848Z</lastmod>
+    <lastmod>2018-07-10T08:49:26.000Z</lastmod>
     <data>
         <display>
         <title>Swift语言中 "@_exported import" 和 "import"  的区别是什么</title>
@@ -703,7 +723,7 @@
     
   <url>
     <loc>https://a1049145827.github.io/2018/07/05/Swift%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</loc>
-    <lastmod>2018-07-05T06:08:36.751Z</lastmod>
+    <lastmod>2018-07-05T06:08:36.000Z</lastmod>
     <data>
         <display>
         <title>Swift访问权限</title>
