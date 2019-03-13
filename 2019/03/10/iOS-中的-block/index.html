@@ -102,19 +102,19 @@
 
 
 
-  <meta name="description" content="在开始做 iOS 开发没多久的时候，一直感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 Block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，它内">
+  <meta name="description" content="在入行做 iOS 开发没多久的时候，感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？　　block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 中的 block">
 <meta property="og:url" content="http://yoursite.com/2019/03/10/iOS-中的-block/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="在开始做 iOS 开发没多久的时候，一直感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 Block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，它内">
+<meta property="og:description" content="在入行做 iOS 开发没多久的时候，感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？　　block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://github.com/a1049145827/Resources/raw/master/iOS/iOS-block.png">
-<meta property="og:updated_time" content="2019-03-12T04:08:42.628Z">
+<meta property="og:updated_time" content="2019-03-13T07:18:11.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 中的 block">
-<meta name="twitter:description" content="在开始做 iOS 开发没多久的时候，一直感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 Block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，它内">
+<meta name="twitter:description" content="在入行做 iOS 开发没多久的时候，感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 代码块，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 block 渐渐有了更加深入的了解，也算是走出了误区。   什么是 Block，Block 的本质是什么？　　block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，">
 <meta name="twitter:image" content="https://github.com/a1049145827/Resources/raw/master/iOS/iOS-block.png">
 
 
@@ -340,7 +340,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-12 12:08:42" itemprop="dateModified" datetime="2019-03-12T12:08:42+08:00">2019-03-12</time>
+                <time title="修改时间：2019-03-13 15:18:11" itemprop="dateModified" datetime="2019-03-13T15:18:11+08:00">2019-03-13</time>
               
             
           </span>
@@ -412,22 +412,22 @@
       
 
       
-        <p>在开始做 iOS 开发没多久的时候，一直感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 <code>代码块</code>，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 Block 渐渐有了更加深入的了解，也算是走出了误区。</p>
+        <p>　　在入行做 iOS 开发没多久的时候，感觉 block 挺神秘的，当时在跟同事交流的时候一直称呼它为 <code>代码块</code>，想当然的把它理解成为是一个匿名函数。但是随着技术能力的增长，以及大神们在博客中无私的分享，对 block 渐渐有了更加深入的了解，也算是走出了误区。</p>
 <hr>
 
-<h2 id="什么是-Block，Block-的本质是什么？"><a href="#什么是-Block，Block-的本质是什么？" class="headerlink" title="什么是 Block，Block 的本质是什么？"></a>什么是 Block，Block 的本质是什么？</h2><p>block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，它内部也有 isa 指针。</p>
+<h2 id="什么是-Block，Block-的本质是什么？"><a href="#什么是-Block，Block-的本质是什么？" class="headerlink" title="什么是 Block，Block 的本质是什么？"></a>什么是 Block，Block 的本质是什么？</h2><p>　　block 是封装了函数调用以及函数调用环境的 OC 对象，派生自 NSBlock，它内部也有 isa 指针。</p>
 <hr>
 
-<h2 id="Block捕获变量"><a href="#Block捕获变量" class="headerlink" title="Block捕获变量"></a>Block捕获变量</h2><p>为了保证block内部能够正常访问外部的变量，block有个变量捕获机制。</p>
+<h2 id="Block捕获变量"><a href="#Block捕获变量" class="headerlink" title="Block捕获变量"></a>Block捕获变量</h2><p>　　为了保证block内部能够正常访问外部的变量，block有个变量捕获机制。</p>
 <p><img src="https://github.com/a1049145827/Resources/raw/master/iOS/iOS-block.png" alt="image-20190312120502166"></p>
-<h3 id="为什么局部变量需要捕获？"><a href="#为什么局部变量需要捕获？" class="headerlink" title="为什么局部变量需要捕获？"></a>为什么局部变量需要捕获？</h3><p>考虑作用域的问题，需要跨函数访问，就需要捕获。</p>
-<h3 id="block里访问self是否会捕获？"><a href="#block里访问self是否会捕获？" class="headerlink" title="block里访问self是否会捕获？"></a>block里访问self是否会捕获？</h3><p>会，self是当调用block函数的参数，参数是局部变量，self指向调用者。</p>
-<h3 id="block里访问成员变量是否会捕获？"><a href="#block里访问成员变量是否会捕获？" class="headerlink" title="block里访问成员变量是否会捕获？"></a>block里访问成员变量是否会捕获？</h3><p>会，成员变量的访问其实是<code>self-&gt;xx</code>，先捕获self，再通过self访问里面的成员变量。</p>
-<h3 id="block对auto和static变量捕获有什么差异？"><a href="#block对auto和static变量捕获有什么差异？" class="headerlink" title="block对auto和static变量捕获有什么差异？"></a>block对auto和static变量捕获有什么差异？</h3><p>auto自动变量可能会销毁的，内存可能会消失，不采用指针访问；static变量一直保存在内存中，指针访问即可。【auto变量block访问方式是值传递（如果是普通类型，则进行值拷贝，如果是对象类型，会使其引用计数加1），static变量block访问方式是指针传递】</p>
-<h3 id="block对全局变量的捕获方式是？"><a href="#block对全局变量的捕获方式是？" class="headerlink" title="block对全局变量的捕获方式是？"></a>block对全局变量的捕获方式是？</h3><p>block不需要对全局变量捕获，都是直接采用取值的。</p>
+<h3 id="为什么局部变量需要捕获？"><a href="#为什么局部变量需要捕获？" class="headerlink" title="为什么局部变量需要捕获？"></a>为什么局部变量需要捕获？</h3><p>　　考虑作用域的问题，需要跨函数访问，就需要捕获。</p>
+<h3 id="block里访问self是否会捕获？"><a href="#block里访问self是否会捕获？" class="headerlink" title="block里访问self是否会捕获？"></a>block里访问self是否会捕获？</h3><p>　　会，self是当调用block函数的参数，参数是局部变量，self指向调用者。</p>
+<h3 id="block里访问成员变量是否会捕获？"><a href="#block里访问成员变量是否会捕获？" class="headerlink" title="block里访问成员变量是否会捕获？"></a>block里访问成员变量是否会捕获？</h3><p>　　会，成员变量的访问其实是<code>self-&gt;xx</code>，先捕获self，再通过self访问里面的成员变量。</p>
+<h3 id="block对auto和static变量捕获有什么差异？"><a href="#block对auto和static变量捕获有什么差异？" class="headerlink" title="block对auto和static变量捕获有什么差异？"></a>block对auto和static变量捕获有什么差异？</h3><p>　　auto自动变量可能会销毁的，内存可能会消失，不采用指针访问；static变量一直保存在内存中，指针访问即可。【auto变量block访问方式是值传递（如果是普通类型，则进行值拷贝，如果是对象类型，会使其引用计数加1），static变量block访问方式是指针传递】</p>
+<h3 id="block对全局变量的捕获方式是？"><a href="#block对全局变量的捕获方式是？" class="headerlink" title="block对全局变量的捕获方式是？"></a>block对全局变量的捕获方式是？</h3><p>　　block不需要对全局变量捕获，都是直接采用取值的。</p>
 <hr>
 
-<h2 id="Block的类型"><a href="#Block的类型" class="headerlink" title="Block的类型"></a>Block的类型</h2><h3 id="block有哪几种类型？"><a href="#block有哪几种类型？" class="headerlink" title="block有哪几种类型？"></a>block有哪几种类型？</h3><p>block的类型，取决于isa指针，可以通过调用class方法或者isa指针查看具体类型，最终都是继承自NSBlock类型。</p>
+<h2 id="Block的类型"><a href="#Block的类型" class="headerlink" title="Block的类型"></a>Block的类型</h2><h3 id="block有哪几种类型？"><a href="#block有哪几种类型？" class="headerlink" title="block有哪几种类型？"></a>block有哪几种类型？</h3><p>　　block的类型，取决于isa指针，可以通过调用class方法或者isa指针查看具体类型，最终都是继承自NSBlock类型。</p>
 <ul>
 <li><strong>NSGlobalBlock </strong> （ _NSConcreteGlobalBlock ）     在数据区</li>
 <li><strong>NSStackBlock </strong> （ _NSConcreteStackBlock ）         在栈区</li>
@@ -451,23 +451,26 @@
 </ul>
 <p>这里有一个示例：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> age = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">void</span> (^block1)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block1"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> (^block2)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block2: %d"</span>, age);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@/%@/%@"</span>, [block1 <span class="keyword">class</span>], [block2 <span class="keyword">class</span>], [^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block3: %d"</span>, age);</span><br><span class="line">&#125; <span class="keyword">class</span>]);</span><br><span class="line"><span class="comment">// 输出： __NSGlobalBlock__/__NSMallocBlock__/__NSStackBlock__</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"代码段：%p"</span>, (IMP)main);</span><br><span class="line"><span class="comment">// 输出： 代码段：0x103b20140</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"全局区：%p, 堆区：%p, 栈区：%p"</span>, block1, block2, ^&#123;<span class="built_in">NSLog</span>(<span class="string">@"block3: %d"</span>, age);&#125;);</span><br><span class="line"><span class="comment">// 输出： 全局区：0x103b23138, 堆区：0x6000006c4000, 栈区：0x7ffeec0dee30</span></span><br></pre></td></tr></table></figure>
-<p>通过上面的示例，也验证了前面的说法。</p>
-<p><strong>但是有一个问题</strong>，示例代码中的 block2 和 block3 应该是一样的才对啊，为什么 block2 在堆区，而 block3 在栈区呢？</p>
-<p>原来，<strong>在 ARC 环境下，编译器会根据情况自动将栈上的 block 复制到堆上</strong>。</p>
+<p>　　通过上面的示例，也验证了前面的说法。</p>
+<p>　　<strong>但是有一个问题</strong>，示例代码中的 block2 和 block3 应该是一样的才对啊，为什么 block2 在堆区，而 block3 在栈区呢？</p>
+<p>　　原来，<strong>在 ARC 环境下，编译器会根据情况自动将栈上的 block 复制到堆上</strong>。</p>
 <h3 id="在-ARC-环境下，编译器会根据情况自动将栈上的-block-复制到堆上的几种情况？"><a href="#在-ARC-环境下，编译器会根据情况自动将栈上的-block-复制到堆上的几种情况？" class="headerlink" title="在 ARC 环境下，编译器会根据情况自动将栈上的 block 复制到堆上的几种情况？"></a>在 ARC 环境下，编译器会根据情况自动将栈上的 block 复制到堆上的几种情况？</h3><ol>
 <li><p>block 作为函数返回值时</p>
 </li>
-<li><p>将 block 赋值给 __strong 指针时</p>
+<li><p>将 block 赋值给 <code>__strong</code> 指针时</p>
 </li>
 <li><p>block 作为 Cocoa API 中方法名含有 usingBlock 的方法参数时</p>
 </li>
 <li><p>block 作为 GCD API 的方法参数时</p>
 </li>
 </ol>
-<p>博客原文作者也注明了使用 block 作为属性时，应该使用什么关键词进行描述。</p>
+<p>　　为了验证第二点，我们特地写个 Demo 来看一下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> age = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">void</span> (^block1)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block1"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> (^block2)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block2: %d"</span>, age);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@/%@/%@"</span>, [block1 <span class="keyword">class</span>], [block2 <span class="keyword">class</span>], [^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"block3: %d"</span>, age);</span><br><span class="line">&#125; <span class="keyword">class</span>]);</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"代码段：%p"</span>, (IMP)main);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"全局区：%p, 堆区：%p, 栈区：%p"</span>, block1, block2, ^&#123;<span class="built_in">NSLog</span>(<span class="string">@"block3: %d"</span>, age);&#125;);</span><br></pre></td></tr></table></figure>
+<p>　　从 Demo 中可以看出，block2 和 block3 的区别就在于 block2 有一个 <code>__strong</code> 的指针引用，正因为此，block2 的内存地址与 block3 完全不在同一个区间。</p>
+<p>　　博客原文作者也注明了使用 block 作为属性时，应该使用什么关键词进行描述。</p>
 <p><strong>MRC 下 block 属性的建议写法</strong><br><code>@property (copy, nonatomic) void (^block)(void);</code></p>
 <p><strong>ARC 下 block 属性的建议写法</strong><br><code>@property (strong, nonatomic) void (^block)(void);</code><br><code>@property (copy, nonatomic) void (^block)(void);</code></p>
-<p><strong>这里应该才参考第二点，将 block 赋值给 __strong 指针时，其实已经将 block 拷贝到堆区了，再用 copy 或者是 strong 都是对其引用计数 +1，所以 ARC 下并没有严格的限制。如果大家在使用过程中遇到了什么问题，欢迎一起讨论一下。</strong></p>
+<p>　　<strong>这里应该才参考第二点，将 block 赋值给 __strong 指针时，其实已经将 block 拷贝到堆区了，再用 copy 或者是 strong 都是对其引用计数 +1，所以 ARC 下并没有严格的限制。如果大家在使用过程中遇到了什么问题，欢迎一起讨论一下。</strong></p>
 <h3 id="对每种类型-block-调用-copy-操作后是什么结果？"><a href="#对每种类型-block-调用-copy-操作后是什么结果？" class="headerlink" title="对每种类型 block 调用 copy 操作后是什么结果？"></a>对每种类型 block 调用 copy 操作后是什么结果？</h3><ul>
 <li><code>__NSGlobalBlock__</code> 调用copy操作后，什么也不做。</li>
 <li><code>__NSStackBlock__</code> 调用copy操作后：从栈复制到堆；副本存储位置是<strong>堆</strong>。</li>
@@ -490,9 +493,13 @@
 <li>如果 block 在<code>栈</code>空间，不管外部变量是强引用还是弱引用，block 都会弱引用访问对象。</li>
 <li>如果 block 在<code>堆</code>空间，如果外部强引用，block 内部也是强引用；如果外部弱引用，block 内部也是弱引用。</li>
 </ul>
+<p><strong>这里有一个疑问：</strong></p>
+<p>　　上面的结论是根据别人博客内容以及理论推导的，但是我自己进行 Demo 演练的时候，却发现栈区的 block 似乎也会对 auto 类型的对象进行强引用。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person *p = [Person new];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Person: %p, retain count: %ld"</span>, p, (<span class="keyword">long</span>)<span class="built_in">CFGetRetainCount</span>((__bridge <span class="built_in">CFTypeRef</span>)(p)));</span><br><span class="line">__<span class="keyword">weak</span> <span class="keyword">void</span>(^weakblock)(<span class="keyword">void</span>) = ^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>, p);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"栈区 block: %p"</span>, weakblock);</span><br><span class="line">weakblock();</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Person: %p, retain count: %ld"</span>, p, (<span class="keyword">long</span>)<span class="built_in">CFGetRetainCount</span>((__bridge <span class="built_in">CFTypeRef</span>)(p)));</span><br></pre></td></tr></table></figure>
+<p>　　<strong>这里 block 引用了 auto 变量，同时没有触发拷贝到堆空间的条件，实际打印出来的内存地址也确实在栈区。但是 auto 类型的对象 p，打印结果显示，block 引用后，p 的引用计数确实增加了1，不知道是我的理解有误，还是这个结论是不正确的，希望以后能够解开这个谜团，也希望大神看到后能给一些指导。</strong></p>
 <hr>
 
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>本文只是从本人的一些疑惑点来讨论 block 的一些知识点。参考原文中对 Block 的剖析更加详细，大家可以认真研读一下。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>　　本文只是从本人的一些疑惑点来讨论 block 的一些知识点。参考原文中对 Block 的剖析更加详细，大家可以认真研读一下。</p>
 <p>传送门：<a href="https://www.jianshu.com/p/4e79e9a0dd82" target="_blank" rel="noopener">iOS-Block本质</a></p>
 
       
@@ -546,6 +553,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/12/iOS开发，容易忽略的帧率杀手：阴影/" rel="prev" title="iOS开发 容易忽略的帧率杀手：阴影">
+                iOS开发 容易忽略的帧率杀手：阴影 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -622,7 +633,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-count">89</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
