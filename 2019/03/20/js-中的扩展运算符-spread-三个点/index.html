@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="运行程序后，xcode不显示当前使用的内存情况问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可 打开 product -&amp;gt; SCheme -&amp;gt; EditSCheme -&amp;gt; Diagnostics -&amp;gt; enable zoombie Objects  取消选中 就可以继续显示了">
-<meta name="keywords" content="iOS, Xcode">
+  <meta name="description" content="今天见一个 Vue 的 Demo 中 js 部分用到了 … 这个运算符，很好奇它是做什么用的，就查了一下资料。 作用：将一个数组转为用逗号分隔的参数序列。 具体用法:用于函数调用12345678910function push(array, ...items) &amp;#123;  array.push(...items);&amp;#125;function add(x, y) &amp;#123;  return">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode运行程序时左侧memory不显示内存">
-<meta property="og:url" content="http://yoursite.com/2018/01/05/Xcode运行程序时左侧memory不显示内存/index.html">
+<meta property="og:title" content="js 中的扩展运算符 (spread) 三个点 (...)">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/js-中的扩展运算符-spread-三个点/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="运行程序后，xcode不显示当前使用的内存情况问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可 打开 product -&amp;gt; SCheme -&amp;gt; EditSCheme -&amp;gt; Diagnostics -&amp;gt; enable zoombie Objects  取消选中 就可以继续显示了">
+<meta property="og:description" content="今天见一个 Vue 的 Demo 中 js 部分用到了 … 这个运算符，很好奇它是做什么用的，就查了一下资料。 作用：将一个数组转为用逗号分隔的参数序列。 具体用法:用于函数调用12345678910function push(array, ...items) &amp;#123;  array.push(...items);&amp;#125;function add(x, y) &amp;#123;  return">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-06T02:31:39.000Z">
+<meta property="og:updated_time" content="2019-03-20T08:35:16.778Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xcode运行程序时左侧memory不显示内存">
-<meta name="twitter:description" content="运行程序后，xcode不显示当前使用的内存情况问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可 打开 product -&amp;gt; SCheme -&amp;gt; EditSCheme -&amp;gt; Diagnostics -&amp;gt; enable zoombie Objects  取消选中 就可以继续显示了">
+<meta name="twitter:title" content="js 中的扩展运算符 (spread) 三个点 (...)">
+<meta name="twitter:description" content="今天见一个 Vue 的 Demo 中 js 部分用到了 … 这个运算符，很好奇它是做什么用的，就查了一下资料。 作用：将一个数组转为用逗号分隔的参数序列。 具体用法:用于函数调用12345678910function push(array, ...items) &amp;#123;  array.push(...items);&amp;#125;function add(x, y) &amp;#123;  return">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/05/Xcode运行程序时左侧memory不显示内存/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/20/js-中的扩展运算符-spread-三个点/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Xcode运行程序时左侧memory不显示内存 | Bruce's Blog</title>
+  <title>js 中的扩展运算符 (spread) 三个点 (...) | Bruce's Blog</title>
   
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/Xcode运行程序时左侧memory不显示内存/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/js-中的扩展运算符-spread-三个点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -296,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Xcode运行程序时左侧memory不显示内存
+          <h1 class="post-title" itemprop="name headline">js 中的扩展运算符 (spread) 三个点 (...)
               
             
           </h1>
@@ -321,24 +321,12 @@
                 
               
 
-              <time title="创建时间：2018-01-05 14:47:51" itemprop="dateCreated datePublished" datetime="2018-01-05T14:47:51+08:00">2018-01-05</time>
+              <time title="创建时间：2019-03-20 16:18:21 / 修改时间：16:35:16" itemprop="dateCreated datePublished" datetime="2019-03-20T16:18:21+08:00">2019-03-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-03-06 10:31:39" itemprop="dateModified" datetime="2018-03-06T10:31:39+08:00">2018-03-06</time>
               
             
           </span>
@@ -370,8 +358,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/05/Xcode运行程序时左侧memory不显示内存/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/01/05/Xcode运行程序时左侧memory不显示内存/" itemprop="commentCount"></span>
+                <a href="/2019/03/20/js-中的扩展运算符-spread-三个点/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/03/20/js-中的扩展运算符-spread-三个点/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,7 +367,7 @@
 
           
           
-             <span id="/2018/01/05/Xcode运行程序时左侧memory不显示内存/" class="leancloud_visitors" data-flag-title="Xcode运行程序时左侧memory不显示内存">
+             <span id="/2019/03/20/js-中的扩展运算符-spread-三个点/" class="leancloud_visitors" data-flag-title="js 中的扩展运算符 (spread) 三个点 (...)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,9 +398,13 @@
       
 
       
-        <h4 id="运行程序后，xcode不显示当前使用的内存情况"><a href="#运行程序后，xcode不显示当前使用的内存情况" class="headerlink" title="运行程序后，xcode不显示当前使用的内存情况"></a>运行程序后，xcode不显示当前使用的内存情况</h4><p>问题是打开了僵尸对象跟踪（enable zoombie Objects），将其关闭即可</p>
-<p>打开 product -&gt; SCheme -&gt; EditSCheme -&gt; Diagnostics -&gt; enable zoombie Objects  取消选中</p>
-<p>就可以继续显示了</p>
+        <p>今天见一个 Vue 的 Demo 中 js 部分用到了 <code>…</code> 这个运算符，很好奇它是做什么用的，就查了一下资料。</p>
+<h3 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h3><p>将一个数组转为用逗号分隔的参数序列。</p>
+<h3 id="具体用法"><a href="#具体用法" class="headerlink" title="具体用法:"></a>具体用法:</h3><h4 id="用于函数调用"><a href="#用于函数调用" class="headerlink" title="用于函数调用"></a>用于函数调用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">array, ...items</span>) </span>&#123;</span><br><span class="line">  array.push(...items);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> numbers = [<span class="number">4</span>, <span class="number">38</span>];</span><br><span class="line">add(...numbers) <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<h4 id="扩展运算符取代-apply-方法的一个实际的例子，应用-Math-max-方法，简化求出一个数组最大元素的写法"><a href="#扩展运算符取代-apply-方法的一个实际的例子，应用-Math-max-方法，简化求出一个数组最大元素的写法" class="headerlink" title="扩展运算符取代 apply 方法的一个实际的例子，应用 Math.max 方法，简化求出一个数组最大元素的写法"></a>扩展运算符取代 apply 方法的一个实际的例子，应用 Math.max 方法，简化求出一个数组最大元素的写法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5 的写法</span></span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, [<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6 的写法</span></span><br><span class="line"><span class="built_in">Math</span>.max(...[<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="built_in">Math</span>.max(<span class="number">14</span>, <span class="number">3</span>, <span class="number">77</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="通过-push-函数，将一个数组添加到另一个数组的尾部"><a href="#通过-push-函数，将一个数组添加到另一个数组的尾部" class="headerlink" title="通过 push 函数，将一个数组添加到另一个数组的尾部"></a>通过 push 函数，将一个数组添加到另一个数组的尾部</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5的 写法</span></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="built_in">Array</span>.prototype.push.apply(arr1, arr2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6 的写法</span></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line">arr1.push(...arr2);</span><br></pre></td></tr></table></figure>
+<h4 id="合并数组"><a href="#合并数组" class="headerlink" title="合并数组"></a>合并数组</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].concat(more)</span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, ...more]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="string">'a'</span>, <span class="string">'b'</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = [<span class="string">'c'</span>];</span><br><span class="line"><span class="keyword">var</span> arr3 = [<span class="string">'d'</span>, <span class="string">'e'</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES5的合并数组</span></span><br><span class="line">arr1.concat(arr2, arr3);</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6的合并数组</span></span><br><span class="line">[...arr1, ...arr2, ...arr3]</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span></span><br></pre></td></tr></table></figure>
+<h4 id="扩展运算符将字符串转为真正的数组"><a href="#扩展运算符将字符串转为真正的数组" class="headerlink" title="扩展运算符将字符串转为真正的数组"></a>扩展运算符将字符串转为真正的数组</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="string">'hello'</span>]</span><br><span class="line"><span class="comment">// [ "h", "e", "l", "l", "o" ]</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -443,7 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS-Xcode/" rel="tag"># iOS, Xcode</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -456,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/05/iOS设备型号-2018最新统计/" rel="next" title="iOS设备型号 2018最新统计">
-                <i class="fa fa-chevron-left"></i> iOS设备型号 2018最新统计
+              <a href="/2019/03/19/iOS-中的-performSelector-withObject-afterDelay-方法/" rel="next" title="iOS 中的 performSelector:withObject:afterDelay: 方法">
+                <i class="fa fa-chevron-left"></i> iOS 中的 performSelector:withObject:afterDelay: 方法
               </a>
             
           </div>
@@ -465,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/06/iOS开发-区分Home键和锁屏键事件/" rel="prev" title="iOS开发 区分Home键和锁屏键事件">
-                iOS开发 区分Home键和锁屏键事件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -655,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#运行程序后，xcode不显示当前使用的内存情况"><span class="nav-number">1.</span> <span class="nav-text">运行程序后，xcode不显示当前使用的内存情况</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用："><span class="nav-number">1.</span> <span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体用法"><span class="nav-number">2.</span> <span class="nav-text">具体用法:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于函数调用"><span class="nav-number">2.1.</span> <span class="nav-text">用于函数调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展运算符取代-apply-方法的一个实际的例子，应用-Math-max-方法，简化求出一个数组最大元素的写法"><span class="nav-number">2.2.</span> <span class="nav-text">扩展运算符取代 apply 方法的一个实际的例子，应用 Math.max 方法，简化求出一个数组最大元素的写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-push-函数，将一个数组添加到另一个数组的尾部"><span class="nav-number">2.3.</span> <span class="nav-text">通过 push 函数，将一个数组添加到另一个数组的尾部</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合并数组"><span class="nav-number">2.4.</span> <span class="nav-text">合并数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展运算符将字符串转为真正的数组"><span class="nav-number">2.5.</span> <span class="nav-text">扩展运算符将字符串转为真正的数组</span></a></li></ol></li></ol></div>
             
 
           </div>
