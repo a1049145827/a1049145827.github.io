@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加： 1[[[UIApplication sharedApplication].windows lastObject] addSubview:view]; 但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidde">
+  <meta name="description" content="前言　　2019 年个人面试已经基本告一段落，由于个人规划的一些问题，整个过程下来还是经历了一些曲折。先从 P2P 暴雷开始，受到母公司挤兑危机的影响，我们公司日子明显十分难熬。迫于无奈，还是要在这个寒冬中继续前行，由于杭州的落户政策更加宽松，后续的发展是优先考虑去杭州，但是由于学历、工作年限、大厂经验等方面没有突出的优势。薪资水平方面杭州整体水平要落后于上海，所以在杭州并没有找到合适的机会。">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发 提示信息被键盘遮挡解决方案">
-<meta property="og:url" content="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/index.html">
+<meta property="og:title" content="iOS 面试总结 - 2019">
+<meta property="og:url" content="http://yoursite.com/2019/04/17/iOS-面试总结-2019/index.html">
 <meta property="og:site_name" content="Bruce&#39;s Blog">
-<meta property="og:description" content="我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加： 1[[[UIApplication sharedApplication].windows lastObject] addSubview:view]; 但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidde">
+<meta property="og:description" content="前言　　2019 年个人面试已经基本告一段落，由于个人规划的一些问题，整个过程下来还是经历了一些曲折。先从 P2P 暴雷开始，受到母公司挤兑危机的影响，我们公司日子明显十分难熬。迫于无奈，还是要在这个寒冬中继续前行，由于杭州的落户政策更加宽松，后续的发展是优先考虑去杭州，但是由于学历、工作年限、大厂经验等方面没有突出的优势。薪资水平方面杭州整体水平要落后于上海，所以在杭州并没有找到合适的机会。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-19T09:20:27.000Z">
+<meta property="og:updated_time" content="2019-04-21T22:26:54.174Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发 提示信息被键盘遮挡解决方案">
-<meta name="twitter:description" content="我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加： 1[[[UIApplication sharedApplication].windows lastObject] addSubview:view]; 但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidde">
+<meta name="twitter:title" content="iOS 面试总结 - 2019">
+<meta name="twitter:description" content="前言　　2019 年个人面试已经基本告一段落，由于个人规划的一些问题，整个过程下来还是经历了一些曲折。先从 P2P 暴雷开始，受到母公司挤兑危机的影响，我们公司日子明显十分难熬。迫于无奈，还是要在这个寒冬中继续前行，由于杭州的落户政策更加宽松，后续的发展是优先考虑去杭州，但是由于学历、工作年限、大厂经验等方面没有突出的优势。薪资水平方面杭州整体水平要落后于上海，所以在杭州并没有找到合适的机会。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/17/iOS-面试总结-2019/"/>
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>iOS开发 提示信息被键盘遮挡解决方案 | Bruce's Blog</title>
+  <title>iOS 面试总结 - 2019 | Bruce's Blog</title>
   
 
 
@@ -279,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/iOS-面试总结-2019/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coder bruce">
@@ -296,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS开发 提示信息被键盘遮挡解决方案
+          <h1 class="post-title" itemprop="name headline">iOS 面试总结 - 2019
               
             
           </h1>
@@ -321,7 +321,7 @@
                 
               
 
-              <time title="创建时间：2018-01-14 17:11:00" itemprop="dateCreated datePublished" datetime="2018-01-14T17:11:00+08:00">2018-01-14</time>
+              <time title="创建时间：2019-04-17 05:40:36" itemprop="dateCreated datePublished" datetime="2019-04-17T05:40:36+08:00">2019-04-17</time>
             
 
             
@@ -338,7 +338,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-03-19 17:20:27" itemprop="dateModified" datetime="2018-03-19T17:20:27+08:00">2018-03-19</time>
+                <time title="修改时间：2019-04-22 06:26:54" itemprop="dateModified" datetime="2019-04-22T06:26:54+08:00">2019-04-22</time>
               
             
           </span>
@@ -370,8 +370,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/" itemprop="commentCount"></span>
+                <a href="/2019/04/17/iOS-面试总结-2019/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/04/17/iOS-面试总结-2019/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2018/01/14/iOS开发-提示信息被键盘遮挡解决方案/" class="leancloud_visitors" data-flag-title="iOS开发 提示信息被键盘遮挡解决方案">
+             <span id="/2019/04/17/iOS-面试总结-2019/" class="leancloud_visitors" data-flag-title="iOS 面试总结 - 2019">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,12 +410,76 @@
       
 
       
-        <p>我们在开发的时候，有需要把一个view显示到window，又不想被键盘的window所遮挡。在iOS11之前的系统中，我们是这么添加：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[<span class="built_in">UIApplication</span> sharedApplication].windows lastObject] addSubview:view];</span><br></pre></td></tr></table></figure>
-<p>但是iOS11中出现了一个新的特性，键盘的window一旦在App中被调起后就不会再被remove，而是hidden状态，这时候我们的view就会被添加到一个隐藏的window上面导致，直接导致无法正常显示。</p>
-<p>我们项目中使用了Toast这个第三方库，所以需要对其做一些封装，核心代码如下所示（已适配iOS11系统）：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">void</span>)showMessageToWindowCenter:(<span class="built_in">NSString</span> *)msg &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (msg.length &lt; <span class="number">1</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSTimeInterval</span> duration = [<span class="keyword">self</span> durationForMsg:msg];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        <span class="built_in">UIWindow</span> *window = [<span class="keyword">self</span> findKeyWindow];</span><br><span class="line">        [window makeToast:msg duration:duration position:CSToastPositionCenter];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="built_in">UIWindow</span> *)findKeyWindow &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIApplication</span> *app = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UIWindow</span> *realKeyWindow = app.windows.firstObject;</span><br><span class="line">    <span class="built_in">NSInteger</span> count = app.windows.count;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = count - <span class="number">1</span>; i &gt; <span class="number">0</span>; i --) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">UIWindow</span> *showWindow = [app.windows objectAtIndex:i];</span><br><span class="line">        <span class="keyword">if</span> (showWindow.hidden) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        realKeyWindow = showWindow;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> realKeyWindow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>目前还有一种情况没有处理(没有大碍)：Toast先弹出来，然后再调起键盘，这个时候键盘还是会把已出现的Toast挡住。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>　　2019 年个人面试已经基本告一段落，由于个人规划的一些问题，整个过程下来还是经历了一些曲折。先从 P2P 暴雷开始，受到母公司挤兑危机的影响，我们公司日子明显十分难熬。迫于无奈，还是要在这个寒冬中继续前行，由于杭州的落户政策更加宽松，后续的发展是优先考虑去杭州，但是由于学历、工作年限、大厂经验等方面没有突出的优势。薪资水平方面杭州整体水平要落后于上海，所以在杭州并没有找到合适的机会。</p>
+<p>　　经过一番思想斗争，还是选择继续留在上海，提升技术的同时，积累一些资本。感觉上今年的四月比三月机会要更多一些，可能是一些企业受去年年底裁员潮的影响，一季度没有开放 HC。</p>
+<p>　　面试中一些问题，在竞争激烈的情况下，经验显得尤为重要，一份漂亮的履历是打开机会的敲门砖。阿里和网易通过内推和猎头渠道都没有能够获得面试机会，面的几家印象比较深刻的应该是 浙江大华、腾展叮咚、哈罗单车、浦发信用卡、杭州有赞、bilibili 等几家公司。这里也总结了一些比较有代表性的问题，和大家共同学习。</p>
+<p>　　<strong>纸上学来终觉浅，自知此事要躬行</strong>。做软件开发，实践是非常重要的一环，只看一遍博客或者 Google 到解决方案直接 copy 到项目中，后面再遇到大概率还是要查资料，<strong>理解+实践</strong>才是高效学习的方式。</p>
+<h2 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h2><p>　　需要注意的是，这里列出来的的每一个问题，可能只是一系列问题的入口，面试官很可能根据面试者的回答即兴进行延伸，所以在准备面试的时候，需要追本溯源，真正的把一个问题研究透彻。</p>
+<p><strong>代表性问题</strong></p>
+<ul>
+<li><p>在使用 Hybrid 开发的时候，H5 和原生如何进行交互？</p>
+</li>
+<li><p>除了使用 UIWebView 和 H5 进行交互，有没有尝试或者研究 WKWebView 与 H5 的交互，使用过程中会遇到什么问题？</p>
+</li>
+<li><p>在使用 weex 的时候有没有遇到什么问题？</p>
+</li>
+<li><p>简单介绍一下 Runtime</p>
+</li>
+<li><p>可以在运行时给类添加成员变量吗？为什么不能？(为什么成员变量列表设计成只读的，出于什么考虑？)</p>
+</li>
+<li><p>我们都知道在分类里可以添加方法，那么能否在分类中添加成员变量？为什么？</p>
+</li>
+<li><p>多线程开发时使用 NSOperation 比 GCD 的优势在哪里？</p>
+</li>
+<li><p>NSOperation 有哪几种状态？</p>
+</li>
+<li><p>在使用 NSOperationQueue 的时候，如何获取队列中 NSOperation 的状态？</p>
+</li>
+<li><p>给类添加属性时使用 atomic 有什么作用？它能否保证</p>
+</li>
+<li><p>在对类簇进行方法交换的时候，需要注意哪些问题</p>
+</li>
+<li><p>深拷贝和浅拷贝</p>
+</li>
+<li><p>+load 方法执行在 main 函数之前还是之后？</p>
+</li>
+<li><p>父类、子类、子类的 Category 中 +load 方法按照什么顺序调用？</p>
+</li>
+<li><p>说一下 KVO，使用 KVC 的方式赋值会不会触发 KVO？</p>
+</li>
+<li><p>项目中做了哪些性能方面的优化</p>
+</li>
+<li><p>MVC 和 MVVM</p>
+</li>
+<li><p>MVVM 中用到的 RAC 中，热信号和冷信号</p>
+</li>
+<li><p>组件化的时候同层级模块间如何通信及调用</p>
+</li>
+<li><p>组件化的时候使用 CTMediator 方案有什么弊端？</p>
+</li>
+<li><p>有没有了解过使用其他的方式进行模块间通信？比如 URL 这种方式，简单介绍一下</p>
+</li>
+<li><p>介绍 UIViewController 的生命周期</p>
+</li>
+<li><p>事件传递链和事件响应链</p>
+</li>
+<li><p>利用 GCD 实现异步线程任务 A 和 B 执行完成后执行任务 C</p>
+</li>
+<li>使用 <code>- performSelector:afterDelay:</code> 方法的时候，需要注意什么问题</li>
+</ul>
+<p><strong>一些基本的算法问题</strong></p>
+<ul>
+<li><p>二叉树的遍历</p>
+</li>
+<li><p>如何从二叉树中快速查找到第二大的数</p>
+</li>
+<li><p>SDWebImage 中用到的缓存策略，如何做到最少使用的最先被清理出缓存？</p>
+</li>
+<li>如何设计一个读写锁</li>
+</ul>
+<p><strong>项目中涉及到的问题</strong></p>
+<p>　　除了这些常见的面试问题，面试官有时候会问到一些算法相关的问题，以及根据简历中的项目进行提问，大家除了练好基本功，对经历过的项目也要重温一下，避免面试官问了答不上来就会给面试官留下不好的印象。有些技术点需要实践一下，看看自己是否切实掌握，不能眼高手低，到面试官问的时候卡壳了，尴尬的还是自己😂。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　现在的移动端开发市场已经趋于稳定，大家招人都不再局限于做业务，还会去考察求职者的基本功是否扎实，以及对底层开发的钻研深度。平时对自己要求高一些，不能浅尝辄止。</p>
 
       
     </div>
@@ -459,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/11/AFNetworking用POST发送的parameters在Java后台接收失败的问题/" rel="next" title="AFNetworking用POST发送的parameters在Java后台接收失败的问题">
-                <i class="fa fa-chevron-left"></i> AFNetworking用POST发送的parameters在Java后台接收失败的问题
+              <a href="/2019/04/13/如何设计一个读写锁/" rel="next" title="如何设计一个读写锁">
+                <i class="fa fa-chevron-left"></i> 如何设计一个读写锁
               </a>
             
           </div>
@@ -468,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/19/使用MongoDB作为数据库/" rel="prev" title="使用MongoDB作为数据库">
-                使用MongoDB作为数据库 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -639,6 +708,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试问题"><span class="nav-number">2.</span> <span class="nav-text">面试问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
